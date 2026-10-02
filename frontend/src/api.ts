@@ -35,6 +35,156 @@ export type Position = {
   first_buy: string | null;
   quote: Quote | null;
   spark: number[];
+  zoya: Zoya;
+  weight_total: number | null;
+};
+
+export type ZoyaStatus = "conforme" | "non_conforme" | "douteux";
+
+/** Compliance status as read by hand in the screening app, and how fresh it is. */
+export type Zoya = {
+  status: ZoyaStatus | null;
+  checked_on: string | null;
+  note: string | null;
+  age_days: number | null;
+  due_on: string | null;
+  state: "non_renseigne" | "a_jour" | "a_reverifier";
+};
+
+export type ComplianceItem = Zoya & {
+  isin: string;
+  name: string;
+  group: "detenu" | "cible" | "autre";
+  checks: number;
+};
+
+export type Compliance = {
+  validity_days: number;
+  statuses: Record<ZoyaStatus, string>;
+  items: ComplianceItem[];
+  summary: { held: number; missing: number; stale: number; not_compliant: number };
+};
+
+export type RuleKind = {
+  kind: string;
+  label: string;
+  unit: string;
+  bound: "max" | "min";
+  help: string;
+  per_account?: boolean;
+};
+
+export type Rule = {
+  id: number;
+  kind: string;
+  account: string | null;
+  value: number;
+  valid_from: string;
+  valid_to: string | null;
+  note: string | null;
+};
+
+export type RuleLine = {
+  kind: string;
+  label: string;
+  unit: string;
+  bound: "max" | "min";
+  account: string | null;
+  count: number;
+  limit: number | null;
+  breaches: number;
+  portfolio_value?: number | null;
+  minimums?: { account: string | null; value: number }[];
+  lines?: { name: string; account: string; weight: number }[];
+};
+
+export type Deviation = {
+  transaction_id: string;
+  date: string;
+  quarter: string;
+  account: string;
+  type: string;
+  name: string;
+  isin: string | null;
+  amount: number;
+  fee: number;
+  breaches: { kind: string; label: string; detail: string }[];
+  reason: string | null;
+};
+
+export type RulesState = {
+  quarter: string;
+  kinds: RuleKind[];
+  rules: Rule[];
+  current: RuleLine[];
+  deviations: Deviation[];
+  pending: number;
+  has_rules: boolean;
+};
+
+export type RoadmapStatus = "idee" | "prevu" | "execute" | "abandonne";
+
+export type RoadmapItem = {
+  id: number;
+  name: string;
+  isin: string | null;
+  account: string | null;
+  amount: number | null;
+  entry_condition: string | null;
+  entry_price: number | null;
+  thesis: string | null;
+  status: RoadmapStatus;
+  symbol: string | null;
+  last_price: number | null;
+  last_price_at: string | null;
+  reached: boolean;
+  zoya: Zoya | null;
+};
+
+export type RoadmapDraft = {
+  name: string;
+  isin: string;
+  account: string;
+  amount: string;
+  entry_condition: string;
+  entry_price: string;
+  thesis: string;
+  status: RoadmapStatus;
+  symbol: string;
+};
+
+export type Roadmap = { statuses: Record<RoadmapStatus, string>; items: RoadmapItem[] };
+
+export type GoldLot = {
+  id: number;
+  label: string;
+  grams: number;
+  cost: number | null;
+  acquired_on: string | null;
+  note: string | null;
+  value: number | null;
+  latent: number | null;
+};
+
+export type Gold = {
+  lots: GoldLot[];
+  grams: number;
+  cost: number | null;
+  value: number | null;
+  latent: number | null;
+  latent_pct: number | null;
+  eur_per_gram: number | null;
+  price_date: string | null;
+  fetched_at: string | null;
+};
+
+export type GoldDraft = { label: string; grams: string; cost: string; acquired_on: string; note: string };
+
+export type SettingsImport = {
+  rules_added: number;
+  rules_present: number;
+  roadmap_added: number;
+  roadmap_present: number;
 };
 
 export type Quote = {
@@ -151,6 +301,7 @@ export type Report = {
     net: number;
     net_pct: number | null;
   };
+  total: { basis: "value" | "cost"; amount: number; lines: number };
   fees: {
     orders: Record<string, number>;
     deposits: number;
@@ -231,4 +382,39 @@ export const api = {
   snapshots: () => request<SnapshotSummary[]>("/api/snapshots"),
   takeSnapshot: (label: string) =>
     request<{ id: number }>("/api/snapshots", json("POST", { label: label || null })),
+
+  rules: () => request<RulesState>("/api/rules"),
+  setRule: (rule: { kind: string; value: string; valid_from: string; account: string | null }) =>
+    request<{ id: number }>("/api/rules", json("POST", rule)),
+  deleteRule: (id: number) => request(`/api/rules/${id}`, { method: "DELETE" }),
+  setReason: (transactionId: string, reason: string) =>
+    request(`/api/deviations/${encodeURIComponent(transactionId)}`, json("PUT", { reason })),
+
+  compliance: () => request<Compliance>("/api/compliance"),
+  recordCompliance: (entry: { isin: string; status: string; checked_on: string; note: string }) =>
+    request("/api/compliance", json("POST", entry)),
+
+  roadmap: () => request<Roadmap>("/api/roadmap"),
+  addRoadmapItem: (item: RoadmapDraft) => request<{ id: number }>("/api/roadmap", json("POST", item)),
+  updateRoadmapItem: (id: number, item: RoadmapDraft) =>
+    request(`/api/roadmap/${id}`, json("PUT", item)),
+  deleteRoadmapItem: (id: number) => request(`/api/roadmap/${id}`, { method: "DELETE" }),
+  refreshRoadmapPrices: () =>
+    request<{ updated: number; errors: string[]; refused: boolean; unreachable: boolean }>(
+      "/api/roadmap/prices",
+      { method: "POST" },
+    ),
+
+  gold: () => request<Gold>("/api/gold"),
+  addGoldLot: (lot: GoldDraft) => request<{ id: number }>("/api/gold/lots", json("POST", lot)),
+  updateGoldLot: (id: number, lot: GoldDraft) => request(`/api/gold/lots/${id}`, json("PUT", lot)),
+  deleteGoldLot: (id: number) => request(`/api/gold/lots/${id}`, { method: "DELETE" }),
+  refreshGoldPrice: () => request<Gold>("/api/gold/price", { method: "POST" }),
+
+  importSettings: (text: string) =>
+    request<SettingsImport>("/api/settings/import", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: text,
+    }),
 };

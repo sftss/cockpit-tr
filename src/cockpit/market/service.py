@@ -115,6 +115,7 @@ class Market:
         self.provider = provider
         self._chart_cache: dict[tuple[str, str], tuple[float, Series]] = {}
         self._fx_today: dict[str, tuple[float, Decimal]] = {}
+        self._spot: dict[str, tuple[float, Decimal]] = {}
 
     # -- Symbols ------------------------------------------------------------
 
@@ -209,6 +210,19 @@ class Market:
             if last
             else None,
         }
+
+    def price_eur(self, symbol: str) -> Decimal:
+        """Latest price of any symbol in euros, asked at most once a minute."""
+        cached = self._spot.get(symbol)
+        if cached and time.monotonic() - cached[0] < QUOTE_MAX_AGE:
+            return cached[1]
+        series = self.provider.chart(symbol, "1d", "5m")
+        if series.price is None or series.price <= 0:
+            raise ProviderError("format", f"pas de cours dans la réponse pour {symbol}")
+        price, currency = normalise(series.price, series.currency)
+        value = price / self._rate_today(currency)
+        self._spot[symbol] = (time.monotonic(), value)
+        return value
 
     # -- Exchange rates -----------------------------------------------------
 

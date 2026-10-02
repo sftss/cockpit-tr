@@ -78,3 +78,19 @@ const eurRound = new Intl.NumberFormat("fr-FR", {
 
 /** Whole euros, for chart axes where cents are noise. */
 export const euroRound = (value: number) => eurRound.format(value);
+
+/** Today as an ISO day, in local time: the default of every date field. */
+export const today = () => {
+  const now = new Date();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+};
+
+const plain = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 });
+
+/** A number as a person writes it: 4, 100, 2,5. */
+export const number = (value: number) => plain.format(value);
+
+const gram = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 });
+
+export const grams = (value: number) => `${gram.format(value)} g`;

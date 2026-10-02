@@ -19,7 +19,7 @@ demandez de le chercher par nom ; jamais de quantités ni de montants.
 | --- | --- | --- |
 | V0 | Import de l'export CSV, base SQLite, calculs, tableau de bord, snapshots | fait |
 | V0 (suite) | Cours par ISIN, graphiques par titre, mini-courbes, courbe de la valeur du portefeuille | fait |
-| V1 | Règles du portefeuille, statut de conformité daté, feuille de route, or physique | à venir |
+| V1 | Règles du portefeuille, statut de conformité daté, feuille de route, or physique | fait |
 | V2 | Assistant et routines d'analyse (la fiche du jour existe déjà, voir `fiches/`) | en cours |
 | V3 | Tickets d'ordre : préparés et contrôlés ici, passés dans l'app Trade Republic | à venir |
 
@@ -33,6 +33,8 @@ l'export CSV officiel.
 | --- | --- |
 | Le code et ses tests (données inventées) | La base SQLite : transactions, positions, montants |
 | | Les exports CSV et les classeurs |
+| Les types de règles | Les valeurs des règles, les motifs d'écart, la feuille de route |
+| | Les statuts de conformité, les lots d'or |
 | | Les identifiants et les clés d'API |
 
 Deux garde-fous : le `.gitignore` écarte les fichiers de données, et un test
@@ -109,6 +111,29 @@ les cotations trouvées avec leur cours : c'est vous qui choisissez, car Yahoo
 n'indique pas l'ISIN et une recherche par nom peut renvoyer une autre classe
 d'action. Si un titre n'est pas sur la bonne place, son symbole Yahoo se saisit
 au même endroit (par exemple `AI.PA`).
+
+## Règles, conformité, feuille de route, or
+
+- **Règles.** Le code connaît des types de règles (ordres manuels par
+  trimestre, frais d'ordre, montant minimal d'un achat, pas de nouvelle ligne
+  sous une certaine valeur de portefeuille, ventes, lignes soldées,
+  rechargements par carte, poids maximal d'une ligne). Leurs valeurs se règlent
+  dans la page « Règles », avec une date d'effet ; l'ancienne valeur reste dans
+  l'historique. Une règle ne bloque rien : une transaction importée qui s'en
+  écarte est listée, et un motif s'écrit à côté. Une transaction n'est comparée
+  qu'aux règles en vigueur le jour où elle a été passée.
+- **Conformité.** L'application ne vérifie rien : elle garde le statut lu à la
+  main dans l'application de filtrage, avec la date de cette lecture. Au-delà de
+  90 jours, le statut passe « à revérifier ».
+- **Feuille de route.** Des cibles, pas des ordres : titre, compte, montant
+  prévu, condition d'entrée, thèse. Si une cible porte un cours d'entrée, la
+  page le signale quand le cours l'atteint ; rien d'autre ne se passe.
+- **Or physique.** Des lots saisis à la main (poids d'or fin, prix payé),
+  valorisés au cours mondial de l'or converti en euros, hors prime. L'or est
+  compté à part : ni dans les poids, ni dans les règles, ni dans la courbe.
+- **Fichier de réglages.** Les valeurs des règles et la feuille de route
+  s'exportent et s'importent en JSON depuis la page « Données ». Ce fichier est
+  personnel : le `.gitignore` l'écarte du dépôt.
 
 ## Où sont mes données
 

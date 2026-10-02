@@ -106,6 +106,8 @@ export function Data({ report, reload }: { report: Report | null; reload: () => 
 
       {hasData && <Quotes reload={reload} />}
 
+      {hasData && <Settings />}
+
       {hasData && (
         <Section
           title="Snapshots"
@@ -158,6 +160,60 @@ export function Data({ report, reload }: { report: Report | null; reload: () => 
         </Section>
       )}
     </>
+  );
+}
+
+/** Rule values and roadmap as a file: they are personal, so they are not in the code. */
+function Settings() {
+  const input = useRef<HTMLInputElement>(null);
+  const [message, setMessage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const importFile = async (file: File) => {
+    setMessage(null);
+    setError(null);
+    try {
+      const done = await api.importSettings(await file.text());
+      setMessage(
+        `${done.rules_added} valeurs de règles et ${done.roadmap_added} cibles ajoutées ; ${done.rules_present + done.roadmap_present} déjà présentes.`,
+      );
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      if (input.current) input.current.value = "";
+    }
+  };
+
+  return (
+    <Section
+      title="Réglages"
+      note="Les valeurs des règles et la feuille de route se sauvegardent dans un fichier, et se rechargent depuis un fichier. L'import ajoute ce qui manque et ne modifie rien d'existant."
+    >
+      <input
+        ref={input}
+        type="file"
+        accept=".json,application/json"
+        className="sr-only"
+        aria-label="Fichier de réglages"
+        onChange={(e) => e.target.files?.[0] && importFile(e.target.files[0])}
+      />
+      <div className="flex flex-wrap items-center gap-4">
+        <Button onClick={() => input.current?.click()}>Importer un fichier de réglages</Button>
+        <a className="text-sm text-accent underline underline-offset-4" href="/api/settings/export">
+          Exporter les réglages
+        </a>
+      </div>
+      {message && (
+        <div className="mt-4">
+          <Notice>{message}</Notice>
+        </div>
+      )}
+      {error && (
+        <div className="mt-4">
+          <Notice tone="error">{error}</Notice>
+        </div>
+      )}
+    </Section>
   );
 }
 

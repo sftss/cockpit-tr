@@ -1,7 +1,8 @@
 """The repository is public: personal data must never be committed.
 
 This test fails as soon as git tracks a file that looks like data (an export,
-a workbook, a database) or like a secret.
+a workbook, a database, a settings file with rule values and roadmap) or like
+a secret.
 """
 
 import shutil
@@ -27,5 +28,6 @@ def test_no_data_or_secret_file_is_tracked():
         if Path(name).suffix.lower() in FORBIDDEN_SUFFIXES
         or Path(name).name in FORBIDDEN_NAMES
         or Path(name).name.startswith("cookies")
+        or Path(name).name.startswith("cockpit-reglages")
     ]
     assert offenders == [], f"fichiers de données ou secrets suivis par git : {offenders}"

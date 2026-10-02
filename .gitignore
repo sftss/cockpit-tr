@@ -14,6 +14,8 @@ exports/
 .env.*
 credentials
 cookies*.txt
+# Fichiers de réglages : valeurs des règles et feuille de route
+cockpit-reglages*.json
 
 # --- Python ---------------------------------------------------------------
 __pycache__/

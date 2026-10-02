@@ -1,11 +1,15 @@
-import type { Report } from "../api";
+import { useEffect, useState } from "react";
+import { api, type Compliance, type Gold, type Report, type RulesState } from "../api";
 import { QuarterChart } from "../components/QuarterChart";
 import { ValueHistory } from "../components/ValueHistory";
 import { PageTitle, Result, Section, TableWrap } from "../components/ui";
+import { accountTotal } from "../totals";
+import { Counters } from "./Rules";
 import {
   accountName,
   date,
   euro,
+  grams,
   percent,
   plural,
   previousQuarter,
@@ -39,6 +43,8 @@ export function Home({ report }: { report: Report }) {
           : plural(now.manual_orders, "ordre manuel", "ordres manuels")}
         , {euro(now.order_fees)} de frais d'ordre
       </PageTitle>
+
+      <RulesSummary stamp={report.last_import} />
 
       <Section title="Comptes">
         <TableWrap>
@@ -89,6 +95,7 @@ export function Home({ report }: { report: Report }) {
           compte a un cours. Les espèces sont recalculées à partir des transactions : c'est une
           estimation.
         </p>
+        <GoldLine report={report} />
       </Section>
 
       <Section title="Valeur du portefeuille">
@@ -129,6 +136,101 @@ export function Home({ report }: { report: Report }) {
         {date(report.period?.to)}. Dernier import le {date(report.last_import)}.
       </p>
     </>
+  );
+}
+
+/** The rules before the prices: what the quarter looks like against what was decided. */
+function RulesSummary({ stamp }: { stamp: string | null }) {
+  const [rules, setRules] = useState<RulesState | null>(null);
+  const [compliance, setCompliance] = useState<Compliance | null>(null);
+  useEffect(() => {
+    api.rules().then(setRules).catch(() => setRules(null));
+    api.compliance().then(setCompliance).catch(() => setCompliance(null));
+  }, [stamp]);
+  if (!rules) return null;
+
+  const link = "text-accent underline underline-offset-4";
+  const zoya = compliance?.summary;
+  return (
+    <Section title="Règles du trimestre">
+      {rules.has_rules ? (
+        <Counters lines={rules.current} />
+      ) : (
+        <p className="max-w-[65ch] text-muted">
+          Aucune règle n'a encore de valeur.{" "}
+          <a className={link} href="#/regles">
+            Régler les valeurs
+          </a>{" "}
+          ou importer un fichier de réglages depuis la page Données.
+        </p>
+      )}
+      <ul className="mt-4 space-y-1 text-sm">
+        {rules.has_rules && (
+          <li>
+            {rules.pending > 0 ? (
+              <span className="text-alert">
+                {plural(rules.pending, "écart attend un motif", "écarts attendent un motif")}.
+              </span>
+            ) : (
+              "Aucun écart sans motif."
+            )}{" "}
+            <a className={link} href="#/regles">
+              Voir les écarts
+            </a>
+          </li>
+        )}
+        {zoya && (
+          <li>
+            {zoya.missing + zoya.stale + zoya.not_compliant > 0 ? (
+              <span className="text-alert">
+                Conformité :{" "}
+                {[
+                  zoya.stale > 0 && plural(zoya.stale, "statut à revérifier", "statuts à revérifier"),
+                  zoya.missing > 0 && plural(zoya.missing, "non renseigné", "non renseignés"),
+                  zoya.not_compliant > 0 &&
+                    plural(zoya.not_compliant, "ligne détenue non conforme", "lignes détenues non conformes"),
+                ]
+                  .filter(Boolean)
+                  .join(", ")}
+                .
+              </span>
+            ) : (
+              "Conformité : tous les statuts sont à jour."
+            )}{" "}
+            <a className={link} href="#/conformite">
+              Voir les statuts
+            </a>
+          </li>
+        )}
+      </ul>
+    </Section>
+  );
+}
+
+/** Physical gold, said in one line: it is kept apart from the broker accounts. */
+function GoldLine({ report }: { report: Report }) {
+  const [gold, setGold] = useState<Gold | null>(null);
+  useEffect(() => {
+    api
+      .gold()
+      .then((known) => {
+        setGold(known);
+        // Ask today's price only when there is gold to value.
+        if (known.lots.length > 0) api.refreshGoldPrice().then(setGold).catch(() => {});
+      })
+      .catch(() => setGold(null));
+  }, []);
+  if (!gold || gold.lots.length === 0) return null;
+  const broker = accountTotal(report);
+  return (
+    <p className="mt-3 max-w-[75ch] text-sm">
+      Or physique, compté à part : {grams(gold.grams)}
+      {gold.value != null && `, ${euro(gold.value)} au cours du ${date(gold.price_date)}`}.
+      {gold.value != null && broker != null && ` Avec le portefeuille : ${euro(broker + gold.value)}.`}{" "}
+      <a className="text-accent underline underline-offset-4" href="#/portefeuille">
+        Détail
+      </a>
+    </p>
   );
 }
 

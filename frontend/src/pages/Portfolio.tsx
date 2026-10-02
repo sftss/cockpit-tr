@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { api, type Position, type RefreshOutcome, type Report } from "../api";
+import { GoldSection } from "../components/GoldSection";
 import { Sparkline } from "../components/Sparkline";
+import { ZoyaLabel } from "../components/Zoya";
 import { Button, Notice, PageTitle, Result, Section, TableWrap } from "../components/ui";
 import {
   accountName,
@@ -135,6 +137,8 @@ export function Portfolio({ report, reload, refresh, refreshing, outcome }: Prop
           </Section>
         );
       })}
+
+      <GoldSection report={report} />
     </>
   );
 }
@@ -147,6 +151,9 @@ function Row({ position: p, save }: { position: Position; save: (isin: string, p
           {p.name}
         </a>
         <span className="block text-xs text-muted">{p.isin}</span>
+        <span className="block text-xs">
+          <ZoyaLabel zoya={p.zoya} />
+        </span>
       </td>
       <td className="num">{quantity(p.shares)}</td>
       <td className="num">{euro(p.cost)}</td>
