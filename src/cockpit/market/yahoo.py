@@ -17,7 +17,7 @@ import urllib.parse
 import urllib.request
 from decimal import Decimal, InvalidOperation
 
-from .provider import Listing, Point, ProviderError, Series
+from .provider import Listing, Point, ProviderError, Series, Split
 
 SEARCH_URL = "https://query2.finance.yahoo.com/v1/finance/search"
 CHART_URL = "https://query1.finance.yahoo.com/v8/finance/chart/"
@@ -89,7 +89,7 @@ class YahooProvider:
 
     def chart(self, symbol: str, span: str, interval: str) -> Series:
         query = urllib.parse.urlencode(
-            {"range": span, "interval": interval, "includePrePost": "false"}
+            {"range": span, "interval": interval, "includePrePost": "false", "events": "split"}
         )
         url = f"{CHART_URL}{urllib.parse.quote(symbol, safe='')}?{query}"
         return parse_chart(self._get(url), symbol)
@@ -153,4 +153,14 @@ def parse_chart(payload: dict, symbol: str) -> Series:
             series.points.append(Point(time=stamp, close=value))
     if series.price is None and series.points:
         series.price = series.points[-1].close
+
+    splits = (result.get("events") or {}).get("splits") or {}
+    for event in splits.values() if isinstance(splits, dict) else []:
+        if not isinstance(event, dict):
+            continue
+        stamp = event.get("date")
+        new, old = _decimal(event.get("numerator")), _decimal(event.get("denominator"))
+        if isinstance(stamp, int) and new and old and new > 0 and old > 0 and new != old:
+            series.splits.append(Split(time=stamp, ratio=new / old))
+    series.splits.sort(key=lambda split: split.time)
     return series

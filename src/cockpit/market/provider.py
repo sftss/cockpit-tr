@@ -41,6 +41,12 @@ class Point:
     close: Decimal
 
 
+@dataclass(frozen=True)
+class Split:
+    time: int  # seconds since the epoch, UTC: first day quoted after the split
+    ratio: Decimal  # new shares for one old share
+
+
 @dataclass
 class Series:
     symbol: str
@@ -51,6 +57,7 @@ class Series:
     previous_close: Decimal | None = None
     market_time: int | None = None
     points: list[Point] = field(default_factory=list)
+    splits: list[Split] = field(default_factory=list)  # within the span asked
 
 
 class QuoteProvider(Protocol):

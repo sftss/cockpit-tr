@@ -73,8 +73,20 @@ def price_history(conn: sqlite3.Connection) -> dict[str, list[tuple[str, Decimal
     return history
 
 
+def split_history(conn: sqlite3.Connection) -> dict[str, list[tuple[str, Decimal]]]:
+    splits: dict[str, list[tuple[str, Decimal]]] = {}
+    for row in conn.execute("SELECT isin, date, ratio FROM splits ORDER BY isin, date"):
+        splits.setdefault(row["isin"], []).append((row["date"], dec(row["ratio"])))
+    return splits
+
+
 def value_history(conn: sqlite3.Connection) -> dict:
-    data = valuation.history(all_transactions(conn), price_history(conn), date.today().isoformat())
+    data = valuation.history(
+        all_transactions(conn),
+        price_history(conn),
+        date.today().isoformat(),
+        split_history(conn),
+    )
     names = dict(conn.execute("SELECT isin, name FROM instruments").fetchall())
     data["unpriced"] = [names.get(isin, isin) for isin in data["unpriced"]]
     return data

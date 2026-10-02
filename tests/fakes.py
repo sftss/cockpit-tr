@@ -5,14 +5,16 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from decimal import Decimal
 
-from cockpit.market.provider import Listing, Point, ProviderError, Series
+from cockpit.market.provider import Listing, Point, ProviderError, Series, Split
 
 
 def epoch(day: str, hour: int = 12) -> int:
     return int(datetime.fromisoformat(f"{day}T{hour:02d}:00:00").replace(tzinfo=UTC).timestamp())
 
 
-def series(symbol, currency, exchange, closes: dict[str, str], previous=None) -> Series:
+def series(
+    symbol, currency, exchange, closes: dict[str, str], previous=None, splits=None
+) -> Series:
     points = [Point(epoch(day), Decimal(value)) for day, value in closes.items()]
     return Series(
         symbol=symbol,
@@ -23,6 +25,7 @@ def series(symbol, currency, exchange, closes: dict[str, str], previous=None) ->
         previous_close=None if previous is None else Decimal(previous),
         market_time=points[-1].time if points else None,
         points=points,
+        splits=[Split(epoch(day), Decimal(ratio)) for day, ratio in (splits or {}).items()],
     )
 
 

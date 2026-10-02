@@ -5,7 +5,10 @@ Two details matter:
 
 * Published price histories are adjusted for splits and bonus issues, so the
   quantities held before such an event are restated the same way. Without it,
-  a 10-for-1 split would make the past look ten times smaller.
+  a 10-for-1 split would make the past look ten times smaller. A line held
+  through the event is restated from the export, which records the shares
+  received. A line already closed has no trace of it in the export: it is
+  restated from the splits the price source publishes.
 * A line with no known price yet on a given day is counted at its cost, and
   the share of the total valued that way is reported, so the curve never
   silently mixes prices and costs.
@@ -37,7 +40,29 @@ class _Track:
         return (self.shares[index], self.costs[index]) if index >= 0 else (ZERO, ZERO)
 
 
-def _tracks(rows: Iterable[Row]) -> tuple[dict[tuple[str, str], _Track], list[tuple[str, Decimal]]]:
+Splits = Mapping[str, list[tuple[str, Decimal]]]  # ISIN -> (day, new shares per old share)
+
+
+def _restate_closed_lines(tracks: dict[tuple[str, str], _Track], splits: Splits) -> None:
+    """Apply the splits that happened while a line held nothing.
+
+    When shares were held on the day of the split, the export has its own row
+    for it and the quantities are already restated: applying the published
+    ratio as well would count the split twice.
+    """
+    for (_, isin), track in tracks.items():
+        for day, ratio in sorted(splits.get(isin, [])):
+            if track.at(day)[0] > SHARE_EPSILON:
+                continue
+            track.shares = [
+                past * ratio if past_day < day else past
+                for past_day, past in zip(track.days, track.shares, strict=True)
+            ]
+
+
+def _tracks(
+    rows: Iterable[Row], splits: Splits | None = None
+) -> tuple[dict[tuple[str, str], _Track], list[tuple[str, Decimal]]]:
     tracks: dict[tuple[str, str], _Track] = {}
     state: dict[tuple[str, str], tuple[Decimal, Decimal]] = {}
     flows: list[tuple[str, Decimal]] = []  # (day, net amount invested that day)
@@ -75,17 +100,23 @@ def _tracks(rows: Iterable[Row]) -> tuple[dict[tuple[str, str], _Track], list[tu
             track.days.append(day)
             track.shares.append(held)
             track.costs.append(cost)
+    if splits:
+        _restate_closed_lines(tracks, splits)
     return tracks, flows
 
 
 def history(
-    rows: Iterable[Row], prices: Mapping[str, list[tuple[str, Decimal]]], until: str
+    rows: Iterable[Row],
+    prices: Mapping[str, list[tuple[str, Decimal]]],
+    until: str,
+    splits: Splits | None = None,
 ) -> dict:
     """Daily value, split by account, with the net amount invested so far.
 
-    `prices` gives, per ISIN, (day, price in euros) sorted by day.
+    `prices` gives, per ISIN, (day, price in euros) sorted by day; `splits`,
+    per ISIN, the splits published by the price source.
     """
-    tracks, flows = _tracks(rows)
+    tracks, flows = _tracks(rows, splits)
     if not tracks:
         return {"points": [], "unpriced": []}
 

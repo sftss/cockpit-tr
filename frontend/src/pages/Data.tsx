@@ -308,7 +308,7 @@ function Proposal({ found, choose }: { found: Candidates | null; choose: (symbol
           ? `Rien par ISIN. Résultats de la recherche par nom « ${found.query} » : Yahoo n'indique pas l'ISIN, vérifier la classe d'action, la place et l'ordre de grandeur du cours avant de choisir.`
           : "Cotations trouvées par ISIN."}
         {found.last_trade &&
-          ` Dernier prix d'exécution connu : ${euro(found.last_trade.price)} le ${date(found.last_trade.date)}.`}
+          ` Dernier prix d'exécution connu : ${euro(found.last_trade.price)} le ${date(found.last_trade.date)} ; un fractionnement d'actions depuis cette date explique un écart d'un facteur rond (10 pour 1, par exemple).`}
       </p>
       <ul className="mt-2">
         {found.candidates.map((c) => (
