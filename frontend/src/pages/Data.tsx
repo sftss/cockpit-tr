@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { api, type ImportReport, type Report, type SnapshotSummary } from "../api";
+import {
+  api,
+  type ImportReport,
+  type Instrument,
+  type Report,
+  type SnapshotSummary,
+} from "../api";
 import { Button, Notice, PageTitle, Section, TableWrap } from "../components/ui";
-import { date } from "../format";
+import { date, delayLabel } from "../format";
 
 export function Data({ report, reload }: { report: Report | null; reload: () => void }) {
   const input = useRef<HTMLInputElement>(null);
@@ -97,6 +103,8 @@ export function Data({ report, reload }: { report: Report | null; reload: () => 
         )}
       </Section>
 
+      {hasData && <Quotes reload={reload} />}
+
       {hasData && (
         <Section
           title="Snapshots"
@@ -149,5 +157,118 @@ export function Data({ report, reload }: { report: Report | null; reload: () => 
         </Section>
       )}
     </>
+  );
+}
+
+/** Where each instrument is quoted, with a way to correct the symbol by hand. */
+function Quotes({ reload }: { reload: () => void }) {
+  const [items, setItems] = useState<Instrument[]>([]);
+  const [busy, setBusy] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+
+  const fetchItems = () => api.instruments().then(setItems).catch(() => setItems([]));
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
+  const run = async (label: string, call: () => Promise<{ errors: string[]; refused: boolean; unreachable: boolean }>) => {
+    setBusy(label);
+    setMessage(null);
+    try {
+      const outcome = await call();
+      if (outcome.refused) setMessage("La source de cours a refusé la requête. Réessayer plus tard.");
+      else if (outcome.unreachable) setMessage("La source de cours est injoignable.");
+      else if (outcome.errors.length) setMessage(outcome.errors.join(" ; "));
+      await fetchItems();
+      reload();
+    } catch (e) {
+      setMessage((e as Error).message);
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const saveSymbol = async (isin: string, symbol: string) => {
+    await api.setSymbol(isin, symbol);
+    await run("cours", api.refreshQuotes);
+  };
+
+  const held = items.filter((i) => i.held);
+  const others = items.filter((i) => !i.held);
+
+  return (
+    <Section
+      title="Cours"
+      note="Les cours viennent de Yahoo Finance, recherchés par code ISIN : une source gratuite et non officielle, qui peut refuser ou changer. Si un titre n'est pas trouvé, ou pas sur la bonne place, saisir son symbole Yahoo (par exemple AI.PA). Un symbole vide relance la recherche par ISIN."
+    >
+      <div className="mb-5 flex flex-wrap items-center gap-3">
+        <Button onClick={() => run("cours", api.refreshQuotes)} disabled={busy !== null}>
+          {busy === "cours" ? "Actualisation…" : "Actualiser les cours"}
+        </Button>
+        <Button onClick={() => run("historique", api.loadHistory)} disabled={busy !== null}>
+          {busy === "historique" ? "Chargement, une minute environ…" : "Charger l'historique des cours"}
+        </Button>
+      </div>
+      {message && (
+        <div className="mb-5">
+          <Notice tone="error">{message}</Notice>
+        </div>
+      )}
+      <TableWrap>
+        <table className="data max-w-4xl">
+          <thead>
+            <tr>
+              <th>Titre</th>
+              <th>Symbole</th>
+              <th>Devise</th>
+              <th>Fraîcheur</th>
+              <th>Jours de cours</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[...held, ...others].map((item) => (
+              <tr key={item.isin}>
+                <td>
+                  {item.name}
+                  <span className="block text-xs text-muted">
+                    {item.isin}
+                    {!item.held && ", ligne soldée"}
+                  </span>
+                </td>
+                <td>
+                  <SymbolInput item={item} save={saveSymbol} />
+                </td>
+                <td>{item.currency ?? "—"}</td>
+                <td>
+                  {item.status === "introuvable"
+                    ? "non trouvé"
+                    : item.symbol
+                      ? delayLabel(item.delay_minutes)
+                      : "pas encore recherché"}
+                </td>
+                <td className="num">{item.price_days}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </TableWrap>
+    </Section>
+  );
+}
+
+function SymbolInput({ item, save }: { item: Instrument; save: (isin: string, symbol: string) => void }) {
+  const stored = item.symbol ?? "";
+  const [draft, setDraft] = useState(stored);
+  useEffect(() => setDraft(stored), [stored]);
+  return (
+    <input
+      aria-label={`Symbole Yahoo de ${item.name}`}
+      value={draft}
+      placeholder="symbole"
+      onChange={(e) => setDraft(e.target.value)}
+      onBlur={() => draft.trim() !== stored && save(item.isin, draft.trim())}
+      onKeyDown={(e) => e.key === "Enter" && (e.target as HTMLInputElement).blur()}
+      className="w-28 rounded-md border border-line bg-surface px-2 py-1 text-right"
+    />
   );
 }

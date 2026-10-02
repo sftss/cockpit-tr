@@ -11,6 +11,9 @@
   --accent: #0e6655;
   --accent-soft: #e1eeea;
   --loss: #9e3b2c;
+  /* Chart series: two hues checked for colour-blind separation on this surface. */
+  --chart-1: #0f8a6c;
+  --chart-2: #4a3aa7;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,6 +26,8 @@
     --accent: #62c4ae;
     --accent-soft: #1b2f2a;
     --loss: #e58a78;
+    --chart-1: #27a584;
+    --chart-2: #8f83ea;
   }
 }
 
@@ -87,15 +92,16 @@ table.data tfoot td {
 }
 
 /* Same column widths in every account table, so figures line up down the page.
-   Columns: title, quantity, average cost, cost, price, value, latent, weight. */
+   Columns: title, quantity, cost, price, session, 30 days, value, latent, weight. */
 table.positions {
   table-layout: fixed;
-  min-width: 940px;
+  min-width: 1040px;
 }
-table.positions th:nth-child(2) { width: 96px; }
+table.positions th:nth-child(2) { width: 88px; }
 table.positions th:nth-child(3) { width: 116px; }
-table.positions th:nth-child(4) { width: 124px; }
-table.positions th:nth-child(5) { width: 124px; }
-table.positions th:nth-child(6) { width: 116px; }
-table.positions th:nth-child(7) { width: 190px; }
-table.positions th:nth-child(8) { width: 84px; }
+table.positions th:nth-child(4) { width: 132px; }
+table.positions th:nth-child(5) { width: 84px; }
+table.positions th:nth-child(6) { width: 112px; }
+table.positions th:nth-child(7) { width: 108px; }
+table.positions th:nth-child(8) { width: 176px; }
+table.positions th:nth-child(9) { width: 72px; }

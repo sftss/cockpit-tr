@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import sqlite3
+import threading
 from collections.abc import Iterator
 from datetime import date
 from pathlib import Path
@@ -16,6 +17,9 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from . import __version__, config, db, store
 from .importers import tr_csv
+from .market import service as market_service
+from .market.provider import ProviderError, QuoteProvider
+from .market.yahoo import YahooProvider
 from .money import dec
 
 LOCAL_HOSTS = ["127.0.0.1", "localhost", "testserver"]
@@ -31,8 +35,21 @@ class SnapshotIn(BaseModel):
     label: str | None = None
 
 
-def create_app(database: Path | str | None = None) -> FastAPI:
+class SymbolIn(BaseModel):
+    symbol: str | None = None
+
+
+def _provider_error(exc: ProviderError) -> HTTPException:
+    # 503: the source turned us down for now; 502: it answered something unusable.
+    return HTTPException(503 if exc.kind in ("refused", "network") else 502, str(exc))
+
+
+def create_app(
+    database: Path | str | None = None, provider: QuoteProvider | None = None
+) -> FastAPI:
     app = FastAPI(title="Cockpit TR", version=__version__, docs_url=None, redoc_url=None)
+    market = market_service.Market(provider or YahooProvider())
+    market_busy = threading.Lock()  # one refresh at a time, whatever the number of tabs
 
     # The app holds personal financial data: answer only to this machine's own
     # browser. The Host check stops DNS rebinding, the Origin check stops another
@@ -132,6 +149,55 @@ def create_app(database: Path | str | None = None) -> FastAPI:
             media_type="text/csv; charset=utf-8",
             headers={"Content-Disposition": f'attachment; filename="{name}"'},
         )
+
+    # -- Market data --------------------------------------------------------
+
+    @app.get("/api/market/instruments")
+    def get_instruments(c: sqlite3.Connection = Depends(conn)) -> list[dict]:
+        return market_service.instruments(c)
+
+    @app.put("/api/market/instruments/{isin}")
+    def put_symbol(isin: str, body: SymbolIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        known = c.execute("SELECT 1 FROM instruments WHERE isin = ?", (isin,)).fetchone()
+        if not known:
+            raise HTTPException(404, "Titre inconnu.")
+        market.set_symbol(c, isin, body.symbol)
+        return {"isin": isin, "symbol": (body.symbol or "").strip() or None}
+
+    @app.post("/api/market/refresh")
+    def refresh_quotes(c: sqlite3.Connection = Depends(conn)) -> dict:
+        """Latest quotes of the instruments held. Safe to call often: each quote
+        is asked at most once a minute."""
+        if not market_busy.acquire(blocking=False):
+            return {"busy": True, **market_service.Outcome().as_dict()}
+        try:
+            outcome = market.refresh_quotes(c, market_service.open_isins(c))
+        finally:
+            market_busy.release()
+        return {"busy": False, **outcome.as_dict()}
+
+    @app.post("/api/market/history")
+    def load_history(c: sqlite3.Connection = Depends(conn)) -> dict:
+        """Daily prices of every instrument ever held, since the first transaction."""
+        since = store.state(c)["from"]
+        if since is None:
+            raise HTTPException(400, "Aucune transaction : importer un export d'abord.")
+        with market_busy:
+            outcome = market.load_history(c, market_service.all_isins(c), since)
+        return {"busy": False, **outcome.as_dict()}
+
+    @app.get("/api/market/chart/{isin}")
+    def get_chart(isin: str, range: str = "1j", c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            return market.chart(c, isin, range)
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+        except ProviderError as exc:
+            raise _provider_error(exc) from exc
+
+    @app.get("/api/portfolio/history")
+    def get_value_history(c: sqlite3.Connection = Depends(conn)) -> dict:
+        return store.value_history(c)
 
     frontend = config.frontend_dir()
     if frontend:

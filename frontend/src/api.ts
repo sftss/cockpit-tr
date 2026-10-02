@@ -33,7 +33,63 @@ export type Position = {
   realized: number;
   dividends: number;
   first_buy: string | null;
+  quote: Quote | null;
+  spark: number[];
 };
+
+export type Quote = {
+  price: number;
+  currency: string;
+  price_eur: number;
+  change: number | null;
+  market_time: string | null;
+  exchange: string | null;
+  delay_minutes: number | null;
+  fetched_at: string;
+};
+
+export type RefreshOutcome = {
+  busy: boolean;
+  updated: number;
+  skipped: number;
+  errors: string[];
+  refused: boolean;
+  unreachable: boolean;
+};
+
+export type Instrument = {
+  isin: string;
+  name: string;
+  held: boolean;
+  symbol: string | null;
+  exchange: string | null;
+  currency: string | null;
+  status: "ok" | "manuel" | "introuvable" | null;
+  delay_minutes: number | null;
+  last_quote: string | null;
+  price_days: number;
+};
+
+export type ChartData = {
+  isin: string;
+  symbol: string;
+  range: string;
+  currency: string;
+  exchange: string;
+  delay_minutes: number | null;
+  intraday: boolean;
+  points: { time: number; value: number }[];
+};
+
+export type ValuePoint = {
+  date: string;
+  value: number;
+  invested: number;
+  at_cost: number;
+  accounts: Record<string, number>;
+};
+
+export type ValueHistory = { points: ValuePoint[]; unpriced: string[] };
 
 export type ClosedLine = {
   account: string;
@@ -143,6 +199,14 @@ export const api = {
       body: text,
     }),
   setPrice: (isin: string, price: string) => request(`/api/prices/${isin}`, json("PUT", { price })),
+  refreshQuotes: () => request<RefreshOutcome>("/api/market/refresh", { method: "POST" }),
+  loadHistory: () => request<RefreshOutcome>("/api/market/history", { method: "POST" }),
+  instruments: () => request<Instrument[]>("/api/market/instruments"),
+  setSymbol: (isin: string, symbol: string) =>
+    request(`/api/market/instruments/${isin}`, json("PUT", { symbol })),
+  chart: (isin: string, range: string) =>
+    request<ChartData>(`/api/market/chart/${isin}?range=${encodeURIComponent(range)}`),
+  valueHistory: () => request<ValueHistory>("/api/portfolio/history"),
   snapshots: () => request<SnapshotSummary[]>("/api/snapshots"),
   takeSnapshot: (label: string) =>
     request<{ id: number }>("/api/snapshots", json("POST", { label: label || null })),

@@ -1,4 +1,4 @@
-"""Command line: ``cockpit serve``, ``cockpit import FILE``, ``cockpit report``."""
+"""Command line: ``cockpit serve``, ``import FILE``, ``report``, ``cours``."""
 
 from __future__ import annotations
 
@@ -83,6 +83,56 @@ def cmd_report(_: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_cours(args: argparse.Namespace) -> int:
+    """Fetch quotes from the terminal: the quickest way to see what the source answers."""
+    from .market import service
+    from .market.yahoo import YahooProvider
+
+    conn = db.connect()
+    if store.state(conn)["transactions"] == 0:
+        print("Aucune transaction. Commencer par : cockpit import <export.csv>")
+        return 1
+    market = service.Market(YahooProvider())
+    if args.historique:
+        print("Chargement de l'historique quotidien (une minute environ)…")
+        outcome = market.load_history(conn, service.all_isins(conn), store.state(conn)["from"])
+    else:
+        outcome = market.refresh_quotes(conn, service.open_isins(conn))
+
+    live = store.quotes(conn)
+    for item in service.instruments(conn):
+        if not (item["held"] or args.historique):
+            continue
+        quote = live.get(item["isin"])
+        if item["symbol"] is None:
+            found = item["status"] == "introuvable"
+            detail = "aucune cotation trouvée par ISIN" if found else "pas encore recherché"
+        elif quote:
+            delay = item["delay_minutes"]
+            timing = (
+                "délai inconnu"
+                if delay is None
+                else ("temps réel" if delay == 0 else f"différé {delay} min")
+            )
+            native = f"{quote['price']:.2f} {quote['currency']}"
+            detail = f"{native:>14}  {_euro(quote['price_eur']):>12}  {timing}"
+        else:
+            detail = f"{item['price_days']} jours de cours en base"
+        print(f"{item['name'][:34]:<34}  {(item['symbol'] or '—'):<10}  {detail}")
+
+    print(f"\n{outcome.updated} mis à jour, {outcome.skipped} sans changement ou sans cotation.")
+    for message in outcome.errors:
+        print(f"  erreur — {message}")
+    if outcome.unreachable:
+        print("La source est injoignable : vérifier la connexion Internet.")
+    if outcome.refused:
+        print(
+            "La source a refusé la requête : réessayer plus tard. "
+            "Les cours peuvent toujours être saisis à la main."
+        )
+    return 0 if not outcome.errors else 1
+
+
 def cmd_serve(args: argparse.Namespace) -> int:
     import uvicorn
 
@@ -120,6 +170,14 @@ def main(argv: list[str] | None = None) -> int:
 
     rep = sub.add_parser("report", help="afficher le résumé dans le terminal")
     rep.set_defaults(func=cmd_report)
+
+    cours = sub.add_parser("cours", help="récupérer les cours des titres détenus")
+    cours.add_argument(
+        "--historique",
+        action="store_true",
+        help="charger l'historique quotidien de tous les titres",
+    )
+    cours.set_defaults(func=cmd_cours)
 
     args = parser.parse_args(argv)
     return args.func(args)

@@ -44,3 +44,37 @@ export const previousQuarter = (id: string) => {
 };
 
 export const plural = (n: number, one: string, many: string) => `${n} ${n > 1 ? many : one}`;
+
+const hourMinute = new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit" });
+
+export const clock = (iso: string | null | undefined) =>
+  iso ? hourMinute.format(new Date(iso)) : DASH;
+
+const currencyFormats = new Map<string, Intl.NumberFormat>();
+
+/** An amount in any currency, e.g. a price in dollars. */
+export const amount = (value: number | null | undefined, currency: string) => {
+  if (value == null) return DASH;
+  let format = currencyFormats.get(currency);
+  if (!format) {
+    try {
+      format = new Intl.NumberFormat("fr-FR", { style: "currency", currency });
+    } catch {
+      format = new Intl.NumberFormat("fr-FR", { minimumFractionDigits: 2 });
+    }
+    currencyFormats.set(currency, format);
+  }
+  return format.format(value);
+};
+
+export const delayLabel = (minutes: number | null | undefined) =>
+  minutes == null ? "délai non connu" : minutes === 0 ? "temps réel" : `différé de ${minutes} min`;
+
+const eurRound = new Intl.NumberFormat("fr-FR", {
+  style: "currency",
+  currency: "EUR",
+  maximumFractionDigits: 0,
+});
+
+/** Whole euros, for chart axes where cents are noise. */
+export const euroRound = (value: number) => eurRound.format(value);
