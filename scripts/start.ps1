@@ -13,7 +13,11 @@ foreach ($tool in "uv", "npm") {
 
 Push-Location frontend
 try {
-    if (-not (Test-Path "node_modules")) {
+    # Réinstalle les dépendances à la première fois et quand leur liste a changé
+    # (après un git pull, par exemple) : npm date son installation dans ce fichier.
+    $wanted = Get-Item "package-lock.json"
+    $installed = Get-Item "node_modules/.package-lock.json" -Force -ErrorAction SilentlyContinue
+    if (-not $installed -or $installed.LastWriteTimeUtc -lt $wanted.LastWriteTimeUtc) {
         npm ci
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
     }
