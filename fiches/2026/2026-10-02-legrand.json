@@ -1,0 +1,50 @@
+{
+  "nom": "Legrand",
+  "ticker": "LR",
+  "place": "Euronext Paris",
+  "date": "2026-10-02",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 6994.2, "2025": 9480.6},
+    "cash_flow_libre": {"2021": 952.4, "2022": 1035.5, "2023": 1584.8, "2024": 1290.5, "2025": 1330.8},
+    "chiffre_affaires_12m": 10106.6,
+    "resultat_net_12m": 1314.7,
+    "resultat_operationnel_12m": 1908.0,
+    "ebitda_12m": 2350.7,
+    "dette_nette": 5755.3,
+    "capitaux_propres": 7493.3,
+    "taux_impot": 0.275,
+    "per": 29.0,
+    "taux_distribution": 0.50
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires_12m": "9480.6 − 4774.3 + 5400.3",
+    "resultat_net_12m": "1244.6 − 628.1 + 698.2",
+    "resultat_operationnel_12m": "1808.5 − 931.0 + 1030.5",
+    "ebitda_12m": "2217.6 − 1129.5 + 1262.6",
+    "dette_nette": "dette financière nette publiée au 30/06/2026",
+    "capitaux_propres": "non publiés dans le communiqué semestriel : capitalisation 37 783,7 / cours sur actif net 5,0423 (Stocklake)",
+    "taux_impot": "taux publié pour le 1er semestre 2026",
+    "per": "PER sur 12 mois (Stocklake) au cours de 145,15 €"
+  },
+  "complements": {
+    "cours": 145.15,
+    "per_a_terme": 21.2,
+    "roe": 0.182,
+    "rendement_dividende": 0.017,
+    "objectif_moyen_analystes": 168.06,
+    "nombre_analystes": 18,
+    "dette_nette_sur_ebitda_fin_2025": 1.96
+  },
+  "sources": [
+    "https://www.businesswire.com/news/home/20260211472558/fr",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/BWR/2026/07/FCBWR168886_20260729.pdf",
+    "https://bnains.org/archives/communiques/Legrand/20250731_Communique_resultats_semestriels_2025_Legrand.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/BWR/2024/02/FCBWR155155_20240215.pdf",
+    "https://www.businesswire.com/news/home/20220209006032/fr",
+    "Stocklake, fiche LR.PA du 02/10/2026"
+  ]
+}

@@ -1,0 +1,342 @@
+{
+  "description": "Entreprises analysées par la fiche du jour, une par jour, sans repasser sur la même avant d'avoir fait le tour. La liste ne dit rien de ce qui est détenu. Une alerte signale une activité à vérifier en premier ; la validation de conformité reste manuelle.",
+  "titres": [
+    {
+      "nom": "Accor",
+      "ticker": "AC",
+      "place": "Euronext Paris",
+      "produits_physiques": false
+    },
+    {
+      "nom": "Air Liquide",
+      "ticker": "AI",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Airbus",
+      "ticker": "AIR",
+      "place": "Euronext Paris",
+      "produits_physiques": true,
+      "alerte": "défense"
+    },
+    {
+      "nom": "Alphabet",
+      "ticker": "GOOGL",
+      "place": "Nasdaq",
+      "produits_physiques": false
+    },
+    {
+      "nom": "Amazon",
+      "ticker": "AMZN",
+      "place": "Nasdaq",
+      "produits_physiques": false
+    },
+    {
+      "nom": "AMD",
+      "ticker": "AMD",
+      "place": "Nasdaq",
+      "produits_physiques": true
+    },
+    {
+      "nom": "ArcelorMittal",
+      "ticker": "MT",
+      "place": "Euronext Amsterdam",
+      "produits_physiques": true
+    },
+    {
+      "nom": "ASML",
+      "ticker": "ASML",
+      "place": "Euronext Amsterdam",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Bloom Energy",
+      "ticker": "BE",
+      "place": "NYSE",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Bouygues",
+      "ticker": "EN",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Broadcom",
+      "ticker": "AVGO",
+      "place": "Nasdaq",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Bureau Veritas",
+      "ticker": "BVI",
+      "place": "Euronext Paris",
+      "produits_physiques": false
+    },
+    {
+      "nom": "BYD Electronic",
+      "ticker": "0285",
+      "place": "Hong Kong",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Capgemini",
+      "ticker": "CAP",
+      "place": "Euronext Paris",
+      "produits_physiques": false
+    },
+    {
+      "nom": "Carrefour",
+      "ticker": "CA",
+      "place": "Euronext Paris",
+      "produits_physiques": true,
+      "alerte": "alcool et porc en rayon"
+    },
+    {
+      "nom": "Coloplast",
+      "ticker": "COLO-B",
+      "place": "Nasdaq Copenhagen",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Constellation Energy",
+      "ticker": "CEG",
+      "place": "Nasdaq",
+      "produits_physiques": false
+    },
+    {
+      "nom": "Danaher",
+      "ticker": "DHR",
+      "place": "NYSE",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Danone",
+      "ticker": "BN",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Dassault Systèmes",
+      "ticker": "DSY",
+      "place": "Euronext Paris",
+      "produits_physiques": false
+    },
+    {
+      "nom": "Eiffage",
+      "ticker": "FGR",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Engie",
+      "ticker": "ENGI",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Equasens",
+      "ticker": "EQS",
+      "place": "Euronext Paris",
+      "produits_physiques": false
+    },
+    {
+      "nom": "EssilorLuxottica",
+      "ticker": "EL",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Eurofins Scientific",
+      "ticker": "ERF",
+      "place": "Euronext Paris",
+      "produits_physiques": false
+    },
+    {
+      "nom": "Euronext",
+      "ticker": "ENX",
+      "place": "Euronext Paris",
+      "produits_physiques": false,
+      "alerte": "activité financière"
+    },
+    {
+      "nom": "Gaztransport & Technigaz",
+      "ticker": "GTT",
+      "place": "Euronext Paris",
+      "produits_physiques": false
+    },
+    {
+      "nom": "Hermès",
+      "ticker": "RMS",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Kering",
+      "ticker": "KER",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "L'Oréal",
+      "ticker": "OR",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Legrand",
+      "ticker": "LR",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "LVMH",
+      "ticker": "MC",
+      "place": "Euronext Paris",
+      "produits_physiques": true,
+      "alerte": "vins et spiritueux"
+    },
+    {
+      "nom": "Meta Platforms",
+      "ticker": "META",
+      "place": "Nasdaq",
+      "produits_physiques": false
+    },
+    {
+      "nom": "Michelin",
+      "ticker": "ML",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Microsoft",
+      "ticker": "MSFT",
+      "place": "Nasdaq",
+      "produits_physiques": false
+    },
+    {
+      "nom": "NVIDIA",
+      "ticker": "NVDA",
+      "place": "Nasdaq",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Orange",
+      "ticker": "ORA",
+      "place": "Euronext Paris",
+      "produits_physiques": false
+    },
+    {
+      "nom": "OVHcloud",
+      "ticker": "OVH",
+      "place": "Euronext Paris",
+      "produits_physiques": false
+    },
+    {
+      "nom": "Publicis",
+      "ticker": "PUB",
+      "place": "Euronext Paris",
+      "produits_physiques": false
+    },
+    {
+      "nom": "Renault",
+      "ticker": "RNO",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Safran",
+      "ticker": "SAF",
+      "place": "Euronext Paris",
+      "produits_physiques": true,
+      "alerte": "défense"
+    },
+    {
+      "nom": "Saint-Gobain",
+      "ticker": "SGO",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Samsung Electronics",
+      "ticker": "SMSN",
+      "place": "Londres (GDR)",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Sanofi",
+      "ticker": "SAN",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Schneider Electric",
+      "ticker": "SU",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Stellantis",
+      "ticker": "STLAP",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "STMicroelectronics",
+      "ticker": "STMPA",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Thales",
+      "ticker": "HO",
+      "place": "Euronext Paris",
+      "produits_physiques": true,
+      "alerte": "défense"
+    },
+    {
+      "nom": "TotalEnergies",
+      "ticker": "TTE",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Trigano",
+      "ticker": "TRI",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "TSMC",
+      "ticker": "TSM",
+      "place": "NYSE (ADR)",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Unibail-Rodamco-Westfield",
+      "ticker": "URW",
+      "place": "Euronext Paris",
+      "produits_physiques": false,
+      "alerte": "dette"
+    },
+    {
+      "nom": "Veolia",
+      "ticker": "VIE",
+      "place": "Euronext Paris",
+      "produits_physiques": false
+    },
+    {
+      "nom": "Vinci",
+      "ticker": "DG",
+      "place": "Euronext Paris",
+      "produits_physiques": true
+    },
+    {
+      "nom": "Wolters Kluwer",
+      "ticker": "WKL",
+      "place": "Euronext Amsterdam",
+      "produits_physiques": false
+    }
+  ]
+}
