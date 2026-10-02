@@ -1,5 +1,6 @@
 import type { Report } from "../api";
 import { QuarterChart } from "../components/QuarterChart";
+import { ValueHistory } from "../components/ValueHistory";
 import { PageTitle, Result, Section, TableWrap } from "../components/ui";
 import {
   accountName,
@@ -85,9 +86,20 @@ export function Home({ report }: { report: Report }) {
         <p className="mt-3 max-w-[75ch] text-sm text-muted">
           Le capital net engagé est ce qui a été payé en achats, moins ce qui a été reçu en ventes.
           La performance compare la valeur à ce capital ; elle s'affiche quand chaque ligne du
-          compte a un cours. Les espèces sont recalculées à partir des transactions et restent à
-          confirmer par la synchro Trade Republic.
+          compte a un cours. Les espèces sont recalculées à partir des transactions : c'est une
+          estimation.
         </p>
+      </Section>
+
+      <Section title="Valeur du portefeuille">
+        <ValueHistory
+          stamp={
+            report.positions
+              .map((p) => p.quote?.fetched_at ?? "")
+              .sort()
+              .at(-1) ?? report.last_import
+          }
+        />
       </Section>
 
       <Section title="Ordres manuels par trimestre">

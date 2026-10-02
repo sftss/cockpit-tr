@@ -6,10 +6,10 @@ import csv
 import io
 import json
 import sqlite3
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from decimal import Decimal
 
-from . import portfolio
+from . import portfolio, valuation
 from .money import dec
 
 
@@ -37,10 +37,57 @@ def set_price(conn: sqlite3.Connection, isin: str, price: Decimal, day: str, sou
     conn.commit()
 
 
+def quotes(conn: sqlite3.Connection) -> dict[str, dict]:
+    """Latest quote of each instrument, as received from the market-data source."""
+    result = {}
+    for row in conn.execute("SELECT * FROM quotes"):
+        price, previous = dec(row["price"]), row["previous_close"]
+        change = None
+        if previous and dec(previous) > 0:
+            change = float((price / dec(previous) - 1).quantize(Decimal("0.0001")))
+        result[row["isin"]] = {
+            "price": float(price),
+            "currency": row["currency"],
+            "price_eur": float(dec(row["price_eur"])),
+            "change": change,
+            "market_time": row["market_time"],
+            "exchange": row["exchange"],
+            "delay_minutes": row["delay_minutes"],
+            "fetched_at": row["fetched_at"],
+        }
+    return result
+
+
+def recent_prices(conn: sqlite3.Connection, isin: str, days: int = 30) -> list[float]:
+    """Last daily prices in euros, oldest first: the data of a sparkline."""
+    rows = conn.execute(
+        "SELECT price FROM prices WHERE isin = ? ORDER BY date DESC LIMIT ?", (isin, days)
+    ).fetchall()
+    return [float(dec(row["price"])) for row in reversed(rows)]
+
+
+def price_history(conn: sqlite3.Connection) -> dict[str, list[tuple[str, Decimal]]]:
+    history: dict[str, list[tuple[str, Decimal]]] = {}
+    for row in conn.execute("SELECT isin, date, price FROM prices ORDER BY isin, date"):
+        history.setdefault(row["isin"], []).append((row["date"], dec(row["price"])))
+    return history
+
+
+def value_history(conn: sqlite3.Connection) -> dict:
+    data = valuation.history(all_transactions(conn), price_history(conn), date.today().isoformat())
+    names = dict(conn.execute("SELECT isin, name FROM instruments").fetchall())
+    data["unpriced"] = [names.get(isin, isin) for isin in data["unpriced"]]
+    return data
+
+
 def current_report(conn: sqlite3.Connection) -> dict:
     data = portfolio.report(all_transactions(conn), latest_prices(conn))
     last = conn.execute("SELECT MAX(imported_at) FROM transactions").fetchone()[0]
     data["last_import"] = last
+    live = quotes(conn)
+    for position in data["positions"]:
+        position["quote"] = live.get(position["isin"])
+        position["spark"] = recent_prices(conn, position["isin"])
     return data
 
 

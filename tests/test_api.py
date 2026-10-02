@@ -92,3 +92,61 @@ def test_only_this_machine_may_talk_to_the_api(client, sample_csv):
         headers={**CSV, "origin": "http://127.0.0.1:8765"},
     )
     assert own_page.status_code == 200
+
+
+# -- Market data, with a source that answers from memory -------------------------
+
+
+@pytest.fixture
+def market_client(tmp_path, sample_csv):
+    from cockpit.market.provider import Listing
+    from tests.fakes import FakeProvider, series
+
+    provider = FakeProvider()
+    provider.listings["XX0000000001"] = [Listing("ACME.PA", "Acme SA", "PAR", "EQUITY")]
+    provider.charts["ACME.PA"] = series(
+        "ACME.PA", "EUR", "PAR", {"2025-06-27": "29", "2025-06-30": "30"}, previous="29"
+    )
+    client = TestClient(create_app(tmp_path / "market.db", provider=provider))
+    client.post("/api/import/csv", content=sample_csv.encode(), headers=CSV)
+    return client, provider
+
+
+def test_market_endpoints(market_client):
+    client, _ = market_client
+    refreshed = client.post("/api/market/refresh").json()
+    assert (refreshed["updated"], refreshed["refused"], refreshed["busy"]) == (1, False, False)
+
+    acme = next(
+        p for p in client.get("/api/report").json()["positions"] if p["isin"] == "XX0000000001"
+    )
+    assert (acme["value"], acme["quote"]["delay_minutes"], acme["spark"]) == (30.0, 15, [30.0])
+
+    chart = client.get("/api/market/chart/XX0000000001?range=1j").json()
+    assert (chart["symbol"], len(chart["points"])) == ("ACME.PA", 2)
+    assert client.get("/api/market/chart/XX0000000001?range=nope").status_code == 400
+    assert client.get("/api/market/chart/XX0000000003").status_code == 502  # no listing
+
+    loaded = client.post("/api/market/history").json()
+    assert loaded["updated"] == 1 and loaded["skipped"] == 2
+    history = client.get("/api/portfolio/history").json()
+    assert history["points"][-1]["date"] == "2025-06-30"
+    assert set(history["unpriced"]) == {"Globex", "World Fund (Acc)"}
+
+    listing = {i["isin"]: i for i in client.get("/api/market/instruments").json()}
+    assert listing["XX0000000001"]["price_days"] == 2
+    renamed = client.put("/api/market/instruments/XX0000000003", json={"symbol": "WRLD.DE"})
+    assert renamed.json() == {"isin": "XX0000000003", "symbol": "WRLD.DE"}
+    assert client.put("/api/market/instruments/UNKNOWN", json={"symbol": "X"}).status_code == 404
+
+
+def test_refused_source_is_reported_not_hidden(market_client):
+    from cockpit.market.provider import ProviderError
+
+    client, provider = market_client
+    provider.fail = ProviderError("refused", "Yahoo a refusé la requête (HTTP 429)")
+    refreshed = client.post("/api/market/refresh").json()
+    assert refreshed["refused"] is True and refreshed["updated"] == 0
+    assert client.get("/api/market/chart/XX0000000001").status_code == 503
+    # The dashboard still works, on prices typed in by hand.
+    assert client.put("/api/prices/XX0000000001", json={"price": "31"}).status_code == 200
