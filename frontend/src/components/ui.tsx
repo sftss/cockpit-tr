@@ -56,3 +56,38 @@ export function Notice({ tone = "info", children }: { tone?: "info" | "error"; c
   const style = tone === "error" ? "border-loss text-loss" : "border-accent";
   return <div className={`rounded-md border-l-4 bg-surface px-4 py-3 text-sm ${style}`}>{children}</div>;
 }
+
+/** A secondary action: outlined, never competing with the main button of a section. */
+export function Quiet({
+  children,
+  onClick,
+  disabled,
+}: {
+  children: ReactNode;
+  onClick: () => void;
+  disabled?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className="rounded-md border border-accent px-3 py-1 text-sm text-accent hover:bg-accent-soft disabled:opacity-50"
+    >
+      {children}
+    </button>
+  );
+}
+
+export const inputClass = "rounded-md border border-line bg-surface px-2 py-1";
+
+/** A labelled field: the label is always visible, never a placeholder. */
+export function Field({ label, hint, children }: { label: string; hint?: string; children: ReactNode }) {
+  return (
+    <label className="block text-sm">
+      <span className="text-muted">{label}</span>
+      <span className="mt-1 block">{children}</span>
+      {hint && <span className="mt-1 block text-xs text-muted">{hint}</span>}
+    </label>
+  );
+}

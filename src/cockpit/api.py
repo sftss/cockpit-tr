@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import sqlite3
 import threading
 from collections.abc import Iterator
@@ -15,7 +16,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
-from . import __version__, config, db, store
+from . import __version__, compliance, config, db, gold, roadmap, rules, settings_file, store
 from .importers import tr_csv
 from .market import service as market_service
 from .market.provider import ProviderError, QuoteProvider
@@ -37,6 +38,45 @@ class SnapshotIn(BaseModel):
 
 class SymbolIn(BaseModel):
     symbol: str | None = None
+
+
+class RuleIn(BaseModel):
+    kind: str
+    value: str | float
+    valid_from: str | None = None
+    account: str | None = None
+    note: str | None = None
+
+
+class ReasonIn(BaseModel):
+    reason: str = ""
+
+
+class ComplianceIn(BaseModel):
+    isin: str
+    status: str
+    checked_on: str | None = None
+    note: str | None = None
+
+
+class RoadmapIn(BaseModel):
+    name: str
+    isin: str | None = None
+    account: str | None = None
+    amount: str | float | None = None
+    entry_condition: str | None = None
+    entry_price: str | float | None = None
+    thesis: str | None = None
+    status: str = "idee"
+    symbol: str | None = None
+
+
+class GoldLotIn(BaseModel):
+    label: str
+    grams: str | float
+    cost: str | float | None = None
+    acquired_on: str | None = None
+    note: str | None = None
 
 
 def _provider_error(exc: ProviderError) -> HTTPException:
@@ -209,6 +249,146 @@ def create_app(
     @app.get("/api/portfolio/history")
     def get_value_history(c: sqlite3.Connection = Depends(conn)) -> dict:
         return store.value_history(c)
+
+    # -- Rules ---------------------------------------------------------------
+
+    @app.get("/api/rules")
+    def get_rules(c: sqlite3.Connection = Depends(conn)) -> dict:
+        return store.rules_state(c)
+
+    @app.post("/api/rules", status_code=201)
+    def post_rule(body: RuleIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            rule_id = rules.set_rule(
+                c, body.kind, body.value, body.valid_from, body.account, body.note
+            )
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+        return {"id": rule_id}
+
+    @app.delete("/api/rules/{rule_id}")
+    def delete_rule(rule_id: int, c: sqlite3.Connection = Depends(conn)) -> dict:
+        if not rules.delete_rule(c, rule_id):
+            raise HTTPException(404, "Règle introuvable.")
+        return {"deleted": rule_id}
+
+    @app.put("/api/deviations/{transaction_id}")
+    def put_reason(
+        transaction_id: str, body: ReasonIn, c: sqlite3.Connection = Depends(conn)
+    ) -> dict:
+        try:
+            rules.set_reason(c, transaction_id, body.reason)
+        except KeyError as exc:
+            raise HTTPException(404, "Transaction inconnue.") from exc
+        return {"transaction_id": transaction_id, "reason": body.reason.strip() or None}
+
+    # -- Compliance ----------------------------------------------------------
+
+    @app.get("/api/compliance")
+    def get_compliance(c: sqlite3.Connection = Depends(conn)) -> dict:
+        return compliance.overview(c, store.held_names(c))
+
+    @app.post("/api/compliance", status_code=201)
+    def post_compliance(body: ComplianceIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            compliance.record(c, body.isin, body.status, body.checked_on, body.note)
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+        return {"isin": body.isin.strip().upper()}
+
+    # -- Roadmap -------------------------------------------------------------
+
+    @app.get("/api/roadmap")
+    def get_roadmap(c: sqlite3.Connection = Depends(conn)) -> dict:
+        return roadmap.items(c)
+
+    @app.post("/api/roadmap", status_code=201)
+    def post_roadmap(body: RoadmapIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            return {"id": roadmap.create(c, body.model_dump())}
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.put("/api/roadmap/{item_id}")
+    def put_roadmap(item_id: int, body: RoadmapIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            found = roadmap.update(c, item_id, body.model_dump())
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+        if not found:
+            raise HTTPException(404, "Cible introuvable.")
+        return {"id": item_id}
+
+    @app.delete("/api/roadmap/{item_id}")
+    def delete_roadmap(item_id: int, c: sqlite3.Connection = Depends(conn)) -> dict:
+        if not roadmap.delete(c, item_id):
+            raise HTTPException(404, "Cible introuvable.")
+        return {"deleted": item_id}
+
+    @app.post("/api/roadmap/prices")
+    def refresh_roadmap(c: sqlite3.Connection = Depends(conn)) -> dict:
+        with market_busy:
+            return roadmap.refresh_prices(c, market)
+
+    # -- Physical gold -------------------------------------------------------
+
+    @app.get("/api/gold")
+    def get_gold(c: sqlite3.Connection = Depends(conn)) -> dict:
+        return gold.summary(c)
+
+    @app.post("/api/gold/lots", status_code=201)
+    def post_gold_lot(body: GoldLotIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            return {"id": gold.add_lot(c, body.model_dump())}
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.put("/api/gold/lots/{lot_id}")
+    def put_gold_lot(lot_id: int, body: GoldLotIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            found = gold.update_lot(c, lot_id, body.model_dump())
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+        if not found:
+            raise HTTPException(404, "Lot introuvable.")
+        return {"id": lot_id}
+
+    @app.delete("/api/gold/lots/{lot_id}")
+    def delete_gold_lot(lot_id: int, c: sqlite3.Connection = Depends(conn)) -> dict:
+        if not gold.delete_lot(c, lot_id):
+            raise HTTPException(404, "Lot introuvable.")
+        return {"deleted": lot_id}
+
+    @app.post("/api/gold/price")
+    def refresh_gold(c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            with market_busy:
+                gold.refresh_price(c, market)
+        except ProviderError as exc:
+            raise _provider_error(exc) from exc
+        return gold.summary(c)
+
+    # -- Settings file -------------------------------------------------------
+
+    @app.get("/api/settings/export")
+    def export_settings(c: sqlite3.Connection = Depends(conn)) -> JSONResponse:
+        name = f"cockpit-reglages_{date.today().isoformat()}.json"
+        return JSONResponse(
+            settings_file.export(c),
+            headers={"Content-Disposition": f'attachment; filename="{name}"'},
+        )
+
+    @app.post("/api/settings/import")
+    async def import_settings(request: Request, c: sqlite3.Connection = Depends(conn)) -> dict:
+        body = await request.body()
+        if len(body) > 1024 * 1024:
+            raise HTTPException(413, "Fichier trop volumineux.")
+        try:
+            return settings_file.load(c, json.loads(body.decode("utf-8-sig")))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise HTTPException(400, "Le fichier n'est pas un JSON lisible.") from exc
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
 
     frontend = config.frontend_dir()
     if frontend:

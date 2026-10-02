@@ -9,8 +9,8 @@ import sqlite3
 from datetime import UTC, date, datetime
 from decimal import Decimal
 
-from . import portfolio, valuation
-from .money import dec
+from . import compliance, portfolio, valuation
+from .money import ZERO, dec, money, ratio
 
 
 def all_transactions(conn: sqlite3.Connection) -> list[sqlite3.Row]:
@@ -97,10 +97,48 @@ def current_report(conn: sqlite3.Connection) -> dict:
     last = conn.execute("SELECT MAX(imported_at) FROM transactions").fetchone()[0]
     data["last_import"] = last
     live = quotes(conn)
-    for position in data["positions"]:
+    statuses = compliance.latest(conn)
+    # Share of each line in the whole broker portfolio, every account together:
+    # on market value once every line has a price, on cost until then.
+    positions = data["positions"]
+    basis = "value" if positions and all(p["value"] is not None for p in positions) else "cost"
+    total = sum((Decimal(str(p[basis])) for p in positions), ZERO)
+    for position in positions:
         position["quote"] = live.get(position["isin"])
         position["spark"] = recent_prices(conn, position["isin"])
+        position["zoya"] = compliance.view(statuses.get(position["isin"]))
+        position["weight_total"] = ratio(Decimal(str(position[basis])), total) if total else None
+    data["total"] = {"basis": basis, "amount": money(total), "lines": len(positions)}
     return data
+
+
+def rules_state(conn: sqlite3.Connection) -> dict:
+    from . import rules  # local import: rules reads the portfolio through this module
+
+    report = current_report(conn)
+    history = value_history(conn)
+    reasons = dict(conn.execute("SELECT transaction_id, reason FROM deviation_notes").fetchall())
+    return rules.state(
+        all_transactions(conn),
+        rules.list_rules(conn),
+        [(point["date"], Decimal(str(point["value"]))) for point in history["points"]],
+        [
+            {
+                "name": p["name"],
+                "account": p["account"],
+                "isin": p["isin"],
+                "weight": p["weight_total"],
+            }
+            for p in report["positions"]
+        ],
+        reasons,
+    )
+
+
+def held_names(conn: sqlite3.Connection) -> dict[str, str]:
+    """ISIN -> name of every instrument currently held."""
+    lines = portfolio.build_lines(all_transactions(conn))
+    return {line.isin: line.name or line.isin for line in lines.values() if line.is_open}
 
 
 def state(conn: sqlite3.Connection) -> dict:

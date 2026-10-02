@@ -11,6 +11,8 @@
   --accent: #0e6655;
   --accent-soft: #e1eeea;
   --loss: #9e3b2c;
+  /* Something to look at: a rule exceeded, a status to check again. Not a loss. */
+  --alert: #7a5200;
   /* Chart series: two hues checked for colour-blind separation on this surface. */
   --chart-1: #0f8a6c;
   --chart-2: #4a3aa7;
@@ -26,6 +28,7 @@
     --accent: #62c4ae;
     --accent-soft: #1b2f2a;
     --loss: #e58a78;
+    --alert: #e0b45a;
     --chart-1: #27a584;
     --chart-2: #8f83ea;
   }
@@ -40,6 +43,7 @@
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
   --color-loss: var(--loss);
+  --color-alert: var(--alert);
   --font-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
   --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
 }
@@ -105,3 +109,40 @@ table.positions th:nth-child(6) { width: 112px; }
 table.positions th:nth-child(7) { width: 108px; }
 table.positions th:nth-child(8) { width: 176px; }
 table.positions th:nth-child(9) { width: 72px; }
+
+/* Rule against what was observed: the third column is a sentence, so it wraps. */
+table.counters {
+  max-width: 60rem;
+  min-width: 640px;
+}
+table.counters th:nth-child(1) { width: 34%; }
+table.counters th:nth-child(3),
+table.counters td:nth-child(3) {
+  text-align: left;
+  padding-left: 32px;
+}
+table.counters th:nth-child(4) { width: 8.5rem; }
+table.counters td:nth-child(4) { white-space: nowrap; }
+
+/* Wide writing columns: the reason of a departure, the note of a status. */
+table.deviations { min-width: 880px; }
+table.deviations th:nth-child(3), table.deviations td:nth-child(3),
+table.deviations th:nth-child(4), table.deviations td:nth-child(4) { text-align: left; }
+table.deviations th:nth-child(4) { width: 34%; }
+table.deviations td { vertical-align: top; }
+
+table.rules { min-width: 880px; }
+table.rules td { vertical-align: top; }
+
+/* Same columns in each group of the compliance page. */
+table.compliance {
+  min-width: 860px;
+  table-layout: fixed;
+}
+table.compliance th:nth-child(1) { width: 30%; }
+table.compliance th:nth-child(2) { width: 164px; }
+table.compliance th:nth-child(3) { width: 164px; }
+table.compliance th:nth-child(4) { text-align: left; }
+table.compliance th:nth-child(5) { width: 128px; }
+table.compliance td { vertical-align: top; }
+table.compliance select { width: 100%; }
