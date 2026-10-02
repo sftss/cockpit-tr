@@ -121,6 +121,8 @@ def cmd_cours(args: argparse.Namespace) -> int:
         print(f"{item['name'][:34]:<34}  {(item['symbol'] or '—'):<10}  {detail}")
 
     print(f"\n{outcome.updated} mis à jour, {outcome.skipped} sans changement ou sans cotation.")
+    if any(i["status"] == "introuvable" and i["symbol"] is None for i in service.instruments(conn)):
+        print("Titre sans cotation : saisir son symbole Yahoo dans l'écran Données, section Cours.")
     for message in outcome.errors:
         print(f"  erreur — {message}")
     if outcome.unreachable:

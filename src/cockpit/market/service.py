@@ -26,6 +26,10 @@ DELAY_MINUTES = {
     "LSE": 20,
 }  # fmt: skip
 
+# The same table by symbol suffix, for exchange codes missing above (Yahoo's
+# table is organised by suffix; '.IL' is London's international order book).
+SUFFIX_DELAY = {"PA": 15, "AS": 15, "DE": 15, "F": 15, "HK": 15, "L": 20, "IL": 20, "CO": 0}
+
 # For funds (several listings of the same ISIN), prefer one quoted in euros.
 FUND_EXCHANGES = ["GER", "PAR", "AMS", "MIL", "FRA"]
 
@@ -56,6 +60,15 @@ def normalise(price: Decimal, currency: str) -> tuple[Decimal, str]:
     if currency in ("GBp", "GBX"):
         return price / 100, "GBP"
     return price, currency
+
+
+def delay_minutes(exchange: str | None, symbol: str | None) -> int | None:
+    """Delay of the free quotes, from the exchange code or else the symbol suffix."""
+    if exchange in DELAY_MINUTES:
+        return DELAY_MINUTES[exchange]
+    if symbol and "." in symbol:
+        return SUFFIX_DELAY.get(symbol.rsplit(".", 1)[1].upper())
+    return None
 
 
 def choose_listing(isin: str, listings: list[Listing]) -> Listing | None:
@@ -222,7 +235,7 @@ class Market:
                 None if previous is None else str(previous),
                 datetime.fromtimestamp(stamp, UTC).isoformat(timespec="seconds"),
                 series.exchange_name or series.exchange,
-                DELAY_MINUTES.get(series.exchange),
+                delay_minutes(series.exchange, series.symbol),
                 _now(),
             ),
         )
@@ -301,7 +314,7 @@ class Market:
             "range": range_key,
             "currency": currency,
             "exchange": series.exchange_name or series.exchange,
-            "delay_minutes": DELAY_MINUTES.get(series.exchange),
+            "delay_minutes": delay_minutes(series.exchange, series.symbol),
             "intraday": interval.endswith("m"),
             "points": [
                 {"time": p.time, "value": float(normalise(p.close, series.currency)[0])}
@@ -370,7 +383,7 @@ def instruments(conn: sqlite3.Connection) -> list[dict]:
             "exchange": row["quote_exchange"],
             "currency": row["quote_currency"],
             "status": row["quote_status"],
-            "delay_minutes": DELAY_MINUTES.get(row["quote_exchange"] or ""),
+            "delay_minutes": delay_minutes(row["quote_exchange"], row["quote_symbol"]),
             "last_quote": row["fetched_at"],
             "price_days": row["price_days"],
         }

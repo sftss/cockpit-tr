@@ -107,6 +107,15 @@ def test_funds_prefer_a_euro_listing_and_shares_the_first_one():
     assert service.choose_listing("IE00ABCDEFG1", []) is None
 
 
+def test_delay_falls_back_on_the_symbol_suffix():
+    assert service.delay_minutes("PAR", "ACME.PA") == 15
+    assert service.delay_minutes("IOB", "SMSN.IL") == 20  # exchange code not in the table
+    assert service.delay_minutes("", "COLO-B.CO") == 0
+    assert service.delay_minutes("NMS", "ACME") == 0
+    assert service.delay_minutes("???", "ACME") is None  # no suffix, unknown exchange
+    assert service.delay_minutes(None, None) is None
+
+
 def test_pence_are_brought_back_to_pounds():
     assert service.normalise(D("1234"), "GBp") == (D("12.34"), "GBP")
     assert service.normalise(D("12"), "USD") == (D("12"), "USD")
