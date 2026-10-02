@@ -70,6 +70,25 @@ export type Instrument = {
   price_days: number;
 };
 
+export type Candidate = {
+  symbol: string;
+  name: string;
+  exchange: string;
+  kind: string;
+  price: number | null;
+  currency: string | null;
+  price_eur: number | null;
+};
+
+export type Candidates = {
+  isin: string;
+  name: string;
+  query: string;
+  by: "isin" | "nom";
+  candidates: Candidate[];
+  last_trade: { date: string; price: number } | null;
+};
+
 export type ChartData = {
   isin: string;
   symbol: string;
@@ -204,6 +223,8 @@ export const api = {
   instruments: () => request<Instrument[]>("/api/market/instruments"),
   setSymbol: (isin: string, symbol: string) =>
     request(`/api/market/instruments/${isin}`, json("PUT", { symbol })),
+  candidates: (isin: string) =>
+    request<Candidates>(`/api/market/instruments/${isin}/candidates`),
   chart: (isin: string, range: string) =>
     request<ChartData>(`/api/market/chart/${isin}?range=${encodeURIComponent(range)}`),
   valueHistory: () => request<ValueHistory>("/api/portfolio/history"),

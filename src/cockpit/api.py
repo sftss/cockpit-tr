@@ -164,6 +164,17 @@ def create_app(
         market.set_symbol(c, isin, body.symbol)
         return {"isin": isin, "symbol": (body.symbol or "").strip() or None}
 
+    @app.get("/api/market/instruments/{isin}/candidates")
+    def get_candidates(isin: str, c: sqlite3.Connection = Depends(conn)) -> dict:
+        """Listings to choose from, by ISIN or else by name. Stores nothing."""
+        known = c.execute("SELECT 1 FROM instruments WHERE isin = ?", (isin,)).fetchone()
+        if not known:
+            raise HTTPException(404, "Titre inconnu.")
+        try:
+            return market.candidates(c, isin)
+        except ProviderError as exc:
+            raise _provider_error(exc) from exc
+
     @app.post("/api/market/refresh")
     def refresh_quotes(c: sqlite3.Connection = Depends(conn)) -> dict:
         """Latest quotes of the instruments held. Safe to call often: each quote

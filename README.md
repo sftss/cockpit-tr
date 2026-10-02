@@ -7,7 +7,8 @@ snapshots datés.
 L'application tourne sur votre ordinateur et n'écoute que sur `127.0.0.1`. Elle
 ne se connecte pas à Trade Republic, ne demande aucun identifiant et ne passe
 aucun ordre. Sa seule sortie vers Internet sert à récupérer des cours : elle
-envoie des codes ISIN et des symboles, jamais de quantités ni de montants.
+envoie des codes ISIN et des symboles, et le nom d'un titre quand vous lui
+demandez de le chercher par nom ; jamais de quantités ni de montants.
 
 > Outil personnel, non affilié à Trade Republic. Ce n'est pas un conseil en
 > investissement.
@@ -17,7 +18,7 @@ envoie des codes ISIN et des symboles, jamais de quantités ni de montants.
 | Phase | Contenu | État |
 | --- | --- | --- |
 | V0 | Import de l'export CSV, base SQLite, calculs, tableau de bord, snapshots | fait |
-| V0 (suite) | Cours par ISIN, graphiques par titre, mini-courbes, courbe de la valeur du portefeuille | fait, à valider sur un vrai poste |
+| V0 (suite) | Cours par ISIN, graphiques par titre, mini-courbes, courbe de la valeur du portefeuille | fait |
 | V1 | Règles du portefeuille, statut de conformité daté, feuille de route, or physique | à venir |
 | V2 | Assistant et routines d'analyse (la fiche du jour existe déjà, voir `fiches/`) | en cours |
 | V3 | Tickets d'ordre : préparés et contrôlés ici, passés dans l'app Trade Republic | à venir |
@@ -102,8 +103,12 @@ Trois visuels en découlent :
 - **la courbe de la valeur du portefeuille** face au capital net engagé, sur
   l'accueil, une fois l'historique chargé.
 
-Si un titre n'est pas trouvé, ou pas sur la bonne place, son symbole Yahoo se
-saisit dans la page « Données » (par exemple `AI.PA`).
+La recherche par ISIN de Yahoo a des trous (trois titres sur 47 au premier
+essai). Dans la page « Données », « Proposer » cherche alors par nom et affiche
+les cotations trouvées avec leur cours : c'est vous qui choisissez, car Yahoo
+n'indique pas l'ISIN et une recherche par nom peut renvoyer une autre classe
+d'action. Si un titre n'est pas sur la bonne place, son symbole Yahoo se saisit
+au même endroit (par exemple `AI.PA`).
 
 ## Où sont mes données
 

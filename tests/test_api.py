@@ -139,6 +139,11 @@ def test_market_endpoints(market_client):
     assert renamed.json() == {"isin": "XX0000000003", "symbol": "WRLD.DE"}
     assert client.put("/api/market/instruments/UNKNOWN", json={"symbol": "X"}).status_code == 404
 
+    proposed = client.get("/api/market/instruments/XX0000000001/candidates").json()
+    assert (proposed["by"], proposed["candidates"][0]["symbol"]) == ("isin", "ACME.PA")
+    assert proposed["candidates"][0]["price_eur"] == 30.0
+    assert client.get("/api/market/instruments/UNKNOWN/candidates").status_code == 404
+
 
 def test_refused_source_is_reported_not_hidden(market_client):
     from cockpit.market.provider import ProviderError
@@ -148,5 +153,6 @@ def test_refused_source_is_reported_not_hidden(market_client):
     refreshed = client.post("/api/market/refresh").json()
     assert refreshed["refused"] is True and refreshed["updated"] == 0
     assert client.get("/api/market/chart/XX0000000001").status_code == 503
+    assert client.get("/api/market/instruments/XX0000000001/candidates").status_code == 503
     # The dashboard still works, on prices typed in by hand.
     assert client.put("/api/prices/XX0000000001", json={"price": "31"}).status_code == 200

@@ -6,6 +6,7 @@ quotation currency is kept beside it.
 
 from __future__ import annotations
 
+import re
 import sqlite3
 import time
 from dataclasses import dataclass, field
@@ -45,6 +46,7 @@ RANGES = {
 }
 
 QUOTE_MAX_AGE = 60  # seconds before a quote is asked again
+MAX_CANDIDATES = 6  # listings proposed when the search by ISIN finds nothing
 
 
 def _now() -> str:
@@ -69,6 +71,12 @@ def delay_minutes(exchange: str | None, symbol: str | None) -> int | None:
     if symbol and "." in symbol:
         return SUFFIX_DELAY.get(symbol.rsplit(".", 1)[1].upper())
     return None
+
+
+def search_terms(name: str) -> str:
+    """The name without its bracketed share class: 'Alphabet (A)' -> 'Alphabet'."""
+    cleaned = re.sub(r"\s+", " ", re.sub(r"\([^)]*\)", " ", name)).strip()
+    return cleaned or name.strip()
 
 
 def choose_listing(isin: str, listings: list[Listing]) -> Listing | None:
@@ -146,6 +154,61 @@ class Market:
         )
         conn.execute("DELETE FROM quotes WHERE isin = ?", (isin,))
         conn.commit()
+
+    def candidates(self, conn: sqlite3.Connection, isin: str) -> dict:
+        """Listings a person can choose from when the search by ISIN finds nothing.
+
+        The source does not say which ISIN a listing carries, so a search by name
+        can return another share class or another kind of security. Nothing is
+        stored here: the choice is made on screen, with each listing's price and
+        the last price traded as a point of comparison.
+        """
+        row = conn.execute("SELECT name FROM instruments WHERE isin = ?", (isin,)).fetchone()
+        if row is None:
+            raise ProviderError("not_found", "titre inconnu")
+        query, by = isin, "isin"
+        found = self.provider.search(isin)
+        if not found:
+            query, by = search_terms(row["name"]), "nom"
+            found = self.provider.search(query)
+
+        items, priced = [], True
+        for listing in found[:MAX_CANDIDATES]:
+            item = {
+                "symbol": listing.symbol,
+                "name": listing.name,
+                "exchange": listing.exchange_name or listing.exchange,
+                "kind": listing.kind,
+                "price": None,
+                "currency": None,
+                "price_eur": None,
+            }
+            if priced:
+                try:
+                    series = self.provider.chart(listing.symbol, "1d", "5m")
+                    if series.price is not None:
+                        price, currency = normalise(series.price, series.currency)
+                        item["price"], item["currency"] = float(price), currency
+                        item["price_eur"] = float(price / self._rate_today(currency))
+                except ProviderError as exc:
+                    priced = exc.kind not in ("refused", "network")  # do not insist
+            items.append(item)
+
+        last = conn.execute(
+            "SELECT date, price FROM transactions WHERE isin = ? AND type IN ('BUY', 'SELL') "
+            "AND price != '' ORDER BY datetime DESC LIMIT 1",
+            (isin,),
+        ).fetchone()
+        return {
+            "isin": isin,
+            "name": row["name"],
+            "query": query,
+            "by": by,
+            "candidates": items,
+            "last_trade": {"date": last["date"], "price": float(dec(last["price"]))}
+            if last
+            else None,
+        }
 
     # -- Exchange rates -----------------------------------------------------
 
