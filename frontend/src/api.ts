@@ -409,6 +409,32 @@ export type SnapshotSummary = {
   positions: number;
 };
 
+export type WatchSource = { titre: string; url: string };
+
+export type WatchTitle = {
+  nom: string;
+  isin: string;
+  faits: { date: string; texte: string; source: WatchSource }[];
+  prochain_rendez_vous: { date: string; objet: string; source: WatchSource } | null;
+  a_regarder: string | null;
+  /** Held line, target of the roadmap, or neither: decided on this machine. */
+  suivi: "ligne" | "cible" | null;
+};
+
+export type WatchWeek = { semaine: string; du: string; au: string };
+
+export type Watch = {
+  weeks: WatchWeek[];
+  report:
+    | (WatchWeek & {
+        macro: { sujet: string; texte: string; sources: WatchSource[] }[];
+        titres: WatchTitle[];
+      })
+    | null;
+  /** Held companies and targets the watch does not cover. */
+  uncovered: string[];
+};
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(path, init);
   if (!response.ok) {
@@ -542,6 +568,9 @@ export const api = {
   updateJournalEntry: (id: number, entry: JournalDraft) =>
     request(`/api/journal/${id}`, json("PUT", entry)),
   deleteJournalEntry: (id: number) => request(`/api/journal/${id}`, { method: "DELETE" }),
+
+  watch: (week?: string) =>
+    request<Watch>(`/api/veille${week ? `?semaine=${encodeURIComponent(week)}` : ""}`),
 
   importSettings: (text: string) =>
     request<SettingsImport>("/api/settings/import", {

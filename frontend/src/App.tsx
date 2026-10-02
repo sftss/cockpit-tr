@@ -12,6 +12,7 @@ import { Portfolio } from "./pages/Portfolio";
 import { Roadmap } from "./pages/Roadmap";
 import { Rules } from "./pages/Rules";
 import { Security } from "./pages/Security";
+import { Watch } from "./pages/Watch";
 
 const PAGES = [
   { id: "accueil", label: "Accueil" },
@@ -19,6 +20,7 @@ const PAGES = [
   { id: "feuille-de-route", label: "Feuille de route" },
   { id: "regles", label: "Règles" },
   { id: "halalitude", label: "Halalitude" },
+  { id: "veille", label: "Veille" },
   { id: "assistant", label: "Assistant" },
   { id: "journal", label: "Journal" },
   { id: "soldees", label: "Lignes soldées" },
@@ -141,6 +143,7 @@ export default function App() {
         {report && shown === "feuille-de-route" && <Roadmap />}
         {report && shown === "regles" && <Rules />}
         {report && shown === "halalitude" && <HalalitudePage reload={reload} />}
+        {report && shown === "veille" && <Watch />}
         {report && shown === "assistant" && <Assistant />}
         {report && shown === "journal" && <Journal />}
         {report && shown === "soldees" && <Closed report={report} />}
