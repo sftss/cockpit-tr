@@ -19,7 +19,7 @@ demandez de le chercher par nom ; jamais de quantités ni de montants.
 | --- | --- | --- |
 | V0 | Import de l'export CSV, base SQLite, calculs, tableau de bord, snapshots | fait |
 | V0 (suite) | Cours par ISIN, graphiques par titre, mini-courbes, courbe de la valeur du portefeuille | fait |
-| V1 | Règles du portefeuille, statut de conformité daté, feuille de route, or physique | fait |
+| V1 | Règles du portefeuille, Halalitude datée, feuille de route, or physique | fait |
 | V2 | Assistant et routines d'analyse (la fiche du jour existe déjà, voir `fiches/`) | en cours |
 | V3 | Tickets d'ordre : préparés et contrôlés ici, passés dans l'app Trade Republic | à venir |
 
@@ -34,7 +34,7 @@ l'export CSV officiel.
 | Le code et ses tests (données inventées) | La base SQLite : transactions, positions, montants |
 | | Les exports CSV et les classeurs |
 | Les types de règles | Les valeurs des règles, les motifs d'écart, la feuille de route |
-| | Les statuts de conformité, les lots d'or |
+| | Les statuts de Halalitude, les lots d'or |
 | | Les identifiants et les clés d'API |
 
 Deux garde-fous : le `.gitignore` écarte les fichiers de données, et un test
@@ -112,7 +112,7 @@ n'indique pas l'ISIN et une recherche par nom peut renvoyer une autre classe
 d'action. Si un titre n'est pas sur la bonne place, son symbole Yahoo se saisit
 au même endroit (par exemple `AI.PA`).
 
-## Règles, conformité, feuille de route, or
+## Règles, Halalitude, feuille de route, or
 
 - **Règles.** Le code connaît des types de règles (ordres manuels par
   trimestre, frais d'ordre, montant minimal d'un achat, pas de nouvelle ligne
@@ -122,9 +122,10 @@ au même endroit (par exemple `AI.PA`).
   l'historique. Une règle ne bloque rien : une transaction importée qui s'en
   écarte est listée, et un motif s'écrit à côté. Une transaction n'est comparée
   qu'aux règles en vigueur le jour où elle a été passée.
-- **Conformité.** L'application ne vérifie rien : elle garde le statut lu à la
-  main dans l'application de filtrage, avec la date de cette lecture. Au-delà de
-  90 jours, le statut passe « à revérifier ».
+- **Halalitude.** L'application ne vérifie rien : elle garde le statut relevé à
+  la main dans les screeners (halal, douteux ou haram), avec la date de ce
+  relevé et une note pour dire lesquels ont été consultés. Au-delà de 90 jours,
+  le statut passe « à revérifier ».
 - **Feuille de route.** Des cibles, pas des ordres : titre, compte, montant
   prévu, condition d'entrée, thèse. Si une cible porte un cours d'entrée, la
   page le signale quand le cours l'atteint ; rien d'autre ne se passe.

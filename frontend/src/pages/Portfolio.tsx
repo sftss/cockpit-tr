@@ -2,7 +2,7 @@ import { useState } from "react";
 import { api, type Position, type RefreshOutcome, type Report } from "../api";
 import { GoldSection } from "../components/GoldSection";
 import { Sparkline } from "../components/Sparkline";
-import { ZoyaLabel } from "../components/Zoya";
+import { HalalitudeLabel } from "../components/Halalitude";
 import { Button, Notice, PageTitle, Result, Section, TableWrap } from "../components/ui";
 import {
   accountName,
@@ -152,7 +152,7 @@ function Row({ position: p, save }: { position: Position; save: (isin: string, p
         </a>
         <span className="block text-xs text-muted">{p.isin}</span>
         <span className="block text-xs">
-          <ZoyaLabel zoya={p.zoya} />
+          <HalalitudeLabel status={p.halalitude} />
         </span>
       </td>
       <td className="num">{quantity(p.shares)}</td>

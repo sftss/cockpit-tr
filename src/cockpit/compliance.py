@@ -1,7 +1,7 @@
-"""Compliance status of each instrument, as checked by hand.
+"""Compliance status of each instrument ("Halalitude"), as checked by hand.
 
 The application never decides whether an instrument is compliant: it stores
-the status read in the screening application, with the day it was read, and
+the status read in the screening applications, with the day it was read, and
 says when that reading is too old to rely on.
 """
 
@@ -13,7 +13,8 @@ from datetime import UTC, date, datetime, timedelta
 from .days import parse_day
 
 VALIDITY_DAYS = 90
-STATUSES = {"conforme": "Conforme", "non_conforme": "Non conforme", "douteux": "Douteux"}
+# Stored values on the left (they are in the database); what the screens say on the right.
+STATUSES = {"conforme": "Halal", "douteux": "Douteux", "non_conforme": "Haram"}
 
 
 def record(

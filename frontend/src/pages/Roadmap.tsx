@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { api, type Roadmap as RoadmapData, type RoadmapDraft, type RoadmapItem, type RoadmapStatus } from "../api";
-import { ZoyaLabel } from "../components/Zoya";
+import { HalalitudeLabel } from "../components/Halalitude";
 import { Button, Field, Notice, PageTitle, Quiet, Section, inputClass } from "../components/ui";
 import { accountName, clock, date, euro, plural } from "../format";
 
@@ -83,7 +83,7 @@ export function Roadmap() {
 
   return (
     <>
-      <PageTitle lead="Une cible n'est pas un ordre : elle dit quoi, à quelle condition et pourquoi. Le signal de cours ne fait rien d'autre que s'afficher, et aucun achat ne se fait sans validation dans Zoya.">
+      <PageTitle lead="Une cible n'est pas un ordre : elle dit quoi, à quelle condition et pourquoi. Le signal de cours ne fait rien d'autre que s'afficher, et aucun achat ne se fait sans vérification de la Halalitude.">
         Feuille de route :{" "}
         {open.length === 0 ? "aucune cible en cours" : plural(open.length, "cible en cours", "cibles en cours")}
         {reached > 0 && `, ${plural(reached, "cours d'entrée atteint", "cours d'entrée atteints")}`}
@@ -195,7 +195,7 @@ function Item({ item, status, edit }: { item: RoadmapItem; status: string; edit:
           <p className="mt-1 text-xs">
             <span className="text-muted">{item.isin}</span>
             <span className="block">
-              <ZoyaLabel zoya={item.zoya} />
+              <HalalitudeLabel status={item.halalitude} />
             </span>
           </p>
         )}
@@ -264,7 +264,7 @@ function ItemForm({
         <Field label="Titre visé">
           <input required value={draft.name} onChange={set("name")} className={wide} />
         </Field>
-        <Field label="Code ISIN" hint="Pour le statut Zoya et le cours.">
+        <Field label="Code ISIN" hint="Pour la Halalitude et le cours.">
           <input value={draft.isin} onChange={set("isin")} className={wide} />
         </Field>
         <Field label="Compte">

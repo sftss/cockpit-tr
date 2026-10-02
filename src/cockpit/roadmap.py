@@ -127,7 +127,9 @@ def items(conn: sqlite3.Connection, today: date | None = None) -> dict:
                     and target is not None
                     and price <= target
                 ),
-                "zoya": compliance.view(statuses.get(row["isin"]), today) if row["isin"] else None,
+                "halalitude": compliance.view(statuses.get(row["isin"]), today)
+                if row["isin"]
+                else None,
             }
         )
     return {"statuses": STATUSES, "items": result}
