@@ -1,8 +1,8 @@
-"""A settings file: rule values and roadmap, as JSON.
+"""A settings file: rule values, roadmap and the assistant's instructions, as JSON.
 
-The rule values and the roadmap are personal, so they are not part of the
-code. This file is how they are carried from one machine to another, or put in
-place the first time. Importing the same file twice adds nothing.
+All three are personal, so they are not part of the code. This file is how they
+are carried from one machine to another, or put in place the first time.
+Importing the same file twice adds nothing.
 """
 
 from __future__ import annotations
@@ -10,6 +10,7 @@ from __future__ import annotations
 import sqlite3
 
 from . import roadmap, rules
+from .assistant import prompt
 
 FORMAT = "cockpit-tr/reglages"
 VERSION = 1
@@ -34,6 +35,9 @@ def export(conn: sqlite3.Connection) -> dict:
             {key: item[key] for key in (*roadmap.FIELDS, "symbol")}
             for item in roadmap.items(conn)["items"]
         ],
+        "assistant_context": [
+            {"title": doc["title"], "content": doc["content"]} for doc in prompt.documents(conn)
+        ],
     }
 
 
@@ -44,7 +48,8 @@ def load(conn: sqlite3.Connection, data: object) -> dict:
     if data.get("version") != VERSION:
         raise ValueError("Version de fichier de réglages inconnue.")
     wanted_rules, wanted_items = data.get("rules") or [], data.get("roadmap") or []
-    if not isinstance(wanted_rules, list) or not isinstance(wanted_items, list):
+    wanted_docs = data.get("assistant_context") or []
+    if not all(isinstance(part, list) for part in (wanted_rules, wanted_items, wanted_docs)):
         raise ValueError("Fichier de réglages mal formé.")
 
     existing = {(r.kind, r.account, r.valid_from) for r in rules.list_rules(conn)}
@@ -79,9 +84,23 @@ def load(conn: sqlite3.Connection, data: object) -> dict:
         names.add(name.casefold())
         added_items += 1
 
+    titles = {doc["title"] for doc in prompt.documents(conn)}
+    added_docs = 0
+    for entry in wanted_docs:
+        if not isinstance(entry, dict):
+            raise ValueError("Fichier de réglages mal formé.")
+        title = str(entry.get("title") or "").strip()
+        if title in titles:
+            continue  # a document already there is never overwritten by an import
+        prompt.save_document(conn, title, str(entry.get("content") or ""))
+        titles.add(title)
+        added_docs += 1
+
     return {
         "rules_added": added_rules,
         "rules_present": len(wanted_rules) - added_rules,
         "roadmap_added": added_items,
         "roadmap_present": len(wanted_items) - added_items,
+        "context_added": added_docs,
+        "context_present": len(wanted_docs) - added_docs,
     }

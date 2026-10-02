@@ -175,7 +175,7 @@ function Settings() {
     try {
       const done = await api.importSettings(await file.text());
       setMessage(
-        `${done.rules_added} valeurs de règles et ${done.roadmap_added} cibles ajoutées ; ${done.rules_present + done.roadmap_present} déjà présentes.`,
+        `${done.rules_added} valeurs de règles, ${done.roadmap_added} cibles et ${done.context_added} documents de l'assistant ajoutés ; ${done.rules_present + done.roadmap_present + done.context_present} déjà présents.`,
       );
     } catch (e) {
       setError((e as Error).message);
@@ -187,7 +187,7 @@ function Settings() {
   return (
     <Section
       title="Réglages"
-      note="Les valeurs des règles et la feuille de route se sauvegardent dans un fichier, et se rechargent depuis un fichier. L'import ajoute ce qui manque et ne modifie rien d'existant."
+      note="Les valeurs des règles, la feuille de route et les consignes de l'assistant se sauvegardent dans un fichier, et se rechargent depuis un fichier. L'import ajoute ce qui manque et ne modifie rien d'existant."
     >
       <input
         ref={input}

@@ -353,6 +353,8 @@ def test_settings_file_round_trip(loaded, tmp_path):
         "rules_present": 0,
         "roadmap_added": 1,
         "roadmap_present": 0,
+        "context_added": 0,
+        "context_present": 0,
     }
     again = settings_file.load(other, exported)
     assert (again["rules_added"], again["roadmap_added"]) == (0, 0)

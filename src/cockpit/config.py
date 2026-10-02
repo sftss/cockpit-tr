@@ -41,3 +41,10 @@ def frontend_dir() -> Path | None:
         if (candidate / "index.html").is_file():
             return candidate
     return None
+
+
+def fiches_dir() -> Path | None:
+    """The daily company sheets (``fiches/`` at the repository root), if present."""
+    override = os.environ.get("COCKPIT_FICHES_DIR")
+    candidate = Path(override) if override else Path(__file__).resolve().parents[2] / "fiches"
+    return candidate if candidate.is_dir() else None

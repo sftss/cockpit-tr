@@ -2,10 +2,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { api, type RefreshOutcome, type Report } from "./api";
 import { Notice } from "./components/ui";
 import { Activity } from "./pages/Activity";
+import { Assistant } from "./pages/Assistant";
 import { Closed } from "./pages/Closed";
 import { HalalitudePage } from "./pages/Halalitude";
 import { Data } from "./pages/Data";
 import { Home } from "./pages/Home";
+import { Journal } from "./pages/Journal";
 import { Portfolio } from "./pages/Portfolio";
 import { Roadmap } from "./pages/Roadmap";
 import { Rules } from "./pages/Rules";
@@ -17,6 +19,8 @@ const PAGES = [
   { id: "feuille-de-route", label: "Feuille de route" },
   { id: "regles", label: "Règles" },
   { id: "halalitude", label: "Halalitude" },
+  { id: "assistant", label: "Assistant" },
+  { id: "journal", label: "Journal" },
   { id: "soldees", label: "Lignes soldées" },
   { id: "frais", label: "Frais et activité" },
   { id: "donnees", label: "Données" },
@@ -137,6 +141,8 @@ export default function App() {
         {report && shown === "feuille-de-route" && <Roadmap />}
         {report && shown === "regles" && <Rules />}
         {report && shown === "halalitude" && <HalalitudePage reload={reload} />}
+        {report && shown === "assistant" && <Assistant />}
+        {report && shown === "journal" && <Journal />}
         {report && shown === "soldees" && <Closed report={report} />}
         {report && shown === "frais" && <Activity report={report} />}
         {report && shown === "donnees" && <Data report={report} reload={reload} />}

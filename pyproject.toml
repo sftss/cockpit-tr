@@ -5,7 +5,9 @@ description = "Cockpit personnel et local pour suivre un portefeuille Trade Repu
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "anthropic>=1.11.0",
     "fastapi>=0.115",
+    "keyring>=25.7.0",
     "uvicorn>=0.32",
 ]
 

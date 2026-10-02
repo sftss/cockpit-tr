@@ -186,6 +186,9 @@ function Item({ item, status, edit }: { item: RoadmapItem; status: string; edit:
     <div className="grid gap-x-10 gap-y-3 md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)_auto]">
       <div>
         <h3 className="font-display text-lg leading-snug">{item.name}</h3>
+        {item.proposed_by === "assistant" && (
+          <p className="text-xs text-accent">proposée par l'assistant</p>
+        )}
         <p className="text-sm text-muted">
           {[status, item.account && accountName(item.account), item.amount != null && euro(item.amount)]
             .filter(Boolean)

@@ -11,12 +11,26 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
-from . import __version__, compliance, config, db, gold, roadmap, rules, settings_file, store
+from . import (
+    __version__,
+    compliance,
+    config,
+    db,
+    gold,
+    journal,
+    roadmap,
+    rules,
+    settings_file,
+    store,
+)
+from .assistant import chat, keys
+from .assistant import prompt as assistant_prompt
+from .assistant.llm import LLM, MODELS, AnthropicLLM
 from .importers import tr_csv
 from .market import service as market_service
 from .market.provider import ProviderError, QuoteProvider
@@ -71,6 +85,36 @@ class RoadmapIn(BaseModel):
     symbol: str | None = None
 
 
+class KeyIn(BaseModel):
+    key: str
+
+
+class AssistantSettingsIn(BaseModel):
+    model: str | None = None
+    budget_eur: str | float | None = None
+
+
+class ContextIn(BaseModel):
+    title: str
+    content: str
+
+
+class ConversationIn(BaseModel):
+    model: str | None = None
+
+
+class MessageIn(BaseModel):
+    text: str
+    web_search: bool = False
+    model: str | None = None
+
+
+class JournalIn(BaseModel):
+    title: str
+    body: str | None = None
+    decided_on: str | None = None
+
+
 class GoldLotIn(BaseModel):
     label: str
     grams: str | float
@@ -85,10 +129,15 @@ def _provider_error(exc: ProviderError) -> HTTPException:
 
 
 def create_app(
-    database: Path | str | None = None, provider: QuoteProvider | None = None
+    database: Path | str | None = None,
+    provider: QuoteProvider | None = None,
+    llm: LLM | None = None,
+    key_store: keys.KeyStore | None = None,
 ) -> FastAPI:
     app = FastAPI(title="Cockpit TR", version=__version__, docs_url=None, redoc_url=None)
     market = market_service.Market(provider or YahooProvider())
+    llm = llm or AnthropicLLM()
+    key_store = key_store or keys.SystemKeyStore()
     market_busy = threading.Lock()  # one refresh at a time, whatever the number of tabs
 
     # The app holds personal financial data: answer only to this machine's own
@@ -367,6 +416,147 @@ def create_app(
         except ProviderError as exc:
             raise _provider_error(exc) from exc
         return gold.summary(c)
+
+    # -- Assistant -----------------------------------------------------------
+
+    def assistant_status(c: sqlite3.Connection) -> dict:
+        _, source = keys.resolve(key_store)
+        return {
+            "configured": source is not None,
+            "key_source": source,  # where the key is kept; the key itself never leaves
+            "models": [{"id": name, "label": spec["label"]} for name, spec in MODELS.items()],
+            "default_model": chat.default_model(c),
+            "month": chat.month_usage(c),
+        }
+
+    @app.get("/api/assistant/status")
+    def get_assistant_status(c: sqlite3.Connection = Depends(conn)) -> dict:
+        return assistant_status(c)
+
+    @app.put("/api/assistant/key")
+    def put_key(body: KeyIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            key_store.set(keys.check_format(body.key))
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+        except keys.KeyStoreError as exc:
+            raise HTTPException(500, str(exc)) from exc
+        return assistant_status(c)
+
+    @app.delete("/api/assistant/key")
+    def delete_key(c: sqlite3.Connection = Depends(conn)) -> dict:
+        key_store.delete()
+        return assistant_status(c)
+
+    @app.put("/api/assistant/settings")
+    def put_assistant_settings(
+        body: AssistantSettingsIn, c: sqlite3.Connection = Depends(conn)
+    ) -> dict:
+        try:
+            if body.model is not None:
+                chat.set_default_model(c, body.model)
+            if body.budget_eur is not None:
+                chat.set_budget(c, body.budget_eur)
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+        return assistant_status(c)
+
+    @app.get("/api/assistant/context")
+    def get_context(c: sqlite3.Connection = Depends(conn)) -> list[dict]:
+        return assistant_prompt.documents(c)
+
+    @app.put("/api/assistant/context")
+    def put_context(body: ContextIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            return {"id": assistant_prompt.save_document(c, body.title, body.content)}
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.delete("/api/assistant/context/{document_id}")
+    def delete_context(document_id: int, c: sqlite3.Connection = Depends(conn)) -> dict:
+        if not assistant_prompt.delete_document(c, document_id):
+            raise HTTPException(404, "Document introuvable.")
+        return {"deleted": document_id}
+
+    @app.get("/api/assistant/conversations")
+    def get_conversations(c: sqlite3.Connection = Depends(conn)) -> list[dict]:
+        return chat.listing(c)
+
+    @app.post("/api/assistant/conversations", status_code=201)
+    def post_conversation(body: ConversationIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        return chat.view(c, chat.create(c, body.model))
+
+    @app.get("/api/assistant/conversations/{conversation_id}")
+    def get_conversation(conversation_id: int, c: sqlite3.Connection = Depends(conn)) -> dict:
+        data = chat.view(c, conversation_id)
+        if data is None:
+            raise HTTPException(404, "Discussion introuvable.")
+        return data
+
+    @app.delete("/api/assistant/conversations/{conversation_id}")
+    def delete_conversation(conversation_id: int, c: sqlite3.Connection = Depends(conn)) -> dict:
+        if not chat.delete(c, conversation_id):
+            raise HTTPException(404, "Discussion introuvable.")
+        return {"deleted": conversation_id}
+
+    @app.post("/api/assistant/conversations/{conversation_id}/messages")
+    def post_message(conversation_id: int, body: MessageIn) -> StreamingResponse:
+        """Send a message; the answer comes back as a stream of events."""
+        api_key, _ = keys.resolve(key_store)
+        if not api_key:
+            raise HTTPException(400, "Aucune clé d'API enregistrée.")
+
+        def events() -> Iterator[str]:
+            # The stream outlives the request handler: it needs its own connection.
+            connection = db.connect(database)
+            try:
+                for event in chat.send(
+                    connection,
+                    llm,
+                    api_key,
+                    conversation_id,
+                    body.text,
+                    web_search=body.web_search,
+                    model=body.model,
+                ):
+                    yield f"data: {json.dumps(event, ensure_ascii=False)}\n\n"
+            finally:
+                connection.close()
+
+        return StreamingResponse(
+            events(),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
+        )
+
+    # -- Decision journal ------------------------------------------------------
+
+    @app.get("/api/journal")
+    def get_journal(c: sqlite3.Connection = Depends(conn)) -> list[dict]:
+        return journal.entries(c)
+
+    @app.post("/api/journal", status_code=201)
+    def post_journal(body: JournalIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            return {"id": journal.add(c, body.model_dump())}
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.put("/api/journal/{entry_id}")
+    def put_journal(entry_id: int, body: JournalIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            found = journal.update(c, entry_id, body.model_dump())
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+        if not found:
+            raise HTTPException(404, "Note introuvable.")
+        return {"id": entry_id}
+
+    @app.delete("/api/journal/{entry_id}")
+    def delete_journal(entry_id: int, c: sqlite3.Connection = Depends(conn)) -> dict:
+        if not journal.delete(c, entry_id):
+            raise HTTPException(404, "Note introuvable.")
+        return {"deleted": entry_id}
 
     # -- Settings file -------------------------------------------------------
 
