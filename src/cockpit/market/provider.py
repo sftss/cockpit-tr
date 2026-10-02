@@ -39,6 +39,11 @@ class Listing:
 class Point:
     time: int  # seconds since the epoch, UTC
     close: Decimal
+    # The rest of the bar, when the source gives it (exchange rates have none).
+    open: Decimal | None = None
+    high: Decimal | None = None
+    low: Decimal | None = None
+    volume: Decimal | None = None
 
 
 @dataclass(frozen=True)

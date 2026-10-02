@@ -9,12 +9,13 @@ from __future__ import annotations
 import re
 import sqlite3
 import time
+from bisect import bisect_right
 from dataclasses import dataclass, field
 from datetime import UTC, date, datetime
 from decimal import Decimal
 
 from ..money import SHARE_EPSILON, dec
-from .provider import Listing, ProviderError, QuoteProvider, Series
+from .provider import Listing, Point, ProviderError, QuoteProvider, Series
 
 # Delay of the free quotes per exchange, in minutes, from Yahoo's own table
 # (help.yahoo.com/kb/SLN2310.html, read on 02/10/2026). Unknown exchange: None.
@@ -34,16 +35,34 @@ SUFFIX_DELAY = {"PA": 15, "AS": 15, "DE": 15, "F": 15, "HK": 15, "L": 20, "IL": 
 # For funds (several listings of the same ISIN), prefer one quoted in euros.
 FUND_EXCHANGES = ["GER", "PAR", "AMS", "MIL", "FRA"]
 
-# Screen range -> (span, interval) asked from the source, and cache lifetime in seconds.
+
+@dataclass(frozen=True)
+class Range:
+    """What one period of the chart asks from the source, and what it shows."""
+
+    span: str  # longer than what is shown when the moving averages need a run-up
+    interval: str
+    lifetime: int  # seconds an answer is kept
+    days: int | None = None  # calendar days shown; None shows everything received
+    averages: tuple[int, ...] = ()  # moving averages, counted in bars
+    unit: str = "jours"  # what one bar is, for the label of an average
+
+    @property
+    def intraday(self) -> bool:
+        return self.interval.endswith("m")
+
+
 RANGES = {
-    "1j": ("1d", "5m", 60),
-    "5j": ("5d", "30m", 300),
-    "1m": ("1mo", "1d", 900),
-    "6m": ("6mo", "1d", 900),
-    "1a": ("1y", "1d", 900),
-    "5a": ("5y", "1wk", 3600),
-    "max": ("max", "1mo", 3600),
+    "1j": Range("1d", "5m", 60),
+    "5j": Range("5d", "30m", 300),
+    "1m": Range("2y", "1d", 900, 31, (50, 200)),
+    "6m": Range("2y", "1d", 900, 183, (50, 200)),
+    "1a": Range("2y", "1d", 900, 366, (50, 200)),
+    "5a": Range("10y", "1wk", 3600, 1827, (10, 40), "semaines"),
+    "max": Range("max", "1mo", 3600),
 }
+DAILY = Range("2y", "1d", 900)  # the series the key figures of an instrument are read from
+DAY = 86_400
 
 QUOTE_MAX_AGE = 60  # seconds before a quote is asked again
 MAX_CANDIDATES = 6  # listings proposed when the search by ISIN finds nothing
@@ -77,6 +96,75 @@ def search_terms(name: str) -> str:
     """The name without its bracketed share class: 'Alphabet (A)' -> 'Alphabet'."""
     cleaned = re.sub(r"\s+", " ", re.sub(r"\([^)]*\)", " ", name)).strip()
     return cleaned or name.strip()
+
+
+def moving_average(values: list[Decimal], window: int) -> list[Decimal | None]:
+    """Mean of the last `window` values at each position; None until there are enough."""
+    result: list[Decimal | None] = []
+    total = Decimal(0)
+    for index, value in enumerate(values):
+        total += value
+        if index >= window:
+            total -= values[index - window]
+        result.append(total / window if index >= window - 1 else None)
+    return result
+
+
+def trades(conn: sqlite3.Connection, isin: str) -> list[dict]:
+    """Every purchase and sale of one instrument, oldest first, as executed."""
+    rows = conn.execute(
+        "SELECT datetime, date, account_id, type, shares, price, amount, fee FROM transactions "
+        "WHERE isin = ? AND type IN ('BUY', 'SELL') ORDER BY datetime",
+        (isin,),
+    ).fetchall()
+    return [
+        {
+            "datetime": row["datetime"],
+            "date": row["date"],
+            "account": row["account_id"],
+            "side": "achat" if row["type"] == "BUY" else "vente",
+            "shares": float(abs(dec(row["shares"]))),
+            "price": float(dec(row["price"])) if row["price"] else None,
+            "amount": float(abs(dec(row["amount"]))),
+            "fee": float(-dec(row["fee"])),
+        }
+        for row in rows
+    ]
+
+
+def _trade_marks(conn: sqlite3.Connection, isin: str, bars: list[Point], intraday: bool) -> list:
+    """Where each purchase and sale falls on the bars shown: the bar of its day
+    (of its minute on an intraday chart). A trade older than the first bar is
+    left out. The mark carries no price: the trade was paid in euros, on another
+    market than the one charted."""
+    if not bars:
+        return []
+    times = [bar.time for bar in bars]
+    days = [_day(bar.time) for bar in bars]
+    marks = []
+    for trade in trades(conn, isin):
+        if intraday:
+            stamp = datetime.fromisoformat(trade["datetime"]).timestamp()
+            index = bisect_right(times, stamp) - 1
+        else:
+            index = bisect_right(days, trade["date"]) - 1
+        if index >= 0:
+            marks.append({"time": bars[index].time, **trade})
+    return marks
+
+
+def _bar(bar: Point) -> dict:
+    def number(value: Decimal | None) -> float | None:
+        return None if value is None else float(value)
+
+    return {
+        "time": bar.time,
+        "value": float(bar.close),
+        "open": number(bar.open),
+        "high": number(bar.high),
+        "low": number(bar.low),
+        "volume": number(bar.volume),
+    }
 
 
 def choose_listing(isin: str, listings: list[Listing]) -> Listing | None:
@@ -113,7 +201,7 @@ class Outcome:
 class Market:
     def __init__(self, provider: QuoteProvider):
         self.provider = provider
-        self._chart_cache: dict[tuple[str, str], tuple[float, Series]] = {}
+        self._chart_cache: dict[tuple[str, str, str], tuple[float, Series]] = {}
         self._fx_today: dict[str, tuple[float, Decimal]] = {}
         self._spot: dict[str, tuple[float, Decimal]] = {}
 
@@ -374,33 +462,152 @@ class Market:
 
     # -- Charts -------------------------------------------------------------
 
-    def chart(self, conn: sqlite3.Connection, isin: str, range_key: str) -> dict:
-        """Series for one instrument, in its quotation currency, with a short cache."""
+    def _series(self, symbol: str, spec: Range) -> Series:
+        """One answer of the source, kept a while: several periods share the same one."""
+        key = (symbol, spec.span, spec.interval)
+        cached = self._chart_cache.get(key)
+        if cached and time.monotonic() - cached[0] < spec.lifetime:
+            return cached[1]
+        series = self.provider.chart(symbol, spec.span, spec.interval)
+        self._chart_cache[key] = (time.monotonic(), series)
+        return series
+
+    def _bars(self, symbol: str, spec: Range, in_euros: bool) -> tuple[Series, str, list[Point]]:
+        """Bars of a symbol, in its quotation currency or in euros.
+
+        In euros, each bar is divided by the exchange rate of its own day (of its
+        own interval): a reconstruction, since the instrument is not quoted in
+        euros on that market.
+        """
+        series = self._series(symbol, spec)
+        unit, currency = normalise(Decimal(1), series.currency)  # pence -> pounds
+        rates: list[tuple[int, Decimal]] = []
+        if in_euros and currency != "EUR":
+            try:
+                pair = self._series(f"EUR{currency}=X", spec)
+                rates = [(point.time, point.close) for point in pair.points if point.close > 0]
+            except ProviderError as exc:
+                if exc.kind in ("refused", "network"):
+                    raise
+            if not rates:
+                rates = [(0, self._rate_today(currency))]
+            currency = "EUR"
+
+        bars, index = [], 0
+        rate = rates[0][1] if rates else Decimal(1)
+        for point in series.points:
+            while index < len(rates) and rates[index][0] <= point.time:
+                rate = rates[index][1]
+                index += 1
+            factor = unit / rate
+
+            def scaled(value: Decimal | None, factor: Decimal = factor) -> Decimal | None:
+                return None if value is None else value * factor
+
+            bars.append(
+                Point(
+                    time=point.time,
+                    close=point.close * factor,
+                    open=scaled(point.open),
+                    high=scaled(point.high),
+                    low=scaled(point.low),
+                    volume=point.volume,
+                )
+            )
+        return series, currency, bars
+
+    def chart(
+        self, conn: sqlite3.Connection, isin: str, range_key: str, in_euros: bool = False
+    ) -> dict:
+        """Bars of one instrument over a period, with its moving averages and the
+        user's own purchases and sales placed on them."""
         if range_key not in RANGES:
             raise ValueError("Période inconnue.")
-        span, interval, lifetime = RANGES[range_key]
+        spec = RANGES[range_key]
         symbol = self.resolve(conn, isin)
         if symbol is None:
             raise ProviderError("not_found", "aucune cotation trouvée pour ce titre")
-        key = (symbol, range_key)
-        cached = self._chart_cache.get(key)
-        if cached and time.monotonic() - cached[0] < lifetime:
-            series = cached[1]
-        else:
-            series = self.provider.chart(symbol, span, interval)
-            self._chart_cache[key] = (time.monotonic(), series)
-        _, currency = normalise(Decimal(1), series.currency)
+        series, currency, bars = self._bars(symbol, spec, in_euros)
+        _, native = normalise(Decimal(1), series.currency)
+
+        first = 0
+        if spec.days is not None and bars:
+            cutoff = bars[-1].time - spec.days * DAY
+            first = next(index for index, bar in enumerate(bars) if bar.time >= cutoff)
+        closes = [bar.close for bar in bars]
+        averages = []
+        for window in spec.averages:
+            points = [
+                {"time": bars[index].time, "value": float(value)}
+                for index, value in enumerate(moving_average(closes, window))
+                if index >= first and value is not None
+            ]
+            if points:
+                label = f"Moyenne {window} {spec.unit}"
+                averages.append({"window": window, "label": label, "points": points})
+        shown = bars[first:]
         return {
             "isin": isin,
             "symbol": series.symbol,
             "range": range_key,
             "currency": currency,
+            "native_currency": native,
             "exchange": series.exchange_name or series.exchange,
             "delay_minutes": delay_minutes(series.exchange, series.symbol),
-            "intraday": interval.endswith("m"),
-            "points": [
-                {"time": p.time, "value": float(normalise(p.close, series.currency)[0])}
-                for p in series.points
+            "intraday": spec.intraday,
+            "points": [_bar(bar) for bar in shown],
+            "averages": averages,
+            "trades": _trade_marks(conn, isin, shown, spec.intraday),
+        }
+
+    def closes_eur(self, symbol: str, since: str) -> list[tuple[str, Decimal]]:
+        """Daily closes of any symbol in euros since `since`: a benchmark's history."""
+        spec = Range(_span_since(since), "1d", 3600)
+        _, _, bars = self._bars(symbol, spec, in_euros=True)
+        return [(_day(bar.time), bar.close) for bar in bars]
+
+    def stats(self, conn: sqlite3.Connection, isin: str, in_euros: bool = False) -> dict:
+        """Key figures of one instrument, read from its daily bars of the last two
+        years: the day, the last 52 weeks, and the change over a few periods."""
+        symbol = self.resolve(conn, isin)
+        if symbol is None:
+            raise ProviderError("not_found", "aucune cotation trouvée pour ce titre")
+        _, currency, bars = self._bars(symbol, DAILY, in_euros)
+        if not bars:
+            raise ProviderError("not_found", "pas d'historique de cours pour ce titre")
+        last = bars[-1]
+        year = [bar for bar in bars if bar.time >= last.time - 366 * DAY]
+        volumes = [bar.volume for bar in bars[-64:-1] if bar.volume]
+
+        def number(value: Decimal | None) -> float | None:
+            return None if value is None else float(value)
+
+        def change_since(limit: int) -> float | None:
+            """Change from the last close at or before `limit` (seconds since the epoch)."""
+            before = [bar for bar in bars if bar.time <= limit]
+            if not before or before[-1].close <= 0:
+                return None
+            return float((last.close / before[-1].close - 1).quantize(Decimal("0.0001")))
+
+        today = datetime.fromtimestamp(last.time, UTC)
+        new_year = int(datetime(today.year, 1, 1, tzinfo=UTC).timestamp())
+        return {
+            "currency": currency,
+            "as_of": _day(last.time),
+            "price": float(last.close),
+            "previous_close": float(bars[-2].close) if len(bars) > 1 else None,
+            "open": number(last.open),
+            "day_low": number(last.low),
+            "day_high": number(last.high),
+            "year_low": float(min(bar.low or bar.close for bar in year)),
+            "year_high": float(max(bar.high or bar.close for bar in year)),
+            "volume": number(last.volume),
+            "average_volume": float(sum(volumes) / len(volumes)) if volumes else None,
+            "changes": [
+                {"label": "1 mois", "change": change_since(last.time - 31 * DAY)},
+                {"label": "6 mois", "change": change_since(last.time - 183 * DAY)},
+                {"label": "1 an", "change": change_since(last.time - 366 * DAY)},
+                {"label": "Depuis le 1er janvier", "change": change_since(new_year)},
             ],
         }
 

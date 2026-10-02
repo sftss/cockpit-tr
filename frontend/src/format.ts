@@ -94,3 +94,8 @@ export const number = (value: number) => plain.format(value);
 const gram = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 });
 
 export const grams = (value: number) => `${gram.format(value)} g`;
+
+const short = new Intl.NumberFormat("fr-FR", { notation: "compact", maximumFractionDigits: 1 });
+
+/** A large count in few characters: 1,2 M, 340 k. */
+export const compact = (value: number) => short.format(value);

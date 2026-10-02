@@ -287,17 +287,51 @@ def create_app(
         return {"busy": False, **outcome.as_dict()}
 
     @app.get("/api/market/chart/{isin}")
-    def get_chart(isin: str, range: str = "1j", c: sqlite3.Connection = Depends(conn)) -> dict:
+    def get_chart(
+        isin: str, range: str = "1j", devise: str = "", c: sqlite3.Connection = Depends(conn)
+    ) -> dict:
         try:
-            return market.chart(c, isin, range)
+            return market.chart(c, isin, range, in_euros=devise.lower() == "eur")
         except ValueError as exc:
             raise HTTPException(400, str(exc)) from exc
         except ProviderError as exc:
             raise _provider_error(exc) from exc
 
+    @app.get("/api/securities/{isin}")
+    def get_security(isin: str, devise: str = "", c: sqlite3.Connection = Depends(conn)) -> dict:
+        """One instrument ever held: the user's trades on it and its key figures.
+        The figures come from the price source; without it, the trades still show."""
+        row = c.execute(
+            "SELECT name, asset_class FROM instruments WHERE isin = ?", (isin,)
+        ).fetchone()
+        if row is None:
+            raise HTTPException(404, "Titre inconnu.")
+        stats, problem = None, None
+        try:
+            stats = market.stats(c, isin, in_euros=devise.lower() == "eur")
+        except ProviderError as exc:
+            problem = str(exc)
+        return {
+            "isin": isin,
+            "name": row["name"],
+            "asset_class": row["asset_class"],
+            "held": isin in store.held_names(c),
+            "trades": market_service.trades(c, isin),
+            "stats": stats,
+            "stats_error": problem,
+        }
+
     @app.get("/api/portfolio/history")
     def get_value_history(c: sqlite3.Connection = Depends(conn)) -> dict:
         return store.value_history(c)
+
+    @app.get("/api/portfolio/performance")
+    def get_performance(indice: str | None = None, c: sqlite3.Connection = Depends(conn)) -> dict:
+        return store.performance_view(c, market, indice)
+
+    @app.get("/api/portfolio/allocation")
+    def get_allocation(c: sqlite3.Connection = Depends(conn)) -> dict:
+        return store.allocation_view(c, config.fiches_dir())
 
     # -- Rules ---------------------------------------------------------------
 

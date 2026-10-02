@@ -10,7 +10,7 @@ from datetime import UTC, date, datetime
 from decimal import Decimal
 from pathlib import Path
 
-from . import compliance, portfolio, valuation, veille
+from . import allocation, compliance, performance, portfolio, valuation, veille
 from .money import ZERO, dec, money, ratio
 
 
@@ -111,6 +111,78 @@ def current_report(conn: sqlite3.Connection) -> dict:
         position["weight_total"] = ratio(Decimal(str(position[basis])), total) if total else None
     data["total"] = {"basis": basis, "amount": money(total), "lines": len(positions)}
     return data
+
+
+def _universe(fiches: Path | None) -> dict[str, dict]:
+    """The public list of companies by ISIN; empty when the file is not there."""
+    if fiches is None:
+        return {}
+    try:
+        listing = json.loads((fiches / "univers.json").read_text(encoding="utf-8"))
+        return {str(entry["isin"]): entry for entry in listing["titres"] if entry.get("isin")}
+    except (OSError, ValueError, KeyError, TypeError):
+        return {}
+
+
+def allocation_view(conn: sqlite3.Connection, fiches: Path | None) -> dict:
+    """Spread of the open lines, on the same basis as their weights."""
+    report = current_report(conn)
+    currencies = dict(conn.execute("SELECT isin, quote_currency FROM instruments").fetchall())
+    return allocation.breakdown(
+        report["positions"], report["total"]["basis"], currencies, _universe(fiches)
+    )
+
+
+# Benchmarks anyone can pick, beside the funds of the portfolio itself. All three
+# are quoted in euros; the two funds reinvest their dividends, the index ignores them.
+INDICES = {
+    "msci-world": ("EUNL.DE", "MSCI World (ETF iShares Core, dividendes réinvestis)"),
+    "sp500": ("SXR8.DE", "S&P 500 (ETF iShares Core, dividendes réinvestis)"),
+    "cac40": ("^FCHI", "CAC 40 (indice, hors dividendes)"),
+}
+
+
+def performance_view(conn: sqlite3.Connection, market, choice: str | None = None) -> dict:
+    """Time-weighted performance of the portfolio beside one benchmark: a fund
+    already in the database (its stored prices) or a public index (asked from
+    the price source)."""
+    points = value_history(conn)["points"]
+    history = price_history(conn)
+    # Funds first: those held, largest first, then those held in the past.
+    held: dict[str, Decimal] = {}
+    for line in portfolio.build_lines(all_transactions(conn)).values():
+        if line.is_open:
+            held[line.isin] = held.get(line.isin, ZERO) + line.cost
+    rows = conn.execute(
+        "SELECT isin, name FROM instruments WHERE asset_class = 'FUND' ORDER BY name"
+    ).fetchall()
+    rows.sort(key=lambda row: -held.get(row["isin"], ZERO))  # stable: names within a tie
+    funds = [
+        {"id": row["isin"], "label": row["name"]}
+        for row in rows
+        if len(history.get(row["isin"], [])) > 1
+    ]
+    benchmarks = funds + [{"id": key, "label": label} for key, (_, label) in INDICES.items()]
+    chosen = next((b for b in benchmarks if b["id"] == choice), benchmarks[0])
+    prices: list[tuple[str, Decimal]] = []
+    problem = None
+    if points:
+        if chosen["id"] in INDICES:
+            from .market.provider import ProviderError  # local import: store stays offline
+
+            try:
+                prices = market.closes_eur(INDICES[chosen["id"]][0], points[0]["date"])
+            except ProviderError as exc:
+                problem = str(exc)
+        else:
+            prices = history.get(chosen["id"], [])
+    return {
+        "benchmarks": benchmarks,
+        "benchmark": chosen,
+        "points": performance.series(points, prices),
+        "priced": any(point["at_cost"] < point["value"] for point in points),
+        "error": problem,
+    }
 
 
 def rules_state(conn: sqlite3.Connection) -> dict:

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api, type Compliance, type Gold, type Report, type RulesState, type Watch } from "../api";
+import { PerformanceChart } from "../components/PerformanceChart";
 import { QuarterChart } from "../components/QuarterChart";
 import { ValueHistory } from "../components/ValueHistory";
 import { PageTitle, Result, Section, TableWrap } from "../components/ui";
@@ -109,6 +110,8 @@ export function Home({ report }: { report: Report }) {
           }
         />
       </Section>
+
+      <PerformanceChart stamp={report.last_import} />
 
       <Section title="Ordres manuels par trimestre">
         <QuarterChart quarters={quarters} current={current} />
