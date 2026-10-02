@@ -1,13 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import {
   api,
+  type Candidates,
   type ImportReport,
   type Instrument,
   type Report,
   type SnapshotSummary,
 } from "../api";
 import { Button, Notice, PageTitle, Section, TableWrap } from "../components/ui";
-import { date, delayLabel } from "../format";
+import { amount, date, delayLabel, euro } from "../format";
 
 export function Data({ report, reload }: { report: Report | null; reload: () => void }) {
   const input = useRef<HTMLInputElement>(null);
@@ -190,7 +191,22 @@ function Quotes({ reload }: { reload: () => void }) {
 
   const saveSymbol = async (isin: string, symbol: string) => {
     await api.setSymbol(isin, symbol);
+    setProposal(null);
     await run("cours", api.refreshQuotes);
+  };
+
+  // Listings proposed for one instrument at a time, when the ISIN finds nothing.
+  const [proposal, setProposal] = useState<{ isin: string; found: Candidates | null } | null>(null);
+  const propose = async (isin: string) => {
+    setMessage(null);
+    setProposal({ isin, found: null });
+    try {
+      const found = await api.candidates(isin);
+      setProposal((current) => (current?.isin === isin ? { isin, found } : current));
+    } catch (e) {
+      setProposal(null);
+      setMessage((e as Error).message);
+    }
   };
 
   const held = items.filter((i) => i.held);
@@ -199,7 +215,7 @@ function Quotes({ reload }: { reload: () => void }) {
   return (
     <Section
       title="Cours"
-      note="Les cours viennent de Yahoo Finance, recherchés par code ISIN : une source gratuite et non officielle, qui peut refuser ou changer. Si un titre n'est pas trouvé, ou pas sur la bonne place, saisir son symbole Yahoo (par exemple AI.PA). Un symbole vide relance la recherche par ISIN."
+      note="Les cours viennent de Yahoo Finance, recherchés par code ISIN : une source gratuite et non officielle, qui peut refuser ou changer. Si un titre n'est pas trouvé, « Proposer » cherche par nom et laisse choisir ; s'il n'est pas sur la bonne place, saisir son symbole Yahoo (par exemple AI.PA). Un symbole vide relance la recherche par ISIN."
     >
       <div className="mb-5 flex flex-wrap items-center gap-3">
         <Button onClick={() => run("cours", api.refreshQuotes)} disabled={busy !== null}>
@@ -227,7 +243,8 @@ function Quotes({ reload }: { reload: () => void }) {
           </thead>
           <tbody>
             {[...held, ...others].map((item) => (
-              <tr key={item.isin}>
+              <Fragment key={item.isin}>
+              <tr>
                 <td>
                   {item.name}
                   <span className="block text-xs text-muted">
@@ -237,6 +254,16 @@ function Quotes({ reload }: { reload: () => void }) {
                 </td>
                 <td>
                   <SymbolInput item={item} save={saveSymbol} />
+                  {!item.symbol && (
+                    <button
+                      type="button"
+                      onClick={() => (proposal?.isin === item.isin ? setProposal(null) : propose(item.isin))}
+                      aria-expanded={proposal?.isin === item.isin}
+                      className="mt-1 block w-28 text-right text-xs text-accent hover:underline"
+                    >
+                      {proposal?.isin === item.isin ? "Fermer" : "Proposer"}
+                    </button>
+                  )}
                 </td>
                 <td>{item.currency ?? "—"}</td>
                 <td>
@@ -248,11 +275,70 @@ function Quotes({ reload }: { reload: () => void }) {
                 </td>
                 <td className="num">{item.price_days}</td>
               </tr>
+              {proposal?.isin === item.isin && (
+                <tr>
+                  <td colSpan={5}>
+                    <Proposal found={proposal.found} choose={(symbol) => saveSymbol(item.isin, symbol)} />
+                  </td>
+                </tr>
+              )}
+              </Fragment>
             ))}
           </tbody>
         </table>
       </TableWrap>
     </Section>
+  );
+}
+
+/** Listings found for one instrument: the person chooses, nothing is picked for them. */
+function Proposal({ found, choose }: { found: Candidates | null; choose: (symbol: string) => void }) {
+  if (!found) return <p className="py-2 text-sm text-muted">Recherche…</p>;
+  if (found.candidates.length === 0)
+    return (
+      <p className="py-2 text-sm text-muted">
+        Aucune cotation trouvée pour « {found.query} ». Saisir le symbole à la main.
+      </p>
+    );
+  return (
+    // Held to the width of the screen: the table around it may scroll sideways.
+    <div className="sticky left-0 w-[min(100%,calc(100vw-3rem))] py-2 text-sm">
+      <p className="max-w-[75ch] text-muted">
+        {found.by === "nom"
+          ? `Rien par ISIN. Résultats de la recherche par nom « ${found.query} » : Yahoo n'indique pas l'ISIN, vérifier la classe d'action, la place et l'ordre de grandeur du cours avant de choisir.`
+          : "Cotations trouvées par ISIN."}
+        {found.last_trade &&
+          ` Dernier prix d'exécution connu : ${euro(found.last_trade.price)} le ${date(found.last_trade.date)}.`}
+      </p>
+      <ul className="mt-2">
+        {found.candidates.map((c) => (
+          <li key={c.symbol} className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-t border-line py-2">
+            <span className="w-24 font-medium">{c.symbol}</span>
+            <span className="min-w-40 flex-1">
+              {c.name}
+              <span className="block text-xs text-muted">
+                {c.exchange}
+                {c.kind !== "EQUITY" && `, ${c.kind === "ETF" ? "ETF" : "fonds"}`}
+              </span>
+            </span>
+            <span className="num">
+              {c.price == null || c.currency == null
+                ? "cours non disponible"
+                : c.currency === "EUR"
+                  ? euro(c.price)
+                  : `${amount(c.price, c.currency)}, soit ${euro(c.price_eur)}`}
+            </span>
+            <button
+              type="button"
+              onClick={() => choose(c.symbol)}
+              className="rounded-md border border-accent px-3 py-1 text-accent hover:bg-accent-soft"
+            >
+              Choisir
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

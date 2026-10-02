@@ -35,11 +35,11 @@ class FakeProvider:
         self.calls: list[tuple] = []
         self.fail: ProviderError | None = None
 
-    def search(self, isin: str) -> list[Listing]:
-        self.calls.append(("search", isin))
+    def search(self, query: str) -> list[Listing]:
+        self.calls.append(("search", query))
         if self.fail:
             raise self.fail
-        return self.listings.get(isin, [])
+        return self.listings.get(query, [])
 
     def chart(self, symbol: str, span: str, interval: str) -> Series:
         self.calls.append(("chart", symbol, span, interval))

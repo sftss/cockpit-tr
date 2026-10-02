@@ -81,11 +81,11 @@ class YahooProvider:
 
     # -- Interface ----------------------------------------------------------
 
-    def search(self, isin: str) -> list[Listing]:
-        query = urllib.parse.urlencode(
-            {"q": isin, "quotesCount": 10, "newsCount": 0, "listsCount": 0}
+    def search(self, query: str) -> list[Listing]:
+        params = urllib.parse.urlencode(
+            {"q": query, "quotesCount": 10, "newsCount": 0, "listsCount": 0}
         )
-        return parse_search(self._get(f"{SEARCH_URL}?{query}"))
+        return parse_search(self._get(f"{SEARCH_URL}?{params}"))
 
     def chart(self, symbol: str, span: str, interval: str) -> Series:
         query = urllib.parse.urlencode(
@@ -114,6 +114,7 @@ def parse_search(payload: dict) -> list[Listing]:
                 name=str(quote.get("longname") or quote.get("shortname") or quote["symbol"]),
                 exchange=str(quote.get("exchange") or ""),
                 kind=str(quote.get("quoteType")),
+                exchange_name=str(quote.get("exchDisp") or ""),
             )
         )
     return listings

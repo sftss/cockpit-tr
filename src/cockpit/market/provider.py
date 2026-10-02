@@ -32,6 +32,7 @@ class Listing:
     name: str
     exchange: str
     kind: str
+    exchange_name: str = ""  # the exchange as shown to a person, when the source gives it
 
 
 @dataclass(frozen=True)
@@ -55,8 +56,8 @@ class Series:
 class QuoteProvider(Protocol):
     name: str
 
-    def search(self, isin: str) -> list[Listing]:
-        """Listings of the instrument with this ISIN, best match first."""
+    def search(self, query: str) -> list[Listing]:
+        """Listings matching an ISIN or a company name, best match first."""
 
     def chart(self, symbol: str, span: str, interval: str) -> Series:
         """Closing prices of `symbol` over `span` (e.g. '1d', '1y'), one per `interval`."""

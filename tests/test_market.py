@@ -178,6 +178,60 @@ def test_symbol_typed_by_hand(loaded, provider):
     assert {i["isin"]: i for i in service.instruments(loaded)}[FUND_ISIN]["symbol"] is None
 
 
+def test_candidates_by_name_when_the_isin_finds_nothing(loaded, provider):
+    assert service.search_terms("World Fund (Acc)") == "World Fund"
+    assert service.search_terms("  Acme  (A) SA ") == "Acme SA"
+    assert service.search_terms("(GDR)") == "(GDR)"
+
+    provider.listings["World Fund"] = [
+        Listing("WRLD.DE", "World Fund", "GER", "ETF", "XETRA"),
+        Listing("WRLD.L", "World Fund", "LSE", "ETF"),
+        Listing("GONE", "World Fund Old", "NMS", "ETF"),
+    ]
+    provider.charts["WRLD.DE"] = series("WRLD.DE", "EUR", "GER", {"2025-06-30": "25"})
+    provider.charts["WRLD.L"] = series("WRLD.L", "GBp", "LSE", {"2025-06-30": "2400"})
+    provider.charts["EURGBP=X"] = series("EURGBP=X", "GBP", "CCY", {"2025-06-30": "0.80"})
+    market = service.Market(provider)
+
+    found = market.candidates(loaded, FUND_ISIN)
+    assert (found["by"], found["query"]) == ("nom", "World Fund")
+    assert [c["symbol"] for c in found["candidates"]] == ["WRLD.DE", "WRLD.L", "GONE"]
+    german, london, gone = found["candidates"]
+    assert (german["exchange"], german["price"], german["price_eur"]) == ("XETRA", 25.0, 25.0)
+    assert (london["exchange"], london["price"], london["currency"]) == ("LSE", 24.0, "GBP")
+    assert london["price_eur"] == 30.0
+    assert gone["price"] is None  # unknown symbol: listed without a price
+    assert found["last_trade"]["price"] > 0
+    # Nothing is chosen for the person.
+    assert {i["isin"]: i for i in service.instruments(loaded)}[FUND_ISIN]["symbol"] is None
+
+    by_isin = market.candidates(loaded, ACME_ISIN)
+    assert (by_isin["by"], [c["symbol"] for c in by_isin["candidates"]]) == ("isin", ["ACME.PA"])
+
+    with pytest.raises(ProviderError):
+        market.candidates(loaded, "UNKNOWN")
+
+
+def test_candidates_stop_asking_prices_after_a_refusal(loaded, provider):
+    provider.listings["World Fund"] = [
+        Listing("WRLD.DE", "World Fund", "GER", "ETF"),
+        Listing("WRLD.L", "World Fund", "LSE", "ETF"),
+    ]
+
+    class RefusingCharts(FakeProvider):
+        def chart(self, symbol, span, interval):
+            self.calls.append(("chart", symbol, span, interval))
+            raise ProviderError("refused", "HTTP 429")
+
+    refusing = RefusingCharts()
+    refusing.listings = provider.listings
+    found = service.Market(refusing).candidates(loaded, FUND_ISIN)
+    assert [c["price"] for c in found["candidates"]] == [None, None]
+    assert [call for call in refusing.calls if call[0] == "chart"] == [
+        ("chart", "WRLD.DE", "1d", "5m")
+    ]
+
+
 # -- History -------------------------------------------------------------------------
 
 
