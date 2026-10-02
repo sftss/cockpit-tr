@@ -212,6 +212,20 @@ table.deviations td { vertical-align: top; }
 table.rules { min-width: 880px; }
 table.rules td { vertical-align: top; }
 
+/* Upcoming events of the weekly watch: words, not figures, so everything reads from the left. */
+table.events {
+  max-width: 60rem;
+  min-width: 640px;
+}
+table.events th,
+table.events td {
+  text-align: left;
+  vertical-align: top;
+}
+table.events th:nth-child(1) { width: 8.5rem; }
+table.events td:nth-child(1) { white-space: nowrap; }
+table.events th:nth-child(2) { width: 22%; }
+
 /* Same columns in each group of the compliance page. */
 table.compliance {
   min-width: 860px;

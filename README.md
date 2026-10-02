@@ -24,7 +24,7 @@ aucun ordre. Elle sort vers Internet pour deux choses :
 | V0 | Import de l'export CSV, base SQLite, calculs, tableau de bord, snapshots | fait |
 | V0 (suite) | Cours par ISIN, graphiques par titre, mini-courbes, courbe de la valeur du portefeuille | fait |
 | V1 | Règles du portefeuille, Halalitude datée, feuille de route, or physique | fait |
-| V2 | Assistant (chat, journal de décisions) : fait. Veille et revue trimestrielle : à venir. La fiche du jour existe déjà, voir `fiches/` | en cours |
+| V2 | Assistant (chat, journal de décisions), veille hebdomadaire (`veilles/`), fiche du jour (`fiches/`) : fait. Revue trimestrielle : à venir | en cours |
 | V3 | Tickets d'ordre : préparés et contrôlés ici, passés dans l'app Trade Republic | à venir |
 
 Pas de connexion programmatique à Trade Republic : son contrat client interdit
@@ -40,6 +40,7 @@ l'export CSV officiel.
 | Les types de règles | Les valeurs des règles, les motifs d'écart, la feuille de route |
 | | Les statuts de Halalitude, les lots d'or |
 | La consigne générique de l'assistant | Les consignes personnelles, les discussions, le journal de décisions |
+| Fiches et veilles sur une liste publique d'entreprises | Lesquelles de ces entreprises sont détenues ou ciblées |
 | | La clé d'API (gestionnaire d'identifiants de Windows) |
 | | Les identifiants et les clés d'API |
 
@@ -71,6 +72,10 @@ uv run cockpit import "C:\chemin\vers\transactions.csv"
 
 L'import peut aussi se faire depuis la page « Données » du tableau de bord.
 Réimporter un export plus récent n'ajoute que les nouvelles lignes.
+
+Au lancement, le script fait un `git pull` pour récupérer les fiches, les
+veilles et le code fusionné depuis la dernière fois. Hors ligne, il le dit et
+lance l'application telle qu'elle est.
 
 Sans le script :
 
@@ -146,7 +151,7 @@ au même endroit (par exemple `AI.PA`).
 
 Un chat intégré, qui lit les données locales par des outils : positions, lignes
 soldées, frais, règles et écarts, Halalitude, feuille de route, transactions,
-cours, fiches du jour, journal de décisions.
+cours, fiches du jour, veille hebdomadaire, journal de décisions.
 
 - **Clé d'API.** Elle se crée dans la console Anthropic et se saisit une fois
   dans la page « Assistant ». Elle est rangée dans le gestionnaire
@@ -168,6 +173,21 @@ cours, fiches du jour, journal de décisions.
   de réglages. Le dépôt ne contient qu'une consigne générique.
 - **Journal de décisions.** Une page pour noter une décision et son motif ;
   l'assistant le lit.
+
+## Veille hebdomadaire
+
+Chaque samedi matin, une tâche planifiée de Claude relève les faits publics de
+la semaine (résultats, annonces, prochains rendez-vous) pour les entreprises de
+`fiches/univers.json`, avec un court contexte macro, et les dépose dans
+`veilles/`. Chaque fait porte sa date et sa source. Format et règles :
+[`veilles/README.md`](veilles/README.md).
+
+La veille couvre toute la liste et ne sait rien du portefeuille. C'est la page
+« Veille », sur votre ordinateur, qui met en avant vos lignes et les cibles de
+votre feuille de route, puis replie le reste. Les fonds ne sont pas couverts.
+
+Ce sont des faits relevés par une IA : une erreur reste possible, d'où le lien
+vers la source à côté de chacun. Ni prédiction, ni consigne.
 
 ## Où sont mes données
 

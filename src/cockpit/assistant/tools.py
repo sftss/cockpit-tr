@@ -145,6 +145,30 @@ TOOLS: list[dict] = [
         },
     },
     {
+        "name": "lire_veille",
+        "description": (
+            "Veille hebdomadaire : faits publics datés et sourcés de la semaine (résultats, "
+            "annonces, prochains rendez-vous) pour une liste d'entreprises, plus un court contexte "
+            "macro. Sans argument, la dernière veille, limitée aux lignes détenues et aux cibles "
+            "de la feuille de route. Ce sont des faits relevés par une IA : citer la source, ne "
+            "pas en tirer de consigne."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "semaine": {
+                    "type": "string",
+                    "description": "Semaine voulue, par exemple 2026-W40. Par défaut la dernière.",
+                },
+                "tous_les_titres": {
+                    "type": "boolean",
+                    "description": "Vrai pour lire aussi les titres ni détenus ni ciblés.",
+                },
+            },
+            "additionalProperties": False,
+        },
+    },
+    {
         "name": "lire_journal",
         "description": (
             "Journal de décisions : ce que l'utilisateur a décidé, quand et pourquoi, et les "
@@ -209,6 +233,7 @@ LABELS = {
     "lire_transactions": "Lecture des transactions",
     "lire_cours": "Lecture des cours",
     "lire_fiches": "Lecture des fiches du jour",
+    "lire_veille": "Lecture de la veille hebdomadaire",
     "lire_journal": "Lecture du journal",
     "ajouter_note_journal": "Note ajoutée au journal",
     "proposer_cible": "Cible proposée sur la feuille de route",
@@ -484,6 +509,41 @@ def _sheets(conn: sqlite3.Connection, args: dict) -> dict:
     return {"fiches": listing}
 
 
+def _watch(conn: sqlite3.Connection, args: dict) -> dict:
+    view = store.watch(conn, config.veilles_dir(), str(args.get("semaine") or "").strip() or None)
+    report = view["report"]
+    if report is None:
+        return {"veille": None, "note": "Aucune veille hebdomadaire sur cet ordinateur."}
+    everything = bool(args.get("tous_les_titres"))
+    followed = {"ligne": "ligne détenue", "cible": "cible de la feuille de route"}
+    titles = [
+        {
+            "nom": title["nom"],
+            "isin": title["isin"],
+            "suivi": followed.get(title["suivi"]),
+            "faits": title["faits"],
+            "prochain_rendez_vous": title.get("prochain_rendez_vous"),
+            "a_regarder": title.get("a_regarder"),
+        }
+        for title in report["titres"]
+        if everything or title["suivi"]
+    ]
+    return {
+        "semaine": report["semaine"],
+        "du": report["du"],
+        "au": report["au"],
+        "semaines_disponibles": [week["semaine"] for week in view["weeks"]],
+        "macro": report["macro"],
+        "titres": titles,
+        "autres_titres_avec_du_nouveau": []
+        if everything
+        else [t["nom"] for t in report["titres"] if not t["suivi"] and t["faits"]],
+        "lignes_et_cibles_hors_veille": view["uncovered"],
+        "rappel": "Faits relevés par une IA dans des sources publiques : ni prédiction, ni "
+        "consigne d'achat ou de vente, et rien sur la Halalitude.",
+    }
+
+
 def _journal(conn: sqlite3.Connection, _: dict) -> dict:
     return {
         "notes": [
@@ -543,6 +603,7 @@ _RUNNERS = {
     "lire_transactions": _transactions,
     "lire_cours": _prices,
     "lire_fiches": _sheets,
+    "lire_veille": _watch,
     "lire_journal": _journal,
     "ajouter_note_journal": _add_note,
     "proposer_cible": _propose_target,

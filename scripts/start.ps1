@@ -11,6 +11,17 @@ foreach ($tool in "uv", "npm") {
     }
 }
 
+# Recupere ce qui a ete publie depuis le dernier lancement : fiches du jour,
+# veilles hebdomadaires, code fusionne. Hors ligne, ou si la copie locale ne
+# peut pas avancer simplement, l'application demarre avec ce qui est present.
+if (Get-Command git -ErrorAction SilentlyContinue) {
+    $env:GIT_TERMINAL_PROMPT = "0"
+    git pull --ff-only --quiet
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "git pull impossible (hors ligne, ou copie locale en avance) : lancement avec la version locale."
+    }
+}
+
 Push-Location frontend
 try {
     # Réinstalle les dépendances à la première fois et quand leur liste a changé

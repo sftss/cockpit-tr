@@ -8,8 +8,9 @@ import json
 import sqlite3
 from datetime import UTC, date, datetime
 from decimal import Decimal
+from pathlib import Path
 
-from . import compliance, portfolio, valuation
+from . import compliance, portfolio, valuation, veille
 from .money import ZERO, dec, money, ratio
 
 
@@ -139,6 +140,47 @@ def held_names(conn: sqlite3.Connection) -> dict[str, str]:
     """ISIN -> name of every instrument currently held."""
     lines = portfolio.build_lines(all_transactions(conn))
     return {line.isin: line.name or line.isin for line in lines.values() if line.is_open}
+
+
+def watch(conn: sqlite3.Connection, folder: Path | None, week: str | None = None) -> dict:
+    """One weekly watch, each company marked as a held line, a target of the
+    roadmap or neither. The watch covers a public list of companies and knows
+    nothing of the portfolio: the marking happens here, on this machine."""
+    reports = veille.reports(folder) if folder else []
+    weeks = [{"semaine": r["semaine"], "du": r["du"], "au": r["au"]} for r in reports]
+    chosen = next((r for r in reports if r["semaine"] == week), None) if week else None
+    chosen = chosen or (reports[0] if reports else None)
+    if chosen is None:
+        return {"weeks": weeks, "report": None, "uncovered": []}
+
+    lines = portfolio.build_lines(all_transactions(conn)).values()
+    held = {line.isin: line.name or line.isin for line in lines if line.is_open}
+    funds = {line.isin for line in lines if line.asset_class == "FUND"}
+    # A target entered without its ISIN is recognised by its name, when it is the list's.
+    by_name = {title["nom"].casefold(): title["isin"] for title in chosen["titres"]}
+    targets = {
+        row["isin"] or by_name.get(row["name"].casefold()) or row["name"]: row["name"]
+        for row in conn.execute(
+            "SELECT isin, name FROM roadmap_items WHERE status IN ('idee', 'prevu')"
+        )
+    }
+    titles = [
+        {
+            **title,
+            "suivi": "ligne"
+            if title["isin"] in held
+            else "cible"
+            if title["isin"] in targets
+            else None,
+        }
+        for title in chosen["titres"]
+    ]
+    covered = {title["isin"] for title in titles}
+    # Funds are left out on purpose: a watch reports on companies.
+    uncovered = sorted(
+        {name for isin, name in {**targets, **held}.items() if isin not in covered | funds}
+    )
+    return {"weeks": weeks, "report": {**chosen, "titres": titles}, "uncovered": uncovered}
 
 
 def state(conn: sqlite3.Connection) -> dict:

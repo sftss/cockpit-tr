@@ -1,20 +1,23 @@
 {
-  "description": "Entreprises analysées par la fiche du jour, une par jour, sans repasser sur la même avant d'avoir fait le tour. La liste ne dit rien de ce qui est détenu. Une alerte signale une activité à vérifier en premier ; la validation de conformité reste manuelle.",
+  "description": "Entreprises analysées par la fiche du jour, une par jour, sans repasser sur la même avant d'avoir fait le tour. La liste ne dit rien de ce qui est détenu. Une alerte signale une activité à vérifier en premier ; la validation de conformité reste manuelle. Le code ISIN sert à rapprocher un titre de la veille hebdomadaire.",
   "titres": [
     {
       "nom": "Accor",
+      "isin": "FR0000120404",
       "ticker": "AC",
       "place": "Euronext Paris",
       "produits_physiques": false
     },
     {
       "nom": "Air Liquide",
+      "isin": "FR0000120073",
       "ticker": "AI",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Airbus",
+      "isin": "NL0000235190",
       "ticker": "AIR",
       "place": "Euronext Paris",
       "produits_physiques": true,
@@ -22,72 +25,84 @@
     },
     {
       "nom": "Alphabet",
+      "isin": "US02079K3059",
       "ticker": "GOOGL",
       "place": "Nasdaq",
       "produits_physiques": false
     },
     {
       "nom": "Amazon",
+      "isin": "US0231351067",
       "ticker": "AMZN",
       "place": "Nasdaq",
       "produits_physiques": false
     },
     {
       "nom": "AMD",
+      "isin": "US0079031078",
       "ticker": "AMD",
       "place": "Nasdaq",
       "produits_physiques": true
     },
     {
       "nom": "ArcelorMittal",
+      "isin": "LU1598757687",
       "ticker": "MT",
       "place": "Euronext Amsterdam",
       "produits_physiques": true
     },
     {
       "nom": "ASML",
+      "isin": "NL0010273215",
       "ticker": "ASML",
       "place": "Euronext Amsterdam",
       "produits_physiques": true
     },
     {
       "nom": "Bloom Energy",
+      "isin": "US0937121079",
       "ticker": "BE",
       "place": "NYSE",
       "produits_physiques": true
     },
     {
       "nom": "Bouygues",
+      "isin": "FR0000120503",
       "ticker": "EN",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Broadcom",
+      "isin": "US11135F1012",
       "ticker": "AVGO",
       "place": "Nasdaq",
       "produits_physiques": true
     },
     {
       "nom": "Bureau Veritas",
+      "isin": "FR0006174348",
       "ticker": "BVI",
       "place": "Euronext Paris",
       "produits_physiques": false
     },
     {
       "nom": "BYD Electronic",
+      "isin": "HK0285041858",
       "ticker": "0285",
       "place": "Hong Kong",
       "produits_physiques": true
     },
     {
       "nom": "Capgemini",
+      "isin": "FR0000125338",
       "ticker": "CAP",
       "place": "Euronext Paris",
       "produits_physiques": false
     },
     {
       "nom": "Carrefour",
+      "isin": "FR0000120172",
       "ticker": "CA",
       "place": "Euronext Paris",
       "produits_physiques": true,
@@ -95,66 +110,77 @@
     },
     {
       "nom": "Coloplast",
+      "isin": "DK0060448595",
       "ticker": "COLO-B",
       "place": "Nasdaq Copenhagen",
       "produits_physiques": true
     },
     {
       "nom": "Constellation Energy",
+      "isin": "US21037T1097",
       "ticker": "CEG",
       "place": "Nasdaq",
       "produits_physiques": false
     },
     {
       "nom": "Danaher",
+      "isin": "US2358511028",
       "ticker": "DHR",
       "place": "NYSE",
       "produits_physiques": true
     },
     {
       "nom": "Danone",
+      "isin": "FR0000120644",
       "ticker": "BN",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Dassault Systèmes",
+      "isin": "FR0014003TT8",
       "ticker": "DSY",
       "place": "Euronext Paris",
       "produits_physiques": false
     },
     {
       "nom": "Eiffage",
+      "isin": "FR0000130452",
       "ticker": "FGR",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Engie",
+      "isin": "FR0010208488",
       "ticker": "ENGI",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Equasens",
+      "isin": "FR0012882389",
       "ticker": "EQS",
       "place": "Euronext Paris",
       "produits_physiques": false
     },
     {
       "nom": "EssilorLuxottica",
+      "isin": "FR0000121667",
       "ticker": "EL",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Eurofins Scientific",
+      "isin": "FR0014000MR3",
       "ticker": "ERF",
       "place": "Euronext Paris",
       "produits_physiques": false
     },
     {
       "nom": "Euronext",
+      "isin": "NL0006294274",
       "ticker": "ENX",
       "place": "Euronext Paris",
       "produits_physiques": false,
@@ -162,36 +188,42 @@
     },
     {
       "nom": "Gaztransport & Technigaz",
+      "isin": "FR0011726835",
       "ticker": "GTT",
       "place": "Euronext Paris",
       "produits_physiques": false
     },
     {
       "nom": "Hermès",
+      "isin": "FR0000052292",
       "ticker": "RMS",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Kering",
+      "isin": "FR0000121485",
       "ticker": "KER",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "L'Oréal",
+      "isin": "FR0000120321",
       "ticker": "OR",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Legrand",
+      "isin": "FR0010307819",
       "ticker": "LR",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "LVMH",
+      "isin": "FR0000121014",
       "ticker": "MC",
       "place": "Euronext Paris",
       "produits_physiques": true,
@@ -199,54 +231,63 @@
     },
     {
       "nom": "Meta Platforms",
+      "isin": "US30303M1027",
       "ticker": "META",
       "place": "Nasdaq",
       "produits_physiques": false
     },
     {
       "nom": "Michelin",
+      "isin": "FR001400AJ45",
       "ticker": "ML",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Microsoft",
+      "isin": "US5949181045",
       "ticker": "MSFT",
       "place": "Nasdaq",
       "produits_physiques": false
     },
     {
       "nom": "NVIDIA",
+      "isin": "US67066G1040",
       "ticker": "NVDA",
       "place": "Nasdaq",
       "produits_physiques": true
     },
     {
       "nom": "Orange",
+      "isin": "FR0000133308",
       "ticker": "ORA",
       "place": "Euronext Paris",
       "produits_physiques": false
     },
     {
       "nom": "OVHcloud",
+      "isin": "FR0014005HJ9",
       "ticker": "OVH",
       "place": "Euronext Paris",
       "produits_physiques": false
     },
     {
       "nom": "Publicis",
+      "isin": "FR0000130577",
       "ticker": "PUB",
       "place": "Euronext Paris",
       "produits_physiques": false
     },
     {
       "nom": "Renault",
+      "isin": "FR0000131906",
       "ticker": "RNO",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Safran",
+      "isin": "FR0000073272",
       "ticker": "SAF",
       "place": "Euronext Paris",
       "produits_physiques": true,
@@ -254,42 +295,49 @@
     },
     {
       "nom": "Saint-Gobain",
+      "isin": "FR0000125007",
       "ticker": "SGO",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Samsung Electronics",
+      "isin": "US7960508882",
       "ticker": "SMSN",
       "place": "Londres (GDR)",
       "produits_physiques": true
     },
     {
       "nom": "Sanofi",
+      "isin": "FR0000120578",
       "ticker": "SAN",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Schneider Electric",
+      "isin": "FR0000121972",
       "ticker": "SU",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Stellantis",
+      "isin": "NL00150001Q9",
       "ticker": "STLAP",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "STMicroelectronics",
+      "isin": "NL0000226223",
       "ticker": "STMPA",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Thales",
+      "isin": "FR0000121329",
       "ticker": "HO",
       "place": "Euronext Paris",
       "produits_physiques": true,
@@ -297,24 +345,28 @@
     },
     {
       "nom": "TotalEnergies",
+      "isin": "FR0000120271",
       "ticker": "TTE",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Trigano",
+      "isin": "FR0005691656",
       "ticker": "TRI",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "TSMC",
+      "isin": "US8740391003",
       "ticker": "TSM",
       "place": "NYSE (ADR)",
       "produits_physiques": true
     },
     {
       "nom": "Unibail-Rodamco-Westfield",
+      "isin": "FR0013326246",
       "ticker": "URW",
       "place": "Euronext Paris",
       "produits_physiques": false,
@@ -322,18 +374,21 @@
     },
     {
       "nom": "Veolia",
+      "isin": "FR0000124141",
       "ticker": "VIE",
       "place": "Euronext Paris",
       "produits_physiques": false
     },
     {
       "nom": "Vinci",
+      "isin": "FR0000125486",
       "ticker": "DG",
       "place": "Euronext Paris",
       "produits_physiques": true
     },
     {
       "nom": "Wolters Kluwer",
+      "isin": "NL0000395903",
       "ticker": "WKL",
       "place": "Euronext Amsterdam",
       "produits_physiques": false

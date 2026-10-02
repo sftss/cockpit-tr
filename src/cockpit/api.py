@@ -558,6 +558,12 @@ def create_app(
             raise HTTPException(404, "Note introuvable.")
         return {"deleted": entry_id}
 
+    # -- Weekly watch --------------------------------------------------------
+
+    @app.get("/api/veille")
+    def get_watch(semaine: str | None = None, c: sqlite3.Connection = Depends(conn)) -> dict:
+        return store.watch(c, config.veilles_dir(), semaine)
+
     # -- Settings file -------------------------------------------------------
 
     @app.get("/api/settings/export")

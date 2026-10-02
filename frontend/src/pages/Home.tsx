@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { api, type Compliance, type Gold, type Report, type RulesState } from "../api";
+import { api, type Compliance, type Gold, type Report, type RulesState, type Watch } from "../api";
 import { QuarterChart } from "../components/QuarterChart";
 import { ValueHistory } from "../components/ValueHistory";
 import { PageTitle, Result, Section, TableWrap } from "../components/ui";
 import { accountTotal } from "../totals";
 import { Counters } from "./Rules";
+import { followedNews } from "./Watch";
 import {
   accountName,
   date,
@@ -143,14 +144,18 @@ export function Home({ report }: { report: Report }) {
 function RulesSummary({ stamp }: { stamp: string | null }) {
   const [rules, setRules] = useState<RulesState | null>(null);
   const [compliance, setCompliance] = useState<Compliance | null>(null);
+  const [watch, setWatch] = useState<Watch | null>(null);
   useEffect(() => {
     api.rules().then(setRules).catch(() => setRules(null));
     api.compliance().then(setCompliance).catch(() => setCompliance(null));
+    api.watch().then(setWatch).catch(() => setWatch(null));
   }, [stamp]);
   if (!rules) return null;
 
   const link = "text-accent underline underline-offset-4";
   const statuses = compliance?.summary;
+  const week = watch?.report;
+  const news = week ? followedNews(week.titres) : 0;
   return (
     <Section title="Règles du trimestre">
       {rules.has_rules ? (
@@ -199,6 +204,18 @@ function RulesSummary({ stamp }: { stamp: string | null }) {
             )}{" "}
             <a className={link} href="#/halalitude">
               Voir les statuts
+            </a>
+          </li>
+        )}
+        {week && (
+          <li>
+            Veille du {date(week.du)} au {date(week.au)} :{" "}
+            {news === 0
+              ? "rien de notable sur les titres suivis"
+              : `du nouveau sur ${plural(news, "titre suivi", "titres suivis")}`}
+            .{" "}
+            <a className={link} href="#/veille">
+              Lire la veille
             </a>
           </li>
         )}

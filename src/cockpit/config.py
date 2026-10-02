@@ -48,3 +48,10 @@ def fiches_dir() -> Path | None:
     override = os.environ.get("COCKPIT_FICHES_DIR")
     candidate = Path(override) if override else Path(__file__).resolve().parents[2] / "fiches"
     return candidate if candidate.is_dir() else None
+
+
+def veilles_dir() -> Path | None:
+    """The weekly watches (``veilles/`` at the repository root), if present."""
+    override = os.environ.get("COCKPIT_VEILLES_DIR")
+    candidate = Path(override) if override else Path(__file__).resolve().parents[2] / "veilles"
+    return candidate if candidate.is_dir() else None
