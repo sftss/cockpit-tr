@@ -68,6 +68,12 @@ def test_chart_answer():
                  "chartPreviousClose": 165.2, "regularMarketTime": 1759413600},
         "timestamp": [1759388400, 1759388700, 1759389000],
         "indicators": {"quote": [{"close": [165.5, None, 166.16]}]},
+        "events": {"splits": {
+            "1727789400": {"date": 1727789400, "numerator": 10.0, "denominator": 1.0,
+                           "splitRatio": "10:1"},
+            "1717767000": {"date": 1717767000, "numerator": 11.0, "denominator": 10.0},
+            "1": {"date": 1, "numerator": 0, "denominator": 1},  # unusable: left out
+        }},
     }]}}  # fmt: skip
     chart = yahoo.parse_chart(payload, "AI.PA")
     assert (chart.currency, chart.exchange, chart.exchange_name) == ("EUR", "PAR", "Paris")
@@ -75,6 +81,10 @@ def test_chart_answer():
     assert [(p.time, p.close) for p in chart.points] == [
         (1759388400, D("165.5")),
         (1759389000, D("166.16")),  # the gap exported as null is left out
+    ]
+    assert [(s.time, s.ratio) for s in chart.splits] == [
+        (1717767000, D("1.1")),
+        (1727789400, D("10")),
     ]
 
 
@@ -289,6 +299,47 @@ def test_value_history_restates_quantities_before_a_split(conn):
     may = points["2025-05-05"]
     assert (may["value"], may["invested"], may["accounts"]) == (50.0, 10.0, {"CTO": 50.0})
     assert data["unpriced"] == ["Acme"]
+
+
+def test_a_split_after_a_line_was_closed_restates_it_from_the_source(conn):
+    rows = [
+        tx("2025-01-06", "BUY", **GLOBEX, shares="1.0", price="800", amount="-800.00"),
+        tx("2025-02-10", "SELL", **GLOBEX, shares="-1.0", price="900", amount="900.00"),
+        tx("2025-06-02", "BUY", **GLOBEX, shares="3.0", price="100", amount="-300.00"),
+    ]
+    tr_csv.import_csv(conn, to_csv(rows))
+    provider = FakeProvider()
+    provider.listings[GLOBEX_ISIN] = [Listing("GLBX.PA", "Globex", "PAR", "EQUITY")]
+    # 10-for-1 on 3 March, while nothing was held: the source shows 80, not 800.
+    provider.charts["GLBX.PA"] = series(
+        "GLBX.PA",
+        "EUR",
+        "PAR",
+        {"2025-01-06": "80", "2025-02-03": "85", "2025-06-02": "100", "2025-06-03": "101"},
+        splits={"2025-03-03": "10"},
+    )
+    service.Market(provider).load_history(conn, [GLOBEX_ISIN], "2025-01-02")
+    assert store.split_history(conn) == {GLOBEX_ISIN: [("2025-03-03", D("10"))]}
+
+    points = {p["date"]: p["value"] for p in store.value_history(conn)["points"]}
+    assert points["2025-01-06"] == 800.0  # 10 restated shares at 80, not 1
+    assert points["2025-02-03"] == 850.0
+    assert points["2025-06-03"] == 303.0  # bought after the split: untouched
+
+
+def test_a_split_seen_in_the_export_is_not_applied_twice(conn):
+    rows = [
+        tx("2025-01-06", "BUY", **GLOBEX, shares="2.0", price="100", amount="-200.00"),
+        tx("2025-03-04", "SPLIT", **GLOBEX, shares="2.0"),  # booked a day after the source's date
+    ]
+    tr_csv.import_csv(conn, to_csv(rows))
+    for day, price in [("2025-01-06", "50"), ("2025-03-05", "52")]:
+        store.set_price(conn, GLOBEX_ISIN, D(price), day, "fake")
+    conn.execute("INSERT INTO splits VALUES (?, '2025-03-03', '2')", (GLOBEX_ISIN,))
+
+    points = {p["date"]: p["value"] for p in store.value_history(conn)["points"]}
+    assert points["2025-01-06"] == 200.0  # 4 shares at 50: restated once, by the export
+    assert points["2025-03-05"] == 208.0
 
 
 def test_value_history_without_transactions(conn):

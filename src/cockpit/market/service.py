@@ -339,6 +339,11 @@ class Market:
                     _upsert_price(
                         conn, isin, day, price / rate, price, currency, self.provider.name
                     )
+                conn.executemany(
+                    "INSERT INTO splits (isin, date, ratio) VALUES (?, ?, ?) "
+                    "ON CONFLICT (isin, date) DO UPDATE SET ratio = excluded.ratio",
+                    [(isin, _day(split.time), str(split.ratio)) for split in series.splits],
+                )
                 conn.execute(
                     "UPDATE instruments SET quote_currency = ?, quote_exchange = ? WHERE isin = ?",
                     (currency, series.exchange, isin),
