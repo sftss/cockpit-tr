@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { api, type Position, type RefreshOutcome, type Report } from "../api";
+import { Allocation } from "../components/Allocation";
 import { GoldSection } from "../components/GoldSection";
+import { HeatMap } from "../components/HeatMap";
 import { Sparkline } from "../components/Sparkline";
 import { HalalitudeLabel } from "../components/Halalitude";
 import { Button, Notice, PageTitle, Result, Section, TableWrap } from "../components/ui";
@@ -83,6 +85,12 @@ export function Portfolio({ report, reload, refresh, refreshing, outcome }: Prop
         </div>
       )}
 
+      {new Set(report.positions.map((p) => p.isin)).size > 1 && (
+        <Section title="Carte du portefeuille">
+          <HeatMap report={report} />
+        </Section>
+      )}
+
       {report.accounts.map((account) => {
         const positions = report.positions.filter((p) => p.account === account.account);
         if (positions.length === 0) return null;
@@ -137,6 +145,8 @@ export function Portfolio({ report, reload, refresh, refreshing, outcome }: Prop
           </Section>
         );
       })}
+
+      <Allocation stamp={latest ?? report.last_import} />
 
       <GoldSection report={report} />
     </>

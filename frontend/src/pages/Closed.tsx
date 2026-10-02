@@ -31,7 +31,14 @@ export function Closed({ report }: { report: Report }) {
           <tbody>
             {report.closed.map((c) => (
               <tr key={c.account + c.isin}>
-                <td>{c.name}</td>
+                <td>
+                  <a
+                    className="underline decoration-line underline-offset-4 hover:decoration-accent"
+                    href={`#/titre/${c.isin}`}
+                  >
+                    {c.name}
+                  </a>
+                </td>
                 <td>{accountName(c.account)}</td>
                 <td className="num">{date(c.closed_on)}</td>
                 <td className="num">{c.holding_days != null ? `${c.holding_days} j` : "—"}</td>

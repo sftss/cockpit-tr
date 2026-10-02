@@ -309,15 +309,86 @@ export type Candidates = {
   last_trade: { date: string; price: number } | null;
 };
 
+/** One bar: the close always, the rest of the bar when the source gives it. */
+export type Bar = {
+  time: number;
+  value: number;
+  open: number | null;
+  high: number | null;
+  low: number | null;
+  volume: number | null;
+};
+
+export type Trade = {
+  datetime: string;
+  date: string;
+  account: string;
+  side: "achat" | "vente";
+  shares: number;
+  price: number | null;
+  amount: number;
+  fee: number;
+};
+
 export type ChartData = {
   isin: string;
   symbol: string;
   range: string;
+  /** Currency of the figures: euros when a conversion was asked, else the quotation's. */
   currency: string;
+  native_currency: string;
   exchange: string;
   delay_minutes: number | null;
   intraday: boolean;
-  points: { time: number; value: number }[];
+  points: Bar[];
+  averages: { window: number; label: string; points: { time: number; value: number }[] }[];
+  /** The user's own trades, each on the bar of its day. */
+  trades: (Trade & { time: number })[];
+};
+
+export type SecurityStats = {
+  currency: string;
+  as_of: string;
+  price: number;
+  previous_close: number | null;
+  open: number | null;
+  day_low: number | null;
+  day_high: number | null;
+  year_low: number;
+  year_high: number;
+  volume: number | null;
+  average_volume: number | null;
+  changes: { label: string; change: number | null }[];
+};
+
+export type SecurityData = {
+  isin: string;
+  name: string;
+  asset_class: string | null;
+  held: boolean;
+  trades: Trade[];
+  stats: SecurityStats | null;
+  stats_error: string | null;
+};
+
+export type Performance = {
+  benchmarks: { id: string; label: string }[];
+  benchmark: { id: string; label: string };
+  /** Portfolio: chained daily changes from 1. Benchmark: its price, null before the first. */
+  points: { date: string; portfolio: number; benchmark: number | null }[];
+  priced: boolean;
+  error: string | null;
+};
+
+export type Allocation = {
+  basis: "value" | "cost";
+  total: number;
+  dimensions: {
+    id: string;
+    title: string;
+    groups: { label: string; amount: number; weight: number | null; lines: number }[];
+  }[];
+  unclassified: string[];
 };
 
 export type ValuePoint = {
@@ -510,8 +581,17 @@ export const api = {
     request(`/api/market/instruments/${isin}`, json("PUT", { symbol })),
   candidates: (isin: string) =>
     request<Candidates>(`/api/market/instruments/${isin}/candidates`),
-  chart: (isin: string, range: string) =>
-    request<ChartData>(`/api/market/chart/${isin}?range=${encodeURIComponent(range)}`),
+  chart: (isin: string, range: string, inEuros: boolean) =>
+    request<ChartData>(
+      `/api/market/chart/${isin}?range=${encodeURIComponent(range)}${inEuros ? "&devise=eur" : ""}`,
+    ),
+  security: (isin: string, inEuros: boolean) =>
+    request<SecurityData>(`/api/securities/${isin}${inEuros ? "?devise=eur" : ""}`),
+  performance: (benchmark?: string) =>
+    request<Performance>(
+      `/api/portfolio/performance${benchmark ? `?indice=${encodeURIComponent(benchmark)}` : ""}`,
+    ),
+  allocation: () => request<Allocation>("/api/portfolio/allocation"),
   valueHistory: () => request<ValueHistory>("/api/portfolio/history"),
   snapshots: () => request<SnapshotSummary[]>("/api/snapshots"),
   takeSnapshot: (label: string) =>

@@ -16,6 +16,17 @@
   /* Chart series: two hues checked for colour-blind separation on this surface. */
   --chart-1: #0f8a6c;
   --chart-2: #4a3aa7;
+  /* A falling bar. With --chart-1 (rising) and --chart-2 (average) the three pass
+     the colour-blind checks; rising bars are also drawn hollow, falling ones filled. */
+  --chart-down: #b8402c;
+  /* Heat map: three steps down, a neutral middle, three steps up. */
+  --heat-down-3: #b8402c;
+  --heat-down-2: #dc9082;
+  --heat-down-1: #f0d2cb;
+  --heat-flat: #e2e7e4;
+  --heat-up-1: #cde6de;
+  --heat-up-2: #7cc0ad;
+  --heat-up-3: #0c7a60;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -31,6 +42,14 @@
     --alert: #e0b45a;
     --chart-1: #27a584;
     --chart-2: #8f83ea;
+    --chart-down: #e66767;
+    --heat-down-3: #e66767;
+    --heat-down-2: #9c463f;
+    --heat-down-1: #55302b;
+    --heat-flat: #2b3430;
+    --heat-up-1: #1d453b;
+    --heat-up-2: #1f7560;
+    --heat-up-3: #27a584;
   }
 }
 
@@ -211,6 +230,10 @@ table.deviations td { vertical-align: top; }
 
 table.rules { min-width: 880px; }
 table.rules td { vertical-align: top; }
+
+/* The user's trades on one instrument: two columns of words after the date. */
+table.trades th:nth-child(2), table.trades td:nth-child(2),
+table.trades th:nth-child(3), table.trades td:nth-child(3) { text-align: left; }
 
 /* Upcoming events of the weekly watch: words, not figures, so everything reads from the left. */
 table.events {

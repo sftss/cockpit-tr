@@ -25,6 +25,7 @@ aucun ordre. Elle sort vers Internet pour deux choses :
 | V0 (suite) | Cours par ISIN, graphiques par titre, mini-courbes, courbe de la valeur du portefeuille | fait |
 | V1 | Règles du portefeuille, Halalitude datée, feuille de route, or physique | fait |
 | V2 | Assistant (chat, journal de décisions), veille hebdomadaire (`veilles/`), fiche du jour (`fiches/`) : fait. Revue trimestrielle : à venir | en cours |
+| Graphiques | Chandeliers, volume, moyennes mobiles et ordres sur la page d'un titre ; carte du portefeuille ; performance comparée ; répartition | fait |
 | V3 | Tickets d'ordre : préparés et contrôlés ici, passés dans l'app Trade Republic | à venir |
 
 Pas de connexion programmatique à Trade Republic : son contrat client interdit
@@ -108,13 +109,35 @@ uv run cockpit cours                # cours des titres détenus, avec les erreur
 uv run cockpit cours --historique   # historique quotidien de tous les titres déjà détenus
 ```
 
-Trois visuels en découlent :
+Ce qui en découle à l'écran :
 
-- **une page par titre** (clic sur son nom dans le portefeuille) : la séance du
-  jour, puis de 5 jours à tout l'historique ;
-- **une mini-courbe des 30 derniers jours** sur chaque ligne du portefeuille ;
-- **la courbe de la valeur du portefeuille** face au capital net engagé, sur
+- **Une page par titre** (clic sur son nom dans le portefeuille ou dans les
+  lignes soldées), de la séance du jour à tout l'historique :
+  - chandeliers ou courbe, volume en dessous ;
+  - moyennes mobiles sur 50 et 200 jours (10 et 40 semaines sur 5 ans) ;
+  - vos achats et vos ventes marqués sur le jour de l'ordre, et la liste de
+    ces ordres ;
+  - pour un titre coté dans une autre devise, le graphique en euros : chaque
+    barre est convertie au taux de change de son jour. C'est une
+    reconstitution, le titre n'étant pas coté en euros sur cette place ;
+  - chiffres clés : fourchettes de la séance et des 52 semaines, volume,
+    variation sur 1 mois, 6 mois, 1 an et depuis le 1er janvier.
+- **La carte du portefeuille** : une tuile par titre, grande comme son poids,
+  colorée selon sa variation (séance, 30 jours, depuis l'achat).
+- **La répartition** par compte, type de titre, devise de cotation, pays du
+  siège et secteur. Pays et secteur viennent de `fiches/univers.json` ; un
+  fonds compte pour un seul bloc.
+- **Une mini-courbe des 30 derniers jours** sur chaque ligne du portefeuille.
+- **La courbe de la valeur du portefeuille** face au capital net engagé, sur
   l'accueil, une fois l'historique chargé.
+- **La performance comparée** à un fonds du portefeuille ou à un indice (MSCI
+  World, S&P 500, CAC 40). Les achats et les ventes sont neutralisés jour par
+  jour : la courbe mesure l'évolution des titres détenus, pas l'argent ajouté.
+  Hors frais d'ordre et dividendes reçus.
+
+Ce que l'application n'a pas, faute de source ou par choix : carnet d'ordres,
+flux des transactions du marché, outils de dessin, recherche de titres par
+critères, produits à effet de levier, passage d'ordre.
 
 La recherche par ISIN de Yahoo a des trous (trois titres sur 47 au premier
 essai). Dans la page « Données », « Proposer » cherche alors par nom et affiche

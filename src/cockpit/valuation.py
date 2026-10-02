@@ -130,8 +130,14 @@ def history(
 
     points, flow_index, invested = [], 0, ZERO
     for day in days:
+        bought, sold = ZERO, ZERO  # of that day: what a performance must set aside
         while flow_index < len(flows) and flows[flow_index][0] <= day:
-            invested += flows[flow_index][1]
+            amount = flows[flow_index][1]
+            invested += amount
+            if amount > 0:
+                bought += amount
+            else:
+                sold -= amount
             flow_index += 1
         total, at_cost = ZERO, ZERO
         accounts: dict[str, Decimal] = {}
@@ -152,6 +158,8 @@ def history(
                 "date": day,
                 "value": money(total),
                 "invested": money(invested),
+                "bought": money(bought),
+                "sold": money(sold),
                 "at_cost": money(at_cost),
                 "accounts": {name: money(value) for name, value in sorted(accounts.items())},
             }

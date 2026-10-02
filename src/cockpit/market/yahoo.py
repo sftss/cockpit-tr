@@ -146,11 +146,29 @@ def parse_chart(payload: dict, symbol: str) -> Series:
     )
     timestamps = result.get("timestamp") or []
     quotes = (result.get("indicators") or {}).get("quote") or [{}]
-    closes = (quotes[0] or {}).get("close") or []
-    for stamp, close in zip(timestamps, closes, strict=False):
+    quote = quotes[0] or {}
+    closes = quote.get("close") or []
+
+    def cell(name: str, index: int) -> Decimal | None:
+        column = quote.get(name) or []
+        return _decimal(column[index]) if index < len(column) else None
+
+    for index, (stamp, close) in enumerate(zip(timestamps, closes, strict=False)):
         value = _decimal(close)
-        if value is not None and isinstance(stamp, int):  # gaps are exported as null
-            series.points.append(Point(time=stamp, close=value))
+        if value is None or not isinstance(stamp, int):  # gaps are exported as null
+            continue
+        low, high = cell("low", index), cell("high", index)
+        whole = low is not None and high is not None and low <= value <= high
+        series.points.append(
+            Point(
+                time=stamp,
+                close=value,
+                open=cell("open", index) if whole else None,
+                high=high if whole else None,
+                low=low if whole else None,
+                volume=cell("volume", index),
+            )
+        )
     if series.price is None and series.points:
         series.price = series.points[-1].close
 
