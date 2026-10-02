@@ -56,7 +56,7 @@ KINDS: dict[str, dict] = {
         "label": "Ventes par trimestre",
         "unit": "ventes",
         "bound": "max",
-        "help": "À zéro, chaque vente demande un motif : rupture de conformité ou de thèse.",
+        "help": "À zéro, chaque vente demande un motif : Halalitude perdue ou thèse rompue.",
     },
     "lignes_soldees_trimestre": {
         "label": "Lignes soldées par trimestre",
@@ -195,7 +195,7 @@ def evaluate(
                 if allowed is not None and counter["ventes"] > allowed:
                     breach(
                         "ventes_trimestre",
-                        "vente à motiver : rupture de conformité ou de thèse"
+                        "vente à motiver : Halalitude perdue ou thèse rompue"
                         if allowed == 0
                         else f"{_rank(counter['ventes'])} vente du trimestre, "
                         f"pour {_plain(allowed)} prévues",

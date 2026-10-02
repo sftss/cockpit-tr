@@ -106,7 +106,7 @@ def current_report(conn: sqlite3.Connection) -> dict:
     for position in positions:
         position["quote"] = live.get(position["isin"])
         position["spark"] = recent_prices(conn, position["isin"])
-        position["zoya"] = compliance.view(statuses.get(position["isin"]))
+        position["halalitude"] = compliance.view(statuses.get(position["isin"]))
         position["weight_total"] = ratio(Decimal(str(position[basis])), total) if total else None
     data["total"] = {"basis": basis, "amount": money(total), "lines": len(positions)}
     return data

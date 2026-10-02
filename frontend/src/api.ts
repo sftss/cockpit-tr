@@ -35,15 +35,15 @@ export type Position = {
   first_buy: string | null;
   quote: Quote | null;
   spark: number[];
-  zoya: Zoya;
+  halalitude: Halalitude;
   weight_total: number | null;
 };
 
-export type ZoyaStatus = "conforme" | "non_conforme" | "douteux";
+export type HalalitudeStatus = "conforme" | "non_conforme" | "douteux";
 
-/** Compliance status as read by hand in the screening app, and how fresh it is. */
-export type Zoya = {
-  status: ZoyaStatus | null;
+/** Compliance status as read by hand in the screening apps, and how fresh it is. */
+export type Halalitude = {
+  status: HalalitudeStatus | null;
   checked_on: string | null;
   note: string | null;
   age_days: number | null;
@@ -51,7 +51,7 @@ export type Zoya = {
   state: "non_renseigne" | "a_jour" | "a_reverifier";
 };
 
-export type ComplianceItem = Zoya & {
+export type ComplianceItem = Halalitude & {
   isin: string;
   name: string;
   group: "detenu" | "cible" | "autre";
@@ -60,7 +60,7 @@ export type ComplianceItem = Zoya & {
 
 export type Compliance = {
   validity_days: number;
-  statuses: Record<ZoyaStatus, string>;
+  statuses: Record<HalalitudeStatus, string>;
   items: ComplianceItem[];
   summary: { held: number; missing: number; stale: number; not_compliant: number };
 };
@@ -138,7 +138,7 @@ export type RoadmapItem = {
   last_price: number | null;
   last_price_at: string | null;
   reached: boolean;
-  zoya: Zoya | null;
+  halalitude: Halalitude | null;
 };
 
 export type RoadmapDraft = {

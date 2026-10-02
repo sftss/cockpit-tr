@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { api, type Compliance as ComplianceData, type ComplianceItem, type ZoyaStatus } from "../api";
-import { ZoyaLabel } from "../components/Zoya";
+import { api, type Compliance as ComplianceData, type ComplianceItem, type HalalitudeStatus } from "../api";
+import { HalalitudeLabel } from "../components/Halalitude";
 import { Notice, PageTitle, Quiet, Section, TableWrap, inputClass } from "../components/ui";
 import { plural, today } from "../format";
 
@@ -10,7 +10,7 @@ const GROUPS = [
   { id: "autre", title: "Autres titres vérifiés" },
 ] as const;
 
-export function Compliance({ reload }: { reload: () => void }) {
+export function HalalitudePage({ reload }: { reload: () => void }) {
   const [data, setData] = useState<ComplianceData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,9 +51,9 @@ export function Compliance({ reload }: { reload: () => void }) {
   return (
     <>
       <PageTitle
-        lead={`L'application ne vérifie rien elle-même : elle garde le statut lu dans Zoya et la date de cette lecture. Au-delà de ${data.validity_days} jours, le statut est à revérifier.`}
+        lead={`L'application ne vérifie rien elle-même : elle garde le statut relevé dans les screeners et la date de ce relevé. Au-delà de ${data.validity_days} jours, le statut est à revérifier.`}
       >
-        Conformité : {headline}
+        Halalitude : {headline}
       </PageTitle>
 
       {error && (
@@ -65,7 +65,7 @@ export function Compliance({ reload }: { reload: () => void }) {
         <div className="mb-8">
           <Notice>
             {plural(flagged, "ligne détenue n'est pas notée", "lignes détenues ne sont pas notées")}{" "}
-            « conforme ».
+            « halal ».
           </Notice>
         </div>
       )}
@@ -80,8 +80,8 @@ export function Compliance({ reload }: { reload: () => void }) {
                 <thead>
                   <tr>
                     <th>Titre</th>
-                    <th>Statut lu dans Zoya</th>
-                    <th>Lu le</th>
+                    <th>Statut relevé</th>
+                    <th>Relevé le</th>
                     <th>Note</th>
                     <th>Enregistrer</th>
                   </tr>
@@ -108,7 +108,7 @@ function Row({
   save,
 }: {
   item: ComplianceItem;
-  statuses: Record<ZoyaStatus, string>;
+  statuses: Record<HalalitudeStatus, string>;
   save: (entry: { isin: string; status: string; checked_on: string; note: string }) => void;
 }) {
   const [status, setStatus] = useState<string>(item.status ?? "");
@@ -125,12 +125,12 @@ function Row({
         {item.name}
         <span className="block text-xs text-muted">{item.isin}</span>
         <span className="block text-xs">
-          <ZoyaLabel zoya={item} />
+          <HalalitudeLabel status={item} />
         </span>
       </td>
       <td>
         <select
-          aria-label={`Statut Zoya de ${item.name}`}
+          aria-label={`Halalitude de ${item.name}`}
           value={status}
           onChange={(e) => setStatus(e.target.value)}
           className={inputClass}
@@ -145,7 +145,7 @@ function Row({
       </td>
       <td>
         <input
-          aria-label={`Date de lecture du statut de ${item.name}`}
+          aria-label={`Date du relevé pour ${item.name}`}
           type="date"
           value={day}
           max={today()}
@@ -156,6 +156,7 @@ function Row({
       <td>
         <input
           aria-label={`Note sur ${item.name}`}
+          placeholder="Screeners consultés, remarque"
           value={note}
           onChange={(e) => setNote(e.target.value)}
           className={`${inputClass} w-full text-left`}
@@ -178,7 +179,7 @@ function AddOther({
   statuses,
   save,
 }: {
-  statuses: Record<ZoyaStatus, string>;
+  statuses: Record<HalalitudeStatus, string>;
   save: (entry: { isin: string; status: string; checked_on: string; note: string }) => void;
 }) {
   const [isin, setIsin] = useState("");
@@ -191,7 +192,7 @@ function AddOther({
   return (
     <Section
       title="Vérifier un autre titre"
-      note="Pour un titre regardé dans Zoya avant de l'inscrire sur la feuille de route."
+      note="Pour un titre regardé dans les screeners avant de l'inscrire sur la feuille de route."
     >
       <div className="flex flex-wrap items-center gap-3">
         <input
@@ -202,7 +203,7 @@ function AddOther({
           className={`${inputClass} w-44`}
         />
         <select
-          aria-label="Statut lu dans Zoya"
+          aria-label="Statut relevé"
           value={status}
           onChange={(e) => setStatus(e.target.value)}
           className={inputClass}

@@ -93,7 +93,7 @@ def test_each_kind_of_rule_on_the_sample_history(loaded):
 
     sale = next(d for d in state["deviations"] if d["date"] == "2025-05-05")
     assert [b["kind"] for b in sale["breaches"]] == ["ventes_trimestre", "lignes_soldees_trimestre"]
-    assert "rupture de conformité ou de thèse" in sale["breaches"][0]["detail"]
+    assert "Halalitude perdue ou thèse rompue" in sale["breaches"][0]["detail"]
 
     counters = {line["kind"]: line for line in state["current"]}
     assert state["quarter"] == "2025-T2"
@@ -206,7 +206,10 @@ def test_compliance_overview_lists_held_lines_then_targets(loaded):
     assert view["summary"] == {"held": 3, "missing": 3, "stale": 0, "not_compliant": 0}
 
     position = next(p for p in store.current_report(loaded)["positions"] if p["isin"] == ACME)
-    assert (position["zoya"]["status"], position["zoya"]["state"]) == ("conforme", "a_jour")
+    assert (position["halalitude"]["status"], position["halalitude"]["state"]) == (
+        "conforme",
+        "a_jour",
+    )
 
 
 # -- Roadmap -------------------------------------------------------------------------
@@ -246,7 +249,7 @@ def test_roadmap_items_and_the_entry_price_signal(loaded):
         150.0,
         100.5,
     )
-    assert item["zoya"]["state"] == "non_renseigne"
+    assert item["halalitude"]["state"] == "non_renseigne"
 
     # The price falls to the entry price: the target is flagged, nothing else happens.
     provider.charts["INI.PA"] = series("INI.PA", "EUR", "PAR", {"2025-07-01": "100.5"})

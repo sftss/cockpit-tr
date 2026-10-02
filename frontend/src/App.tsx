@@ -3,7 +3,7 @@ import { api, type RefreshOutcome, type Report } from "./api";
 import { Notice } from "./components/ui";
 import { Activity } from "./pages/Activity";
 import { Closed } from "./pages/Closed";
-import { Compliance } from "./pages/Compliance";
+import { HalalitudePage } from "./pages/Halalitude";
 import { Data } from "./pages/Data";
 import { Home } from "./pages/Home";
 import { Portfolio } from "./pages/Portfolio";
@@ -16,7 +16,7 @@ const PAGES = [
   { id: "portefeuille", label: "Portefeuille" },
   { id: "feuille-de-route", label: "Feuille de route" },
   { id: "regles", label: "Règles" },
-  { id: "conformite", label: "Conformité" },
+  { id: "halalitude", label: "Halalitude" },
   { id: "soldees", label: "Lignes soldées" },
   { id: "frais", label: "Frais et activité" },
   { id: "donnees", label: "Données" },
@@ -136,7 +136,7 @@ export default function App() {
         )}
         {report && shown === "feuille-de-route" && <Roadmap />}
         {report && shown === "regles" && <Rules />}
-        {report && shown === "conformite" && <Compliance reload={reload} />}
+        {report && shown === "halalitude" && <HalalitudePage reload={reload} />}
         {report && shown === "soldees" && <Closed report={report} />}
         {report && shown === "frais" && <Activity report={report} />}
         {report && shown === "donnees" && <Data report={report} reload={reload} />}

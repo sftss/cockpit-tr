@@ -150,7 +150,7 @@ function RulesSummary({ stamp }: { stamp: string | null }) {
   if (!rules) return null;
 
   const link = "text-accent underline underline-offset-4";
-  const zoya = compliance?.summary;
+  const statuses = compliance?.summary;
   return (
     <Section title="Règles du trimestre">
       {rules.has_rules ? (
@@ -179,25 +179,25 @@ function RulesSummary({ stamp }: { stamp: string | null }) {
             </a>
           </li>
         )}
-        {zoya && (
+        {statuses && (
           <li>
-            {zoya.missing + zoya.stale + zoya.not_compliant > 0 ? (
+            {statuses.missing + statuses.stale + statuses.not_compliant > 0 ? (
               <span className="text-alert">
-                Conformité :{" "}
+                Halalitude :{" "}
                 {[
-                  zoya.stale > 0 && plural(zoya.stale, "statut à revérifier", "statuts à revérifier"),
-                  zoya.missing > 0 && plural(zoya.missing, "non renseigné", "non renseignés"),
-                  zoya.not_compliant > 0 &&
-                    plural(zoya.not_compliant, "ligne détenue non conforme", "lignes détenues non conformes"),
+                  statuses.stale > 0 && plural(statuses.stale, "statut à revérifier", "statuts à revérifier"),
+                  statuses.missing > 0 && plural(statuses.missing, "non renseigné", "non renseignés"),
+                  statuses.not_compliant > 0 &&
+                    plural(statuses.not_compliant, "ligne détenue douteuse ou haram", "lignes détenues douteuses ou haram"),
                 ]
                   .filter(Boolean)
                   .join(", ")}
                 .
               </span>
             ) : (
-              "Conformité : tous les statuts sont à jour."
+              "Halalitude : tous les statuts sont à jour."
             )}{" "}
-            <a className={link} href="#/conformite">
+            <a className={link} href="#/halalitude">
               Voir les statuts
             </a>
           </li>
