@@ -6,9 +6,13 @@ snapshots datés.
 
 L'application tourne sur votre ordinateur et n'écoute que sur `127.0.0.1`. Elle
 ne se connecte pas à Trade Republic, ne demande aucun identifiant et ne passe
-aucun ordre. Sa seule sortie vers Internet sert à récupérer des cours : elle
-envoie des codes ISIN et des symboles, et le nom d'un titre quand vous lui
-demandez de le chercher par nom ; jamais de quantités ni de montants.
+aucun ordre. Elle sort vers Internet pour deux choses :
+
+- **récupérer des cours** : elle envoie des codes ISIN et des symboles, et le
+  nom d'un titre quand vous lui demandez de le chercher par nom ; jamais de
+  quantités ni de montants ;
+- **l'assistant**, seulement si vous enregistrez une clé d'API : chaque question
+  envoie à l'API d'Anthropic les données de portefeuille utiles à la réponse.
 
 > Outil personnel, non affilié à Trade Republic. Ce n'est pas un conseil en
 > investissement.
@@ -20,7 +24,7 @@ demandez de le chercher par nom ; jamais de quantités ni de montants.
 | V0 | Import de l'export CSV, base SQLite, calculs, tableau de bord, snapshots | fait |
 | V0 (suite) | Cours par ISIN, graphiques par titre, mini-courbes, courbe de la valeur du portefeuille | fait |
 | V1 | Règles du portefeuille, Halalitude datée, feuille de route, or physique | fait |
-| V2 | Assistant et routines d'analyse (la fiche du jour existe déjà, voir `fiches/`) | en cours |
+| V2 | Assistant (chat, journal de décisions) : fait. Veille et revue trimestrielle : à venir. La fiche du jour existe déjà, voir `fiches/` | en cours |
 | V3 | Tickets d'ordre : préparés et contrôlés ici, passés dans l'app Trade Republic | à venir |
 
 Pas de connexion programmatique à Trade Republic : son contrat client interdit
@@ -35,6 +39,8 @@ l'export CSV officiel.
 | | Les exports CSV et les classeurs |
 | Les types de règles | Les valeurs des règles, les motifs d'écart, la feuille de route |
 | | Les statuts de Halalitude, les lots d'or |
+| La consigne générique de l'assistant | Les consignes personnelles, les discussions, le journal de décisions |
+| | La clé d'API (gestionnaire d'identifiants de Windows) |
 | | Les identifiants et les clés d'API |
 
 Deux garde-fous : le `.gitignore` écarte les fichiers de données, et un test
@@ -132,9 +138,36 @@ au même endroit (par exemple `AI.PA`).
 - **Or physique.** Des lots saisis à la main (poids d'or fin, prix payé),
   valorisés au cours mondial de l'or converti en euros, hors prime. L'or est
   compté à part : ni dans les poids, ni dans les règles, ni dans la courbe.
-- **Fichier de réglages.** Les valeurs des règles et la feuille de route
-  s'exportent et s'importent en JSON depuis la page « Données ». Ce fichier est
-  personnel : le `.gitignore` l'écarte du dépôt.
+- **Fichier de réglages.** Les valeurs des règles, la feuille de route et les
+  consignes de l'assistant s'exportent et s'importent en JSON depuis la page
+  « Données ». Ce fichier est personnel : le `.gitignore` l'écarte du dépôt.
+
+## Assistant
+
+Un chat intégré, qui lit les données locales par des outils : positions, lignes
+soldées, frais, règles et écarts, Halalitude, feuille de route, transactions,
+cours, fiches du jour, journal de décisions.
+
+- **Clé d'API.** Elle se crée dans la console Anthropic et se saisit une fois
+  dans la page « Assistant ». Elle est rangée dans le gestionnaire
+  d'identifiants de Windows ; aucune page ni aucun export ne la réaffiche.
+  L'API est facturée à l'usage, séparément d'un abonnement Claude.
+- **Ce que l'assistant ne voit pas.** L'or physique, les paiements par carte et
+  les coordonnées bancaires ne lui sont jamais transmis.
+- **Ce qu'il peut écrire.** Une note dans le journal de décisions et une
+  proposition de cible sur la feuille de route (statut « idée », sans montant ni
+  cours d'entrée), toutes deux marquées comme venant de lui. Rien d'autre : ni
+  règle, ni statut, ni motif.
+- **Recherche web.** Un interrupteur dans le chat, éteint par défaut ; les
+  sources s'affichent sous la réponse.
+- **Coût.** Les tokens et un coût estimé s'affichent sous chaque réponse et par
+  mois, face à un budget qui sert de repère sans rien bloquer. Le plafond réel
+  se règle dans la console Anthropic.
+- **Consignes personnelles.** Vos consignes et documents de référence se
+  saisissent dans les réglages de l'assistant, ou s'importent avec le fichier
+  de réglages. Le dépôt ne contient qu'une consigne générique.
+- **Journal de décisions.** Une page pour noter une décision et son motif ;
+  l'assistant le lit.
 
 ## Où sont mes données
 

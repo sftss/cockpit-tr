@@ -138,6 +138,7 @@ export type RoadmapItem = {
   last_price: number | null;
   last_price_at: string | null;
   reached: boolean;
+  proposed_by: "assistant" | null;
   halalitude: Halalitude | null;
 };
 
@@ -185,7 +186,76 @@ export type SettingsImport = {
   rules_present: number;
   roadmap_added: number;
   roadmap_present: number;
+  context_added: number;
+  context_present: number;
 };
+
+export type MonthUsage = {
+  month: string;
+  calls: number;
+  tokens_in: number;
+  tokens_out: number;
+  web_searches: number;
+  cost_usd: number;
+  cost_eur: number | null;
+  budget_eur: number;
+  share_of_budget: number;
+};
+
+export type AssistantStatus = {
+  configured: boolean;
+  key_source: "coffre" | "environnement" | null;
+  models: { id: string; label: string }[];
+  default_model: string;
+  month: MonthUsage;
+};
+
+export type AssistantTurn = {
+  role: "assistant";
+  text: string;
+  at: string;
+  model: string | null;
+  activity: { label: string; writes: boolean }[];
+  sources: { url: string; title: string | null }[];
+  usage: { tokens_in: number; tokens_out: number; web_searches: number; cost_usd: number };
+};
+
+export type Turn = { role: "user"; text: string; at: string } | AssistantTurn;
+
+export type Conversation = {
+  id: number;
+  title: string;
+  model: string;
+  updated_at: string;
+  turns: Turn[];
+};
+
+export type ConversationSummary = {
+  id: number;
+  title: string;
+  model: string;
+  updated_at: string;
+  messages: number;
+};
+
+/** What the server sends while an answer is being written. */
+export type ChatEvent =
+  | { type: "text"; text: string }
+  | { type: "activity"; label: string; writes?: boolean }
+  | { type: "error"; message: string; kind?: string }
+  | { type: "done"; conversation: Conversation | null; month: MonthUsage };
+
+export type ContextDocument = { id: number; title: string; content: string; updated_at: string };
+
+export type JournalEntry = {
+  id: number;
+  decided_on: string;
+  title: string;
+  body: string | null;
+  author: "moi" | "assistant";
+};
+
+export type JournalDraft = { title: string; body: string; decided_on: string };
 
 export type Quote = {
   price: number;
@@ -360,6 +430,44 @@ const json = (method: string, body: unknown): RequestInit => ({
   body: JSON.stringify(body),
 });
 
+/** Send a message and hand each event to `onEvent` as the answer is written. */
+async function sendMessage(
+  conversationId: number,
+  body: { text: string; web_search: boolean; model: string },
+  onEvent: (event: ChatEvent) => void,
+): Promise<void> {
+  const response = await fetch(`/api/assistant/conversations/${conversationId}/messages`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!response.ok || !response.body) {
+    let detail = `Erreur ${response.status}`;
+    try {
+      const failure = await response.json();
+      if (typeof failure.detail === "string") detail = failure.detail;
+    } catch {
+      /* keep the status text */
+    }
+    throw new Error(detail);
+  }
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    // Events are separated by a blank line; the last piece may be incomplete.
+    const parts = buffer.split("\n\n");
+    buffer = parts.pop() ?? "";
+    for (const part of parts) {
+      const line = part.split("\n").find((l) => l.startsWith("data: "));
+      if (line) onEvent(JSON.parse(line.slice(6)) as ChatEvent);
+    }
+  }
+}
+
 export const api = {
   report: () => request<Report>("/api/report"),
   importCsv: (text: string) =>
@@ -410,6 +518,30 @@ export const api = {
   updateGoldLot: (id: number, lot: GoldDraft) => request(`/api/gold/lots/${id}`, json("PUT", lot)),
   deleteGoldLot: (id: number) => request(`/api/gold/lots/${id}`, { method: "DELETE" }),
   refreshGoldPrice: () => request<Gold>("/api/gold/price", { method: "POST" }),
+
+  assistantStatus: () => request<AssistantStatus>("/api/assistant/status"),
+  saveKey: (key: string) => request<AssistantStatus>("/api/assistant/key", json("PUT", { key })),
+  deleteKey: () => request<AssistantStatus>("/api/assistant/key", { method: "DELETE" }),
+  saveAssistantSettings: (settings: { model?: string; budget_eur?: string }) =>
+    request<AssistantStatus>("/api/assistant/settings", json("PUT", settings)),
+  contextDocuments: () => request<ContextDocument[]>("/api/assistant/context"),
+  saveContextDocument: (title: string, content: string) =>
+    request<{ id: number }>("/api/assistant/context", json("PUT", { title, content })),
+  deleteContextDocument: (id: number) =>
+    request(`/api/assistant/context/${id}`, { method: "DELETE" }),
+  conversations: () => request<ConversationSummary[]>("/api/assistant/conversations"),
+  conversation: (id: number) => request<Conversation>(`/api/assistant/conversations/${id}`),
+  createConversation: (model: string) =>
+    request<Conversation>("/api/assistant/conversations", json("POST", { model })),
+  deleteConversation: (id: number) =>
+    request(`/api/assistant/conversations/${id}`, { method: "DELETE" }),
+  sendMessage,
+
+  journal: () => request<JournalEntry[]>("/api/journal"),
+  addJournalEntry: (entry: JournalDraft) => request<{ id: number }>("/api/journal", json("POST", entry)),
+  updateJournalEntry: (id: number, entry: JournalDraft) =>
+    request(`/api/journal/${id}`, json("PUT", entry)),
+  deleteJournalEntry: (id: number) => request(`/api/journal/${id}`, { method: "DELETE" }),
 
   importSettings: (text: string) =>
     request<SettingsImport>("/api/settings/import", {

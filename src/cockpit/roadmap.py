@@ -60,15 +60,15 @@ def _clean(conn: sqlite3.Connection, data: dict) -> dict:
     }
 
 
-def create(conn: sqlite3.Connection, data: dict) -> int:
+def create(conn: sqlite3.Connection, data: dict, proposed_by: str | None = None) -> int:
     item = _clean(conn, data)
     now = _now()
     cursor = conn.execute(
         "INSERT INTO roadmap_items (name, isin, account_id, amount, entry_condition, entry_price,"
-        " thesis, status, quote_symbol, created_at, updated_at) "
+        " thesis, status, quote_symbol, proposed_by, created_at, updated_at) "
         "VALUES (:name, :isin, :account_id, :amount, :entry_condition, :entry_price, :thesis,"
-        " :status, :quote_symbol, :now, :now)",
-        {**item, "now": now},
+        " :status, :quote_symbol, :proposed_by, :now, :now)",
+        {**item, "proposed_by": proposed_by, "now": now},
     )
     conn.commit()
     return cursor.lastrowid
@@ -121,6 +121,7 @@ def items(conn: sqlite3.Connection, today: date | None = None) -> dict:
                 "symbol": row["quote_symbol"],
                 "last_price": float(price) if price is not None else None,
                 "last_price_at": row["last_price_at"],
+                "proposed_by": row["proposed_by"],
                 "reached": bool(
                     row["status"] in ACTIVE
                     and price is not None
