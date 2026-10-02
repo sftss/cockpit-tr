@@ -1,0 +1,36 @@
+# --- Données personnelles : jamais dans le dépôt -------------------------
+# La base, les exports et les classeurs vivent dans le dossier de données
+# de l'utilisateur (voir README), pas ici.
+*.csv
+*.xlsx
+*.xls
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+data/
+exports/
+.env
+.env.*
+credentials
+cookies*.txt
+
+# --- Python ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+
+# --- Frontend -------------------------------------------------------------
+node_modules/
+frontend/dist/
+*.tsbuildinfo
+
+# --- Divers ---------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
