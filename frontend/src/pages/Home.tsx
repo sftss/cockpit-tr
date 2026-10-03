@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
-import { api, type Compliance, type Gold, type Report, type RulesState, type Watch } from "../api";
+import {
+  api,
+  type Compliance,
+  type Gold,
+  type Report,
+  type RulesState,
+  type TicketStatus,
+  type Watch,
+} from "../api";
 import { PerformanceChart } from "../components/PerformanceChart";
 import { QuarterChart } from "../components/QuarterChart";
 import { ValueHistory } from "../components/ValueHistory";
@@ -149,11 +157,13 @@ function RulesSummary({ stamp }: { stamp: string | null }) {
   const [compliance, setCompliance] = useState<Compliance | null>(null);
   const [watch, setWatch] = useState<Watch | null>(null);
   const [due, setDue] = useState<string | null>(null);
+  const [tickets, setTickets] = useState<Record<TicketStatus, number> | null>(null);
   useEffect(() => {
     api.rules().then(setRules).catch(() => setRules(null));
     api.compliance().then(setCompliance).catch(() => setCompliance(null));
     api.watch().then(setWatch).catch(() => setWatch(null));
     api.reviews().then((listing) => setDue(listing.due?.name ?? null)).catch(() => setDue(null));
+    api.ticketSummary().then(setTickets).catch(() => setTickets(null));
   }, [stamp]);
   if (!rules) return null;
 
@@ -209,6 +219,21 @@ function RulesSummary({ stamp }: { stamp: string | null }) {
             )}{" "}
             <a className={link} href="#/halalitude">
               Voir les statuts
+            </a>
+          </li>
+        )}
+        {tickets && tickets.pret + tickets.brouillon > 0 && (
+          <li>
+            Tickets :{" "}
+            {[
+              tickets.pret > 0 && plural(tickets.pret, "prêt", "prêts"),
+              tickets.brouillon > 0 && plural(tickets.brouillon, "brouillon", "brouillons"),
+            ]
+              .filter(Boolean)
+              .join(", ")}
+            .{" "}
+            <a className={link} href="#/tickets">
+              Voir les tickets
             </a>
           </li>
         )}

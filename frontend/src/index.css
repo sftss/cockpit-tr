@@ -247,6 +247,16 @@ table.review-text td:not(:first-child) {
 }
 table.review-text td { vertical-align: top; }
 
+/* Executed tickets: planned over done in each cell, the reason in words. */
+table.executed-tickets { min-width: 900px; }
+table.executed-tickets td { vertical-align: top; }
+table.executed-tickets th:nth-child(7),
+table.executed-tickets td:nth-child(7) {
+  text-align: left;
+  padding-left: 32px;
+  white-space: normal;
+}
+
 /* Past readings against the market: words, with one figure. */
 table.record {
   max-width: 60rem;

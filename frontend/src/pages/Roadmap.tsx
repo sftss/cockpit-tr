@@ -76,6 +76,20 @@ export function Roadmap() {
     }
   };
 
+  /** A draft ticket for this target; the page of tickets takes over from there. */
+  const prepare = async (item: RoadmapItem) => {
+    try {
+      await api.createTicket({
+        roadmap_item_id: item.id,
+        // The planned amount becomes a quantity only when a price is known.
+        ...(item.amount != null && item.last_price != null ? { amount: item.amount } : {}),
+      });
+      window.location.hash = "#/tickets";
+    } catch (e) {
+      setError((e as Error).message);
+    }
+  };
+
   if (!data) return error ? <Notice tone="error">{error}</Notice> : null;
   const open = data.items.filter((i) => i.status === "idee" || i.status === "prevu");
   const closed = data.items.filter((i) => i.status === "execute" || i.status === "abandonne");
@@ -134,6 +148,7 @@ export function Roadmap() {
         editing={editing}
         setEditing={setEditing}
         act={act}
+        prepare={prepare}
       />
 
       {closed.length > 0 && (
@@ -151,12 +166,14 @@ function ItemList({
   editing,
   setEditing,
   act,
+  prepare,
 }: {
   items: RoadmapItem[];
   data: RoadmapData;
   editing: number | "new" | null;
   setEditing: (id: number | "new" | null) => void;
   act: (action: () => Promise<unknown>) => void;
+  prepare?: (item: RoadmapItem) => void;
 }) {
   if (items.length === 0) return null;
   return (
@@ -173,7 +190,12 @@ function ItemList({
               remove={() => act(() => api.deleteRoadmapItem(item.id))}
             />
           ) : (
-            <Item item={item} status={data.statuses[item.status]} edit={() => setEditing(item.id)} />
+            <Item
+              item={item}
+              status={data.statuses[item.status]}
+              edit={() => setEditing(item.id)}
+              prepare={prepare && item.isin ? () => prepare(item) : undefined}
+            />
           )}
         </li>
       ))}
@@ -181,7 +203,17 @@ function ItemList({
   );
 }
 
-function Item({ item, status, edit }: { item: RoadmapItem; status: string; edit: () => void }) {
+function Item({
+  item,
+  status,
+  edit,
+  prepare,
+}: {
+  item: RoadmapItem;
+  status: string;
+  edit: () => void;
+  prepare?: () => void;
+}) {
   return (
     <div className="grid gap-x-10 gap-y-3 md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)_auto]">
       <div>
@@ -226,9 +258,16 @@ function Item({ item, status, edit }: { item: RoadmapItem; status: string; edit:
           item.isin && <p className="text-xs text-muted">cours non relevé</p>
         )}
         {item.reached && <p className="mt-1 font-medium text-accent">Cours d'entrée atteint</p>}
-        <button type="button" onClick={edit} className="mt-2 text-accent hover:underline">
-          Modifier
-        </button>
+        <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 md:justify-end">
+          {prepare && (
+            <button type="button" onClick={prepare} className="text-accent hover:underline">
+              Préparer le ticket
+            </button>
+          )}
+          <button type="button" onClick={edit} className="text-accent hover:underline">
+            Modifier
+          </button>
+        </p>
       </div>
     </div>
   );

@@ -21,8 +21,8 @@ doute entre ce fichier et une demande ponctuelle, poser la question avant d'agir
    pas de service hébergé.
 5. **La Halalitude se relève à la main.** L'application ne la calcule pas, ne
    la devine pas et ne cite le nom d'aucun screener dans ce qu'elle publie. Un
-   ticket d'ordre s'arrête tant que le statut n'est pas relevé ou qu'il est à
-   revérifier : c'est le seul contrôle bloquant.
+   achat s'arrête sur son ticket tant que le statut n'est pas « halal », relevé
+   et à jour : c'est le seul contrôle bloquant. Une vente n'est jamais arrêtée.
 6. **Les autres règles du portefeuille ne bloquent rien.** Un écart est listé
    et un motif s'écrit à côté. Les types de règles sont dans le code, leurs
    valeurs dans la base de l'utilisateur.
@@ -30,8 +30,10 @@ doute entre ce fichier et une demande ponctuelle, poser la question avant d'agir
    dans le dépôt, dans la base, dans un fichier ou dans la réponse d'un point
    d'accès.
 8. **L'assistant ne voit jamais** l'or physique, les paiements par carte ni les
-   coordonnées bancaires. Il n'écrit que deux choses, marquées comme venant de
-   lui : une note au journal et une proposition de cible.
+   coordonnées bancaires. Il n'écrit que trois choses, marquées comme venant de
+   lui : une note au journal, une proposition de cible, et le brouillon d'un
+   ticket quand l'utilisateur le lui demande. Il ne rend aucun ticket « prêt »
+   et n'en écrit pas le motif.
 9. **Ni conseil, ni urgence, ni levier.** Rien dans l'application ne dit
    d'acheter ou de vendre, ne presse d'agir, n'encourage l'effet de levier. Une
    analyse présente des scénarios, pas une prédiction, et dit ses incertitudes.

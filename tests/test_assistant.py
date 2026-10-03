@@ -86,7 +86,7 @@ def test_every_tool_has_a_runner_and_a_label():
     assert set(names) == set(tools.LABELS)
     for tool in tools.TOOLS:
         assert tool["input_schema"]["type"] == "object" and tool["description"]
-    assert {"ajouter_note_journal", "proposer_cible"} == tools.WRITING
+    assert {"ajouter_note_journal", "proposer_cible", "preparer_ticket"} == tools.WRITING
 
 
 def test_portfolio_tool_shows_what_the_screens_show(loaded):
