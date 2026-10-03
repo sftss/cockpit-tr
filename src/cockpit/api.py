@@ -598,6 +598,11 @@ def create_app(
     def get_watch(semaine: str | None = None, c: sqlite3.Connection = Depends(conn)) -> dict:
         return store.watch(c, config.veilles_dir(), semaine)
 
+    @app.get("/api/veille/bilan")
+    def get_readings_record() -> dict:
+        """How the past readings fared against the market. Asks the price source."""
+        return store.readings_record(market, config.veilles_dir())
+
     # -- Settings file -------------------------------------------------------
 
     @app.get("/api/settings/export")

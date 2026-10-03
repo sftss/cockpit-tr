@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import {
   api,
+  type ReadingsRecord,
   type Watch as WatchData,
   type WatchReading,
   type WatchSource,
   type WatchTitle,
 } from "../api";
 import { Notice, PageTitle, Section, TableWrap, inputClass } from "../components/ui";
-import { date, plural } from "../format";
+import { date, percent, plural, signedPercent } from "../format";
 
 const FOLLOWED = { ligne: "ligne détenue", cible: "cible de la feuille de route" } as const;
 
@@ -161,6 +162,7 @@ export function Watch() {
       )}
 
       {report.lecture && <Reading lecture={report.lecture} />}
+      <Record />
     </>
   );
 }
@@ -199,6 +201,86 @@ function Reading({ lecture }: { lecture: Lecture }) {
           </details>
         )}
       </div>
+    </Section>
+  );
+}
+
+const VERDICTS = {
+  juste: "juste",
+  "à côté": "à côté",
+  "non notée": "non notée : balance partagée",
+  "en attente": "en attente",
+  inconnu: "cours indisponible",
+} as const;
+
+/** What the past readings were worth, with the laziest forecast beside them. */
+function Record() {
+  const [record, setRecord] = useState<ReadingsRecord | null>(null);
+  useEffect(() => {
+    api
+      .readingsRecord()
+      .then(setRecord)
+      .catch(() => setRecord(null));
+  }, []);
+  if (!record || record.rows.length === 0) return null;
+  const { scored, right, always_up_right: naive, enough, minimum } = record.summary;
+  return (
+    <Section
+      title="Ce que les lectures ont valu"
+      note={`La balance du marché de chaque veille, face à ce que le ${record.benchmark} a fait en euros entre le vendredi de la veille et le vendredi suivant.`}
+    >
+      {record.error && (
+        <div className="mb-4">
+          <Notice tone="error">Cours de l'indice indisponibles : {record.error}.</Notice>
+        </div>
+      )}
+      <p className="mb-4 max-w-[80ch]">
+        {scored === 0 ? (
+          "Aucune lecture n'a encore de verdict : le premier arrive après la clôture du vendredi qui suit la veille."
+        ) : (
+          <>
+            {plural(right, "lecture juste", "lectures justes")} sur {scored}{" "}
+            {scored > 1 ? "notées" : "notée"}. Sur les mêmes semaines, annoncer « hausse » à chaque
+            fois aurait été juste {naive} fois.{" "}
+            {enough
+              ? `Soit ${percent(right / scored)} contre ${percent(naive / scored)}.`
+              : `Pas de taux de réussite avant ${minimum} lectures notées : d'ici là, le hasard suffit à expliquer le score.`}
+          </>
+        )}
+      </p>
+      <TableWrap>
+        <table className="data record">
+          <thead>
+            <tr>
+              <th>Veille</th>
+              <th>Balance annoncée</th>
+              <th>Indice, semaine suivante</th>
+              <th>Verdict</th>
+            </tr>
+          </thead>
+          <tbody>
+            {record.rows.map((row) => (
+              <tr key={row.semaine}>
+                <td>
+                  du {date(row.du)} au {date(row.au)}
+                </td>
+                <td>
+                  {LEANS[row.sens]}
+                  <span className="text-muted">, confiance {row.confiance}</span>
+                </td>
+                <td className="num">
+                  {row.variation == null ? (
+                    <span className="text-muted">jusqu'au {date(row.jusqu_au)}</span>
+                  ) : (
+                    signedPercent(row.variation)
+                  )}
+                </td>
+                <td>{VERDICTS[row.verdict]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </TableWrap>
     </Section>
   );
 }

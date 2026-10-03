@@ -10,7 +10,7 @@ from datetime import UTC, date, datetime
 from decimal import Decimal
 from pathlib import Path
 
-from . import allocation, compliance, performance, portfolio, valuation, veille
+from . import allocation, bilan, compliance, performance, portfolio, valuation, veille
 from .money import ZERO, dec, money, ratio
 
 
@@ -268,6 +268,38 @@ def watch(conn: sqlite3.Connection, folder: Path | None, week: str | None = None
         }
     report = {**chosen, "titres": titles, "lecture": lecture}
     return {"weeks": weeks, "report": report, "uncovered": uncovered}
+
+
+def readings_record(market, folder: Path | None, today: date | None = None) -> dict:
+    """The market balance of each past watch against what the MSCI World did, in
+    euros, over the following week. Nothing personal enters this: it compares
+    public files with public prices."""
+    symbol, label = INDICES["msci-world"]
+    readings = [
+        {
+            "semaine": report["semaine"],
+            "du": report["du"],
+            "au": report["au"],
+            "sens": report["lecture"]["marche"]["balance"]["sens"],
+            "confiance": report["lecture"]["marche"]["balance"]["confiance"],
+        }
+        for report in (veille.reports(folder) if folder else [])
+        if report.get("lecture")
+    ]
+    closes: list[tuple[str, Decimal]] = []
+    problem = None
+    if readings:
+        from .market.provider import ProviderError  # local import: store stays offline
+
+        try:
+            closes = market.closes_eur(symbol, min(reading["au"] for reading in readings))
+        except ProviderError as exc:
+            problem = str(exc)
+    return {
+        "benchmark": label,
+        **bilan.score(readings, closes, today or date.today()),
+        "error": problem,
+    }
 
 
 def state(conn: sqlite3.Connection) -> dict:
