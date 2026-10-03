@@ -494,12 +494,25 @@ export type WatchTitle = {
 
 export type WatchWeek = { semaine: string; du: string; au: string };
 
+/** One reading: both sides argued, what would settle it, and where the balance leans. */
+export type WatchReading = {
+  hausse: string[];
+  baisse: string[];
+  signaux: { date: string | null; texte: string }[];
+  balance: { sens: "hausse" | "baisse" | "partagée"; confiance: "faible" | "moyenne"; motif: string };
+};
+
 export type Watch = {
   weeks: WatchWeek[];
   report:
     | (WatchWeek & {
         macro: { sujet: string; texte: string; sources: WatchSource[] }[];
         titres: WatchTitle[];
+        /** An interpretation of the week, absent from the first watches. */
+        lecture: {
+          marche: WatchReading;
+          secteurs: (WatchReading & { secteur: string; suivi: boolean })[];
+        } | null;
       })
     | null;
   /** Held companies and targets the watch does not cover. */

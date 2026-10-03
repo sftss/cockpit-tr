@@ -149,9 +149,11 @@ TOOLS: list[dict] = [
         "description": (
             "Veille hebdomadaire : faits publics datés et sourcés de la semaine (résultats, "
             "annonces, prochains rendez-vous) pour une liste d'entreprises, plus un court contexte "
-            "macro. Sans argument, la dernière veille, limitée aux lignes détenues et aux cibles "
-            "de la feuille de route. Ce sont des faits relevés par une IA : citer la source, ne "
-            "pas en tirer de consigne."
+            "macro, puis une lecture de la semaine (arguments à la hausse et à la baisse, "
+            "signaux à surveiller, balance avec son niveau de confiance). Sans argument, la "
+            "dernière veille, limitée aux lignes détenues et aux cibles de la feuille de route. "
+            "Citer la source des faits ; présenter la balance comme une opinion incertaine, "
+            "jamais comme une consigne."
         ),
         "input_schema": {
             "type": "object",
@@ -535,12 +537,14 @@ def _watch(conn: sqlite3.Connection, args: dict) -> dict:
         "semaines_disponibles": [week["semaine"] for week in view["weeks"]],
         "macro": report["macro"],
         "titres": titles,
+        "lecture_de_la_semaine": report.get("lecture"),
         "autres_titres_avec_du_nouveau": []
         if everything
         else [t["nom"] for t in report["titres"] if not t["suivi"] and t["faits"]],
         "lignes_et_cibles_hors_veille": view["uncovered"],
-        "rappel": "Faits relevés par une IA dans des sources publiques : ni prédiction, ni "
-        "consigne d'achat ou de vente, et rien sur la Halalitude.",
+        "rappel": "Faits relevés par une IA dans des sources publiques, et rien sur la "
+        "Halalitude. La lecture de la semaine est une interprétation : des scénarios et une "
+        "balance qui est une opinion, jamais une prédiction ni une consigne d'achat ou de vente.",
     }
 
 

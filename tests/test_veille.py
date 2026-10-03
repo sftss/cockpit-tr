@@ -17,9 +17,9 @@ from cockpit.importers import tr_csv
 ROOT = Path(__file__).resolve().parents[1]
 ACME, GLOBEX, INITECH, FUND = "XX0000000001", "XX0000000002", "XX0000000004", "XX0000000003"
 UNIVERSE = [
-    {"nom": "Acme", "isin": ACME},
-    {"nom": "Globex", "isin": GLOBEX},
-    {"nom": "Initech", "isin": INITECH},
+    {"nom": "Acme", "isin": ACME, "secteur": "Industrie"},
+    {"nom": "Globex", "isin": GLOBEX, "secteur": "Santé"},
+    {"nom": "Initech", "isin": INITECH, "secteur": "Énergie"},
 ]
 SOURCE = {"titre": "Communiqué du 4 juin", "url": "https://example.org/communique"}
 
@@ -205,6 +205,108 @@ def test_every_watch_of_the_repository_is_valid_and_rendered():
         assert file.with_suffix(".md").read_text("utf-8") == veille.render(data), file.name
 
 
+# -- The reading of the week ----------------------------------------------------------
+
+
+def reading(lean: str = "partagée") -> dict:
+    return {
+        "hausse": ["Les résultats publiés cette semaine sont en hausse."],
+        "baisse": ["La banque centrale a relevé ses taux.", "Le pétrole renchérit."],
+        "signaux": [
+            {"date": "2025-06-12", "texte": "Prochaine décision de taux."},
+            {"date": None, "texte": "Prochain chiffre d'inflation."},
+        ],
+        "balance": {"sens": lean, "confiance": "faible", "motif": "Rien ne l'emporte nettement."},
+    }
+
+
+def with_reading() -> dict:
+    data = watch()
+    data["lecture"] = {
+        "marche": reading("baisse"),
+        "secteurs": [{"secteur": "Industrie", **reading()}, {"secteur": "Énergie", **reading()}],
+    }
+    return data
+
+
+def reading_errors(change) -> list[str]:
+    data = with_reading()
+    change(data["lecture"])
+    return veille.validate(data, UNIVERSE)
+
+
+def test_a_reading_argues_both_sides_and_stays_modest():
+    assert veille.validate(with_reading(), UNIVERSE) == []
+    assert reading_errors(lambda r: r["marche"].update(hausse=[])) == [
+        "lecture du marché : de 1 à 4 arguments à la hausse"
+    ]
+    assert reading_errors(lambda r: r["marche"].update(baisse=["x"] * 5)) == [
+        "lecture du marché : de 1 à 4 arguments à la baisse"
+    ]
+    # Nobody knows where a market goes: there is no strong confidence to claim.
+    assert reading_errors(lambda r: r["marche"]["balance"].update(confiance="forte")) == [
+        "lecture du marché : balance, confiance attendue parmi faible, moyenne"
+    ]
+    assert reading_errors(lambda r: r["marche"]["balance"].update(sens="krach")) == [
+        "lecture du marché : balance, sens attendu parmi hausse, baisse, partagée"
+    ]
+    assert reading_errors(lambda r: r["marche"].pop("balance")) == [
+        "lecture du marché : balance absente"
+    ]
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Il faut acheter avant les résultats.",
+        "Mieux vaut vendre maintenant.",
+        "Renforcer la ligne sur repli.",
+        "Objectif de cours relevé à 200 euros.",
+    ],
+)
+def test_a_reading_never_gives_an_order(text):
+    errors = reading_errors(lambda r: r["marche"].update(hausse=[text]))
+    assert errors == [
+        "lecture du marché, à la hausse : une lecture ne donne pas de consigne d'achat ou de vente"
+    ]
+    # Sales and purchases as facts are not orders.
+    assert (
+        reading_errors(lambda r: r["marche"].update(hausse=["Les ventes et les achats montent."]))
+        == []
+    )
+
+
+def test_a_reading_names_known_sectors_and_future_signals():
+    assert reading_errors(lambda r: r["secteurs"][0].update(secteur="Cryptomonnaies")) == [
+        "lecture : secteur inconnu de la liste des titres (Cryptomonnaies)"
+    ]
+    assert reading_errors(lambda r: r["secteurs"].append(dict(r["secteurs"][0]))) == [
+        "lecture : secteur présent deux fois (Industrie)"
+    ]
+    assert reading_errors(lambda r: r.update(secteurs=r["secteurs"] * 4)) == [
+        "lecture : secteurs, liste de 6 au plus"
+    ]
+    assert reading_errors(lambda r: r["marche"]["signaux"][0].update(date="2025-06-06")) == [
+        "lecture du marché : un signal daté est postérieur à la période"
+    ]
+    assert reading_errors(lambda r: r["marche"].update(signaux=[])) == [
+        "lecture du marché : de 1 à 4 signaux à surveiller"
+    ]
+
+
+def test_the_reading_closes_the_readable_version_and_says_what_it_is():
+    text = veille.render(with_reading())
+    assert "## Lecture de la semaine" not in veille.render(watch())  # optional
+    reading_part = text[text.index("## Lecture de la semaine") :]
+    assert text.index("## Prochains rendez-vous") < text.index("## Lecture de la semaine")
+    assert "Ce n'est pas un conseil en investissement" in reading_part
+    assert "### Marché" in reading_part and "### Industrie" in reading_part
+    assert "- 12 juin 2025 : Prochaine décision de taux." in reading_part
+    assert "- Prochain chiffre d'inflation." in reading_part
+    assert "**Balance : penche à la baisse, confiance faible.** Rien ne l'emporte" in reading_part
+    assert "**Balance : partagée, confiance faible.**" in reading_part
+
+
 # -- In the application --------------------------------------------------------------
 
 
@@ -289,3 +391,24 @@ def test_the_assistant_reads_the_followed_companies_first(conn, sample_csv, fold
 def test_the_assistant_is_told_when_there_is_no_watch(conn, monkeypatch, tmp_path):
     monkeypatch.setenv("COCKPIT_VEILLES_DIR", str(tmp_path / "absent"))
     assert json.loads(tools.run(conn, "lire_veille", {})[0])["veille"] is None
+
+
+def test_the_reading_marks_the_sectors_held_or_targeted(conn, sample_csv, folder):
+    (folder / "2025" / "2025-W23.json").write_text(json.dumps(with_reading()), "utf-8")
+    tr_csv.import_csv(conn, sample_csv)  # Acme and Globex are held, Initech is not
+    lecture = store.watch(conn, folder)["report"]["lecture"]
+    assert [(s["secteur"], s["suivi"]) for s in lecture["secteurs"]] == [
+        ("Industrie", True),
+        ("Énergie", False),
+    ]
+    assert lecture["marche"]["balance"]["sens"] == "baisse"
+    roadmap.create(conn, {"name": "Initech", "isin": INITECH, "status": "idee"})
+    assert store.watch(conn, folder)["report"]["lecture"]["secteurs"][1]["suivi"] is True
+
+    told = json.loads(tools.run(conn, "lire_veille", {})[0])
+    assert told["lecture_de_la_semaine"]["marche"]["balance"]["confiance"] == "faible"
+    assert "opinion" in told["rappel"]
+
+
+def test_a_watch_without_a_reading_shows_none(conn, folder):
+    assert store.watch(conn, folder)["report"]["lecture"] is None

@@ -28,6 +28,16 @@ MONTHS = [
     "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre",
     "octobre", "novembre", "décembre",
 ]  # fmt: skip
+MAX_ARGUMENTS = 4  # on each side of a reading, and for what would settle it
+MAX_ARGUMENT = 300
+MAX_SECTORS = 6
+LEANS = {"hausse": "penche à la hausse", "baisse": "penche à la baisse", "partagée": "partagée"}
+# No "forte": nobody knows where a market goes, and the file must not pretend to.
+CONFIDENCE = ("faible", "moyenne")
+ORDERS = re.compile(
+    r"\b(achet(er|ez|ons)|vend(re|ez|ons)|renforce[rz]|all[ée]ge[rz]|objectif de cours)\b",
+    re.IGNORECASE,
+)
 WEEK = re.compile(r"^(\d{4})-W(\d{2})$")
 URL = re.compile(r"^https?://\S+$")
 
@@ -60,6 +70,76 @@ def _source(value: object, where: str, errors: list[str]) -> None:
         errors.append(f"{where} : source sans titre")
     if not URL.match(str(value.get("url") or "")):
         errors.append(f"{where} : source sans adresse web")
+
+
+def _wording(value: object, limit: int, where: str, errors: list[str]) -> None:
+    text = value.strip() if isinstance(value, str) else ""
+    if not text or len(text) > limit:
+        errors.append(f"{where} : texte manquant ou trop long")
+    elif ORDERS.search(text):
+        errors.append(f"{where} : une lecture ne donne pas de consigne d'achat ou de vente")
+
+
+def _reading(block: object, where: str, end: date | None, errors: list[str]) -> None:
+    """One reading: what pushes up, what pushes down, what would settle it, and
+    which way the balance leans. Both sides must be argued."""
+    if not isinstance(block, dict):
+        errors.append(f"{where} : objet attendu")
+        return
+    for side in ("hausse", "baisse"):
+        arguments = block.get(side)
+        if not isinstance(arguments, list) or not 1 <= len(arguments) <= MAX_ARGUMENTS:
+            errors.append(f"{where} : de 1 à {MAX_ARGUMENTS} arguments à la {side}")
+            continue
+        for argument in arguments:
+            _wording(argument, MAX_ARGUMENT, f"{where}, à la {side}", errors)
+
+    signals = block.get("signaux")
+    if not isinstance(signals, list) or not 1 <= len(signals) <= MAX_ARGUMENTS:
+        errors.append(f"{where} : de 1 à {MAX_ARGUMENTS} signaux à surveiller")
+    else:
+        for signal in signals:
+            if not isinstance(signal, dict):
+                errors.append(f"{where} : signal mal formé")
+                continue
+            _wording(signal.get("texte"), MAX_ARGUMENT, f"{where}, signal", errors)
+            if signal.get("date") is not None:
+                day = _day(signal["date"])
+                if day is None or (end and day <= end):
+                    errors.append(f"{where} : un signal daté est postérieur à la période")
+
+    balance = block.get("balance")
+    if not isinstance(balance, dict):
+        errors.append(f"{where} : balance absente")
+        return
+    if balance.get("sens") not in LEANS:
+        errors.append(f"{where} : balance, sens attendu parmi {', '.join(LEANS)}")
+    if balance.get("confiance") not in CONFIDENCE:
+        errors.append(f"{where} : balance, confiance attendue parmi {', '.join(CONFIDENCE)}")
+    _wording(balance.get("motif"), MAX_ARGUMENT, f"{where}, motif de la balance", errors)
+
+
+def _lecture(lecture: object, universe: list[dict], end: date | None, errors: list[str]) -> None:
+    if not isinstance(lecture, dict):
+        errors.append("lecture : objet attendu")
+        return
+    _reading(lecture.get("marche"), "lecture du marché", end, errors)
+    sectors = lecture.get("secteurs")
+    if not isinstance(sectors, list) or len(sectors) > MAX_SECTORS:
+        errors.append(f"lecture : secteurs, liste de {MAX_SECTORS} au plus")
+        return
+    known = {str(entry.get("secteur")) for entry in universe if entry.get("secteur")}
+    seen: set[str] = set()
+    for block in sectors:
+        name = str(block.get("secteur") or "") if isinstance(block, dict) else ""
+        if name not in known:
+            errors.append(
+                f"lecture : secteur inconnu de la liste des titres ({name or 'sans nom'})"
+            )
+        if name in seen:
+            errors.append(f"lecture : secteur présent deux fois ({name})")
+        seen.add(name)
+        _reading(block, f"lecture, {name or 'secteur'}", end, errors)
 
 
 def validate(data: object, universe: list[dict]) -> list[str]:
@@ -157,6 +237,8 @@ def validate(data: object, universe: list[dict]) -> list[str]:
 
     for isin in sorted(set(expected) - seen):
         errors.append(f"{expected[isin]} : absent de la veille")
+    if data.get("lecture") is not None:  # optional: the first watches had none
+        _lecture(data["lecture"], universe, end, errors)
     return errors
 
 
@@ -216,7 +298,41 @@ def render(data: dict) -> str:
                 f"| {day} | {title['nom']} | {event['objet']} ({_link(event['source'])}) |"
             )
         lines.append("")
+
+    lecture = data.get("lecture")
+    if lecture:
+        lines += [
+            "## Lecture de la semaine",
+            "",
+            "Interprétation rédigée par une IA à partir des faits ci-dessus. Ce n'est pas un "
+            "conseil en investissement : la balance est une opinion argumentée, qui se trompera "
+            "régulièrement.",
+            "",
+        ]
+        lines += _reading_lines("Marché", lecture["marche"])
+        for block in lecture["secteurs"]:
+            lines += _reading_lines(block["secteur"], block)
     return "\n".join(lines)
+
+
+def _reading_lines(title: str, block: dict) -> list[str]:
+    lines = [f"### {title}", "", "**Ce qui pousse à la hausse**", ""]
+    lines += [f"- {argument}" for argument in block["hausse"]]
+    lines += ["", "**Ce qui pousse à la baisse**", ""]
+    lines += [f"- {argument}" for argument in block["baisse"]]
+    lines += ["", "**Ce qui trancherait**", ""]
+    for signal in block["signaux"]:
+        day = signal.get("date")
+        when = f"{long_date(date.fromisoformat(day))} : " if day else ""
+        lines.append(f"- {when}{signal['texte']}")
+    balance = block["balance"]
+    lines += [
+        "",
+        f"**Balance : {LEANS[balance['sens']]}, confiance {balance['confiance']}.** "
+        f"{balance['motif']}",
+        "",
+    ]
+    return lines
 
 
 def universe_of(folder: Path) -> list[dict]:

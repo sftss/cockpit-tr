@@ -252,7 +252,22 @@ def watch(conn: sqlite3.Connection, folder: Path | None, week: str | None = None
     uncovered = sorted(
         {name for isin, name in {**targets, **held}.items() if isin not in covered | funds}
     )
-    return {"weeks": weeks, "report": {**chosen, "titres": titles}, "uncovered": uncovered}
+    # The reading covers sectors of the public list; which ones are held is known here only.
+    lecture = chosen.get("lecture")
+    if lecture:
+        try:
+            sectors = {str(e["isin"]): e.get("secteur") for e in veille.universe_of(folder)}
+        except (OSError, ValueError, KeyError):
+            sectors = {}
+        mine = {sectors.get(isin) for isin in list(held) + list(targets)} - {None}
+        lecture = {
+            **lecture,
+            "secteurs": [
+                {**block, "suivi": block["secteur"] in mine} for block in lecture["secteurs"]
+            ],
+        }
+    report = {**chosen, "titres": titles, "lecture": lecture}
+    return {"weeks": weeks, "report": report, "uncovered": uncovered}
 
 
 def state(conn: sqlite3.Connection) -> dict:

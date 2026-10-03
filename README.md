@@ -210,7 +210,16 @@ La veille couvre toute la liste et ne sait rien du portefeuille. C'est la page
 votre feuille de route, puis replie le reste. Les fonds ne sont pas couverts.
 
 Ce sont des faits relevés par une IA : une erreur reste possible, d'où le lien
-vers la source à côté de chacun. Ni prédiction, ni consigne.
+vers la source à côté de chacun.
+
+La veille se termine par une **lecture de la semaine**, pour le marché puis par
+secteur : ce qui pousse à la hausse, ce qui pousse à la baisse, ce qui
+trancherait, et une balance (hausse, baisse ou partagée) avec un niveau de
+confiance faible ou moyen. C'est une interprétation, tenue à part des faits :
+une opinion argumentée qui se trompera régulièrement, pas une prédiction ni un
+conseil en investissement. Le script refuse une lecture qui n'argumente qu'un
+côté, qui annonce une confiance forte ou qui donne une consigne d'achat ou de
+vente.
 
 ## Où sont mes données
 
