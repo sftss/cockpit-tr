@@ -262,6 +262,10 @@ dans les calculs : l'outil ne devine pas.
 
 ## Développement
 
+Les règles du projet, pour une personne comme pour un agent de code, sont dans
+[`CLAUDE.md`](CLAUDE.md) : ce qui ne se discute pas, la façon de travailler et
+les vérifications à passer avant une demande de fusion.
+
 ```powershell
 uv run pytest                 # tests (données inventées)
 uv run ruff check .           # style
