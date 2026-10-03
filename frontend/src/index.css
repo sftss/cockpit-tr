@@ -235,6 +235,21 @@ table.rules td { vertical-align: top; }
 table.trades th:nth-child(2), table.trades td:nth-child(2),
 table.trades th:nth-child(3), table.trades td:nth-child(3) { text-align: left; }
 
+/* Past readings against the market: words, with one figure. */
+table.record {
+  max-width: 60rem;
+  min-width: 640px;
+}
+table.record th,
+table.record td {
+  text-align: left;
+}
+table.record th:nth-child(3),
+table.record td:nth-child(3) {
+  text-align: right;
+  padding-right: 32px;
+}
+
 /* Upcoming events of the weekly watch: words, not figures, so everything reads from the left. */
 table.events {
   max-width: 60rem;

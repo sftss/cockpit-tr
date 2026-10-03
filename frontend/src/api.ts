@@ -519,6 +519,32 @@ export type Watch = {
   uncovered: string[];
 };
 
+/** How past readings fared: each market balance against the benchmark's following week. */
+export type ReadingsRecord = {
+  benchmark: string;
+  rows: {
+    semaine: string;
+    du: string;
+    au: string;
+    jusqu_au: string;
+    sens: "hausse" | "baisse" | "partagée";
+    confiance: "faible" | "moyenne";
+    variation: number | null;
+    verdict: "juste" | "à côté" | "non notée" | "en attente" | "inconnu";
+  }[];
+  summary: {
+    scored: number;
+    right: number;
+    /** Weeks, among those scored, when "up every week" would have been right. */
+    always_up_right: number;
+    unscored: number;
+    pending: number;
+    enough: boolean;
+    minimum: number;
+  };
+  error: string | null;
+};
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(path, init);
   if (!response.ok) {
@@ -662,6 +688,7 @@ export const api = {
     request(`/api/journal/${id}`, json("PUT", entry)),
   deleteJournalEntry: (id: number) => request(`/api/journal/${id}`, { method: "DELETE" }),
 
+  readingsRecord: () => request<ReadingsRecord>("/api/veille/bilan"),
   watch: (week?: string) =>
     request<Watch>(`/api/veille${week ? `?semaine=${encodeURIComponent(week)}` : ""}`),
 

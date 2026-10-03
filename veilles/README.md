@@ -135,6 +135,12 @@ la semaine, tenue à part des faits eux-mêmes.
   Le script refuse les mots « acheter », « vendre », « renforcer », « alléger »
   et « objectif de cours » dans la lecture.
 
+### Ce que les lectures ont valu
+
+L'application, pas la veille, compare ensuite chaque balance du marché à la
+variation d'un indice mondial sur la semaine suivante. Une veille ne se note
+pas elle-même et ne revient pas sur ses lectures passées.
+
 ## Limites
 
 - Les faits sont relevés par une IA dans des sources publiques : une erreur de

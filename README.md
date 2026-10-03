@@ -221,6 +221,12 @@ conseil en investissement. Le script refuse une lecture qui n'argumente qu'un
 côté, qui annonce une confiance forte ou qui donne une consigne d'achat ou de
 vente.
 
+Pour savoir ce que ces lectures valent, la page compare chaque balance du
+marché à ce que le MSCI World a fait, en euros, la semaine suivante. Une
+balance « partagée » n'est pas notée. À côté du score figure celui de la
+prévision la plus paresseuse, « hausse chaque semaine », sur les mêmes
+semaines ; aucun taux de réussite n'est annoncé avant dix lectures notées.
+
 ## Où sont mes données
 
 Dans `%LOCALAPPDATA%\cockpit-tr\cockpit.db` (un seul fichier). Le sauvegarder
