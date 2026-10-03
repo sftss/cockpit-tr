@@ -9,6 +9,7 @@ import { Data } from "./pages/Data";
 import { Home } from "./pages/Home";
 import { Journal } from "./pages/Journal";
 import { Portfolio } from "./pages/Portfolio";
+import { Reviews } from "./pages/Reviews";
 import { Roadmap } from "./pages/Roadmap";
 import { Rules } from "./pages/Rules";
 import { Security } from "./pages/Security";
@@ -21,6 +22,7 @@ const PAGES = [
   { id: "regles", label: "Règles" },
   { id: "halalitude", label: "Halalitude" },
   { id: "veille", label: "Veille" },
+  { id: "revues", label: "Revues" },
   { id: "assistant", label: "Assistant" },
   { id: "journal", label: "Journal" },
   { id: "soldees", label: "Lignes soldées" },
@@ -144,6 +146,7 @@ export default function App() {
         {report && shown === "regles" && <Rules />}
         {report && shown === "halalitude" && <HalalitudePage reload={reload} />}
         {report && shown === "veille" && <Watch />}
+        {report && shown === "revues" && <Reviews />}
         {report && shown === "assistant" && <Assistant />}
         {report && shown === "journal" && <Journal />}
         {report && shown === "soldees" && <Closed report={report} />}

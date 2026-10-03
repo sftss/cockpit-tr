@@ -23,6 +23,7 @@ from . import (
     db,
     gold,
     journal,
+    review,
     roadmap,
     rules,
     settings_file,
@@ -113,6 +114,18 @@ class JournalIn(BaseModel):
     title: str
     body: str | None = None
     decided_on: str | None = None
+
+
+class ReviewIn(BaseModel):
+    quarter: str
+
+
+class TextIn(BaseModel):
+    text: str = ""
+
+
+class CommentaryIn(BaseModel):
+    model: str | None = None
 
 
 class GoldLotIn(BaseModel):
@@ -591,6 +604,66 @@ def create_app(
         if not journal.delete(c, entry_id):
             raise HTTPException(404, "Note introuvable.")
         return {"deleted": entry_id}
+
+    # -- Quarterly review ----------------------------------------------------
+
+    @app.get("/api/reviews")
+    def get_reviews(c: sqlite3.Connection = Depends(conn)) -> dict:
+        return review.listing(c)
+
+    @app.post("/api/reviews", status_code=201)
+    def post_review(body: ReviewIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        """Compute the review of a quarter and keep it; again, to refresh its figures."""
+        try:
+            return review.generate(c, body.quarter, config.fiches_dir())
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    def kept_review(quarter: str, c: sqlite3.Connection) -> dict:
+        found = review.get(c, quarter)
+        if found is None:
+            raise HTTPException(404, "Revue introuvable.")
+        return found
+
+    @app.get("/api/reviews/{quarter}")
+    def get_review(quarter: str, c: sqlite3.Connection = Depends(conn)) -> dict:
+        return kept_review(quarter, c)
+
+    @app.put("/api/reviews/{quarter}/conclusions")
+    def put_conclusions(quarter: str, body: TextIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        if not review.set_conclusions(c, quarter, body.text):
+            raise HTTPException(404, "Revue introuvable.")
+        return kept_review(quarter, c)
+
+    @app.post("/api/reviews/{quarter}/commentary")
+    def post_commentary(
+        quarter: str, body: CommentaryIn, c: sqlite3.Connection = Depends(conn)
+    ) -> dict:
+        """Ask the assistant to read the review. Billed like any message to it."""
+        kept_review(quarter, c)
+        api_key, _ = keys.resolve(key_store)
+        if not api_key:
+            raise HTTPException(400, "Aucune clé d'API enregistrée.")
+        model = body.model if body.model in MODELS else chat.default_model(c)
+        try:
+            return review.comment(c, llm, api_key, quarter, model)
+        except review.CommentaryError as exc:
+            raise HTTPException(502, str(exc)) from exc
+
+    @app.get("/api/reviews/{quarter}/export")
+    def export_review(quarter: str, c: sqlite3.Connection = Depends(conn)) -> Response:
+        text = review.markdown(kept_review(quarter, c))
+        return Response(
+            text,
+            media_type="text/markdown; charset=utf-8",
+            headers={"Content-Disposition": f'attachment; filename="revue-{quarter}.md"'},
+        )
+
+    @app.delete("/api/reviews/{quarter}")
+    def delete_review(quarter: str, c: sqlite3.Connection = Depends(conn)) -> dict:
+        if not review.delete(c, quarter):
+            raise HTTPException(404, "Revue introuvable.")
+        return {"deleted": quarter}
 
     # -- Weekly watch --------------------------------------------------------
 
