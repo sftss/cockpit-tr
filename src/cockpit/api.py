@@ -28,6 +28,7 @@ from . import (
     rules,
     settings_file,
     store,
+    tickets,
 )
 from .assistant import chat, keys
 from .assistant import prompt as assistant_prompt
@@ -128,6 +129,29 @@ class CommentaryIn(BaseModel):
     model: str | None = None
 
 
+class TicketIn(BaseModel):
+    isin: str | None = None
+    name: str | None = None
+    account: str | None = None
+    side: str | None = None
+    shares: str | float | None = None
+    amount: str | float | None = None
+    order_type: str | None = None
+    limit_price: str | float | None = None
+    price: str | float | None = None
+    fee: str | float | None = None
+    reason: str | None = None
+    roadmap_item_id: int | None = None
+
+
+class TicketStatusIn(BaseModel):
+    status: str
+
+
+class TicketMatchIn(BaseModel):
+    transaction_id: str | None = None
+
+
 class GoldLotIn(BaseModel):
     label: str
     grams: str | float
@@ -196,9 +220,11 @@ def create_app(
         except UnicodeDecodeError as exc:
             raise HTTPException(400, "Le fichier n'est pas encodé en UTF-8.") from exc
         try:
-            return tr_csv.import_csv(c, text).as_dict()
+            report = tr_csv.import_csv(c, text).as_dict()
         except tr_csv.CsvFormatError as exc:
             raise HTTPException(400, str(exc)) from exc
+        # An order placed from a ticket shows up here: match it with its ticket.
+        return {**report, "tickets": tickets.reconcile(c)}
 
     @app.put("/api/prices/{isin}")
     def put_price(isin: str, body: PriceIn, c: sqlite3.Connection = Depends(conn)) -> dict:
@@ -425,6 +451,78 @@ def create_app(
     def refresh_roadmap(c: sqlite3.Connection = Depends(conn)) -> dict:
         with market_busy:
             return roadmap.refresh_prices(c, market)
+
+    # -- Order tickets -------------------------------------------------------
+    # A ticket is prepared and checked here; the order is placed by the user in
+    # the broker's application. No route sends anything to a broker.
+
+    def ticket_view(c: sqlite3.Connection, ticket_id: int) -> dict:
+        return tickets.get(c, ticket_id, config.fiches_dir())
+
+    def ticket_call(action, *args) -> None:
+        try:
+            action(*args)
+        except KeyError as exc:
+            raise HTTPException(404, "Ticket introuvable.") from exc
+        except tickets.TicketError as exc:
+            raise HTTPException(400, str(exc)) from exc
+
+    @app.get("/api/tickets")
+    def get_tickets(c: sqlite3.Connection = Depends(conn)) -> dict:
+        return tickets.listing(c, config.fiches_dir())
+
+    @app.get("/api/tickets/summary")
+    def get_tickets_summary(c: sqlite3.Connection = Depends(conn)) -> dict:
+        return tickets.summary(c)
+
+    @app.post("/api/tickets", status_code=201)
+    def post_ticket(body: TicketIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            ticket_id = tickets.create(
+                c, body.model_dump(exclude_unset=True), fiches=config.fiches_dir()
+            )
+        except tickets.TicketError as exc:
+            raise HTTPException(400, str(exc)) from exc
+        return ticket_view(c, ticket_id)
+
+    @app.post("/api/tickets/reconcile")
+    def reconcile_tickets(c: sqlite3.Connection = Depends(conn)) -> dict:
+        return tickets.reconcile(c)
+
+    @app.put("/api/tickets/{ticket_id}")
+    def put_ticket(ticket_id: int, body: TicketIn, c: sqlite3.Connection = Depends(conn)) -> dict:
+        ticket_call(
+            tickets.update, c, ticket_id, body.model_dump(exclude_unset=True), config.fiches_dir()
+        )
+        return ticket_view(c, ticket_id)
+
+    @app.post("/api/tickets/{ticket_id}/status")
+    def post_ticket_status(
+        ticket_id: int, body: TicketStatusIn, c: sqlite3.Connection = Depends(conn)
+    ) -> dict:
+        ticket_call(tickets.set_status, c, ticket_id, body.status, config.fiches_dir())
+        return ticket_view(c, ticket_id)
+
+    @app.post("/api/tickets/{ticket_id}/price")
+    def post_ticket_price(ticket_id: int, c: sqlite3.Connection = Depends(conn)) -> dict:
+        try:
+            with market_busy:
+                ticket_call(tickets.refresh_price, c, market, ticket_id)
+        except ProviderError as exc:
+            raise _provider_error(exc) from exc
+        return ticket_view(c, ticket_id)
+
+    @app.post("/api/tickets/{ticket_id}/match")
+    def post_ticket_match(
+        ticket_id: int, body: TicketMatchIn, c: sqlite3.Connection = Depends(conn)
+    ) -> dict:
+        ticket_call(tickets.match, c, ticket_id, body.transaction_id)
+        return ticket_view(c, ticket_id)
+
+    @app.delete("/api/tickets/{ticket_id}")
+    def delete_ticket(ticket_id: int, c: sqlite3.Connection = Depends(conn)) -> dict:
+        ticket_call(tickets.delete, c, ticket_id)
+        return {"deleted": ticket_id}
 
     # -- Physical gold -------------------------------------------------------
 

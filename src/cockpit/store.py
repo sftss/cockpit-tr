@@ -113,7 +113,7 @@ def current_report(conn: sqlite3.Connection) -> dict:
     return data
 
 
-def _universe(fiches: Path | None) -> dict[str, dict]:
+def universe(fiches: Path | None) -> dict[str, dict]:
     """The public list of companies by ISIN; empty when the file is not there."""
     if fiches is None:
         return {}
@@ -129,7 +129,7 @@ def allocation_view(conn: sqlite3.Connection, fiches: Path | None) -> dict:
     report = current_report(conn)
     currencies = dict(conn.execute("SELECT isin, quote_currency FROM instruments").fetchall())
     return allocation.breakdown(
-        report["positions"], report["total"]["basis"], currencies, _universe(fiches)
+        report["positions"], report["total"]["basis"], currencies, universe(fiches)
     )
 
 

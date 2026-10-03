@@ -86,6 +86,23 @@ export function Data({ report, reload }: { report: Report | null; reload: () => 
               {result.total} lignes lues : {result.inserted} ajoutées, {result.already_present} déjà
               présentes
               {result.date_min && `, du ${date(result.date_min)} au ${date(result.date_max)}`}.
+              {result.tickets.matched.length > 0 && (
+                <span className="block">
+                  {result.tickets.matched.length === 1
+                    ? "Un ticket prêt a été rapproché de sa transaction."
+                    : `${result.tickets.matched.length} tickets prêts ont été rapprochés de leur transaction.`}{" "}
+                  <a className="text-accent underline" href="#/tickets">
+                    Voir les tickets
+                  </a>
+                </span>
+              )}
+              {result.tickets.ambiguous.length > 0 && (
+                <span className="block">
+                  {result.tickets.ambiguous.length === 1
+                    ? "Un ticket prêt a peut-être sa transaction : à désigner dans la page Tickets."
+                    : `${result.tickets.ambiguous.length} tickets prêts ont peut-être leur transaction : à désigner dans la page Tickets.`}
+                </span>
+              )}
               {result.rejected.length > 0 && (
                 <span className="block text-loss">
                   Lignes rejetées : {result.rejected.join(" ; ")}

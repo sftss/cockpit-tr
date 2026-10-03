@@ -8,7 +8,7 @@ import threading
 import webbrowser
 from pathlib import Path
 
-from . import __version__, config, db, store
+from . import __version__, config, db, store, tickets
 from .importers import tr_csv
 
 
@@ -39,6 +39,12 @@ def cmd_import(args: argparse.Namespace) -> int:
         print(f"  rejetée — {message}")
     for name, count in report.unknown_types.items():
         print(f"  type non reconnu, ignoré dans les calculs : {name} ({count})")
+    # An order placed from a ticket shows up in the export: match it, as the page does.
+    matching = tickets.reconcile(conn)
+    if matching["matched"]:
+        print(f"Tickets rapprochés de leur transaction : {len(matching['matched'])}")
+    if matching["ambiguous"]:
+        print(f"Tickets à rapprocher à la main, page Tickets : {len(matching['ambiguous'])}")
     print(f"Base : {config.db_path()}")
     return 0
 

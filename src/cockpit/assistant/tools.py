@@ -9,8 +9,10 @@ the figures the user sees. Three things are deliberately out of its reach:
 * everything that is a decision of the user: rule values, compliance
   statuses, reasons, prices, the API key.
 
-Writing is limited to two things, both marked as coming from the assistant: a
-note in the decision journal and a proposed target on the roadmap.
+Writing is limited to three things, all marked as coming from the assistant: a
+note in the decision journal, a proposed target on the roadmap, and the draft
+of an order ticket. A draft is all it can do to a ticket: no tool makes one
+ready, writes its reason, or says it was executed.
 """
 
 from __future__ import annotations
@@ -19,7 +21,7 @@ import json
 import sqlite3
 from decimal import Decimal
 
-from .. import compliance, config, journal, roadmap, store
+from .. import compliance, config, journal, roadmap, store, tickets
 from ..money import dec
 from ..portfolio import CARD
 
@@ -195,6 +197,16 @@ TOOLS: list[dict] = [
         "input_schema": {"type": "object", "properties": {}, "additionalProperties": False},
     },
     {
+        "name": "lire_tickets",
+        "description": (
+            "Tickets d'ordre : les ordres que l'utilisateur prépare ici avant de les passer "
+            "lui-même chez le courtier. Pour chacun : titre, compte, sens, quantité, montant, "
+            "état (brouillon, prêt, exécuté, abandonné), résultat de chaque contrôle et motif "
+            "écrit."
+        ),
+        "input_schema": {"type": "object", "properties": {}, "additionalProperties": False},
+    },
+    {
         "name": "ajouter_note_journal",
         "description": (
             "Ajoute une note au journal de décisions, marquée comme venant de l'assistant. À "
@@ -237,9 +249,40 @@ TOOLS: list[dict] = [
             "additionalProperties": False,
         },
     },
+    {
+        "name": "preparer_ticket",
+        "description": (
+            "Crée le brouillon d'un ticket d'ordre, marqué comme venant de l'assistant. À "
+            "n'utiliser que si l'utilisateur demande explicitement de préparer ce ticket, avec "
+            "le titre, le compte, le sens et la quantité ou le montant qu'il a donnés : ne "
+            "choisis aucun de ces éléments à sa place. Le brouillon n'engage rien : "
+            "l'utilisateur le relit, écrit le motif s'il en faut un, le passe à « prêt », puis "
+            "passe l'ordre lui-même chez le courtier. La réponse donne le résultat des "
+            "contrôles : rapporte-le tel quel, Halalitude comprise."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "isin": {"type": "string", "description": "Code ISIN du titre."},
+                "compte": {"type": "string", "enum": ["CTO", "PEA"]},
+                "sens": {"type": "string", "enum": ["achat", "vente"]},
+                "quantite": {"type": "number", "description": "Nombre de titres."},
+                "montant": {
+                    "type": "number",
+                    "description": "Montant en euros, si la quantité n'est pas donnée.",
+                },
+                "cours_limite": {
+                    "type": "number",
+                    "description": "Cours limite en euros, seulement si l'utilisateur en veut un.",
+                },
+            },
+            "required": ["isin", "compte", "sens"],
+            "additionalProperties": False,
+        },
+    },
 ]
 
-WRITING = {"ajouter_note_journal", "proposer_cible"}
+WRITING = {"ajouter_note_journal", "proposer_cible", "preparer_ticket"}
 
 LABELS = {
     "lire_portefeuille": "Lecture du portefeuille",
@@ -254,6 +297,8 @@ LABELS = {
     "lire_veille": "Lecture de la veille hebdomadaire",
     "lire_revue": "Lecture des revues trimestrielles",
     "lire_journal": "Lecture du journal",
+    "lire_tickets": "Lecture des tickets d'ordre",
+    "preparer_ticket": "Brouillon de ticket préparé",
     "ajouter_note_journal": "Note ajoutée au journal",
     "proposer_cible": "Cible proposée sur la feuille de route",
 }
@@ -631,6 +676,69 @@ def _propose_target(conn: sqlite3.Connection, args: dict) -> dict:
     }
 
 
+def _ticket(seen: dict) -> dict:
+    return {
+        "identifiant": seen["id"],
+        "titre": seen["name"],
+        "isin": seen["isin"],
+        "compte": seen["account"],
+        "sens": tickets.SIDES[seen["side"]].lower(),
+        "quantite": seen["shares"],
+        "type_ordre": tickets.ORDER_TYPES[seen["order_type"]].lower(),
+        "cours_limite": seen["limit_price"],
+        "cours_indicatif": seen["price"],
+        "cours_releve_le": seen["price_at"],
+        "montant": seen["amount"],
+        "frais": seen["fee"],
+        "etat": tickets.STATUSES[seen["status"]].lower(),
+        "propose_par": seen["proposed_by"] or "utilisateur",
+        "motif": seen["reason"],
+        "cible": seen["target"]["name"] if seen["target"] else None,
+        "controles": [
+            {"controle": c["label"], "resultat": c["state"], "detail": c["detail"]}
+            for c in seen["controls"]
+        ],
+        "arrete": seen["blocked"],
+        "motif_demande": seen["needs_reason"],
+        "execute": seen["executed"],
+    }
+
+
+def _tickets(conn: sqlite3.Connection, _: dict) -> dict:
+    listed = tickets.listing(conn, config.fiches_dir())["tickets"]
+    return {
+        "tickets": [_ticket(seen) for seen in listed],
+        "rappel": "Un ticket prépare un ordre ; l'ordre se passe chez le courtier, par "
+        "l'utilisateur. « bloquant » : le ticket s'arrête tant que la Halalitude n'est pas "
+        "relevée, halal et à jour. « motif » : une règle est dépassée, un motif écrit est "
+        "demandé, rien n'est bloqué.",
+    }
+
+
+def _prepare_ticket(conn: sqlite3.Connection, args: dict) -> dict:
+    side = {"achat": "BUY", "vente": "SELL"}.get(str(args.get("sens") or ""))
+    if side is None:
+        raise ToolError("Sens attendu : achat ou vente.")
+    data = {"isin": args.get("isin"), "account": args.get("compte"), "side": side}
+    if args.get("quantite") is not None:
+        data["shares"] = args["quantite"]
+    elif args.get("montant") is not None:
+        data["amount"] = args["montant"]
+    if args.get("cours_limite") is not None:
+        data["order_type"], data["limit_price"] = "limite", args["cours_limite"]
+    try:
+        ticket_id = tickets.create(conn, data, proposed_by="assistant", fiches=config.fiches_dir())
+    except tickets.TicketError as exc:
+        raise ToolError(str(exc)) from exc
+    return {
+        "enregistre": True,
+        "ticket": _ticket(tickets.get(conn, ticket_id, config.fiches_dir())),
+        "rappel": "C'est un brouillon. L'utilisateur le relit dans la page Tickets, écrit le "
+        "motif s'il en faut un et le passe à « prêt » ; l'ordre se passe ensuite chez le "
+        "courtier. Rien n'a été envoyé.",
+    }
+
+
 _RUNNERS = {
     "lire_portefeuille": _portfolio,
     "lire_lignes_soldees": _closed,
@@ -644,6 +752,8 @@ _RUNNERS = {
     "lire_veille": _watch,
     "lire_revue": _review,
     "lire_journal": _journal,
+    "lire_tickets": _tickets,
+    "preparer_ticket": _prepare_ticket,
     "ajouter_note_journal": _add_note,
     "proposer_cible": _propose_target,
 }

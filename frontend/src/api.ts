@@ -471,6 +471,8 @@ export type ImportReport = {
   unknown_types: Record<string, number>;
   date_min: string | null;
   date_max: string | null;
+  /** Tickets matched with a transaction of this import, and those left to the user. */
+  tickets: { matched: number[]; ambiguous: number[] };
 };
 
 export type SnapshotSummary = {
@@ -657,6 +659,95 @@ export type ReviewListing = {
   due: { quarter: string; name: string } | null;
 };
 
+export type TicketStatus = "brouillon" | "pret" | "execute" | "abandonne";
+export type TicketSide = "BUY" | "SELL";
+export type TicketOrderType = "marche" | "limite";
+
+/** How a control ends. Only "bloquant" stops a ticket; "motif" asks for a written reason. */
+export type ControlState =
+  | "ok"
+  | "bloquant"
+  | "motif"
+  | "avertissement"
+  | "info"
+  | "attente"
+  | "erreur";
+
+export type TicketControl = { key: string; label: string; state: ControlState; detail: string };
+
+export type TicketTrade = {
+  transaction_id: string;
+  date: string;
+  shares: number;
+  price: number | null;
+  amount: number;
+  fee: number;
+};
+
+export type Ticket = {
+  id: number;
+  isin: string;
+  name: string;
+  account: string;
+  side: TicketSide;
+  shares: number | null;
+  order_type: TicketOrderType;
+  limit_price: number | null;
+  price: number | null;
+  price_at: string | null;
+  /** The price the amount is counted with: the limit of a limit order, else the indicative price. */
+  unit: number | null;
+  amount: number | null;
+  fee: number;
+  fee_share: number | null;
+  reason: string | null;
+  status: TicketStatus;
+  proposed_by: string | null;
+  created_at: string;
+  ready_at: string | null;
+  closed_at: string | null;
+  held: number;
+  instrument: string | null;
+  halalitude: Halalitude;
+  target: {
+    id: number;
+    name: string;
+    status: RoadmapStatus;
+    thesis: string | null;
+    entry_condition: string | null;
+  } | null;
+  controls: TicketControl[];
+  blocked: boolean;
+  needs_reason: boolean;
+  can_be_ready: boolean;
+  stop: string | null;
+  candidates: TicketTrade[];
+  executed: TicketTrade | null;
+};
+
+export type TicketListing = {
+  statuses: Record<TicketStatus, string>;
+  sides: Record<TicketSide, string>;
+  order_types: Record<TicketOrderType, string>;
+  default_fee: number;
+  tickets: Ticket[];
+};
+
+export type TicketDraft = {
+  isin?: string;
+  name?: string;
+  account?: string;
+  side?: TicketSide;
+  shares?: string | null;
+  amount?: string | number;
+  order_type?: TicketOrderType;
+  limit_price?: string | null;
+  price?: string | null;
+  fee?: string;
+  reason?: string;
+  roadmap_item_id?: number | null;
+};
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(path, init);
   if (!response.ok) {
@@ -769,6 +860,19 @@ export const api = {
       "/api/roadmap/prices",
       { method: "POST" },
     ),
+
+  tickets: () => request<TicketListing>("/api/tickets"),
+  ticketSummary: () => request<Record<TicketStatus, number>>("/api/tickets/summary"),
+  createTicket: (draft: TicketDraft) => request<Ticket>("/api/tickets", json("POST", draft)),
+  updateTicket: (id: number, draft: TicketDraft) =>
+    request<Ticket>(`/api/tickets/${id}`, json("PUT", draft)),
+  setTicketStatus: (id: number, status: TicketStatus) =>
+    request<Ticket>(`/api/tickets/${id}/status`, json("POST", { status })),
+  refreshTicketPrice: (id: number) =>
+    request<Ticket>(`/api/tickets/${id}/price`, { method: "POST" }),
+  matchTicket: (id: number, transactionId: string | null) =>
+    request<Ticket>(`/api/tickets/${id}/match`, json("POST", { transaction_id: transactionId })),
+  deleteTicket: (id: number) => request(`/api/tickets/${id}`, { method: "DELETE" }),
 
   gold: () => request<Gold>("/api/gold"),
   addGoldLot: (lot: GoldDraft) => request<{ id: number }>("/api/gold/lots", json("POST", lot)),

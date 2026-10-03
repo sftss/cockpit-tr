@@ -26,7 +26,7 @@ aucun ordre. Elle sort vers Internet pour deux choses :
 | V1 | Règles du portefeuille, Halalitude datée, feuille de route, or physique | fait |
 | V2 | Assistant (chat, journal de décisions), veille hebdomadaire (`veilles/`), fiche du jour (`fiches/`), revue trimestrielle | fait |
 | Graphiques | Chandeliers, volume, moyennes mobiles et ordres sur la page d'un titre ; carte du portefeuille ; performance comparée ; répartition | fait |
-| V3 | Tickets d'ordre : préparés et contrôlés ici, passés dans l'app Trade Republic | à venir |
+| V3 | Tickets d'ordre : préparés et contrôlés ici, passés dans l'app Trade Republic | fait |
 
 Pas de connexion programmatique à Trade Republic : son contrat client interdit
 l'accès par un programme qu'il ne fournit pas. Les transactions viennent de
@@ -174,8 +174,8 @@ au même endroit (par exemple `AI.PA`).
 
 Un chat intégré, qui lit les données locales par des outils : positions, lignes
 soldées, frais, règles et écarts, Halalitude, feuille de route, transactions,
-cours, fiches du jour, veille hebdomadaire, revues trimestrielles, journal de
-décisions.
+cours, fiches du jour, veille hebdomadaire, revues trimestrielles, tickets
+d'ordre, journal de décisions.
 
 - **Clé d'API.** Elle se crée dans la console Anthropic et se saisit une fois
   dans la page « Assistant ». Elle est rangée dans le gestionnaire
@@ -183,10 +183,11 @@ décisions.
   L'API est facturée à l'usage, séparément d'un abonnement Claude.
 - **Ce que l'assistant ne voit pas.** L'or physique, les paiements par carte et
   les coordonnées bancaires ne lui sont jamais transmis.
-- **Ce qu'il peut écrire.** Une note dans le journal de décisions et une
+- **Ce qu'il peut écrire.** Une note dans le journal de décisions, une
   proposition de cible sur la feuille de route (statut « idée », sans montant ni
-  cours d'entrée), toutes deux marquées comme venant de lui. Rien d'autre : ni
-  règle, ni statut, ni motif.
+  cours d'entrée) et, quand vous le lui demandez, le brouillon d'un ticket
+  d'ordre. Les trois sont marqués comme venant de lui. Rien d'autre : ni règle,
+  ni statut, ni motif, et il ne rend aucun ticket « prêt ».
 - **Recherche web.** Un interrupteur dans le chat, éteint par défaut ; les
   sources s'affichent sous la réponse.
 - **Coût.** Les tokens et un coût estimé s'affichent sous chaque réponse et par
@@ -249,6 +250,59 @@ suivant.
 
 L'accueil rappelle la revue du dernier trimestre terminé tant qu'elle n'a pas
 été faite. Une revue rend compte ; elle ne propose aucun ordre.
+
+## Tickets d'ordre
+
+Un ticket prépare un ordre et le contrôle avant qu'il soit passé. **Rien ne
+part de l'ordinateur** : l'ordre se passe ensuite à la main, dans l'application
+Trade Republic. La page « Tickets » sert à écrire ce qui est prévu, à voir ce
+que les règles en disent, puis à comparer avec ce qui a été fait.
+
+Un ticket se crée depuis la page « Tickets », depuis une cible de la feuille de
+route (« Préparer le ticket ») ou depuis la page d'un titre. Il porte le titre,
+le compte, le sens, la quantité (ou un montant, dont la quantité est déduite),
+le type d'ordre, un cours indicatif daté et les frais prévus.
+
+| État | Ce que ça veut dire |
+| --- | --- |
+| Brouillon | En préparation ; tout se modifie |
+| Prêt | Contrôlé ; un encadré donne ce qu'il faut recopier dans Trade Republic |
+| Exécuté | Rapproché de la transaction importée ; le prévu s'affiche à côté du fait |
+| Abandonné | Laissé de côté ; il se reprend ou se supprime |
+
+Les contrôles se recalculent à chaque affichage :
+
+- **Halalitude, à l'achat : le seul contrôle qui arrête.** Sans statut
+  « halal » relevé depuis 90 jours au plus, le ticket reste un brouillon.
+  « Douteux » arrête comme « haram », et aucun motif ne le débloque. Un ticket
+  prêt dont le statut expire redevient un brouillon. Une vente n'est jamais
+  arrêtée.
+- **Règles du portefeuille : un motif écrit, rien de bloqué.** Achat minimal,
+  ordres et frais du trimestre, nouvelle ligne, poids maximal, ventes et lignes
+  soldées sont mesurés par le même code que la page « Règles », en comptant les
+  tickets déjà prêts. Une règle dépassée demande un motif ; il suit ensuite la
+  transaction, sans être saisi deux fois.
+- **Avertissements, sans rien demander.** Ticket hors feuille de route, espèces
+  estimées insuffisantes, ISIN hors UE et EEE pour le PEA, type de titre non
+  connu, ordre saisi sans frais.
+- **Une vente ne dépasse pas ce qui est détenu** sur le compte, ventes déjà
+  prêtes comprises.
+
+Après l'ordre, importer le nouvel export. Le rapprochement se fait de lui-même
+quand une seule transaction est sûrement l'ordre : même titre, même compte,
+même sens, passée dans les trente jours après que le ticket a été rendu prêt,
+avec des frais, pour une quantité proche (10 %), dans la limite de cours si le
+ticket en avait une et, pour un achat, un jour où le statut était « halal » et
+à jour. Dans tous les autres cas, l'application liste les transactions
+possibles et demande laquelle. « Défaire » annule un rapprochement : la
+transaction écartée n'est plus reprise d'elle-même, et le motif copié à côté
+d'elle est retiré.
+
+Limites à connaître : le cours indicatif n'est pas le cours d'exécution ;
+l'éligibilité au PEA se lit dans Trade Republic, l'application ne la certifie
+pas ; les frais sont à 1 € par défaut et se corrigent sur le ticket.
+L'application ne propose aucun ticket d'elle-même, ne conseille aucune taille
+et ne fixe aucun objectif de cours.
 
 ## Où sont mes données
 

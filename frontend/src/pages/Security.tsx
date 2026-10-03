@@ -41,6 +41,7 @@ export function Security({ isin, report }: { isin: string; report: Report }) {
   const [chart, setChart] = useState<ChartData | null>(null);
   const [security, setSecurity] = useState<SecurityData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [ticketError, setTicketError] = useState<string | null>(null);
   const [unknown, setUnknown] = useState(false);
   const [allTrades, setAllTrades] = useState(false);
   const positions = report.positions.filter((p) => p.isin === isin);
@@ -80,6 +81,16 @@ export function Security({ isin, report }: { isin: string; report: Report }) {
       alive = false;
     };
   }, [isin, inEuros, report.last_import]);
+
+  /** A draft ticket on this title; the page of tickets takes over from there. */
+  const prepare = async (side: "BUY" | "SELL") => {
+    try {
+      await api.createTicket({ isin, side, ...(first ? { account: first.account } : {}) });
+      window.location.hash = "#/tickets";
+    } catch (e) {
+      setTicketError((e as Error).message);
+    }
+  };
 
   if (unknown) {
     return (
@@ -136,6 +147,19 @@ export function Security({ isin, report }: { isin: string; report: Report }) {
           </p>
         )
       )}
+
+      <p className="mb-6 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+        <span className="text-muted">Ticket d'ordre :</span>
+        <button type="button" onClick={() => prepare("BUY")} className="text-accent hover:underline">
+          préparer un achat
+        </button>
+        {first && (
+          <button type="button" onClick={() => prepare("SELL")} className="text-accent hover:underline">
+            préparer une vente
+          </button>
+        )}
+        {ticketError && <span className="w-full text-alert">{ticketError}</span>}
+      </p>
 
       <div className="mb-3 flex flex-wrap items-center gap-x-6 gap-y-2">
         <div className="flex flex-wrap gap-1" role="group" aria-label="Période du graphique">
