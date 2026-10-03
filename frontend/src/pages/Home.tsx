@@ -148,10 +148,12 @@ function RulesSummary({ stamp }: { stamp: string | null }) {
   const [rules, setRules] = useState<RulesState | null>(null);
   const [compliance, setCompliance] = useState<Compliance | null>(null);
   const [watch, setWatch] = useState<Watch | null>(null);
+  const [due, setDue] = useState<string | null>(null);
   useEffect(() => {
     api.rules().then(setRules).catch(() => setRules(null));
     api.compliance().then(setCompliance).catch(() => setCompliance(null));
     api.watch().then(setWatch).catch(() => setWatch(null));
+    api.reviews().then((listing) => setDue(listing.due?.name ?? null)).catch(() => setDue(null));
   }, [stamp]);
   if (!rules) return null;
 
@@ -207,6 +209,14 @@ function RulesSummary({ stamp }: { stamp: string | null }) {
             )}{" "}
             <a className={link} href="#/halalitude">
               Voir les statuts
+            </a>
+          </li>
+        )}
+        {due && (
+          <li>
+            <span className="text-alert">La revue du {due} n'a pas encore été faite.</span>{" "}
+            <a className={link} href="#/revues">
+              Ouvrir les revues
             </a>
           </li>
         )}

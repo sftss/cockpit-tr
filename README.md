@@ -24,7 +24,7 @@ aucun ordre. Elle sort vers Internet pour deux choses :
 | V0 | Import de l'export CSV, base SQLite, calculs, tableau de bord, snapshots | fait |
 | V0 (suite) | Cours par ISIN, graphiques par titre, mini-courbes, courbe de la valeur du portefeuille | fait |
 | V1 | Règles du portefeuille, Halalitude datée, feuille de route, or physique | fait |
-| V2 | Assistant (chat, journal de décisions), veille hebdomadaire (`veilles/`), fiche du jour (`fiches/`) : fait. Revue trimestrielle : à venir | en cours |
+| V2 | Assistant (chat, journal de décisions), veille hebdomadaire (`veilles/`), fiche du jour (`fiches/`), revue trimestrielle | fait |
 | Graphiques | Chandeliers, volume, moyennes mobiles et ordres sur la page d'un titre ; carte du portefeuille ; performance comparée ; répartition | fait |
 | V3 | Tickets d'ordre : préparés et contrôlés ici, passés dans l'app Trade Republic | à venir |
 
@@ -174,7 +174,8 @@ au même endroit (par exemple `AI.PA`).
 
 Un chat intégré, qui lit les données locales par des outils : positions, lignes
 soldées, frais, règles et écarts, Halalitude, feuille de route, transactions,
-cours, fiches du jour, veille hebdomadaire, journal de décisions.
+cours, fiches du jour, veille hebdomadaire, revues trimestrielles, journal de
+décisions.
 
 - **Clé d'API.** Elle se crée dans la console Anthropic et se saisit une fois
   dans la page « Assistant ». Elle est rangée dans le gestionnaire
@@ -226,6 +227,28 @@ marché à ce que le MSCI World a fait, en euros, la semaine suivante. Une
 balance « partagée » n'est pas notée. À côté du score figure celui de la
 prévision la plus paresseuse, « hausse chaque semaine », sur les mêmes
 semaines ; aucun taux de réussite n'est annoncé avant dix lectures notées.
+
+## Revue trimestrielle
+
+La page « Revues » arrête les chiffres d'un trimestre et les garde tels qu'ils
+étaient : comptes, performance du trimestre (achats et ventes neutralisés) face
+à un fonds du portefeuille, activité face aux règles, écarts et leurs motifs,
+frais, lignes ouvertes et soldées, portefeuille et Halalitude, feuille de
+route, fiches du trimestre, puis les règles en vigueur pour le trimestre
+suivant.
+
+- **L'application calcule, sans IA.** Les mêmes transactions redonnent la même
+  revue. « Actualiser les chiffres » la recalcule.
+- **Le commentaire de l'assistant est à la demande.** Un bouton lui envoie la
+  revue ; sa lecture est gardée avec elle, et la discussion se poursuit dans la
+  page « Assistant ». C'est un appel à l'API, compté dans la consommation.
+- **Les conclusions sont les vôtres** : un champ libre, conservé quand les
+  chiffres sont actualisés.
+- **Export en Markdown**, pour l'archiver ou la relire ailleurs. Ce fichier est
+  personnel : il ne va pas dans le dépôt.
+
+L'accueil rappelle la revue du dernier trimestre terminé tant qu'elle n'a pas
+été faite. Une revue rend compte ; elle ne propose aucun ordre.
 
 ## Où sont mes données
 

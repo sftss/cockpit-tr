@@ -235,6 +235,18 @@ table.rules td { vertical-align: top; }
 table.trades th:nth-child(2), table.trades td:nth-child(2),
 table.trades th:nth-child(3), table.trades td:nth-child(3) { text-align: left; }
 
+/* Tables of the quarterly review whose columns are words. */
+table.review-rules th:nth-child(3),
+table.review-rules td:nth-child(3) {
+  text-align: left;
+  padding-left: 32px;
+}
+table.review-text th:not(:first-child),
+table.review-text td:not(:first-child) {
+  text-align: left;
+}
+table.review-text td { vertical-align: top; }
+
 /* Past readings against the market: words, with one figure. */
 table.record {
   max-width: 60rem;

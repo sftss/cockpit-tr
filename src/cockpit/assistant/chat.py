@@ -277,6 +277,7 @@ def send(
     text: str,
     web_search: bool = False,
     model: str | None = None,
+    max_chars: int = MAX_MESSAGE_CHARS,
 ) -> Iterator[dict]:
     """Send one message and yield what happens, as events for the screen.
 
@@ -293,7 +294,7 @@ def send(
     if not text:
         yield {"type": "error", "message": "Message vide."}
         return
-    if len(text) > MAX_MESSAGE_CHARS:
+    if len(text) > max_chars:
         yield {"type": "error", "message": "Message trop long."}
         return
 

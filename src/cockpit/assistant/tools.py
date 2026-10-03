@@ -171,6 +171,22 @@ TOOLS: list[dict] = [
         },
     },
     {
+        "name": "lire_revue",
+        "description": (
+            "Revues trimestrielles calculées par l'application : comptes, performance du "
+            "trimestre, activité face aux règles, écarts et motifs, frais, lignes ouvertes et "
+            "soldées, Halalitude, feuille de route, fiches. Sans argument, la liste des revues "
+            "et le texte de la plus récente ; avec « trimestre », celle demandée."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "trimestre": {"type": "string", "description": "Par exemple 2026-T3."},
+            },
+            "additionalProperties": False,
+        },
+    },
+    {
         "name": "lire_journal",
         "description": (
             "Journal de décisions : ce que l'utilisateur a décidé, quand et pourquoi, et les "
@@ -236,6 +252,7 @@ LABELS = {
     "lire_cours": "Lecture des cours",
     "lire_fiches": "Lecture des fiches du jour",
     "lire_veille": "Lecture de la veille hebdomadaire",
+    "lire_revue": "Lecture des revues trimestrielles",
     "lire_journal": "Lecture du journal",
     "ajouter_note_journal": "Note ajoutée au journal",
     "proposer_cible": "Cible proposée sur la feuille de route",
@@ -548,6 +565,23 @@ def _watch(conn: sqlite3.Connection, args: dict) -> dict:
     }
 
 
+def _review(conn: sqlite3.Connection, args: dict) -> dict:
+    from .. import review  # local import: a review asks the assistant for its commentary
+
+    kept = review.listing(conn)["reviews"]
+    if not kept:
+        return {"revues": [], "note": "Aucune revue trimestrielle n'a encore été générée."}
+    wanted = str(args.get("trimestre") or "").strip() or kept[0]["quarter"]
+    found = review.get(conn, wanted)
+    if found is None:
+        raise ToolError(f"Aucune revue pour {wanted}. Appeler l'outil sans argument.")
+    return {
+        "revues": [{"trimestre": r["quarter"], "generee_le": r["generated_at"]} for r in kept],
+        "trimestre": wanted,
+        "texte": review.markdown(found),
+    }
+
+
 def _journal(conn: sqlite3.Connection, _: dict) -> dict:
     return {
         "notes": [
@@ -608,6 +642,7 @@ _RUNNERS = {
     "lire_cours": _prices,
     "lire_fiches": _sheets,
     "lire_veille": _watch,
+    "lire_revue": _review,
     "lire_journal": _journal,
     "ajouter_note_journal": _add_note,
     "proposer_cible": _propose_target,

@@ -142,13 +142,9 @@ INDICES = {
 }
 
 
-def performance_view(conn: sqlite3.Connection, market, choice: str | None = None) -> dict:
-    """Time-weighted performance of the portfolio beside one benchmark: a fund
-    already in the database (its stored prices) or a public index (asked from
-    the price source)."""
-    points = value_history(conn)["points"]
-    history = price_history(conn)
-    # Funds first: those held, largest first, then those held in the past.
+def benchmark_funds(conn: sqlite3.Connection, history: dict) -> list[dict]:
+    """Funds of the database that can serve as a benchmark, from their stored
+    prices: those held first, largest first, then those held in the past."""
     held: dict[str, Decimal] = {}
     for line in portfolio.build_lines(all_transactions(conn)).values():
         if line.is_open:
@@ -157,11 +153,20 @@ def performance_view(conn: sqlite3.Connection, market, choice: str | None = None
         "SELECT isin, name FROM instruments WHERE asset_class = 'FUND' ORDER BY name"
     ).fetchall()
     rows.sort(key=lambda row: -held.get(row["isin"], ZERO))  # stable: names within a tie
-    funds = [
+    return [
         {"id": row["isin"], "label": row["name"]}
         for row in rows
         if len(history.get(row["isin"], [])) > 1
     ]
+
+
+def performance_view(conn: sqlite3.Connection, market, choice: str | None = None) -> dict:
+    """Time-weighted performance of the portfolio beside one benchmark: a fund
+    already in the database (its stored prices) or a public index (asked from
+    the price source)."""
+    points = value_history(conn)["points"]
+    history = price_history(conn)
+    funds = benchmark_funds(conn, history)
     benchmarks = funds + [{"id": key, "label": label} for key, (_, label) in INDICES.items()]
     chosen = next((b for b in benchmarks if b["id"] == choice), benchmarks[0])
     prices: list[tuple[str, Decimal]] = []
@@ -185,7 +190,8 @@ def performance_view(conn: sqlite3.Connection, market, choice: str | None = None
     }
 
 
-def rules_state(conn: sqlite3.Connection) -> dict:
+def rules_state(conn: sqlite3.Connection, today: date | None = None) -> dict:
+    """Counters against the rules for the quarter of `today` (by default, now)."""
     from . import rules  # local import: rules reads the portfolio through this module
 
     report = current_report(conn)
@@ -205,6 +211,7 @@ def rules_state(conn: sqlite3.Connection) -> dict:
             for p in report["positions"]
         ],
         reasons,
+        today,
     )
 
 

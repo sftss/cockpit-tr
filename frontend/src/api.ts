@@ -545,6 +545,118 @@ export type ReadingsRecord = {
   error: string | null;
 };
 
+export type ReviewData = {
+  quarter: string;
+  name: string;
+  from: string;
+  to: string;
+  as_of: string;
+  complete: boolean;
+  accounts: {
+    account: string;
+    label: string;
+    open_lines: number;
+    net_invested: number;
+    value: number | null;
+    latent: number | null;
+    performance: number | null;
+  }[];
+  performance:
+    | { available: false }
+    | {
+        available: true;
+        from: string;
+        to: string;
+        start_value: number;
+        end_value: number;
+        bought: number;
+        sold: number;
+        gain: number;
+        change: number | null;
+        at_cost: number;
+        benchmark: { label: string; from: string; change: number | null } | null;
+      };
+  /** Counts and ceilings come ready to show: their units differ from one rule to the next. */
+  counters: {
+    kind: string;
+    label: string;
+    count: string;
+    limit: string;
+    next_limit: string;
+    breaches: number;
+  }[];
+  deviations: {
+    date: string;
+    name: string;
+    account: string;
+    side: string;
+    amount: number;
+    details: string[];
+    reason: string | null;
+  }[];
+  fees: {
+    manual_orders: number;
+    free_trades: number;
+    order_fees: number;
+    deposit_fees: number;
+    manual_amount: number;
+    share_of_amount: number | null;
+    total_since_start: number;
+    share_of_capital: number | null;
+  };
+  rotation: { quarter: string; manual_orders: number }[];
+  closed: {
+    name: string;
+    account: string;
+    holding_days: number | null;
+    net: number;
+    net_pct: number | null;
+  }[];
+  opened: string[];
+  positions: {
+    name: string;
+    account: string;
+    value: number | null;
+    cost: number;
+    latent_pct: number | null;
+    weight: number | null;
+    halalitude: string;
+    halalitude_state: string;
+  }[];
+  weights_basis: "value" | "cost";
+  halalitude: {
+    missing: number;
+    stale: number;
+    not_compliant: number;
+    attention: { name: string; status: string; checked_on: string | null; state: string }[];
+  };
+  roadmap: {
+    name: string;
+    status: string;
+    entry_price: number | null;
+    last_price: number | null;
+    reached: boolean;
+  }[];
+  sheets: { date: string; name: string | null; score: number | null; label: string | null }[];
+};
+
+export type Review = {
+  quarter: string;
+  generated_at: string;
+  data: ReviewData;
+  commentary: string | null;
+  commentary_at: string | null;
+  conversation_id: number | null;
+  conclusions: string | null;
+};
+
+export type ReviewListing = {
+  reviews: { quarter: string; name: string; generated_at: string; has_commentary: boolean }[];
+  quarters: { quarter: string; name: string }[];
+  /** The last finished quarter, when it has no review yet. */
+  due: { quarter: string; name: string } | null;
+};
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(path, init);
   if (!response.ok) {
@@ -688,6 +800,13 @@ export const api = {
     request(`/api/journal/${id}`, json("PUT", entry)),
   deleteJournalEntry: (id: number) => request(`/api/journal/${id}`, { method: "DELETE" }),
 
+  reviews: () => request<ReviewListing>("/api/reviews"),
+  review: (quarter: string) => request<Review>(`/api/reviews/${quarter}`),
+  generateReview: (quarter: string) => request<Review>("/api/reviews", json("POST", { quarter })),
+  saveConclusions: (quarter: string, text: string) =>
+    request<Review>(`/api/reviews/${quarter}/conclusions`, json("PUT", { text })),
+  commentReview: (quarter: string) =>
+    request<Review>(`/api/reviews/${quarter}/commentary`, json("POST", {})),
   readingsRecord: () => request<ReadingsRecord>("/api/veille/bilan"),
   watch: (week?: string) =>
     request<Watch>(`/api/veille${week ? `?semaine=${encodeURIComponent(week)}` : ""}`),
