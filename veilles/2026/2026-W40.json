@@ -1,0 +1,844 @@
+{
+  "semaine": "2026-W40",
+  "du": "2026-09-26",
+  "au": "2026-10-02",
+  "macro": [
+    {
+      "sujet": "BCE",
+      "texte": "Pas de réunion de politique monétaire cette semaine. Le taux de dépôt est à 2,50 % depuis le 16 septembre, après la hausse de 0,25 point décidée le 10 septembre. Devant le Parlement européen le 28 septembre, Christine Lagarde a rappelé une inflation de 3,2 % en août (2,9 % en juillet) et des projections de la BCE à 3,0 % en 2026, 2,5 % en 2027 et 2,1 % en 2028.",
+      "sources": [
+        {
+          "titre": "Christine Lagarde, audition au Parlement européen du 28 septembre 2026 (texte repris par la BRI)",
+          "url": "https://www.bis.org/speeches/20260930-hearing-committee-economic-and-monetary-affairs-european-parliament"
+        },
+        {
+          "titre": "BCE, décisions de politique monétaire du 10 septembre 2026",
+          "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260910~314e508016.en.html"
+        }
+      ]
+    },
+    {
+      "sujet": "Fed",
+      "texte": "Pas de réunion cette semaine. La fourchette des fonds fédéraux est à 3,75 %-4,00 % depuis la hausse de 0,25 point du 16 septembre. Le 1er octobre, le vice-président Philip Jefferson a déclaré que tout ajustement futur dépendrait des données, de l'évolution des perspectives et de la balance des risques.",
+      "sources": [
+        {
+          "titre": "Réserve fédérale, discours de Philip Jefferson du 1er octobre 2026",
+          "url": "https://www.federalreserve.gov/newsevents/speech/jefferson20261001a.htm"
+        },
+        {
+          "titre": "Réserve fédérale, note de mise en œuvre du 16 septembre 2026",
+          "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a1.htm"
+        }
+      ]
+    },
+    {
+      "sujet": "Inflation",
+      "texte": "Zone euro : 3,8 % sur un an en septembre selon l'estimation rapide du 2 octobre, après 3,2 % en août (énergie 18,8 %, services 3,2 % ; hors énergie, alimentation, alcool et tabac 2,5 %). France : 3,0 % sur un an en septembre selon l'estimation provisoire du 30 septembre, après 2,4 % en août (indice harmonisé 3,4 %). États-Unis : indice PCE d'août à 3,4 % sur un an, 3,0 % hors alimentation et énergie, publié le 30 septembre.",
+      "sources": [
+        {
+          "titre": "Eurostat, estimation rapide du 2 octobre 2026",
+          "url": "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/2-02102026-ap"
+        },
+        {
+          "titre": "Insee, estimation provisoire du 30 septembre 2026",
+          "url": "https://www.insee.fr/fr/statistiques/9056956"
+        },
+        {
+          "titre": "BEA, revenus et dépenses des ménages d'août 2026",
+          "url": "https://www.bea.gov/news/2026/personal-income-and-outlays-august-2026"
+        }
+      ]
+    },
+    {
+      "sujet": "Emploi",
+      "texte": "États-Unis : 29 000 emplois non agricoles créés en septembre et taux de chômage de 4,2 %, selon le rapport du 2 octobre ; juillet est révisé de +21 000 à -10 000. Les offres d'emploi étaient de 7,1 millions en août (publication du 29 septembre). Zone euro : taux de chômage de 6,4 % en août, stable sur un mois (publication du 1er octobre).",
+      "sources": [
+        {
+          "titre": "BLS, situation de l'emploi de septembre 2026 (page de la dernière publication)",
+          "url": "https://www.bls.gov/news.release/empsit.nr0.htm"
+        },
+        {
+          "titre": "BLS, offres d'emploi et rotation de la main-d'œuvre d'août 2026 (page de la dernière publication)",
+          "url": "https://www.bls.gov/news.release/jolts.nr0.htm"
+        },
+        {
+          "titre": "Eurostat, chômage d'août 2026",
+          "url": "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/3-01102026-ap"
+        }
+      ]
+    },
+    {
+      "sujet": "Euro-dollar",
+      "texte": "Taux de référence de la BCE : 1 euro valait 1,1403 dollar le 25 septembre, 1,1378 le 28 septembre et 1,1225 le 2 octobre.",
+      "sources": [
+        {
+          "titre": "BCE, taux de change de référence de l'euro contre le dollar",
+          "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-usd.en.html"
+        }
+      ]
+    },
+    {
+      "sujet": "Pétrole",
+      "texte": "Le Brent s'échangeait autour de 102 dollars le baril le vendredi 2 octobre. Aucune décision de l'OPEP+ dans la semaine : les sept pays concernés avaient maintenu le 6 septembre leur niveau de production pour octobre et fixé leur réunion suivante au 4 octobre.",
+      "sources": [
+        {
+          "titre": "Trading Economics, cours du Brent au 2 octobre 2026",
+          "url": "https://tradingeconomics.com/commodity/brent-crude-oil"
+        },
+        {
+          "titre": "OPEP, communiqué du 6 septembre 2026",
+          "url": "https://www.opec.org/pr-detail/613-6-september-2026.html"
+        }
+      ]
+    }
+  ],
+  "titres": [
+    {
+      "nom": "Accor",
+      "isin": "FR0000120404",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Air Liquide",
+      "isin": "FR0000120073",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Airbus",
+      "isin": "NL0000235190",
+      "faits": [
+        {
+          "date": "2026-09-29",
+          "texte": "L'A350F, version cargo de l'A350, a effectué son premier vol d'essai au départ de Toulouse : 4 heures 10 de vol, jusqu'à 25 000 pieds. Neuf mois d'essais en vol sont prévus avant la demande de certification auprès de l'agence européenne de la sécurité aérienne.",
+          "source": {
+            "titre": "FreightWaves, article du 29 septembre 2026",
+            "url": "https://www.freightwaves.com/?p=581900"
+          }
+        },
+        {
+          "date": "2026-10-01",
+          "texte": "René Obermann quitte le conseil d'administration à compter du 1er octobre ; Christophe Fouquet, directeur général d'ASML, est coopté pour la fin de son mandat. Florent Menegaux, dirigeant de Michelin, est retenu pour succéder à Jean-Pierre Clamadieu comme administrateur à l'assemblée générale d'avril 2027.",
+          "source": {
+            "titre": "Communiqué du 1er octobre 2026",
+            "url": "https://www.airbus.com/en/newsroom/press-releases/2026-10-airbus-announces-nominations-to-its-board-of-directors"
+          }
+        },
+        {
+          "date": "2026-10-02",
+          "texte": "Airbus demande à certains exploitants d'A330neo de vérifier, lors de la maintenance courante, qu'aucun outil n'a été oublié dans l'appareil, après la découverte d'un outil dans la structure d'un avion avant livraison, selon Bloomberg repris par AeroTime. Airbus parle d'un constat isolé et indique que l'agence européenne de la sécurité aérienne n'a relevé aucun problème de sécurité immédiat.",
+          "source": {
+            "titre": "AeroTime, article du 2 octobre 2026 reprenant Bloomberg",
+            "url": "https://www.aerotime.aero/articles/airbus-a330neo-airlines-inspections-stray-tools"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-28",
+        "objet": "Résultats des neuf premiers mois 2026",
+        "source": {
+          "titre": "Page des résultats financiers",
+          "url": "https://www.airbus.com/en/investors/financial-results-annual-reports"
+        }
+      },
+      "a_regarder": "Selon AeroTime, l'agence européenne de la sécurité aérienne doit fixer d'ici la mi-novembre la date limite des inspections demandées aux exploitants d'A330neo."
+    },
+    {
+      "nom": "Alphabet",
+      "isin": "US02079K3059",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Amazon",
+      "isin": "US0231351067",
+      "faits": [
+        {
+          "date": "2026-09-30",
+          "texte": "Amazon et Constellation annoncent un accord de 20 ans portant sur 690 mégawatts d'électricité de la centrale nucléaire de Calvert Cliffs (Maryland), dont environ 190 mégawatts de capacité nouvelle attendue entre 2030 et 2032.",
+          "source": {
+            "titre": "Communiqué de Constellation du 30 septembre 2026",
+            "url": "https://www.constellationenergy.com/news/2026/09/constellation-and-amazon-announce-20-year-power-purchase-agreement-at-calvert-cliffs.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "AMD",
+      "isin": "US0079031078",
+      "faits": [
+        {
+          "date": "2026-09-28",
+          "texte": "AMD annonce un accord définitif pour acquérir World Labs, laboratoire de recherche et de modèles d'IA dirigé par Fei-Fei Li, pour environ 8,2 milliards de dollars, entièrement en actions. Fei-Fei Li rejoindra AMD comme vice-présidente exécutive et directrice scientifique.",
+          "source": {
+            "titre": "Communiqué du 28 septembre 2026",
+            "url": "https://ir.amd.com/news-events/press-releases/detail/1299/amd-to-acquire-world-labs-to-advance-the-future-of-ai-compute"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": "L'acquisition de World Labs reste soumise aux autorisations réglementaires ; le groupe indique une clôture attendue d'ici fin 2026."
+    },
+    {
+      "nom": "ArcelorMittal",
+      "isin": "LU1598757687",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-05",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Calendrier financier 2026, communiqué du 12 décembre 2025 repris par StreetInsider",
+          "url": "https://www.streetinsider.com/Basic+Content/ArcelorMittal+announces+its+financial+calendar+for+2026/25732324.html"
+        }
+      },
+      "a_regarder": "Le 25 septembre, veille de la période, le groupe a indiqué ne pas pouvoir redémarrer son usine ukrainienne de Kryvyi Rih après plusieurs frappes de missiles, et s'attendre à une dépréciation sans effet sur la trésorerie d'environ 1 milliard de dollars ; il dit discuter de l'avenir du site avec le gouvernement ukrainien."
+    },
+    {
+      "nom": "ASML",
+      "isin": "NL0010273215",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Bloom Energy",
+      "isin": "US0937121079",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Bouygues",
+      "isin": "FR0000120503",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Broadcom",
+      "isin": "US11135F1012",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Bureau Veritas",
+      "isin": "FR0006174348",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "BYD Electronic",
+      "isin": "HK0285041858",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Capgemini",
+      "isin": "FR0000125338",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Carrefour",
+      "isin": "FR0000120172",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-21",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué du 23 juillet 2026, agenda",
+          "url": "https://www.carrefour.com/sites/default/files/2026-07/Communique%CC%81%20de%20presse%20Carrefour%20T2%20&%20S1%202026_2.pdf"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Coloplast",
+      "isin": "DK0060448595",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-03",
+        "objet": "Comptes annuels et rapport annuel 2025/26",
+        "source": {
+          "titre": "Calendrier financier mis à jour, annonce du 11 février 2026 reprise par Placera",
+          "url": "https://www.placera.se/pressmeddelanden/coloplast-b-coloplast-a-s-updated-financial-calendar-2025-26-20260211"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Constellation Energy",
+      "isin": "US21037T1097",
+      "faits": [
+        {
+          "date": "2026-09-30",
+          "texte": "Constellation et Amazon annoncent un accord de 20 ans portant sur 690 mégawatts de la centrale nucléaire de Calvert Cliffs (Maryland), dont environ 190 mégawatts de capacité nouvelle attendue entre 2030 et 2032. L'accord doit permettre plus de 3 milliards de dollars d'investissements dans cette centrale de 1 790 mégawatts.",
+          "source": {
+            "titre": "Communiqué du 30 septembre 2026",
+            "url": "https://www.constellationenergy.com/news/2026/09/constellation-and-amazon-announce-20-year-power-purchase-agreement-at-calvert-cliffs.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Danaher",
+      "isin": "US2358511028",
+      "faits": [
+        {
+          "date": "2026-10-01",
+          "texte": "Julie Sawyer Montgomery prend ses fonctions de présidente et directrice générale et entre au conseil d'administration, comme annoncé le 3 août 2026. Rainer Blair reste conseiller jusqu'au 31 mars 2027.",
+          "source": {
+            "titre": "Communiqué du 1er octobre 2026",
+            "url": "https://investors.danaher.com/2026-10-01-Julie-Sawyer-Montgomery-Assumes-Role-as-Danaher-President-and-Chief-Executive-Officer"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-21",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué du 22 septembre 2026",
+          "url": "https://investors.danaher.com/2026-09-22-Danaher-Schedules-Third-Quarter-2026-Earnings-Conference-Call"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Danone",
+      "isin": "FR0000120644",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-28",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Aide-mémoire du 1er octobre 2026",
+          "url": "https://www.globenewswire.com/news-release/2026/10/01/3373181/0/en/danone-q3-2026-sales-aide-m%C3%A9moire.html"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Dassault Systèmes",
+      "isin": "FR0014003TT8",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-28",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Page investisseurs",
+          "url": "https://investor.3ds.com/"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Eiffage",
+      "isin": "FR0000130452",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-12",
+        "objet": "Information trimestrielle et chiffre d'affaires du troisième trimestre",
+        "source": {
+          "titre": "Communiqué du 26 août 2026, calendrier des publications",
+          "url": "https://app.eiffage.com/system/files/communiques_presse/CP%20Eiffage%201er%20semestre%202026.pdf"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Engie",
+      "isin": "FR0010208488",
+      "faits": [
+        {
+          "date": "2026-09-30",
+          "texte": "L'État belge, Engie et Electrabel reportent au 4 novembre 2026 la date cible de conclusion de l'accord de principe (« Heads of Terms ») sur la possible acquisition des activités nucléaires par l'État belge, prévu par la lettre d'intention du 29 avril 2026.",
+          "source": {
+            "titre": "Communiqué du 30 septembre 2026",
+            "url": "https://newsroom.engie.com/actualites/l-etat-belge-et-le-groupe-engie-ont-convenu-de-reporter-au-4-novembre-2026-la-date-cible-pour-la-conclusion-des-heads-of-terms-6ed15-ff316.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-11-05",
+        "objet": "Résultats financiers au 30 septembre 2026",
+        "source": {
+          "titre": "Communiqué du 31 juillet 2026, événements à venir",
+          "url": "https://www.engie.com/app/uploads/2026/07/CP-ENGIE-resultats-H1-2026.pdf"
+        }
+      },
+      "a_regarder": "La date cible de conclusion de l'accord de principe avec l'État belge sur les activités nucléaires est désormais le 4 novembre 2026."
+    },
+    {
+      "nom": "Equasens",
+      "isin": "FR0012882389",
+      "faits": [
+        {
+          "date": "2026-09-28",
+          "texte": "Résultats du premier semestre 2026 : chiffre d'affaires de 124,5 millions d'euros (+7,3 %), résultat opérationnel courant de 23,7 millions d'euros (+11,9 %), résultat net de 20,0 millions d'euros (+10,5 %). Les revenus annuels récurrents atteignent 111,1 millions d'euros au 30 juin (+8,8 %).",
+          "source": {
+            "titre": "Boursier.com via Bourse Direct, article du 28 septembre 2026",
+            "url": "https://www.boursedirect.fr/fr/actualites/categorie/resultats/equasens-benefice-de-20-me-au-1er-semestre-boursier-2929220d66140b86b62e7fe449a05566da91b5db"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-29",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Agenda financier",
+          "url": "https://equasens.com/investisseurs/agenda/"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "EssilorLuxottica",
+      "isin": "FR0000121667",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Eurofins Scientific",
+      "isin": "FR0014000MR3",
+      "faits": [
+        {
+          "date": "2026-10-01",
+          "texte": "UL Solutions annonce avoir finalisé l'acquisition de l'activité d'essais électriques et électroniques d'Eurofins Scientific. Le communiqué de clôture ne rappelle pas le prix.",
+          "source": {
+            "titre": "Communiqué de UL Solutions du 1er octobre 2026, déposé à la SEC",
+            "url": "https://www.sec.gov/Archives/edgar/data/0001901440/000162828026064246/exhibit991pressreleaseoful.htm"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-23",
+        "objet": "Journée investisseurs à Amersfoort (Pays-Bas)",
+        "source": {
+          "titre": "Page investisseurs",
+          "url": "https://www.eurofins.com/en/investors/"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Euronext",
+      "isin": "NL0006294274",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-05",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Page relations investisseurs",
+          "url": "https://www.euronext.com/en/investor-relations"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Gaztransport & Technigaz",
+      "isin": "FR0011726835",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-23",
+        "objet": "Point d'activité du troisième trimestre 2026",
+        "source": {
+          "titre": "Agenda financier",
+          "url": "https://www.gtt.fr/financial-calendar"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Hermès",
+      "isin": "FR0000052292",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Kering",
+      "isin": "FR0000121485",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "L'Oréal",
+      "isin": "FR0000120321",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Legrand",
+      "isin": "FR0010307819",
+      "faits": [
+        {
+          "date": "2026-09-28",
+          "texte": "À l'occasion de sa journée investisseurs, Legrand relève ses ambitions pour 2027-2030 : croissance organique des ventes de 6 % à 8 % par an, marge opérationnelle ajustée de 21 % à 22 % des ventes en moyenne et cash-flow libre de 13 % à 15 % des ventes.",
+          "source": {
+            "titre": "Communiqué du 28 septembre 2026",
+            "url": "https://www.legrand.com/en/news/2026-capital-markets-day"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "LVMH",
+      "isin": "FR0000121014",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Meta Platforms",
+      "isin": "US30303M1027",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Michelin",
+      "isin": "FR001400AJ45",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Microsoft",
+      "isin": "US5949181045",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "NVIDIA",
+      "isin": "US67066G1040",
+      "faits": [
+        {
+          "date": "2026-09-28",
+          "texte": "Le conseil d'administration autorise 150 milliards de dollars de rachats d'actions supplémentaires, ce qui porte à 235 milliards de dollars le montant restant autorisé.",
+          "source": {
+            "titre": "Communiqué du 28 septembre 2026",
+            "url": "https://nvidianews.nvidia.com/news/nvidia-announces-a-150-billion-share-repurchase-authorization-increase"
+          }
+        },
+        {
+          "date": "2026-09-28",
+          "texte": "NVIDIA lance Open Agent Safety Platform, une plateforme logicielle ouverte et une architecture de référence destinées à sécuriser les agents d'IA, des tests au déploiement.",
+          "source": {
+            "titre": "Communiqué du 28 septembre 2026",
+            "url": "https://nvidianews.nvidia.com/news/open-agent-safety-platform"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Orange",
+      "isin": "FR0000133308",
+      "faits": [
+        {
+          "date": "2026-09-29",
+          "texte": "Orange Business est retenu pour déployer le réseau fédérateur TESTA-EIRIS, réseau privé sécurisé destiné aux administrations publiques de l'Union européenne, avec la DG DIGIT de la Commission européenne : au moins 12 points de présence dans 5 régions. Ni le montant ni la durée ne sont indiqués.",
+          "source": {
+            "titre": "Boursier.com via Bourse Direct, article du 29 septembre 2026",
+            "url": "https://www.boursedirect.fr/fr/actualites/categorie/accords/orange-deploiera-le-reseau-backbone-de-l-union-europeenne-boursier-c388c54744cad53149b6f3ccdff4aef19ab97fcf"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "OVHcloud",
+      "isin": "FR0014005HJ9",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-20",
+        "objet": "Résultats annuels de l'exercice 2026",
+        "source": {
+          "titre": "Communiqué du 25 juin 2026, calendrier",
+          "url": "https://corporate.ovhcloud.com/en/newsroom/news/financial-results-q3-fy26/"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Publicis",
+      "isin": "FR0000130577",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-13",
+        "objet": "Revenu du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué du 2 octobre 2026",
+          "url": "https://www.publicisgroupe.com/en/news/press-releases/publicis-groupe-invitation-third-quarter-2026-revenue"
+        }
+      },
+      "a_regarder": "L'acquisition de LiveRamp, annoncée le 17 mai 2026, reste soumise aux autorisations réglementaires et au vote des actionnaires de LiveRamp ; le groupe indique une clôture attendue avant fin 2026."
+    },
+    {
+      "nom": "Renault",
+      "isin": "FR0000131906",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Safran",
+      "isin": "FR0000073272",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Saint-Gobain",
+      "isin": "FR0000125007",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Samsung Electronics",
+      "isin": "US7960508882",
+      "faits": [
+        {
+          "date": "2026-09-29",
+          "texte": "Samsung Electronics et cinq autres sociétés du groupe investissent ensemble 1 milliard de dollars dans Helix Digital Infrastructure, société d'infrastructures pour l'IA créée par KKR ; la part de Samsung Electronics est de 500 millions de dollars.",
+          "source": {
+            "titre": "Communiqué du 29 septembre 2026",
+            "url": "https://news.samsung.com/global/samsung-to-invest-usd-1-billion-in-ai-infrastructure-company-helix"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Sanofi",
+      "isin": "FR0000120578",
+      "faits": [
+        {
+          "date": "2026-10-01",
+          "texte": "Sanofi et Regeneron élargissent leur alliance en immunologie à plusieurs anticorps à longue durée d'action : Regeneron reçoit 1 milliard de dollars à la signature et jusqu'à 7 milliards de dollars de paiements d'étape ; coûts et profits futurs sont partagés à parts égales. L'accord de partage des profits sur Dupixent ne change pas.",
+          "source": {
+            "titre": "Communiqué du 1er octobre 2026, déposé à la SEC",
+            "url": "https://www.sec.gov/Archives/edgar/data/0001121404/000119312526410232/d143371dex991.htm"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-30",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Agenda investisseurs",
+          "url": "https://www.sanofi.com/en/investors/news-events/upcoming-events"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Schneider Electric",
+      "isin": "FR0000121972",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-29",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Page des résultats financiers",
+          "url": "https://www.se.com/ww/en/about-us/investor-relations/financial-results"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Stellantis",
+      "isin": "NL00150001Q9",
+      "faits": [
+        {
+          "date": "2026-10-01",
+          "texte": "Ventes aux États-Unis au troisième trimestre 2026 : 324 277 véhicules, contre 324 825 un an plus tôt, et 958 463 sur neuf mois (+3 %). Par marque : Ram +29 %, Jeep -20 % (128 542 véhicules), Chrysler +6 %, Dodge +2 %.",
+          "source": {
+            "titre": "Communiqué de FCA US du 1er octobre 2026, repris par Stock Titan",
+            "url": "https://www.stocktitan.net/news/STLA/stellantis-reports-q3-q1go4e3aoepk.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-28",
+        "objet": "Publication du troisième trimestre 2026",
+        "source": {
+          "titre": "Calendrier 2026, communiqué du 13 janvier 2026",
+          "url": "https://www.media.stellantis.com/em-en/corporate/press/stellantis-announces-2026-corporate-calendar"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "STMicroelectronics",
+      "isin": "NL0000226223",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Thales",
+      "isin": "FR0000121329",
+      "faits": [
+        {
+          "date": "2026-09-30",
+          "texte": "Le conseil d'administration, réuni le 29 septembre, décide un acompte sur dividende de 1,05 euro par action au titre de l'exercice 2026 ; détachement le 2 décembre, paiement le 4 décembre 2026.",
+          "source": {
+            "titre": "Communiqué du 30 septembre 2026",
+            "url": "https://www.webdisclosure.com/press-release/thales-epa-ho-thales-annonce-le-versement-dun-acompte-sur-dividende-6nDsuY8AA6F"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "TotalEnergies",
+      "isin": "FR0000120271",
+      "faits": [
+        {
+          "date": "2026-09-28",
+          "texte": "À sa présentation stratégique, TotalEnergies annonce 2,5 milliards de dollars de rachats d'actions au quatrième trimestre 2026 et entre 2 et 2,5 milliards de dollars au premier trimestre 2027.",
+          "source": {
+            "titre": "Présentation « Strategy and Outlook » du 28 septembre 2026, déposée à la SEC",
+            "url": "https://www.sec.gov/Archives/edgar/data/0000879764/000110465926112504/tm2626677d1_ex99-15.htm"
+          }
+        },
+        {
+          "date": "2026-09-28",
+          "texte": "Le conseil d'administration a adopté le 27 septembre une politique de hausse du dividende de plus de 5 % par an pour les exercices 2026 à 2030. Le groupe prévoit des investissements nets de 14 à 17 milliards de dollars par an sur 2027-2032.",
+          "source": {
+            "titre": "Présentation « Strategy and Outlook » du 28 septembre 2026, déposée à la SEC",
+            "url": "https://www.sec.gov/Archives/edgar/data/0000879764/000110465926112504/tm2626677d1_ex99-15.htm"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-29",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Calendrier",
+          "url": "https://totalenergies.com/media/info/calendar"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Trigano",
+      "isin": "FR0005691656",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "TSMC",
+      "isin": "US8740391003",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-15",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Page investisseurs, résultats trimestriels",
+          "url": "https://investor.tsmc.com/english/quarterly-results"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Unibail-Rodamco-Westfield",
+      "isin": "FR0013326246",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-22",
+        "objet": "Point d'activité du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué du 30 juillet 2026 repris par FinanzNachrichten",
+          "url": "https://www.finanznachrichten.de/nachrichten-2026-07/69164878-unibail-rodamco-westfield-se-unibail-rodamco-westfield-reports-h1-2026-earnings-399.htm"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Veolia",
+      "isin": "FR0000124141",
+      "faits": [
+        {
+          "date": "2026-09-29",
+          "texte": "Veolia est désigné attributaire par l'aire métropolitaine de Barcelone d'un marché d'eau potable d'un milliard d'euros sur 25 ans, couvrant huit communes et plus de 230 000 habitants.",
+          "source": {
+            "titre": "Boursier.com via Bourse Direct, article du 29 septembre 2026",
+            "url": "https://www.boursedirect.fr/fr/actualites/categorie/divers/veolia-remporte-un-contrat-d-un-milliard-d-euros-a-barcelone-boursier-bbf7ad9c51fc33969a248ceb8c9b3f6954bf6c06"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-11-05",
+        "objet": "Informations financières des neuf premiers mois 2026",
+        "source": {
+          "titre": "Espace finance",
+          "url": "https://www.veolia.com/fr/groupe/espace-finance.md"
+        }
+      },
+      "a_regarder": "Le groupe dit espérer finaliser le contrat de Barcelone au début de 2027."
+    },
+    {
+      "nom": "Vinci",
+      "isin": "FR0000125486",
+      "faits": [
+        {
+          "date": "2026-10-01",
+          "texte": "Vinci signe une convention d'achat d'actions avec un prestataire de services d'investissement, dans le cadre de son programme de rachat : jusqu'à 270 millions d'euros, du 2 octobre au 21 décembre 2026 au plus tard.",
+          "source": {
+            "titre": "Communiqué du 1er octobre 2026",
+            "url": "https://www.vinci.com/newsroom/communiques-presse/mise-en-oeuvre-du-programme-de-rachat-dactions-propres-47"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-22",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Agenda investisseurs",
+          "url": "https://vinci.com/en/finance/investors/calendar"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Wolters Kluwer",
+      "isin": "NL0000395903",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-04",
+        "objet": "Point d'activité des neuf premiers mois 2026",
+        "source": {
+          "titre": "Agenda investisseurs",
+          "url": "https://www.wolterskluwer.com/es/investors/calendar-faq/investor-calendar"
+        }
+      },
+      "a_regarder": null
+    }
+  ]
+}
