@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { api, type Watch as WatchData, type WatchSource, type WatchTitle } from "../api";
+import {
+  api,
+  type Watch as WatchData,
+  type WatchReading,
+  type WatchSource,
+  type WatchTitle,
+} from "../api";
 import { Notice, PageTitle, Section, TableWrap, inputClass } from "../components/ui";
 import { date, plural } from "../format";
 
@@ -153,7 +159,91 @@ export function Watch() {
           </details>
         </Section>
       )}
+
+      {report.lecture && <Reading lecture={report.lecture} />}
     </>
+  );
+}
+
+type Lecture = NonNullable<NonNullable<WatchData["report"]>["lecture"]>;
+const LEANS = {
+  hausse: "penche à la hausse",
+  baisse: "penche à la baisse",
+  partagée: "partagée",
+} as const;
+
+/** The interpretation of the week: said to be one, and kept apart from the facts. */
+function Reading({ lecture }: { lecture: Lecture }) {
+  const mine = lecture.secteurs.filter((sector) => sector.suivi);
+  const others = lecture.secteurs.filter((sector) => !sector.suivi);
+  return (
+    <Section
+      title="Lecture de la semaine"
+      note="Interprétation rédigée par une IA à partir des faits ci-dessus. Ce n'est pas un conseil en investissement : la balance est une opinion argumentée, qui se trompera régulièrement. Elle ne justifie aucun ordre à elle seule."
+    >
+      <div className="max-w-[90ch] space-y-10">
+        <ReadingBlock title="Marché" reading={lecture.marche} />
+        {mine.map((sector) => (
+          <ReadingBlock key={sector.secteur} title={sector.secteur} tag="secteur détenu ou ciblé" reading={sector} />
+        ))}
+        {others.length > 0 && (
+          <details>
+            <summary className="cursor-pointer text-accent">
+              {plural(others.length, "autre secteur", "autres secteurs")}
+            </summary>
+            <div className="mt-6 space-y-10">
+              {others.map((sector) => (
+                <ReadingBlock key={sector.secteur} title={sector.secteur} reading={sector} />
+              ))}
+            </div>
+          </details>
+        )}
+      </div>
+    </Section>
+  );
+}
+
+function ReadingBlock({ title, tag, reading }: { title: string; tag?: string; reading: WatchReading }) {
+  return (
+    <article>
+      <h3 className="font-medium">
+        {title}
+        {tag && <span className="ml-2 text-sm font-normal text-muted">{tag}</span>}
+      </h3>
+      <p className="mt-1">
+        Balance : <span className="font-medium">{LEANS[reading.balance.sens]}</span>
+        <span className="text-muted">, confiance {reading.balance.confiance}.</span>{" "}
+        {reading.balance.motif}
+      </p>
+      <div className="mt-4 grid gap-x-10 gap-y-4 md:grid-cols-2">
+        <Arguments title="Ce qui pousse à la hausse" items={reading.hausse} />
+        <Arguments title="Ce qui pousse à la baisse" items={reading.baisse} />
+      </div>
+      <div className="mt-4">
+        <h4 className="text-sm text-muted">Ce qui trancherait</h4>
+        <ul className="mt-1 space-y-1.5">
+          {reading.signaux.map((signal) => (
+            <li key={signal.texte}>
+              {signal.date && <span className="num text-sm text-muted">{date(signal.date)} </span>}
+              {signal.texte}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  );
+}
+
+function Arguments({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div>
+      <h4 className="text-sm text-muted">{title}</h4>
+      <ul className="mt-1 list-disc space-y-1.5 pl-5">
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

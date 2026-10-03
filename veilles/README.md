@@ -67,6 +67,27 @@ semaine qui vient de s'achever.
 }
 ```
 
+Une veille peut se terminer par une `lecture` : une interprétation des faits de
+la semaine, tenue à part des faits eux-mêmes.
+
+```json
+"lecture": {
+  "marche": {
+    "hausse": ["Un argument tiré d'un fait relevé plus haut.", "…"],
+    "baisse": ["Un argument tiré d'un fait relevé plus haut.", "…"],
+    "signaux": [
+      {"date": "2026-10-15", "texte": "Ce qui, à venir, ferait pencher d'un côté ou de l'autre."},
+      {"date": null, "texte": "Un signal dont la date n'est pas confirmée."}
+    ],
+    "balance": {"sens": "partagée", "confiance": "faible", "motif": "Pourquoi, en une ou deux phrases."}
+  },
+  "secteurs": [
+    {"secteur": "Santé", "hausse": ["…"], "baisse": ["…"], "signaux": [{"date": null, "texte": "…"}],
+     "balance": {"sens": "hausse", "confiance": "faible", "motif": "…"}}
+  ]
+}
+```
+
 ## Règles
 
 - **Tous les titres** de `univers.json` figurent dans `titres`, une fois chacun,
@@ -84,12 +105,35 @@ semaine qui vient de s'achever.
 - **Le prochain rendez-vous** (publication de résultats, assemblée, journée
   investisseurs) a une date postérieure à la période et une source. Inconnu ou
   non confirmé : `null`.
-- **À regarder** : une phrase factuelle sur un point ouvert, sans consigne
-  (400 caractères au plus), ou `null`.
+- **À regarder** : une phrase factuelle sur un point ouvert et à venir, sans
+  consigne (400 caractères au plus), ou `null`. Elle prolonge un fait sourcé de
+  la veille, ou cite sa source dans la phrase ; elle ne sert pas à glisser un
+  fait antérieur à la période.
 - **Macro** : huit points au plus, chacun avec au moins une source. Décisions de
   banques centrales, inflation, emploi, changes, pétrole, droits de douane,
   semi-conducteurs.
 - Aucun mot d'ordre : ni « acheter », ni « vendre », ni objectif de cours.
+
+### Lecture de la semaine
+
+- **Ce que c'est** : des scénarios, pas une prédiction. Personne ne sait où va
+  un marché ; la lecture dit ce qui pousse d'un côté, ce qui pousse de l'autre,
+  et ce qui trancherait.
+- **Deux côtés, toujours** : de 1 à 4 arguments à la hausse et de 1 à 4 à la
+  baisse, 300 caractères au plus chacun. Chaque argument part d'un fait relevé
+  dans la veille (contexte ou titres), ou d'un mécanisme économique dit
+  simplement. Aucun chiffre qui ne figure pas plus haut avec sa source.
+- **Signaux** : de 1 à 4 événements ou publications à venir. Une date n'est
+  donnée que si elle est confirmée dans la veille ; sinon `null`.
+- **Balance** : `hausse`, `baisse` ou `partagée`, avec une confiance `faible`
+  ou `moyenne` et un motif. Il n'existe pas de confiance « forte ». `partagée`
+  est la réponse honnête quand rien ne l'emporte nettement.
+- **Portée** : le marché dans son ensemble, puis six secteurs au plus parmi
+  ceux de `univers.json`, choisis parce que la semaine a apporté des faits sur
+  eux. Pas de lecture titre par titre.
+- **Interdits** : consigne d'achat ou de vente, objectif de cours, urgence.
+  Le script refuse les mots « acheter », « vendre », « renforcer », « alléger »
+  et « objectif de cours » dans la lecture.
 
 ## Limites
 
@@ -99,3 +143,7 @@ semaine qui vient de s'achever.
   la veille de la semaine suivante.
 - « Rien de notable » veut dire qu'aucun fait de la liste ci-dessus n'a été
   trouvé, pas qu'il ne s'est rien passé.
+- La lecture de la semaine est une opinion rédigée par une IA à partir d'une
+  semaine de faits. Sa balance se trompera régulièrement, et elle ne tient
+  compte ni de la valorisation des titres ni de la situation de qui la lit. Ce
+  n'est pas un conseil en investissement.
