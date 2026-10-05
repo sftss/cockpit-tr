@@ -1,0 +1,59 @@
+{
+  "nom": "Veolia",
+  "ticker": "VIE",
+  "place": "Euronext Paris",
+  "date": "2026-10-05",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": false,
+    "chiffre_affaires": {"2021": 28508, "2022": 42885, "2023": 45351, "2024": 44692, "2025": 44396},
+    "cash_flow_libre": {"2021": 1340.5, "2022": 1032, "2023": 1143, "2024": 1156, "2025": 1178},
+    "chiffre_affaires_12m": 44541,
+    "resultat_net_12m": 1242,
+    "resultat_operationnel_12m": 3364,
+    "ebitda_12m": 7235,
+    "dette_nette": 24548,
+    "capitaux_propres": 13264,
+    "taux_impot": 0.258,
+    "per": 17.9,
+    "taux_distribution": 0.968
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires": "chiffres publiés chaque année ; 2021 est le périmètre de Veolia avant l'intégration de Suez (janvier 2022)",
+    "cash_flow_libre": "free cash-flow net publié (avant dividendes, investissements financiers et cessions financières) ; 2021 avant Suez",
+    "chiffre_affaires_12m": "44396 − 22048 + 22193",
+    "resultat_net_12m": "résultat net part du groupe publié : 1217 − 657 + 682",
+    "resultat_operationnel_12m": "résultat opérationnel après quote-part des entités mises en équivalence : 3299 − 1667 + 1732",
+    "ebitda_12m": "7050 − 3367 + 3552",
+    "dette_nette": "endettement financier net publié au 30/06/2026",
+    "capitaux_propres": "total des capitaux propres au bilan du 31/12/2025 (part du groupe 10855 + participations ne donnant pas le contrôle 2409) ; le bilan du 30/06/2026 est publié dans le rapport financier semestriel mais n'a pas pu être lu",
+    "taux_impot": "taux d'impôt courant publié pour le 1er semestre 2026",
+    "per": "PER sur 12 mois (Stocklake, 17,87) au cours de 30,73 €",
+    "taux_distribution": "dividende 2025 de 1,50 € par action / résultat net part du groupe par action 2025 de 1,55 € (non dilué)"
+  },
+  "complements": {
+    "cours": 30.73,
+    "capitalisation": 22803.7,
+    "per_a_terme": 11.7,
+    "roe": 0.134,
+    "cours_sur_actif_net": 2.29,
+    "rendement_dividende": 0.0488,
+    "objectif_moyen_analystes": 39.19,
+    "nombre_analystes": 18,
+    "dette_nette_sur_ebitda_fin_2025": 2.79,
+    "resultat_net_courant_par_action_2025": 2.25
+  },
+  "sources": [
+    "https://www.veolia.com/sites/g/files/dvc4206/files/document/2026/07/veolia-resultats-du-premier-semestre-2026.pdf",
+    "https://www.veolia.com/sites/g/files/dvc4206/files/document/2026/07/Commentaires_sur_resultats_S1_2026.pdf",
+    "https://www.businesswire.com/news/home/20260225997997/fr",
+    "https://www.veolia.com/sites/g/files/dvc4206/files/document/2026/02/Finance_Veolia_Commentaires_sur_les_resultats_2025.pdf",
+    "https://www.veolia.com/sites/g/files/dvc4206/files/document/2026/02/Finance_Veolia_Annexes_comptes_consolides_31-12-25.pdf",
+    "https://www.veolia.com/fr/nos-medias/communiques-presse/comptes-annuels-2023",
+    "https://www.veolia.com/fr/nos-medias/newsroom/communiques-presse/resultats-annuels-2022-new",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/BWR/2022/03/FCBWR140388_20220317.pdf",
+    "Stocklake, fiche VIE.PA du 05/10/2026"
+  ]
+}
