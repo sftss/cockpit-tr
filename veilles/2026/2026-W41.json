@@ -1,0 +1,1057 @@
+{
+  "semaine": "2026-W41",
+  "du": "2026-10-03",
+  "au": "2026-10-09",
+  "macro": [
+    {
+      "sujet": "BCE",
+      "texte": "Pas de réunion de politique monétaire cette semaine ; la prochaine se tient les 28 et 29 octobre. Le compte rendu de la réunion des 9 et 10 septembre, publié le 8 octobre, indique que les perspectives d'inflation se sont dégradées depuis juin et que les risques sont orientés à la hausse. Le 5 octobre, Philip Lane a rappelé une inflation de 3,8 % en septembre (énergie 18,8 %, sous-jacente 2,5 %) et déclaré que la BCE n'était pas sur une trajectoire de taux fixée d'avance.",
+      "sources": [
+        {
+          "titre": "BCE, compte rendu de la réunion des 9 et 10 septembre 2026, publié le 8 octobre",
+          "url": "https://www.ecb.europa.eu/press/accounts/2026/html/ecb.mg261008~a10153d090.en.html"
+        },
+        {
+          "titre": "BCE, discours de Philip Lane du 5 octobre 2026",
+          "url": "https://www.ecb.europa.eu/press/key/date/2026/html/ecb.sp261005~1d8d998ef4.en.html"
+        },
+        {
+          "titre": "BCE, calendrier des réunions du Conseil des gouverneurs",
+          "url": "https://www.ecb.europa.eu/press/calendars/mgcgc/html/index.en.html"
+        }
+      ]
+    },
+    {
+      "sujet": "Fed",
+      "texte": "Pas de réunion cette semaine ; la prochaine se tient les 27 et 28 octobre. Les minutes de la réunion des 15 et 16 septembre, publiées le 7 octobre, indiquent que le relèvement de la fourchette des fonds fédéraux à 3,75 %-4,00 % a été voté par 12 voix contre 0, et que la plupart des participants jugeaient qu'une nouvelle hausse serait probablement appropriée d'ici la fin de l'année.",
+      "sources": [
+        {
+          "titre": "Réserve fédérale, minutes de la réunion des 15 et 16 septembre 2026",
+          "url": "https://www.federalreserve.gov/monetarypolicy/fomcminutes20260916.htm"
+        },
+        {
+          "titre": "Réserve fédérale, communiqué du 7 octobre 2026",
+          "url": "https://federalreserve.gov/newsevents/pressreleases/monetary20261007a.htm"
+        },
+        {
+          "titre": "Réserve fédérale, calendrier d'octobre 2026",
+          "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
+        }
+      ]
+    },
+    {
+      "sujet": "Euro-dollar",
+      "texte": "Taux de référence de la BCE : 1 euro valait 1,1225 dollar le 2 octobre, 1,1204 le 5 octobre, 1,1177 le 7 octobre et 1,1206 le 9 octobre.",
+      "sources": [
+        {
+          "titre": "BCE, taux de change de référence de l'euro contre le dollar",
+          "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-usd.en.html"
+        }
+      ]
+    },
+    {
+      "sujet": "Pétrole",
+      "texte": "Réunis en visioconférence le 4 octobre, sept pays de l'OPEP+ (Arabie saoudite, Russie, Irak, Koweït, Kazakhstan, Algérie, Oman) ont décidé de maintenir en novembre leur production requise de septembre ; leur prochaine réunion est fixée au 1er novembre. Le Brent s'échangeait autour de 104 dollars le baril le vendredi 9 octobre.",
+      "sources": [
+        {
+          "titre": "OPEP, communiqué du 4 octobre 2026",
+          "url": "https://opec.org/pr-detail/1891616-4-october-2026.html"
+        },
+        {
+          "titre": "Trading Economics, cours du Brent au 9 octobre 2026",
+          "url": "https://tradingeconomics.com/commodity/brent-crude-oil"
+        }
+      ]
+    }
+  ],
+  "titres": [
+    {
+      "nom": "Accor",
+      "isin": "FR0000120404",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-22",
+        "objet": "Publication du troisième trimestre 2026",
+        "source": {
+          "titre": "Page finance",
+          "url": "https://group.accor.com/en/finance"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Air Liquide",
+      "isin": "FR0000120073",
+      "faits": [
+        {
+          "date": "2026-10-05",
+          "texte": "Air Liquide présente son plan stratégique « Beyond » pour 2026-2030 : croissance moyenne du chiffre d'affaires de 5 % par an, résultat net récurrent en hausse de 10 % par an à taux de change constants, marge opérationnelle en hausse de 400 à 600 points de base sur la durée du plan, rentabilité des capitaux employés supérieure à 11 %. Le groupe prévoit de lancer en 2027 et 2028 un programme de rachat d'actions de 4 milliards d'euros.",
+          "source": {
+            "titre": "Agefi-Dow Jones, article du 5 octobre 2026 repris par ABC Bourse",
+            "url": "https://www.abcbourse.com/marches/air-liquide-prevoit-4-milliards-d-euros-de-rachats-d-actions-et-des-investisseme_703668"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Airbus",
+      "isin": "NL0000235190",
+      "faits": [
+        {
+          "date": "2026-10-08",
+          "texte": "Airbus a livré 72 avions commerciaux en septembre 2026 et enregistré 17 commandes. Sur neuf mois : 547 livraisons (+8 % sur un an), 1 174 commandes brutes et 1 105 commandes nettes. Le groupe vise environ 870 livraisons sur l'année.",
+          "source": {
+            "titre": "Reuters, dépêche du 8 octobre 2026 reprise par AJOT",
+            "url": "https://www.ajot.com/news/airbus-confirms-72-jet-deliveries-in-september"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Alphabet",
+      "isin": "US02079K3059",
+      "faits": [
+        {
+          "date": "2026-10-06",
+          "texte": "Google signe avec Constellation Energy pour 3 590 mégawatts d'électricité nucléaire sur le réseau PJM, aux États-Unis : un contrat d'achat de 20 ans pour 890 mégawatts et un contrat de fourniture de long terme pour 2 700 mégawatts supplémentaires. Première livraison attendue en 2028.",
+          "source": {
+            "titre": "Reuters, dépêche du 6 octobre 2026 reprise par TimesLIVE",
+            "url": "https://www.timeslive.co.za/news/sci-tech/2026-10-06-google-enters-massive-36-gw-power-deal-with-constellation-energy/"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-28",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué du 6 octobre 2026",
+          "url": "https://abc.xyz/investor/news/news-details/2026/Alphabet-Announces-Date-of-Third-Quarter-2026-Financial-Results-Conference-Call-2026-8tpGZsLS6v/default.aspx"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Amazon",
+      "isin": "US0231351067",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "AMD",
+      "isin": "US0079031078",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-03",
+        "objet": "Résultats du troisième trimestre de l'exercice 2026",
+        "source": {
+          "titre": "Communiqué du 6 octobre 2026",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1300/amd-to-report-fiscal-third-quarter-2026-financial-results"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "ArcelorMittal",
+      "isin": "LU1598757687",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-05",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Calendrier financier 2026, communiqué du 12 décembre 2025 repris par MFN",
+          "url": "https://mfn.se/one/a/arcelormittal/arcelormittal-announces-its-financial-calendar-for-2026-af23df64"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "ASML",
+      "isin": "NL0010273215",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-14",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Page des résultats trimestriels",
+          "url": "https://investor.asml.com/quarterly-results"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Bloom Energy",
+      "isin": "US0937121079",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Bouygues",
+      "isin": "FR0000120503",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Broadcom",
+      "isin": "US11135F1012",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Bureau Veritas",
+      "isin": "FR0006174348",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-21",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Agenda investisseurs",
+          "url": "https://group.bureauveritas.com/investors/agenda-contacts"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "BYD Electronic",
+      "isin": "HK0285041858",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Capgemini",
+      "isin": "FR0000125338",
+      "faits": [
+        {
+          "date": "2026-10-06",
+          "texte": "Capgemini annonce un rachat d'actions destiné à neutraliser la dilution de son plan d'actionnariat salarié 2026 : jusqu'à 3,0 millions d'actions, à un prix moyen maximum de 200 euros, en vue de leur annulation, avant le 17 décembre 2026, date d'effet de l'augmentation de capital réservée aux salariés. Ce rachat est distinct de l'enveloppe pluriannuelle de 2 milliards d'euros annoncée le 30 juillet 2025.",
+          "source": {
+            "titre": "Communiqué du 6 octobre 2026",
+            "url": "https://www.globenewswire.com/news-release/2026/10/06/3375768/0/fr/capgemini-se-neutralisation-de-la-dilution-du-plan-d-actionnariat-salari%C3%A9-2026.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-30",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Agenda investisseurs",
+          "url": "https://investors.capgemini.com/calendar"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Carrefour",
+      "isin": "FR0000120172",
+      "faits": [
+        {
+          "date": "2026-10-08",
+          "texte": "Carrefour annonce la cession des murs de 35 magasins (32 en France, dont 26 Carrefour Market et 6 hypermarchés, et 3 hypermarchés en Espagne) à une coentreprise formée par Atrato et GIC, pour environ 290 millions d'euros. Le groupe continue d'exploiter les magasins, avec des baux de 12 ans dont 10 ans fermes.",
+          "source": {
+            "titre": "Boursier.com, dépêche du 8 octobre 2026 reprise par Bourse Direct",
+            "url": "https://www.boursedirect.fr/en/news/category/divers/carrefour-sale-leaseback-de-35-magasins-en-france-et-en-espagne-boursier-2576793433a7ca89426d9e2650ad0ec33d4c74e9"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-21",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué des résultats du premier semestre 2026, agenda",
+          "url": "https://www.carrefour.com/sites/default/files/2026-07/Communique%CC%81%20de%20presse%20Carrefour%20T2%20&%20S1%202026_2.pdf"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Coloplast",
+      "isin": "DK0060448595",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-03",
+        "objet": "Comptes annuels et rapport annuel 2025/26",
+        "source": {
+          "titre": "Calendrier financier mis à jour, annonce du 11 février 2026 reprise par Placera",
+          "url": "https://www.placera.se/pressmeddelanden/coloplast-b-coloplast-a-s-updated-financial-calendar-2025-26-20260211"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Constellation Energy",
+      "isin": "US21037T1097",
+      "faits": [
+        {
+          "date": "2026-10-06",
+          "texte": "Constellation signe avec Google pour 3 590 mégawatts sur le réseau PJM : un contrat de 20 ans pour 890 mégawatts et un contrat de fourniture de long terme pour 2 700 mégawatts supplémentaires. L'accord doit permettre plus de 4,3 milliards de dollars d'investissements nouveaux de Constellation, avec la modernisation de 11 réacteurs nucléaires en Illinois, en Pennsylvanie et dans le New Jersey ; première livraison attendue en 2028.",
+          "source": {
+            "titre": "Reuters, dépêche du 6 octobre 2026 reprise par TimesLIVE",
+            "url": "https://www.timeslive.co.za/news/sci-tech/2026-10-06-google-enters-massive-36-gw-power-deal-with-constellation-energy/"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Danaher",
+      "isin": "US2358511028",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-21",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué du 22 septembre 2026",
+          "url": "https://investors.danaher.com/2026-09-22-Danaher-Schedules-Third-Quarter-2026-Earnings-Conference-Call"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Danone",
+      "isin": "FR0000120644",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-28",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Aide-mémoire du 1er octobre 2026",
+          "url": "https://www.globenewswire.com/news-release/2026/10/01/3373181/0/en/danone-q3-2026-sales-aide-m%C3%A9moire.html"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Dassault Systèmes",
+      "isin": "FR0014003TT8",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-28",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Page investisseurs",
+          "url": "https://investor.3ds.com/"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Eiffage",
+      "isin": "FR0000130452",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-12",
+        "objet": "Information trimestrielle et chiffre d'affaires du troisième trimestre",
+        "source": {
+          "titre": "Communiqué du 26 août 2026, calendrier financier (version anglaise)",
+          "url": "https://app.eiffage.com/system/files/communiques_presse/PR%20Eiffage%20Q1%202026.pdf"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Engie",
+      "isin": "FR0010208488",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-05",
+        "objet": "Résultats financiers au 30 septembre 2026",
+        "source": {
+          "titre": "Communiqué du 31 juillet 2026, événements à venir (dépôt AMF)",
+          "url": "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2026/07/FCECO082861_20260731.pdf"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Equasens",
+      "isin": "FR0012882389",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-29",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué « Agenda financier 2026 »",
+          "url": "https://equasens.com/wp-content/uploads/2025/12/EQUASENS_COMMUNIQUE_20251210_Agenda-financier.pdf"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "EssilorLuxottica",
+      "isin": "FR0000121667",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-20",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué du 28 juillet 2026, événements à venir (dépôt AMF)",
+          "url": "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2026/07/FCMKW114841_20260728.pdf"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Eurofins Scientific",
+      "isin": "FR0014000MR3",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-21",
+        "objet": "Point d'activité des neuf premiers mois 2026",
+        "source": {
+          "titre": "Agenda investisseurs",
+          "url": "https://www.eurofins.com/en/investors/calendar/"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Euronext",
+      "isin": "NL0006294274",
+      "faits": [
+        {
+          "date": "2026-10-07",
+          "texte": "Euronext publie ses volumes de septembre 2026. Selon MT Newswires, le volume quotidien moyen échangé au comptant atteint 14,01 milliards d'euros, contre 12,08 milliards un an plus tôt.",
+          "source": {
+            "titre": "MT Newswires, dépêche du 7 octobre 2026 reprise par Webull",
+            "url": "https://www.webull.com/news/15710491873117184"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-11-05",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Page relations investisseurs",
+          "url": "https://www.euronext.com/en/investor-relations"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Gaztransport & Technigaz",
+      "isin": "FR0011726835",
+      "faits": [
+        {
+          "date": "2026-10-05",
+          "texte": "GTT annonce une commande du chantier naval Samsung Heavy Industries pour la conception des cuves de quatre nouveaux méthaniers de 200 000 mètres cubes chacun, pour un armateur européen. Livraison des navires prévue en 2029 ; montant non communiqué.",
+          "source": {
+            "titre": "ABC Bourse, article du 5 octobre 2026",
+            "url": "https://www.abcbourse.com/marches/gtt-signe-une-commande-pour-la-conception-des-cuves-de-quatre-nouveaux-methanier_703724"
+          }
+        },
+        {
+          "date": "2026-10-07",
+          "texte": "GTT annonce une commande du chantier naval Jiangnan pour la conception des cuves de deux nouveaux méthaniers de 175 000 mètres cubes chacun, pour l'armateur ADNOC Logistics and Services. Livraison des navires prévue au premier trimestre 2030.",
+          "source": {
+            "titre": "Boursier.com, dépêche du 7 octobre 2026 reprise par Bourse Direct",
+            "url": "https://www.boursedirect.fr/fr/actualites/categorie/accords/gtt-nouvelle-commande-boursier-cc640faa3724dccdacfa2423773686d345ab7997"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-23",
+        "objet": "Point d'activité du troisième trimestre 2026",
+        "source": {
+          "titre": "Agenda financier",
+          "url": "https://www.gtt.fr/financial-calendar"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Hermès",
+      "isin": "FR0000052292",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-22",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Agenda financier",
+          "url": "https://finance.hermes.com/en/calendar/"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Kering",
+      "isin": "FR0000121485",
+      "faits": [
+        {
+          "date": "2026-10-09",
+          "texte": "Kering publie un communiqué intitulé « Saint Laurent annonce le départ de son directeur artistique, Anthony Vaccarello ». Seul le titre daté du communiqué a pu être lu.",
+          "source": {
+            "titre": "Euronext, liste des communiqués de Kering (titre du 9 octobre 2026)",
+            "url": "https://live.euronext.com/en/listview/company-press-release/003011"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "L'Oréal",
+      "isin": "FR0000120321",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-22",
+        "objet": "Chiffre d'affaires au 30 septembre 2026",
+        "source": {
+          "titre": "Agenda financier",
+          "url": "https://www.loreal-finance.com/fr/calendrier"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Legrand",
+      "isin": "FR0010307819",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-05",
+        "objet": "Résultats des neuf premiers mois 2026",
+        "source": {
+          "titre": "ABC Bourse, article du 29 juillet 2026 sur l'agenda financier",
+          "url": "https://www.abcbourse.com/marches/legrand-publie-ses-comptes-semestriels-2026-et-fixe-son-agenda-financier_700528"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "LVMH",
+      "isin": "FR0000121014",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-12",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Agenda financier",
+          "url": "https://www.lvmh.com/en/financial-calendar/2026-q3-revenue"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Meta Platforms",
+      "isin": "US30303M1027",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Michelin",
+      "isin": "FR001400AJ45",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-20",
+        "objet": "Ventes du troisième trimestre et des neuf premiers mois 2026",
+        "source": {
+          "titre": "Agenda",
+          "url": "https://www.michelin.com/en/events"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Microsoft",
+      "isin": "US5949181045",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-28",
+        "objet": "Résultats du premier trimestre de l'exercice 2027",
+        "source": {
+          "titre": "Communiqué du 7 octobre 2026 (PR Newswire, repris par Finviz)",
+          "url": "https://finviz.com/news/400058/microsoft-announces-quarterly-earnings-release-date"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "NVIDIA",
+      "isin": "US67066G1040",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Orange",
+      "isin": "FR0000133308",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-27",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué du 28 juillet 2026, calendrier",
+          "url": "https://assets.orange.com/medias/domain12751/media101937/581256-exeyl73ayg-75.pdf"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "OVHcloud",
+      "isin": "FR0014005HJ9",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-20",
+        "objet": "Résultats annuels de l'exercice 2026",
+        "source": {
+          "titre": "Agenda investisseurs",
+          "url": "https://corporate.ovhcloud.com/en/investor-relations/agenda-and-events/"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Publicis",
+      "isin": "FR0000130577",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-13",
+        "objet": "Publication du troisième trimestre 2026",
+        "source": {
+          "titre": "Agenda Zonebourse des résultats, semaine du 12 au 16 octobre 2026 (repris par Bourse Direct)",
+          "url": "https://www.boursedirect.fr/en/news/category/actualites-financieres/agenda-zonebourse-des-resultats-de-societes-semaine-du-12-au-16-octobre-2026-zone-bourse-0fa3d6136ed93677180df740a04bee2fdde621d7"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Renault",
+      "isin": "FR0000131906",
+      "faits": [
+        {
+          "date": "2026-10-05",
+          "texte": "Renault Group publie un communiqué intitulé « Carine Damois est nommée Directrice Financière de Renault Group ». Seul le titre daté du communiqué a pu être lu.",
+          "source": {
+            "titre": "Euronext, liste des communiqués de Renault (titre du 5 octobre 2026)",
+            "url": "https://live.euronext.com/fr/listview/company-press-release/002953"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Safran",
+      "isin": "FR0000073272",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-23",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué du 23 avril 2026, calendrier",
+          "url": "https://www.safran-group.com/fr/espace-presse/safran-publie-son-chiffre-affaires-du-1er-trimestre-2026-performance-exceptionnelle-activites-2026-04-23"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Saint-Gobain",
+      "isin": "FR0000125007",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-27",
+        "objet": "Chiffre d'affaires des neuf mois 2026",
+        "source": {
+          "titre": "Calendrier financier",
+          "url": "https://www.saint-gobain.com/fr/finance/evenements-financiers/calendrier"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Samsung Electronics",
+      "isin": "US7960508882",
+      "faits": [
+        {
+          "date": "2026-10-08",
+          "texte": "Estimation préliminaire pour le troisième trimestre 2026 : chiffre d'affaires consolidé d'environ 195 000 milliards de wons et résultat opérationnel d'environ 107 400 milliards de wons. Au troisième trimestre 2025, ils étaient de 86 060 et 12 170 milliards de wons ; au deuxième trimestre 2026, de 171 500 et 89 490 milliards.",
+          "source": {
+            "titre": "Communiqué du 8 octobre 2026",
+            "url": "https://news.samsung.com/global/samsung-electronics-announces-earnings-guidance-for-third-quarter-2026"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-29",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Avis aux investisseurs du 8 octobre 2026",
+          "url": "https://www.samsung.com/global/ir/reports-disclosures/notices/"
+        }
+      },
+      "a_regarder": "Les chiffres du 8 octobre sont une estimation préliminaire ; la publication des résultats du troisième trimestre est annoncée pour le 29 octobre 2026."
+    },
+    {
+      "nom": "Sanofi",
+      "isin": "FR0000120578",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-30",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué du 6 octobre 2026",
+          "url": "https://www.sanofi.com/en/media-room/press-releases/2026/2026-10-06-05-30-00-3375120"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Schneider Electric",
+      "isin": "FR0000121972",
+      "faits": [
+        {
+          "date": "2026-10-05",
+          "texte": "Schneider Electric annonce un accord pour acquérir le groupe américain PTC : 205 dollars par action en numéraire, soit environ 22,6 milliards de dollars (20,1 milliards d'euros) pour les capitaux propres. L'opération serait financée par de la dette nouvelle et une émission de titres ; sa finalisation est attendue d'ici au troisième trimestre 2027.",
+          "source": {
+            "titre": "AFP, dépêche du 5 octobre 2026 reprise par Connaissance des Énergies",
+            "url": "https://www.connaissancedesenergies.org/afp/schneider-electric-debourse-pour-plus-de-20-milliards-deuros-pour-ptc-sa-plus-grosse-acquisition-261005"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-16",
+        "objet": "Chiffre d'affaires du troisième trimestre 2026 (publication avancée)",
+        "source": {
+          "titre": "AFP, dépêche du 5 octobre 2026 reprise par Connaissance des Énergies",
+          "url": "https://www.connaissancedesenergies.org/afp/schneider-electric-debourse-pour-plus-de-20-milliards-deuros-pour-ptc-sa-plus-grosse-acquisition-261005"
+        }
+      },
+      "a_regarder": "La finalisation de l'acquisition de PTC reste soumise aux autorisations réglementaires et à l'approbation des actionnaires de PTC."
+    },
+    {
+      "nom": "Stellantis",
+      "isin": "NL00150001Q9",
+      "faits": [
+        {
+          "date": "2026-10-06",
+          "texte": "L'autorité américaine de sécurité routière (NHTSA) enregistre le rappel 26V621 de FCA US, filiale de Stellantis : 265 512 fourgons Ram ProMaster des années-modèles 2022 à 2026, version électrique comprise, pour un risque de perte de l'assistance de direction lié à une entrée d'eau dans un faisceau électrique.",
+          "source": {
+            "titre": "NHTSA, accusé de réception du rappel 26V621 du 6 octobre 2026",
+            "url": "https://static.nhtsa.gov/odi/rcl/2026/RCAK-26V621-9736.pdf"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-28",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Calendrier 2026, communiqué du 13 janvier 2026",
+          "url": "https://www.stellantis.com/en/news/press-releases/2026/january/stellantis-announces-2026-corporate-calendar"
+        }
+      },
+      "a_regarder": "Pour le rappel 26V621, l'envoi des lettres provisoires aux propriétaires est prévu à partir du 17 novembre 2026, selon l'accusé de réception de la NHTSA."
+    },
+    {
+      "nom": "STMicroelectronics",
+      "isin": "NL0000226223",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-29",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué du 5 octobre 2026",
+          "url": "https://www.globenewswire.com/news-release/2026/10/05/3374171/0/en/stmicroelectronics-announces-timing-for-third-quarter-2026-earnings-release-and-conference-call.html"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Thales",
+      "isin": "FR0000121329",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-22",
+        "objet": "Prises de commandes et chiffre d'affaires au 30 septembre 2026",
+        "source": {
+          "titre": "Communiqué du 21 avril 2026, événements à venir (dépôt AMF)",
+          "url": "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2026/04/FCECO081663_20260421.pdf"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "TotalEnergies",
+      "isin": "FR0000120271",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-29",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Webzine des actionnaires d'octobre 2026, agenda",
+          "url": "https://totalenergies.com/fr/node/37046"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Trigano",
+      "isin": "FR0005691656",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "TSMC",
+      "isin": "US8740391003",
+      "faits": [
+        {
+          "date": "2026-10-08",
+          "texte": "Chiffre d'affaires de septembre 2026 : environ 511,86 milliards de dollars taïwanais, en baisse de 0,6 % par rapport à août 2026 et en hausse de 54,6 % par rapport à septembre 2025. De janvier à septembre 2026 : 3 898,73 milliards de dollars taïwanais, en hausse de 41,1 % sur un an.",
+          "source": {
+            "titre": "Communiqué du 8 octobre 2026",
+            "url": "https://pr.tsmc.com/english/news/3343"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2026-10-15",
+        "objet": "Résultats du troisième trimestre 2026",
+        "source": {
+          "titre": "Page investisseurs, résultats trimestriels",
+          "url": "https://investor.tsmc.com/quarterly-results"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Unibail-Rodamco-Westfield",
+      "isin": "FR0013326246",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-22",
+        "objet": "Point d'activité du troisième trimestre 2026",
+        "source": {
+          "titre": "Communiqué du 30 juillet 2026 repris par FinanzNachrichten",
+          "url": "https://www.finanznachrichten.de/nachrichten-2026-07/69164878-unibail-rodamco-westfield-se-unibail-rodamco-westfield-reports-h1-2026-earnings-399.htm"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Veolia",
+      "isin": "FR0000124141",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-05",
+        "objet": "Informations financières des neuf premiers mois 2026",
+        "source": {
+          "titre": "Espace finance",
+          "url": "https://www.veolia.com/fr/groupe/espace-finance"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Vinci",
+      "isin": "FR0000125486",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Wolters Kluwer",
+      "isin": "NL0000395903",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-04",
+        "objet": "Point d'activité des neuf premiers mois 2026",
+        "source": {
+          "titre": "Agenda investisseurs",
+          "url": "https://www.wolterskluwer.com/es/investors/calendar-faq/investor-calendar"
+        }
+      },
+      "a_regarder": null
+    }
+  ],
+  "lecture": {
+    "marche": {
+      "hausse": [
+        "Les chiffres des fabricants de puces sont élevés : chiffre d'affaires de TSMC en hausse de 54,6 % sur un an en septembre, résultat opérationnel de Samsung estimé à environ 107 400 milliards de wons au troisième trimestre, contre 12 170 milliards un an plus tôt.",
+        "Des entreprises s'engagent sur le long terme : Schneider Electric acquiert PTC pour environ 22,6 milliards de dollars, Google signe pour 3 590 mégawatts avec Constellation, Air Liquide fixe des objectifs jusqu'en 2030.",
+        "Philip Lane dit que la BCE n'est pas sur une trajectoire de taux fixée d'avance : une pause reste possible si les données le permettent."
+      ],
+      "baisse": [
+        "Selon les minutes de la Fed, la plupart des participants jugeaient qu'une nouvelle hausse des taux serait probablement appropriée d'ici la fin de l'année.",
+        "Le compte rendu de la BCE décrit des perspectives d'inflation dégradées depuis juin, avec des risques orientés à la hausse ; l'inflation de septembre est à 3,8 % en zone euro.",
+        "Le Brent reste autour de 104 dollars le baril et l'OPEP+ n'augmente pas sa production : la pression de l'énergie sur les prix (18,8 % sur un an en zone euro) ne se relâche pas."
+      ],
+      "signaux": [
+        {
+          "date": "2026-10-14",
+          "texte": "Résultats du troisième trimestre d'ASML, puis de TSMC le lendemain : confirmation ou non des chiffres élevés du secteur des puces."
+        },
+        {
+          "date": "2026-10-28",
+          "texte": "Fin de la réunion de la Fed, puis de celle de la BCE le lendemain : nouvelle hausse des taux, ou pause."
+        },
+        {
+          "date": null,
+          "texte": "Prochains chiffres d'inflation aux États-Unis et en zone euro : reflux de l'énergie, ou diffusion aux autres prix."
+        },
+        {
+          "date": "2026-11-01",
+          "texte": "Réunion de l'OPEP+ : une hausse de production soulagerait le pétrole, un maintien prolongerait la tension."
+        }
+      ],
+      "balance": {
+        "sens": "partagée",
+        "confiance": "faible",
+        "motif": "Les chiffres d'entreprises sont solides, surtout dans les puces, mais les deux banques centrales décrivent une inflation qui peut encore appeler des taux plus hauts. Rien ne l'emporte nettement avant les résultats du troisième trimestre et les réunions de fin octobre."
+      }
+    },
+    "secteurs": [
+      {
+        "secteur": "Technologies de l'information",
+        "hausse": [
+          "TSMC publie un chiffre d'affaires en hausse de 54,6 % sur un an en septembre et de 41,1 % sur neuf mois : la demande de puces reste forte.",
+          "Samsung estime son résultat opérationnel du troisième trimestre à environ 107 400 milliards de wons, contre 89 490 milliards au trimestre précédent.",
+          "Capgemini rachète jusqu'à 3,0 millions d'actions pour compenser la dilution de son plan d'actionnariat salarié."
+        ],
+        "baisse": [
+          "Le chiffre d'affaires de TSMC recule de 0,6 % entre août et septembre : à ce niveau, la progression d'un mois sur l'autre n'est plus acquise.",
+          "La perspective d'une nouvelle hausse des taux de la Fed pèse d'abord sur les valeurs dont les bénéfices attendus sont lointains, ce qui est le cas d'une partie du secteur.",
+          "Après de tels chiffres, la barre est haute : un résultat seulement bon peut décevoir."
+        ],
+        "signaux": [
+          {
+            "date": "2026-10-14",
+            "texte": "Résultats du troisième trimestre d'ASML : commandes d'équipements des fabricants de puces."
+          },
+          {
+            "date": "2026-10-15",
+            "texte": "Résultats du troisième trimestre de TSMC : marges et prévisions d'investissement."
+          },
+          {
+            "date": "2026-10-29",
+            "texte": "Résultats détaillés de Samsung Electronics et résultats de STMicroelectronics."
+          }
+        ],
+        "balance": {
+          "sens": "hausse",
+          "confiance": "faible",
+          "motif": "Les deux publications chiffrées de la semaine vont dans le même sens. Elles sont toutefois déjà connues, et les résultats d'ASML et de TSMC, dans les jours qui viennent, peuvent les confirmer comme les contredire."
+        }
+      },
+      {
+        "secteur": "Industrie",
+        "hausse": [
+          "Airbus livre 72 avions en septembre et 547 sur neuf mois, en hausse de 8 % sur un an.",
+          "Schneider Electric s'étend dans le logiciel avec PTC, une activité aux revenus en général plus réguliers que la vente de matériel."
+        ],
+        "baisse": [
+          "Airbus vise environ 870 livraisons sur l'année après 547 en neuf mois : le dernier trimestre doit être nettement plus soutenu que les précédents.",
+          "Schneider Electric finance l'acquisition de PTC par de la dette nouvelle et une émission de titres, au moment où les taux montent ; l'opération reste soumise aux autorisations et au vote des actionnaires de PTC."
+        ],
+        "signaux": [
+          {
+            "date": "2026-10-16",
+            "texte": "Chiffre d'affaires du troisième trimestre de Schneider Electric, premier rendez-vous depuis l'annonce de l'acquisition."
+          },
+          {
+            "date": "2026-10-22",
+            "texte": "Prises de commandes et chiffre d'affaires de Thales au 30 septembre, puis chiffre d'affaires de Safran le lendemain."
+          },
+          {
+            "date": null,
+            "texte": "Livraisons d'Airbus d'octobre : rythme compatible ou non avec la cible annuelle."
+          }
+        ],
+        "balance": {
+          "sens": "partagée",
+          "confiance": "faible",
+          "motif": "Les livraisons d'Airbus progressent mais la cible annuelle reste exigeante, et l'acquisition de Schneider Electric est un pari de long terme dont le coût est immédiat."
+        }
+      },
+      {
+        "secteur": "Services aux collectivités",
+        "hausse": [
+          "Google signe avec Constellation pour 3 590 mégawatts, dont un contrat de 20 ans : les besoins électriques des centres de données donnent de la visibilité aux producteurs.",
+          "L'accord doit permettre plus de 4,3 milliards de dollars d'investissements nouveaux dans 11 réacteurs existants."
+        ],
+        "baisse": [
+          "Secteur endetté et lourd en investissements : la perspective de taux encore plus hauts renchérit son financement.",
+          "La première livraison liée à l'accord n'est attendue qu'en 2028 : les dépenses viennent avant les revenus."
+        ],
+        "signaux": [
+          {
+            "date": "2026-10-28",
+            "texte": "Décision de taux de la Fed, puis de la BCE le lendemain."
+          },
+          {
+            "date": "2026-11-05",
+            "texte": "Publications d'Engie et de Veolia sur les neuf premiers mois."
+          }
+        ],
+        "balance": {
+          "sens": "partagée",
+          "confiance": "faible",
+          "motif": "Des contrats longs d'un côté, un financement plus cher de l'autre : aucun des deux ne l'emporte nettement."
+        }
+      },
+      {
+        "secteur": "Matériaux",
+        "hausse": [
+          "Air Liquide vise une croissance de 5 % par an du chiffre d'affaires et de 10 % par an du résultat net récurrent sur 2026-2030, et prévoit 4 milliards d'euros de rachats d'actions en 2027 et 2028."
+        ],
+        "baisse": [
+          "Ce sont des objectifs à cinq ans, pas des résultats : leur réalisation dépend d'une activité industrielle que la hausse des taux et de l'énergie peut freiner.",
+          "Un seul fait relevé dans le secteur cette semaine : la lecture repose sur une seule entreprise."
+        ],
+        "signaux": [
+          {
+            "date": "2026-11-05",
+            "texte": "Résultats du troisième trimestre d'ArcelorMittal."
+          },
+          {
+            "date": null,
+            "texte": "Chiffre d'affaires du troisième trimestre d'Air Liquide, premier point d'étape du nouveau plan."
+          }
+        ],
+        "balance": {
+          "sens": "partagée",
+          "confiance": "faible",
+          "motif": "Un plan à cinq ans ne dit rien de la conjoncture des prochains mois, et aucun autre fait n'a été relevé dans le secteur."
+        }
+      },
+      {
+        "secteur": "Énergie",
+        "hausse": [
+          "GTT annonce deux commandes dans la semaine, pour quatre puis deux méthaniers : les investissements dans le transport de gaz liquéfié se poursuivent.",
+          "Le Brent autour de 104 dollars le baril soutient les revenus des producteurs."
+        ],
+        "baisse": [
+          "L'OPEP+ maintient sa production et se revoit dès le 1er novembre : la politique d'offre peut changer vite.",
+          "Un pétrole cher nourrit l'inflation, donc la hausse des taux, qui finit par peser sur la demande d'énergie."
+        ],
+        "signaux": [
+          {
+            "date": "2026-10-23",
+            "texte": "Point d'activité du troisième trimestre de GTT : état du carnet de commandes."
+          },
+          {
+            "date": "2026-10-29",
+            "texte": "Résultats du troisième trimestre de TotalEnergies."
+          },
+          {
+            "date": "2026-11-01",
+            "texte": "Réunion de l'OPEP+ : niveau de production de décembre."
+          }
+        ],
+        "balance": {
+          "sens": "partagée",
+          "confiance": "faible",
+          "motif": "Les prix soutiennent le secteur à court terme, mais ils dépendent de décisions de production qui se rediscutent chaque mois."
+        }
+      }
+    ]
+  }
+}
