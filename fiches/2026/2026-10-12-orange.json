@@ -1,0 +1,61 @@
+{
+  "nom": "Orange",
+  "ticker": "ORA",
+  "place": "Euronext Paris",
+  "date": "2026-10-12",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": false,
+    "chiffre_affaires": {"2021": 42522, "2022": 43471, "2023": 39678, "2024": 40260, "2025": 40396},
+    "cash_flow_libre": {"2021": 2401, "2022": 3058, "2023": 3184, "2024": 3372, "2025": 3653},
+    "chiffre_affaires_12m": 41491,
+    "resultat_net_12m": 4142,
+    "resultat_operationnel_12m": 7511,
+    "ebitda_12m": 12923,
+    "dette_nette": 35683,
+    "capitaux_propres": 31824.2,
+    "taux_impot": 0.494,
+    "per": 12.96,
+    "taux_distribution": 5.357
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires": "chiffres publiés en données historiques ; 2021 et 2022 avec l'Espagne, 2023 à 2025 sans l'Espagne (activité apportée à la coentreprise MasOrange en 2024, comptes 2023 retraités dans le communiqué 2024)",
+    "cash_flow_libre": "cash-flow organique des activités télécoms publié ; 2021 et 2022 avec l'Espagne, 2023 à 2025 hors Espagne",
+    "chiffre_affaires_12m": "40396 − 19853 + 20948",
+    "resultat_net_12m": "résultat net attribuable aux propriétaires de la société mère publié : 538 − (−398) + 3206 ; comprend un gain d'environ 2,4 Md€ lié à la prise de contrôle exclusif de MasOrange (1er semestre 2026)",
+    "resultat_operationnel_12m": "résultat d'exploitation publié : 3422 − 685 + 4774 ; comprend le même gain MasOrange (2559 au 1er semestre 2026)",
+    "ebitda_12m": "EBITDAaL publié : 12470 − 5675 + 6128 ; MasOrange n'y est consolidée que depuis juin 2026",
+    "dette_nette": "endettement financier net publié au 30/06/2026, après l'achat de 50 % de MasOrange",
+    "capitaux_propres": "non publiés dans le communiqué semestriel : capitalisation 36 863,3 / cours sur actif net 1,1583 (Stocklake)",
+    "taux_impot": "taux effectif 2025 : impôt sur les sociétés 1070 / résultat avant impôt 2168 (résultat d'exploitation 3422 − résultat financier 1254) ; aucun taux publié pour le 1er semestre 2026",
+    "per": "PER sur 12 mois (Stocklake, 12,96) au cours de 13,87 €",
+    "taux_distribution": "dividende 2025 de 0,75 € par action / résultat net par action 2025 de 0,14 € (Stocklake et présentation des résultats annuels)"
+  },
+  "complements": {
+    "cours": 13.87,
+    "capitalisation": 36863.3,
+    "per_a_terme": 12.1,
+    "roe": 0.142,
+    "cours_sur_actif_net": 1.16,
+    "rendement_dividende": 0.0527,
+    "objectif_moyen_analystes": 18.99,
+    "nombre_analystes": 16,
+    "dette_nette_sur_ebitdaal_publiee_30_06_2026": 2.40,
+    "dette_nette_sur_ebitdaal_publiee_fin_2025": 1.80,
+    "resultat_net_ajuste_part_du_groupe_12m": 2374,
+    "resultat_net_ajuste_par_action_2025": 0.86,
+    "dividende_2026_annonce_par_action": 0.79
+  },
+  "sources": [
+    "https://assets.orange.com/medias/domain12751/media101937/581256-exeyl73ayg-75.pdf",
+    "https://www.bnains.org/archives/communiques/France_Telecom/20250729_Communique_resultats_semestriels_2025_Orange.pdf",
+    "https://assets.orange.com/pm_12751_515_515640-r0iiwajx10.pdf",
+    "https://www.zonebourse.com/actualite-bourse/orange-fy-2025-communique-de-presse-515628-2f6v1dpsp8-75-ce7e5ddfd088f42d",
+    "https://bnains.org/archives/communiques/France_Telecom/20250213_Communique_resultats_annuels_2024_Orange.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2023/02/FCMKW133027_20230216.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2022/02/FCMKW135396_20220217.pdf",
+    "Stocklake, fiche ORA.PA du 12/10/2026"
+  ]
+}
