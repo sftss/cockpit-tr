@@ -1,0 +1,58 @@
+{
+  "nom": "Michelin",
+  "ticker": "ML",
+  "place": "Euronext Paris",
+  "date": "2026-10-13",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 23795, "2022": 28590, "2023": 28343, "2024": 27193, "2025": 25992},
+    "cash_flow_libre": {"2021": 1357, "2022": -180, "2023": 2343, "2024": 2225, "2025": 2181},
+    "chiffre_affaires_12m": 25651,
+    "resultat_net_12m": 1590,
+    "resultat_operationnel_12m": 2349,
+    "ebitda_12m": 4653,
+    "dette_nette": 4547,
+    "capitaux_propres": 17488,
+    "taux_impot": 0.263,
+    "per": 14.5,
+    "taux_distribution": 0.585
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires_12m": "ventes : 25992 − 13028 + 12687",
+    "resultat_net_12m": "résultat net publié : 1664 − 840 + 766",
+    "resultat_operationnel_12m": "résultat opérationnel publié (après autres produits et charges opérationnels) : 2366 − 1200 + 1183",
+    "ebitda_12m": "EBITDA des secteurs publié : 4663 − 2428 + 2418",
+    "cash_flow_libre": "« cash-flow libre » publié (flux opérationnels moins flux d'investissement, acquisitions comprises) ; le « cash-flow libre avant acquisitions » publié est aussi négatif en 2022 (−104)",
+    "dette_nette": "endettement net publié au 30/06/2026",
+    "capitaux_propres": "non publiés dans le communiqué semestriel : endettement net 4547 / ratio d'endettement net publié de 26,0 % (17 455 à 17 522 selon l'arrondi du ratio) ; le cours sur actif net de Stocklake (0,40) est incohérent et n'a pas été utilisé",
+    "taux_impot": "taux effectif 2025 : impôt 594 / résultat avant impôt 2258 (Stocklake, comptes 2025) ; aucun taux publié dans le communiqué semestriel",
+    "per": "cours de 33,30 € (Stocklake) / résultat net par action publié sur 12 mois de 2,29 € (2,36 − 1,18 + 1,11) ; le PER de Stocklake (3,25) est incohérent avec les résultats publiés et n'a pas été utilisé",
+    "taux_distribution": "dividende 2025 de 1,38 € par action / résultat net par action 2025 de 2,36 €"
+  },
+  "complements": {
+    "cours": 33.30,
+    "capitalisation": 23753.0,
+    "rendement_dividende": 0.041,
+    "objectif_moyen_analystes": 33.52,
+    "nombre_analystes": 14,
+    "ratio_endettement_net_30_06_2026": 0.260,
+    "ratio_endettement_net_fin_2025": 0.130,
+    "dette_nette_sur_ebitda_fin_2025": 0.50,
+    "cash_flow_libre_avant_acquisitions_1er_semestre_2026": 282,
+    "cash_flow_libre_1er_semestre_2026": -328,
+    "provisions_retraites_nettes_30_06_2026": 2303
+  },
+  "sources": [
+    "https://fr.finance.yahoo.com/actualites/michelin-r%C3%A9alise-au-premier-semestre-154500834.html",
+    "https://reifenpresse.de/wp-content/uploads/2026/07/Michelin-2026-Q2.pdf",
+    "https://www.michelin.com/publications/groupe/informations-financieres-au-30-juin-2026",
+    "https://fr.finance.yahoo.com/actualites/michelin-enregistre-2025-r%C3%A9sultat-op%C3%A9rationnel-164500833.html",
+    "https://bnains.org/archives/communiques/Michelin/20250212_Communique_resultats_annuels_2024_Michelin.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2024/02/FCMKW133380_20240212.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2023/02/FCMKW132391_20230213.pdf",
+    "Stocklake, fiche et comptes 2025 ML.PA du 13/10/2026"
+  ]
+}
