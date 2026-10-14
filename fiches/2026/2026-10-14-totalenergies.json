@@ -1,0 +1,62 @@
+{
+  "nom": "TotalEnergies",
+  "ticker": "TTE",
+  "place": "Euronext Paris",
+  "date": "2026-10-14",
+  "devise": "USD",
+  "unite": "millions de dollars, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 184634, "2022": 263310, "2023": 218945, "2024": 195610, "2025": 182344},
+    "cash_flow_libre": {"2021": 15833, "2022": 29426, "2023": 19109, "2024": 12088, "2025": 10748},
+    "chiffre_affaires_12m": 196619,
+    "resultat_net_12m": 17837,
+    "resultat_operationnel_12m": 33071,
+    "ebitda_12m": 46092,
+    "dette_nette": 19710,
+    "capitaux_propres": 130953,
+    "taux_impot": 0.392,
+    "per": 11.1,
+    "taux_distribution": 0.619
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires": "produits des ventes publiés (hors droits d'accises)",
+    "cash_flow_libre": "« cash-flow net » publié : marge brute d'autofinancement avant variation du besoin en fonds de roulement, moins investissements nets (acquisitions et cessions comprises)",
+    "chiffre_affaires_12m": "produits des ventes : 182344 − 92575 + 106850",
+    "resultat_net_12m": "résultat net IFRS part TotalEnergies : 13127 − 6538 + 11248",
+    "ebitda_12m": "EBITDA ajusté publié : 40555 − 20194 + 25731",
+    "resultat_operationnel_12m": "aucun résultat opérationnel avant impôt n'est publié : EBITDA ajusté 12 mois 46092 moins amortissements et dépréciations publiés du rapprochement de l'EBITDA ajusté (corporels et droits miniers + incorporels) sur 12 mois, (12565 + 382) − (6104 + 179) + (6172 + 185) = 13021 ; inclut la quote-part des sociétés mises en équivalence",
+    "dette_nette": "dette nette hors contrats de location publiée au 30/06/2026 ; dettes de location au 31/12/2025 : 8567",
+    "capitaux_propres": "capitaux propres totaux publiés au 30/06/2026 (part TotalEnergies 128408 + intérêts minoritaires 2545)",
+    "taux_impot": "taux moyen d'imposition publié pour le 1er semestre 2026",
+    "per": "PER sur 12 mois de Stocklake sur le certificat de dépôt coté à New York (TTE, 88,95 $), le titre de Paris (TTE.PA) n'étant pas couvert ; une action par certificat, comptes publiés en dollars",
+    "taux_distribution": "dividendes versés aux actionnaires de la société mère en 2025 (8121) / résultat net IFRS part TotalEnergies 2025 (13127) ; le résultat net IFRS par action n'est publié qu'en dollars et le dividende (3,40 € par action) en euros"
+  },
+  "complements": {
+    "cours_certificat_new_york_usd": 88.95,
+    "capitalisation": 196355.0,
+    "per_a_terme": 8.1,
+    "roe": 0.145,
+    "rendement_dividende": 0.045,
+    "objectif_moyen_analystes_usd": 98.25,
+    "nombre_analystes": 10,
+    "dividende_2025_par_action_eur": 3.40,
+    "resultat_net_ajuste_par_action_2025_eur": 6.10,
+    "rachats_actions_2025": 7496,
+    "ratio_endettement_30_06_2026": 0.131,
+    "dette_nette_fin_2025": 20215,
+    "capitaux_propres_fin_2025": 117523,
+    "brent_1er_semestre_2026_usd_baril": 92.3,
+    "brent_1er_semestre_2025_usd_baril": 71.9,
+    "production_1er_semestre_2026_kbep_j": 2474,
+    "production_1er_semestre_2025_kbep_j": 2531
+  },
+  "sources": [
+    "https://totalenergies.com/system/files/documents/totalenergies_cp-resultats-2t26_2026_fr.pdf",
+    "https://totalenergies.com/system/files/documents/totalenergies_pr-results-q4-2025_2026_en.pdf",
+    "https://www.businesswire.com/news/home/20240206849440/en/TotalEnergies-SE-Fourth-Quarter-and-Full-Year-2023-Results",
+    "https://www.businesswire.com/news/home/20230208005409/en/",
+    "Stocklake, fiche TTE (certificat de dépôt, New York) du 14/10/2026"
+  ]
+}
