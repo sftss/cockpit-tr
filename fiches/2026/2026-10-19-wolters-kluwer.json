@@ -1,0 +1,63 @@
+{
+  "nom": "Wolters Kluwer",
+  "ticker": "WKL",
+  "place": "Euronext Amsterdam",
+  "date": "2026-10-19",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": false,
+    "chiffre_affaires": {"2021": 4771, "2022": 5453, "2023": 5584, "2024": 5916, "2025": 6125},
+    "cash_flow_libre": {"2021": 1010, "2022": 1220, "2023": 1164, "2024": 1276, "2025": 1348},
+    "chiffre_affaires_12m": 6106,
+    "resultat_net_12m": 1335,
+    "resultat_operationnel_12m": 1790,
+    "ebitda_12m": 2246,
+    "dette_nette": 4024,
+    "capitaux_propres": 940,
+    "taux_impot": 0.237,
+    "per": 13.9,
+    "taux_distribution": 0.447
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires": "chiffres d'affaires publiés ; la cession de Finance, Risk & Regulatory Reporting (FRR) au 1er décembre 2025 réduit le chiffre d'affaires du 1er semestre 2026 de 60",
+    "cash_flow_libre": "cash-flow libre ajusté publié par le groupe (adjusted free cash flow)",
+    "chiffre_affaires_12m": "6125 − 3052 + 3033",
+    "resultat_net_12m": "résultat net publié, entièrement attribuable aux actionnaires : 1308 − 553 + 580 ; l'exercice 2025 comprend une plus-value de cession de 232 (FRR) dans le résultat opérationnel",
+    "resultat_operationnel_12m": "résultat opérationnel IFRS : 1735 − 765 + 820",
+    "ebitda_12m": "EBITDA publié : 2212 − 1009 + 1043",
+    "dette_nette": "dette nette publiée au 30/06/2026",
+    "capitaux_propres": "total des capitaux propres publié au 30/06/2026",
+    "taux_impot": "taux effectif publié pour le 1er semestre 2026",
+    "per": "PER sur 12 mois (Stocklake) au cours de 81,52 €",
+    "taux_distribution": "dividende 2025 par action (2,52 €) / bénéfice dilué par action 2025 (5,64 €)"
+  },
+  "complements": {
+    "cours": 81.52,
+    "capitalisation": 18133.1,
+    "per_a_terme": 13.2,
+    "cours_sur_actif_net": 19.36,
+    "rendement_dividende": 0.032,
+    "objectif_moyen_analystes": 89.91,
+    "nombre_analystes": 16,
+    "plus_haut_52_semaines": 115.15,
+    "plus_bas_52_semaines": 54.64,
+    "resultat_operationnel_ajuste_12m": 1715,
+    "ebitda_ajuste_12m": 2019,
+    "dette_nette_sur_ebitda_publiee_30_06_2026": 2.0,
+    "plus_value_cession_frr_2025": 232,
+    "dividendes_verses_2025": 563,
+    "rachats_d_actions_1er_semestre_2026": 215,
+    "croissance_organique_1er_semestre_2026": 0.05,
+    "marge_operationnelle_ajustee_1er_semestre_2026": 0.294
+  },
+  "sources": [
+    "https://www.globenewswire.com/news-release/2026/08/05/3339046/0/en/Wolters-Kluwer-2026-Half-Year-Report.html",
+    "https://assets.contenthub.wolterskluwer.com/api/public/content/3775537-2026-08-05-wolters-kluwer-2026-half-year-results-7d85c04c6c",
+    "https://www.globenewswire.com/news-release/2026/02/25/3244280/0/en/wolters-kluwer-2025-full-year-report.html",
+    "https://www.globenewswire.com/news-release/2024/02/21/2832461/0/en/Wolters-Kluwer-2023-Full-Year-Report.html",
+    "https://www.globenewswire.com/news-release/2022/02/23/2390001/0/en/Wolters-Kluwer-2021-Full-Year-Report.html",
+    "Stocklake, fiche WKL.AS du 19/10/2026"
+  ]
+}
