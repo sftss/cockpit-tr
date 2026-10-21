@@ -1,0 +1,63 @@
+{
+  "nom": "Publicis",
+  "ticker": "PUB",
+  "place": "Euronext Paris",
+  "date": "2026-10-21",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": false,
+    "chiffre_affaires": {"2021": 11738, "2022": 14196, "2023": 14802, "2024": 16030, "2025": 17399},
+    "cash_flow_libre": {"2021": 1427, "2022": 1807, "2023": 1547, "2024": 1838, "2025": 2032},
+    "chiffre_affaires_12m": 17650,
+    "resultat_net_12m": 1622,
+    "resultat_operationnel_12m": 2441,
+    "ebitda_12m": 3194,
+    "dette_nette": 1215,
+    "capitaux_propres": 10496,
+    "taux_impot": 0.259,
+    "per": 15.7,
+    "taux_distribution": 0.57
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires": "« revenu » publié (normes IFRS), qui comprend les coûts refacturés aux clients ; le groupe pilote plutôt le « revenu net » (14 547 en 2025, 10 487 en 2021)",
+    "cash_flow_libre": "« free cash flow avant variation du BFR » publié dans le communiqué annuel de chaque exercice ; la variation du besoin en fonds de roulement n'y est pas déduite. 2022 : 1 807 publié, 1 697 après un impôt additionnel de 110 payé en janvier 2023. 2023 : 1 547, dont un impact net de 148 lié au règlement Rosetta",
+    "chiffre_affaires_12m": "17399 − 8483 + 8734",
+    "resultat_net_12m": "résultat net part du Groupe : 1653 − 824 + 793 (résultat net total : 1661 − 832 + 797 = 1626)",
+    "resultat_operationnel_12m": "résultat opérationnel publié : 2394 − 1102 + 1149",
+    "ebitda_12m": "EBITDA publié (marge opérationnelle avant amortissements) : 3168 − 1501 + 1527",
+    "dette_nette": "endettement financier net publié au 30/06/2026, hors obligations locatives (2 142) ; trésorerie nette de 548 au 31/12/2025",
+    "capitaux_propres": "total des capitaux propres au bilan du 30/06/2026 (part du Groupe : 10 519)",
+    "taux_impot": "taux effectif d'impôt prévisionnel publié pour le 1er semestre 2026",
+    "per": "PER sur 12 mois (Stocklake, 15,72) au cours de 100,95 €",
+    "taux_distribution": "dividende 2025 de 3,75 € par action / résultat par action 2025 de 6,58 € ; rapporté au résultat courant dilué par action (7,48 €), 50 %",
+    "capitalisation": "Stocklake, au cours de 100,95 €"
+  },
+  "complements": {
+    "cours": 100.95,
+    "capitalisation": 25209.3,
+    "per_a_terme": 11.8,
+    "roe": 0.162,
+    "cours_sur_actif_net": 2.40,
+    "rendement_dividende": 0.0369,
+    "objectif_moyen_analystes": 115.0,
+    "nombre_analystes": 16,
+    "revenu_net_2025": 14547,
+    "revenu_net_12m": 14624,
+    "croissance_organique_revenu_net_9_mois_2026": 0.048,
+    "obligations_locatives_30_06_2026": 2142,
+    "dette_nette_moyenne_12_mois_30_06_2026": 1131
+  },
+  "sources": [
+    "https://www.publicisgroupe.com/sites/default/files/press-releases/2026-07/Communiqu%C3%A9%20de%20presse%20-%202026.06%20-%20FR_0.pdf",
+    "https://www.publicisgroupe.com/sites/default/files/press-releases/2026-02/CP_FY%202025_FR.pdf",
+    "https://www.publicisgroupe.com/sites/default/files/press-releases/2025-02/CP_Resultats_FY2024%20FR_20250204_0.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/BWR/2024/02/FCBWR155059_20240208.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/BWR/2023/02/FCBWR147520_20230202.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/BWR/2022/02/FCBWR139484_20220203.pdf",
+    "https://www.lesoleil.com/communiques-de-presse/2026/10/13/publicis-groupe-revenu-du-troisieme-trimestre-2026-MSEQ7FNF6NBYDHNCTH2HSJO3LE/",
+    "https://www.tikr.com/fr/blog/publicis-acquires-liveramp-for-2-2b-as-ramp-stock-surges-27-on-announcement",
+    "Stocklake, fiche PUB.PA du 21/10/2026"
+  ]
+}
