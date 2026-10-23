@@ -1,0 +1,72 @@
+{
+  "nom": "Danone",
+  "ticker": "BN",
+  "place": "Euronext Paris",
+  "date": "2026-10-23",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {
+      "2021": 24281,
+      "2022": 27661,
+      "2023": 27619,
+      "2024": 27376,
+      "2025": 27283
+    },
+    "cash_flow_libre": {
+      "2021": 2489,
+      "2022": 2127,
+      "2023": 2633,
+      "2024": 3003,
+      "2025": 2799
+    },
+    "chiffre_affaires_12m": 27482,
+    "resultat_net_12m": 1960,
+    "resultat_operationnel_12m": 3060,
+    "ebitda_12m": 4312,
+    "dette_nette": 8975,
+    "capitaux_propres": 17609,
+    "taux_impot": 0.287,
+    "per": 20.7,
+    "taux_distribution": 0.798
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires_12m": "27283 − 13737 + 13936",
+    "resultat_net_12m": "résultat net part du groupe publié : 1825 − 1040 + 1175",
+    "resultat_operationnel_12m": "résultat opérationnel publié, non courant compris : 2940 − 1573 + 1693",
+    "ebitda_12m": "le groupe ne publie pas l'EBITDA : résultat opérationnel + dotations aux amortissements et dépréciations des actifs corporels et incorporels du tableau de flux, soit (2940 + 1355) − (1573 + 641) + (1693 + 538) ; la ligne ne sépare pas les dépréciations",
+    "dette_nette": "dette nette publiée au 30/06/2026, dettes liées aux options de vente accordées aux minoritaires comprises (dette financière nette hors ces options : 8557)",
+    "capitaux_propres": "capitaux propres part du groupe au 30/06/2026 (rapport financier semestriel)",
+    "taux_impot": "taux effectif publié pour le 1er semestre 2026 (taux courant : 26,5 %)",
+    "per": "PER sur 12 mois (Stocklake, 20,66) au cours de 62,38 €",
+    "taux_distribution": "dividende 2025 de 2,25 € par action / résultat net dilué par action 2025 de 2,82 € ; rapporté au BNPA courant dilué (3,80 €), 59 %",
+    "chiffre_affaires": "2021 et 2022 : communiqué annuel 2022 ; 2023 et 2024 : communiqué annuel 2024 ; 2025 : communiqué annuel 2025",
+    "cash_flow_libre": "free cash-flow publié par le groupe ; mêmes communiqués que le chiffre d'affaires",
+    "dette_nette_sur_ebitda_fin_2025": "dette nette au 31/12/2025 / (résultat opérationnel 2025 + dotations aux amortissements et dépréciations 2025) : 8431 / (2940 + 1355)",
+    "dette_financiere_brute_30_06_2026": "dettes financières non courantes + courantes + découverts bancaires au 30/06/2026 : 10923 + 5409 + 1095 (rapport financier semestriel)",
+    "capitalisation": "Stocklake, au cours de 62,38 €"
+  },
+  "complements": {
+    "cours": 62.38,
+    "per_a_terme": 14.8,
+    "roe": 0.122,
+    "rendement_dividende": 0.037,
+    "objectif_moyen_analystes": 78.52,
+    "nombre_analystes": 22,
+    "capitalisation": 40178.7,
+    "dette_financiere_brute_30_06_2026": 17427,
+    "dette_nette_sur_ebitda_fin_2025": 1.96
+  },
+  "sources": [
+    "https://www.nasdaq.com/press-release/danone-2025-another-year-strong-delivery-2026-02-20",
+    "https://www.webdisclosure.com/press-release/danone-strong-q2-performance-and-solid-h1-results-demonstrating-the-relevance-of-our-health-focused-portfolio-bk9pVAqat3X",
+    "https://www.danone.com/content/dam/corp/global/danonecom/investors/en-all-publications/2026/2026interimfinancialreport.pdf",
+    "https://www.globenewswire.com/news-release/2025/07/30/3123752/0/en/Danone-A-strong-first-half-Consistently-delivering-quality-results.html",
+    "https://www.bnains.org/archives/communiques/Danone/20250226_Communique_resultats_annuels_2024_Danone.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2023/02/FCMKW114022_20230222.pdf",
+    "https://www.trivano.com/persbericht/danone-forte-performance-au-t2-et-resultats-solides-au-1er-semestre-refletant-la-pertinence-de-notre-portefeuille-de-produits-axe-sur-la-sante-748499.html",
+    "Stocklake, fiche BN.PA du 23/10/2026"
+  ]
+}
