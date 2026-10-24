@@ -1,0 +1,938 @@
+{
+  "semaine": "2026-W43",
+  "du": "2026-10-17",
+  "au": "2026-10-23",
+  "macro": [
+    {
+      "sujet": "Activité en zone euro",
+      "texte": "L'indice PMI composite flash de la zone euro passe à 51,9 en octobre (53,1 en septembre) ; services à 51,7 (53,0), industrie à 52,4 (52,9). En France, la production du secteur privé repasse en contraction. Les coûts de production des industriels s'accélèrent nettement, liés surtout à l'énergie.",
+      "sources": [
+        {
+          "titre": "S&P Global, PMI flash de la zone euro d'octobre 2026 (23 octobre)",
+          "url": "https://www.pmi.spglobal.com/Public/Home/PressRelease/460d8e59c101498493559df807c62014"
+        }
+      ]
+    },
+    {
+      "sujet": "PMI États-Unis, Royaume-Uni et France",
+      "texte": "Selon le résumé de marché de Newsquawk du 23 octobre, le PMI composite flash est de 57,6 aux États-Unis, 53,1 au Royaume-Uni et 48,4 en France ; le PMI manufacturier allemand est à 54,2.",
+      "sources": [
+        {
+          "titre": "Newsquawk, European Market Wrap du 23 octobre 2026",
+          "url": "https://www.newsquawk.com/headlines/newsquawk-european-market-wrap---23rd-october-2026"
+        }
+      ]
+    },
+    {
+      "sujet": "Pétrole",
+      "texte": "Le 23 octobre, le Brent évolue entre 112,74 et 115,45 $ le baril et termine environ 2 $ plus haut, selon Newsquawk. Le ministère américain de l'Énergie autorise un échange d'urgence de 400 000 barils de la réserve stratégique.",
+      "sources": [
+        {
+          "titre": "Newsquawk, European Market Wrap du 23 octobre 2026",
+          "url": "https://www.newsquawk.com/headlines/newsquawk-european-market-wrap---23rd-october-2026"
+        }
+      ]
+    },
+    {
+      "sujet": "France : dette et notation",
+      "texte": "Moody's devait réexaminer le vendredi 23 octobre la note de la France (Aa3, perspective négative) ; le résultat n'était pas connu à la rédaction. Newsquawk relève un écart OAT–Bund à 10 ans à un nouveau plus haut en plusieurs années.",
+      "sources": [
+        {
+          "titre": "ABC Bourse, « Moody's pourrait dégrader la note de la France vendredi »",
+          "url": "https://www.abcbourse.com/marches/moody-s-pourrait-degrader-la-note-de-la-france-vendredi_704606"
+        },
+        {
+          "titre": "Newsquawk, European Market Wrap du 23 octobre 2026",
+          "url": "https://www.newsquawk.com/headlines/newsquawk-european-market-wrap---23rd-october-2026"
+        }
+      ]
+    },
+    {
+      "sujet": "Commerce",
+      "texte": "Le représentant américain au Commerce (USTR) propose de prolonger jusqu'au 9 janvier 2027 la suspension de son enquête de la section 301 sur les secteurs maritime et de la construction navale chinois. La France a demandé une exemption de droits de douane américains pour le cognac et le champagne.",
+      "sources": [
+        {
+          "titre": "Newsquawk, European Market Wrap du 23 octobre 2026",
+          "url": "https://www.newsquawk.com/headlines/newsquawk-european-market-wrap---23rd-october-2026"
+        }
+      ]
+    }
+  ],
+  "titres": [
+    {
+      "nom": "Accor",
+      "isin": "FR0000120404",
+      "faits": [
+        {
+          "date": "2026-10-22",
+          "texte": "Accor publie un chiffre d'affaires du 3e trimestre 2026 de 1 503 M€, en hausse de 7,7 % à taux de change constants. Le groupe relève la fourchette basse de son EBITDA récurrent 2026, désormais de 1 270 à 1 285 M€ (contre 1 260 à 1 285 M€).",
+          "source": {
+            "titre": "Accor, communiqué du 22 octobre 2026",
+            "url": "https://press.accor.com/third-quarter-2026-accor-upgrades-its-ebitda-guidance/?lang=eng"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": "Selon le communiqué d'Accor du 22 octobre, la cession de sa participation d'environ 30,7 % dans Essendi, signée le 23 juillet, doit se conclure au 4e trimestre 2026 sous réserve d'autorisations réglementaires et antitrust, avant un rachat d'actions supplémentaire de 500 M€."
+    },
+    {
+      "nom": "Air Liquide",
+      "isin": "FR0000120073",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-29",
+        "objet": "Publication des résultats du 3e trimestre 2026",
+        "source": {
+          "titre": "Air Liquide, document pré-T3 (webdisclosure, 7 octobre)",
+          "url": "https://www.webdisclosure.com/press-release/air-liquide-epa-ai-mise-en-ligne-du-document-pre-q3-2026-sales-communication-NyyAVfy8K2t"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Airbus",
+      "isin": "NL0000235190",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-28",
+        "objet": "Résultats des neuf premiers mois 2026",
+        "source": {
+          "titre": "Airbus, résultats financiers",
+          "url": "https://www.airbus.com/en/investors/financial-results"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Alphabet",
+      "isin": "US02079K3059",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Amazon",
+      "isin": "US0231351067",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-29",
+        "objet": "Résultats du 3e trimestre 2026 (appel à 14 h, heure du Pacifique)",
+        "source": {
+          "titre": "Amazon, conférence sur les résultats du T3 2026",
+          "url": "https://ir.aboutamazon.com/events/event-details/2026/Q3-2026-Amazoncom-Inc-Earnings-Conference-Call/default.aspx"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "AMD",
+      "isin": "US0079031078",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-03",
+        "objet": "Résultats du 3e trimestre fiscal 2026, après la clôture",
+        "source": {
+          "titre": "AMD, annonce de la date des résultats",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1300/amd-to-report-fiscal-third-quarter-2026-financial-results"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "ArcelorMittal",
+      "isin": "LU1598757687",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-05",
+        "objet": "Résultats du 3e trimestre 2026",
+        "source": {
+          "titre": "ArcelorMittal, calendrier financier 2026",
+          "url": "https://mfn.se/all/a/arcelormittal/arcelormittal-announces-its-financial-calendar-for-2026-af23df64"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "ASML",
+      "isin": "NL0010273215",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Bloom Energy",
+      "isin": "US0937121079",
+      "faits": [
+        {
+          "date": "2026-10-22",
+          "texte": "Bloom Energy publie un chiffre d'affaires du 3e trimestre 2026 de 1 235,8 M$, en hausse de 138,1 %, et relève ses objectifs 2026 : chiffre d'affaires de 4,4 à 4,6 Md$, résultat opérationnel non-GAAP de 960 à 1 030 M$, BPA non-GAAP de 3,10 à 3,40 $.",
+          "source": {
+            "titre": "Bloom Energy, communiqué de résultats du T3 2026 (8-K, ex. 99.1)",
+            "url": "https://www.sec.gov/Archives/edgar/data/0001664703/000162828026066890/ex991_q326financialresults.htm"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Bouygues",
+      "isin": "FR0000120503",
+      "faits": [
+        {
+          "date": "2026-10-20",
+          "texte": "Colas, filiale de Bouygues, a finalisé le 20 octobre l'acquisition de 100 % de l'américain Suit-Kote (routes), valorisé 480 M$ (environ 428 M€) ; Suit-Kote a réalisé 460 M$ de chiffre d'affaires en 2025. L'opération suit l'examen des autorités américaines de la concurrence.",
+          "source": {
+            "titre": "ABC Bourse, « Colas a bouclé l'acquisition de Suit-Kote » (21 octobre)",
+            "url": "https://www.abcbourse.com/marches/bouygues-colas-a-boucle-l-acquisition-de-suit-kote-aux-etats-unis-pour-480-mill_704565"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Broadcom",
+      "isin": "US11135F1012",
+      "faits": [
+        {
+          "date": "2026-10-20",
+          "texte": "Broadcom annonce prolonger sa relation avec FedEx dans un accord unique portant sur VMware Cloud Foundation, Avi Load Balancer et Tanzu Platform pour le cloud privé de FedEx. Le montant et la durée ne sont pas communiqués.",
+          "source": {
+            "titre": "GlobeNewswire, communiqué Broadcom du 20 octobre 2026",
+            "url": "https://www.globenewswire.com/news-release/2026/10/20/3384502/19933/en/broadcom-announces-continued-infrastructure-agreement-with-fedex-to-support-global-operations.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Bureau Veritas",
+      "isin": "FR0006174348",
+      "faits": [
+        {
+          "date": "2026-10-21",
+          "texte": "Bureau Veritas publie un chiffre d'affaires du 3e trimestre 2026 de 1 569,7 M€ (+10,1 %, dont +6,2 % en organique) et de 4 513,8 M€ sur neuf mois (+4,9 %, +5,7 % en organique). Les objectifs 2026 sont confirmés.",
+          "source": {
+            "titre": "Bureau Veritas, communiqué du 21 octobre 2026 (STT Info)",
+            "url": "https://www.sttinfo.fi/tiedote/72429302/bureau-veritas-double-digit-total-revenue-growth-in-the-third-quarter-of-2026?publisherId=58763726"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2027-02-25",
+        "objet": "Résultats annuels 2026",
+        "source": {
+          "titre": "Bureau Veritas, calendrier financier du communiqué du 21 octobre 2026",
+          "url": "https://www.sttinfo.fi/tiedote/72429302/bureau-veritas-double-digit-total-revenue-growth-in-the-third-quarter-of-2026?publisherId=58763726"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "BYD Electronic",
+      "isin": "HK0285041858",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Capgemini",
+      "isin": "FR0000125338",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-30",
+        "objet": "Chiffre d'affaires du 3e trimestre 2026, à 7 h (Paris)",
+        "source": {
+          "titre": "Capgemini, calendrier des investisseurs",
+          "url": "https://investors.capgemini.com/fr/calendrier/"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Carrefour",
+      "isin": "FR0000120172",
+      "faits": [
+        {
+          "date": "2026-10-20",
+          "texte": "Carrefour publie une croissance comparable de 2,3 % au 3e trimestre 2026 et abaisse ses objectifs 2026 : marge opérationnelle courante en hausse de 0 à 15 points de base (contre 25), BPA ajusté stable à légèrement en hausse, flux de trésorerie net en léger repli. Il cite la dégradation de la situation sociale et sécuritaire en France.",
+          "source": {
+            "titre": "ABC Bourse, « Carrefour abaisse ses objectifs 2026 » (20 octobre)",
+            "url": "https://www.abcbourse.com/marches/carrefour-abaisse-ses-objectifs-2026-en-raison-de-la-situation-en-france_704531"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Coloplast",
+      "isin": "DK0060448595",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-03",
+        "objet": "Résultats annuels 2025/26",
+        "source": {
+          "titre": "Coloplast, invitation à la conférence du 3 novembre 2026",
+          "url": "https://www.globenewswire.com/news-release/2026/10/21/3385339/0/en/coloplast-a-s-fy-2025-26-earnings-release-invitation-for-conference-call-on-3-november-2026-at-11-00am-cet.html"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Constellation Energy",
+      "isin": "US21037T1097",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-09",
+        "objet": "Résultats du 3e trimestre 2026 (appel à 9 h, heure de l'Est)",
+        "source": {
+          "titre": "Constellation Energy, conférence sur les résultats du T3 2026",
+          "url": "https://investors.constellationenergy.com/events/event-details/q3-2026-constellation-energy-corporation-earnings-conference-call"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Danaher",
+      "isin": "US2358511028",
+      "faits": [
+        {
+          "date": "2026-10-21",
+          "texte": "Danaher publie pour le 3e trimestre 2026 des ventes de 6,6 Md$ (+8,5 %), une croissance « core » de 3,0 % (5,5 % hors tests respiratoires) et un BPA ajusté de 2,11 $ (+11,5 %). La prévision de BPA ajusté 2026 passe à 8,57–8,62 $ (contre 8,45–8,60 $).",
+          "source": {
+            "titre": "Danaher, communiqué de résultats du T3 2026 (8-K, ex. 99.1)",
+            "url": "https://www.sec.gov/Archives/edgar/data/0000313616/000031361626000201/dhr-20261021xex991.htm"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Danone",
+      "isin": "FR0000120644",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-28",
+        "objet": "Ventes du 3e trimestre 2026",
+        "source": {
+          "titre": "Danone, aide-mémoire des ventes du T3 2026 (1er octobre)",
+          "url": "https://www.globenewswire.com/news-release/2026/10/01/3373181/0/fr/danone.html"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Dassault Systèmes",
+      "isin": "FR0014003TT8",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Eiffage",
+      "isin": "FR0000130452",
+      "faits": [
+        {
+          "date": "2026-10-20",
+          "texte": "Eiffage indique qu'APRR, sa filiale d'autoroutes, a réalisé sur neuf mois 2026 un chiffre d'affaires hors construction de 2,487 Md€ (+0,2 %). Le trafic cumulé APRR et AREA recule de 2,9 % sur un an.",
+          "source": {
+            "titre": "Option Finance, « Eiffage annonce une légère hausse des revenus à neuf mois d'APRR » (20 octobre)",
+            "url": "https://www.optionfinance.fr/info-financiere-en-continu/d/2026-10-20-eiffage-annonce-une-legere-hausse-des-revenus-a-neuf-mois-daprr.html"
+          }
+        },
+        {
+          "date": "2026-10-21",
+          "texte": "Eiffage signe un protocole d'accord avec le LOSC et entre en négociations exclusives pour céder 100 % du capital des sociétés exploitant le Decathlon Arena – Stade Pierre-Mauroy. Le montant n'est pas communiqué.",
+          "source": {
+            "titre": "EasyBourse, « Eiffage et le LOSC négocient le transfert de l'exploitation du Stade Pierre-Mauroy »",
+            "url": "https://www.easybourse.com/btp/news/1539815/eiffage-losc-negocient-transfert-exploitation-stade-pierre-mauroy.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": "La cession des sociétés exploitant le Stade Pierre-Mauroy est envisagée pour le 1er trimestre 2027, sous réserve de la consultation des salariés et des autorisations requises (EasyBourse, 21 octobre)."
+    },
+    {
+      "nom": "Engie",
+      "isin": "FR0010208488",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Equasens",
+      "isin": "FR0012882389",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-29",
+        "objet": "Chiffre d'affaires du 3e trimestre 2026, après la clôture",
+        "source": {
+          "titre": "Equasens, agenda financier 2026 (Yahoo Finance)",
+          "url": "https://fr.finance.yahoo.com/actualites/equasens-annonce-agenda-financier-2026-170000395.html"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "EssilorLuxottica",
+      "isin": "FR0000121667",
+      "faits": [
+        {
+          "date": "2026-10-21",
+          "texte": "EssilorLuxottica publie un chiffre d'affaires du 3e trimestre 2026 de 7,49 Md€, en hausse de 7,2 % à taux constants (9 % à taux courants), et de 22,3 Md€ sur neuf mois (+8,9 % à taux constants). Les lunettes connectées atteignent 486 M€ au trimestre (+20 % à taux constants).",
+          "source": {
+            "titre": "FashionUnited, « DTC and wearables propel EssilorLuxottica » (21 octobre)",
+            "url": "https://fashionunited.com/news/business/dtc-and-wearables-propel-essilorluxottica-to-7-49-billion-euros-in-q3/2026102175293"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Eurofins Scientific",
+      "isin": "FR0014000MR3",
+      "faits": [
+        {
+          "date": "2026-10-21",
+          "texte": "Eurofins publie un chiffre d'affaires de 1 913 M€ au 3e trimestre 2026 (+6,1 %) et de 5 614 M€ sur neuf mois (+3,7 %, +3,0 % en organique). La croissance organique 2026 devrait rester inférieure à l'objectif initial ; les objectifs de rentabilité et de trésorerie sont inchangés.",
+          "source": {
+            "titre": "Idéal Investisseur, « Eurofins : accelerating growth in the third quarter » (21 octobre)",
+            "url": "https://www.ideal-investisseur.fr/en/stock-news/eurofins-accelerating-growth-in-the-third-quarter-but-2026-organic-target-out-of-reach/27618.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Euronext",
+      "isin": "NL0006294274",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Gaztransport & Technigaz",
+      "isin": "FR0011726835",
+      "faits": [
+        {
+          "date": "2026-10-23",
+          "texte": "GTT publie un chiffre d'affaires de 570,1 M€ sur neuf mois 2026 (−4,9 %), 80 commandes dont 71 méthaniers neufs et un carnet de 299 unités (1,8 Md€). Les objectifs 2026 sont confirmés : chiffre d'affaires de 740 à 780 M€, EBITDA de 490 à 530 M€.",
+          "source": {
+            "titre": "GTT, communiqué d'activité du T3 2026 (23 octobre)",
+            "url": "https://www.globenewswire.com/news-release/2026/10/23/3387519/0/en/gtt-q3-2026-activity-update-press-release.html"
+          }
+        },
+        {
+          "date": "2026-10-23",
+          "texte": "GTT annonce que Catherine Ronge présidera son conseil d'administration à partir du 16 novembre 2026, en remplacement de Philippe Berterottière, démissionnaire. Sa rémunération fixe est de 350 000 € par an, sans part variable ni indemnité de départ.",
+          "source": {
+            "titre": "GTT, communiqué sur la rémunération de la présidente (23 octobre)",
+            "url": "https://www.globenewswire.com/news-release/2026/10/23/3387541/0/fr/r%C3%A9mun%C3%A9ration-de-la-pr%C3%A9sidente-du-conseil-d-administration-de-gtt.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2027-02-24",
+        "objet": "Résultats annuels 2026, après la clôture",
+        "source": {
+          "titre": "GTT, communiqué d'activité du T3 2026",
+          "url": "https://www.globenewswire.com/news-release/2026/10/23/3387519/0/en/gtt-q3-2026-activity-update-press-release.html"
+        }
+      },
+      "a_regarder": "Catherine Ronge doit prendre la présidence du conseil d'administration de GTT le 16 novembre 2026, selon le communiqué du 23 octobre."
+    },
+    {
+      "nom": "Hermès",
+      "isin": "FR0000052292",
+      "faits": [
+        {
+          "date": "2026-10-22",
+          "texte": "Hermès publie un chiffre d'affaires du 3e trimestre 2026 de 4 096 M€ (+4,3 % à taux constants, +5,5 % publié) et de 12 260 M€ sur neuf mois (+5,5 % à taux constants, +2,9 % publié). Il a racheté 94 846 titres pour 160 M€ sur neuf mois.",
+          "source": {
+            "titre": "Hermès International, chiffre d'affaires du 3e trimestre 2026 (22 octobre)",
+            "url": "https://www.globenewswire.com/news-release/2026/10/22/3386040/0/fr/herm%C3%A8s-international-chiffre-d-affaires-du-3%C3%A8me-trimestre-2026.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2027-02-12",
+        "objet": "Résultats annuels 2026",
+        "source": {
+          "titre": "Hermès International, chiffre d'affaires du 3e trimestre 2026",
+          "url": "https://www.globenewswire.com/news-release/2026/10/22/3386040/0/fr/herm%C3%A8s-international-chiffre-d-affaires-du-3%C3%A8me-trimestre-2026.html"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Kering",
+      "isin": "FR0000121485",
+      "faits": [
+        {
+          "date": "2026-10-22",
+          "texte": "Kering publie un chiffre d'affaires du 3e trimestre 2026 de 3 345 M€ (stable, −1 % en comparable) dont 1 291 M€ pour Gucci (−4 %, −6 % en comparable). Il confirme viser une amélioration de sa marge opérationnelle courante 2026 et prévoit au moins 125 fermetures nettes de magasins cette année (105 sur neuf mois).",
+          "source": {
+            "titre": "Kering, chiffre d'affaires du 3e trimestre 2026 (22 octobre)",
+            "url": "https://www.globenewswire.com/news-release/2026/10/22/3386683/0/en/kering-revenue-for-the-third-quarter-of-2026.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "L'Oréal",
+      "isin": "FR0000120321",
+      "faits": [
+        {
+          "date": "2026-10-22",
+          "texte": "L'Oréal publie un chiffre d'affaires de 35,33 Md€ à fin septembre 2026 (+7,7 % publié, +6,9 % à données comparables). Au 3e trimestre : 11,56 Md€, +11,9 % publié et +7,2 % à données comparables.",
+          "source": {
+            "titre": "L'Oréal, chiffre d'affaires au 30 septembre 2026 (22 octobre)",
+            "url": "https://www.globenewswire.com/news-release/2026/10/22/3386718/0/fr/chiffre-d-affaires-au-30-septembre-2026.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Legrand",
+      "isin": "FR0010307819",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "LVMH",
+      "isin": "FR0000121014",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Meta Platforms",
+      "isin": "US30303M1027",
+      "faits": [
+        {
+          "date": "2026-10-21",
+          "texte": "Meta publie un chiffre d'affaires du 3e trimestre 2026 de 64,6 Md$ (+26 %) et un BPA dilué de 3,83 $. Le résultat d'exploitation recule de 37 % à 12,99 Md$ après une charge de 9,89 Md$ liée à un accord conclu en août avec 52 procureurs généraux d'États américains. Capex 2026 attendu à 135–145 Md$.",
+          "source": {
+            "titre": "Meta, résultats du T3 2026 (8-K, ex. 99.1)",
+            "url": "https://www.sec.gov/Archives/edgar/data/0001326801/000162828026066700/meta-09302026xexhibit991.htm"
+          }
+        },
+        {
+          "date": "2026-10-21",
+          "texte": "Le conseil de Meta approuve la création d'actions Class C sans droit de vote, effective le 19 janvier 2027. Chaque action A et B recevra une action C en dividende exceptionnel, aux dates encore à fixer ; Meta s'attend à ce que le cours de l'action A reflète un fractionnement par deux.",
+          "source": {
+            "titre": "Meta, résultats du T3 2026 (8-K, ex. 99.1)",
+            "url": "https://www.sec.gov/Archives/edgar/data/0001326801/000162828026066700/meta-09302026xexhibit991.htm"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": "Les dates de record et de paiement du dividende en actions Class C de Meta restent à fixer ; les nouvelles actions prennent effet le 19 janvier 2027 selon le communiqué du 21 octobre."
+    },
+    {
+      "nom": "Michelin",
+      "isin": "FR001400AJ45",
+      "faits": [
+        {
+          "date": "2026-10-20",
+          "texte": "Michelin publie un chiffre d'affaires de 19,2 Md€ sur neuf mois 2026 (+1,0 % à taux constants, +0,1 % à périmètre et taux constants), avec un 3e trimestre à +2,2 % à taux constants. Les objectifs annuels sont confirmés, dont un flux de trésorerie libre avant M&A supérieur à 1,6 Md€.",
+          "source": {
+            "titre": "Michelin, information financière au 30 septembre 2026",
+            "url": "https://www.michelin.com/publications/groupe/information-financiere-au-30-septembre-2026"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Microsoft",
+      "isin": "US5949181045",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-28",
+        "objet": "Résultats du 1er trimestre de l'exercice 2027, après la clôture",
+        "source": {
+          "titre": "Microsoft, annonce de la date des résultats",
+          "url": "https://news.microsoft.com/source/2026/10/07/microsoft-announces-quarterly-earnings-release-date-69/"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "NVIDIA",
+      "isin": "US67066G1040",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Orange",
+      "isin": "FR0000133308",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "OVHcloud",
+      "isin": "FR0014005HJ9",
+      "faits": [
+        {
+          "date": "2026-10-20",
+          "texte": "OVHcloud publie pour l'exercice clos le 31 août 2026 un chiffre d'affaires de 1,145 Md€ (+7,2 % à périmètre constant), un EBITDA ajusté de 480,5 M€ (marge de 42 %) et un résultat net de 9,4 M€. Le flux de trésorerie après dette est positif, à 24,7 M€. Objectif 2027 : croissance organique supérieure à 10 %.",
+          "source": {
+            "titre": "ABC Bourse, « OVHcloud affiche 7,2 % de croissance en 2026 » (20 octobre)",
+            "url": "https://www.abcbourse.com/marches/ovhcloud-affiche-7-2-de-croissance-en-2026-et-un-premier-flux-de-tresorerie-po_704465"
+          }
+        }
+      ],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Publicis",
+      "isin": "FR0000130577",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Renault",
+      "isin": "FR0000131906",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Safran",
+      "isin": "FR0000073272",
+      "faits": [
+        {
+          "date": "2026-10-23",
+          "texte": "Safran publie un chiffre d'affaires ajusté de 9 003 M€ au 3e trimestre 2026 (+14,7 %, +13,4 % en organique) et de 26 574 M€ sur neuf mois (+17,5 %). Les perspectives 2026 sont confirmées : résultat opérationnel courant de 6,4 à 6,5 Md€, flux de trésorerie libre de 4,7 à 4,9 Md€.",
+          "source": {
+            "titre": "Safran, chiffre d'affaires du 3e trimestre 2026 (23 octobre)",
+            "url": "https://www.safran-group.com/pressroom/safran-reports-its-third-quarter-2026-revenue-2026-10-23"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2027-02-09",
+        "objet": "Résultats annuels 2026",
+        "source": {
+          "titre": "Safran, chiffre d'affaires du 3e trimestre 2026",
+          "url": "https://www.safran-group.com/pressroom/safran-reports-its-third-quarter-2026-revenue-2026-10-23"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Saint-Gobain",
+      "isin": "FR0000125007",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Samsung Electronics",
+      "isin": "US7960508882",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Sanofi",
+      "isin": "FR0000120578",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-30",
+        "objet": "Résultats du 3e trimestre 2026",
+        "source": {
+          "titre": "Sanofi, communiqué du 6 octobre 2026",
+          "url": "https://www.sanofi.com/fr/media-room/communiques-de-presse/2026/2026-10-06-05-30-00-3375120"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Schneider Electric",
+      "isin": "FR0000121972",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Stellantis",
+      "isin": "NL00150001Q9",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "STMicroelectronics",
+      "isin": "NL0000226223",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-10-29",
+        "objet": "Résultats du 3e trimestre 2026, avant l'ouverture, conférence à 9 h 30 (CET)",
+        "source": {
+          "titre": "STMicroelectronics, annonce de la date des résultats du T3 2026",
+          "url": "https://www.generation-nt.com/communiques-presse/stmicroelectronics-announces-timing-for-third-quarter-2026-earnings-2082225"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "Thales",
+      "isin": "FR0000121329",
+      "faits": [
+        {
+          "date": "2026-10-22",
+          "texte": "Thales enregistre sur neuf mois 2026 des prises de commandes de 19,1 Md€ (+14 %) et un chiffre d'affaires de 16,4 Md€ (+7,6 %, +8,1 % en organique). Le groupe vise le haut de la fourchette de croissance organique de 6 à 7 %, « et potentiellement au-delà », et confirme ses autres objectifs.",
+          "source": {
+            "titre": "Thales, commandes et ventes au 30 septembre 2026 (22 octobre)",
+            "url": "https://www.finanzwire.com/press-release/thales-epa-ho-thales-reports-its-order-intake-and-sales-as-of-september-30-2026-press-release-22-october-2026-gqnPtiEdIOv"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2027-03-02",
+        "objet": "Résultats annuels, avant l'ouverture",
+        "source": {
+          "titre": "Thales, commandes et ventes au 30 septembre 2026",
+          "url": "https://www.finanzwire.com/press-release/thales-epa-ho-thales-reports-its-order-intake-and-sales-as-of-september-30-2026-press-release-22-october-2026-gqnPtiEdIOv"
+        }
+      },
+      "a_regarder": null
+    },
+    {
+      "nom": "TotalEnergies",
+      "isin": "FR0000120271",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Trigano",
+      "isin": "FR0005691656",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "TSMC",
+      "isin": "US8740391003",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Unibail-Rodamco-Westfield",
+      "isin": "FR0013326246",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Veolia",
+      "isin": "FR0000124141",
+      "faits": [],
+      "prochain_rendez_vous": null,
+      "a_regarder": null
+    },
+    {
+      "nom": "Vinci",
+      "isin": "FR0000125486",
+      "faits": [
+        {
+          "date": "2026-10-22",
+          "texte": "Vinci publie sur neuf mois 2026 un chiffre d'affaires de 56,0 Md€ (+3,1 %, +1,8 % à périmètre comparable), des prises de commandes de 49,6 Md€ (+6 %) et un carnet de 75,4 Md€ (+7 %). Les objectifs 2026 sont confirmés, avec un flux de trésorerie libre pouvant atteindre 6 Md€.",
+          "source": {
+            "titre": "Vinci, chiffres à neuf mois 2026 (22 octobre)",
+            "url": "https://www.globenewswire.com/news-release/2026/10/22/3386691/0/en/vinci-9m-2026-further-growth-in-revenue-and-order-intake.html"
+          }
+        }
+      ],
+      "prochain_rendez_vous": {
+        "date": "2027-02-10",
+        "objet": "Résultats annuels 2026, après la clôture",
+        "source": {
+          "titre": "Vinci, chiffres à neuf mois 2026",
+          "url": "https://www.globenewswire.com/news-release/2026/10/22/3386691/0/en/vinci-9m-2026-further-growth-in-revenue-and-order-intake.html"
+        }
+      },
+      "a_regarder": "Selon le communiqué de Vinci du 22 octobre, ses objectifs excluent une éventuelle hausse de la taxe française sur les exploitants d'infrastructures de transport longue distance, en cours d'examen au Parlement ; Vinci l'estime à environ 450 M€ pour 2026, payables en 2027."
+    },
+    {
+      "nom": "Wolters Kluwer",
+      "isin": "NL0000395903",
+      "faits": [],
+      "prochain_rendez_vous": {
+        "date": "2026-11-04",
+        "objet": "Point d'activité à neuf mois 2026",
+        "source": {
+          "titre": "Wolters Kluwer, calendrier des investisseurs",
+          "url": "https://www.wolterskluwer.com/cs-cz/investors/calendar-faq/investor-calendar"
+        }
+      },
+      "a_regarder": null
+    }
+  ],
+  "lecture": {
+    "marche": {
+      "hausse": [
+        "Plusieurs groupes confirment ou relèvent leurs objectifs 2026 (Accor, Bloom Energy, Danaher, Thales, Vinci, Safran) : les publications de la semaine ne montrent pas de rupture d'activité d'ensemble.",
+        "Le PMI composite flash américain est à 57,6 : l'activité y reste soutenue selon l'enquête, ce qui profite aux entreprises exposées à cette demande."
+      ],
+      "baisse": [
+        "Le Brent est entre 112,74 et 115,45 $ le 23 octobre : l'énergie alimente les coûts de production signalés par le PMI de la zone euro et pèse sur les marges.",
+        "Le PMI composite de la zone euro recule à 51,9 et la France repasse en contraction ; Carrefour abaisse ses objectifs en citant la situation sociale et sécuritaire en France.",
+        "Moody's devait réexaminer la note de la France le 23 octobre et l'écart OAT–Bund est à un plus haut en plusieurs années : le risque de crédit français reste un point de tension."
+      ],
+      "signaux": [
+        {
+          "date": "2026-10-28",
+          "texte": "Résultats de Microsoft et d'Airbus : ils diront si la demande liée à l'IA et l'aéronautique tiennent le rythme."
+        },
+        {
+          "date": "2026-10-29",
+          "texte": "Résultats d'Amazon et de STMicroelectronics, au milieu d'un calendrier de publications chargé."
+        },
+        {
+          "date": null,
+          "texte": "La suite des prix de l'énergie et de la décision de Moody's sur la France."
+        }
+      ],
+      "balance": {
+        "sens": "partagée",
+        "confiance": "faible",
+        "motif": "Des résultats d'entreprises plutôt solides s'opposent à une énergie chère, à une activité européenne qui ralentit et à une tension sur la dette française. Rien ne l'emporte nettement sur une semaine."
+      }
+    },
+    "secteurs": [
+      {
+        "secteur": "Consommation discrétionnaire",
+        "hausse": [
+          "Accor relève la fourchette basse de son EBITDA 2026 et Hermès poursuit sa croissance à taux constants sur neuf mois.",
+          "Michelin confirme ses objectifs annuels avec un 3e trimestre en accélération à taux constants."
+        ],
+        "baisse": [
+          "Kering voit Gucci reculer de 6 % en comparable au 3e trimestre et prévoit au moins 125 fermetures nettes de magasins.",
+          "L'activité en France recule (PMI français en contraction), ce qui peut peser sur la demande des marques les plus exposées au marché européen."
+        ],
+        "signaux": [
+          {
+            "date": null,
+            "texte": "Les prochains chiffres du luxe et de l'automobile, qui diront si l'écart entre les marques se creuse."
+          }
+        ],
+        "balance": {
+          "sens": "partagée",
+          "confiance": "faible",
+          "motif": "Les résultats sont contrastés entre Hermès, Accor et Michelin d'un côté et Kering de l'autre."
+        }
+      },
+      {
+        "secteur": "Consommation de base",
+        "hausse": [
+          "L'Oréal publie un 3e trimestre à +7,2 % à données comparables, un rythme soutenu."
+        ],
+        "baisse": [
+          "Carrefour abaisse ses objectifs 2026 de marge, de BPA et de trésorerie, en citant la situation en France."
+        ],
+        "signaux": [
+          {
+            "date": "2026-10-28",
+            "texte": "Ventes du 3e trimestre de Danone."
+          }
+        ],
+        "balance": {
+          "sens": "partagée",
+          "confiance": "faible",
+          "motif": "Un acteur du secteur confirme sa dynamique, un autre abaisse ses objectifs : la semaine ne tranche pas."
+        }
+      },
+      {
+        "secteur": "Industrie",
+        "hausse": [
+          "Safran, Thales, Vinci et Bloom Energy publient des activités en croissance et confirment ou relèvent leurs objectifs.",
+          "Le carnet de commandes de Vinci progresse et les commandes de Thales sont en hausse sur neuf mois."
+        ],
+        "baisse": [
+          "Le trafic autoroutier cumulé d'APRR recule de 2,9 % sur un an, signe d'une demande de mobilité plus faible.",
+          "Vinci signale une possible taxe française sur les infrastructures de transport, hors de ses objectifs."
+        ],
+        "signaux": [
+          {
+            "date": "2026-10-28",
+            "texte": "Résultats des neuf mois d'Airbus."
+          }
+        ],
+        "balance": {
+          "sens": "hausse",
+          "confiance": "faible",
+          "motif": "Les publications du secteur sont majoritairement favorables, mais l'énergie chère et la fiscalité française restent des risques."
+        }
+      },
+      {
+        "secteur": "Santé",
+        "hausse": [
+          "Danaher relève sa prévision de BPA ajusté 2026.",
+          "EssilorLuxottica accélère, avec des lunettes connectées à +20 % à taux constants."
+        ],
+        "baisse": [
+          "Eurofins indique que sa croissance organique 2026 devrait rester inférieure à l'objectif initial.",
+          "La croissance « core » de Danaher est de 3,0 % au trimestre, bien en dessous de ses ventes publiées (+8,5 %)."
+        ],
+        "signaux": [
+          {
+            "date": "2026-10-30",
+            "texte": "Résultats du 3e trimestre de Sanofi."
+          }
+        ],
+        "balance": {
+          "sens": "partagée",
+          "confiance": "faible",
+          "motif": "Des résultats corrects côté Danaher et EssilorLuxottica, mais un objectif de croissance abaissé chez Eurofins."
+        }
+      },
+      {
+        "secteur": "Technologies de l'information",
+        "hausse": [
+          "OVHcloud publie un premier flux de trésorerie positif et vise plus de 10 % de croissance organique en 2027.",
+          "Broadcom signe un accord avec FedEx autour de VMware Cloud Foundation, signe d'une demande d'infrastructure cloud privée."
+        ],
+        "baisse": [
+          "Le montant de l'accord Broadcom–FedEx n'est pas communiqué, ce qui limite la portée du fait.",
+          "Le PMI de la zone euro signale un ralentissement de l'activité, qui peut freiner les dépenses informatiques des clients européens."
+        ],
+        "signaux": [
+          {
+            "date": "2026-10-28",
+            "texte": "Résultats de Microsoft."
+          },
+          {
+            "date": "2026-10-30",
+            "texte": "Chiffre d'affaires du 3e trimestre de Capgemini."
+          }
+        ],
+        "balance": {
+          "sens": "partagée",
+          "confiance": "faible",
+          "motif": "Peu de faits chiffrés sur le secteur cette semaine ; les signaux viendront des résultats de la semaine prochaine."
+        }
+      }
+    ]
+  }
+}
