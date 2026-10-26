@@ -1,0 +1,60 @@
+{
+  "nom": "EssilorLuxottica",
+  "ticker": "EL",
+  "place": "Euronext Paris",
+  "date": "2026-10-26",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 19820, "2022": 24494, "2023": 25395, "2024": 26508, "2025": 28491},
+    "cash_flow_libre": {"2022": 2256, "2023": 2394, "2024": 2413, "2025": 2796},
+    "chiffre_affaires_12m": 29285,
+    "resultat_net_12m": 2494,
+    "resultat_operationnel_12m": 3672,
+    "ebitda_12m": 6820,
+    "dette_nette": 13385,
+    "capitaux_propres": 39929,
+    "taux_impot": 0.248,
+    "per": 33.9,
+    "taux_distribution": 0.794
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026, chiffres IFRS publiés",
+    "chiffre_affaires_12m": "28491 − 14024 + 14818",
+    "resultat_net_12m": "résultat net part du groupe : 2315 − 1387 + 1566",
+    "resultat_operationnel_12m": "3379 − 2003 + 2296",
+    "ebitda_12m": "6492 − 3559 + 3887",
+    "chiffre_affaires": "chiffre d'affaires IFRS publié ; 2021 n'intègre GrandVision qu'au second semestre (pro forma publié : 21498)",
+    "cash_flow_libre": "2021 absent : seul un arrondi (2,8 milliards) est publié, sans montant exact. Définition d'avant 2026 (le groupe y ajoute depuis 2026 les cessions d'immobilisations)",
+    "dette_nette": "endettement financier net publié au 30/06/2026, dettes de loyer comprises (9478 hors loyers)",
+    "capitaux_propres": "total des capitaux propres publié au 30/06/2026",
+    "taux_impot": "taux effectif d'impôt publié pour le 1er semestre 2026",
+    "per": "PER sur 12 mois (Stocklake, 33,87) au cours de 181,20 €",
+    "taux_distribution": "dividende 2025 de 4,00 € / bénéfice net par action de base 2025 de 5,04 €"
+  },
+  "complements": {
+    "cours": 181.2,
+    "per_a_terme": 22.8,
+    "roe": 0.067,
+    "rendement_dividende": 0.022,
+    "objectif_moyen_analystes": 215.91,
+    "nombre_analystes": 23,
+    "plus_haut_52_semaines": 323.8,
+    "plus_bas_52_semaines": 138.3,
+    "capitalisation": 83057,
+    "cash_flow_libre_s1_2026": 1067,
+    "cash_flow_libre_s1_2025_retraite": 959,
+    "dette_nette_fin_2025": 10853,
+    "chiffre_affaires_t3_2026": 7486
+  },
+  "sources": [
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2026/07/FCMKW134841_20260728.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2026/02/FCMKW114264_20260211.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2024/02/FCMKW133830_20240214.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2023/02/FCMKW134208_20230223.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2022/03/FCMKW130127_20220311.pdf",
+    "https://www.globenewswire.com/news-release/2026/10/20/3384748/0/fr/essilorluxottica-chiffre-d-affaires-t3-chiffre-d-affaires-en-croissance-de-9-0-au-t3-7-2-%C3%A0-taux-de-change-constants.html",
+    "Stocklake, fiche EL.PA du 26/10/2026"
+  ]
+}
