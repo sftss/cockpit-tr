@@ -1,0 +1,55 @@
+{
+  "nom": "Saint-Gobain",
+  "ticker": "SGO",
+  "place": "Euronext Paris",
+  "date": "2026-10-28",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 44160, "2022": 51197, "2023": 47944, "2024": 46571, "2025": 46483},
+    "cash_flow_libre": {"2021": 2904, "2022": 3791, "2023": 3910, "2024": 4031, "2025": 3752},
+    "chiffre_affaires_12m": 46226,
+    "resultat_net_12m": 2671,
+    "resultat_operationnel_12m": 5084,
+    "ebitda_12m": 7010,
+    "dette_nette": 11519,
+    "capitaux_propres": 25393,
+    "taux_impot": 0.25,
+    "per": 12.6,
+    "taux_distribution": 0.39
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires_12m": "46483 − 23852 + 23595",
+    "resultat_net_12m": "résultat net part du Groupe : 2883 − 1629 + 1417",
+    "resultat_operationnel_12m": "résultat d'exploitation : 5293 − 2803 + 2594",
+    "ebitda_12m": "7203 − 3818 + 3625",
+    "dette_nette": "endettement net publié au 30/06/2026",
+    "capitaux_propres": "capitaux propres du Groupe publiés au 30/06/2026",
+    "taux_impot": "taux d'impôt sur le résultat net courant publié pour le 1er semestre 2026",
+    "per": "PER sur 12 mois (Stocklake) au cours de 67,84 €",
+    "taux_distribution": "dividende 2025 de 2,30 € / BNPA 2025 de 5,83 € (communiqué annuel 2025)",
+    "cash_flow_libre": "2021 et 2022 : communiqué annuel 2022 ; 2023 : communiqué annuel 2024 ; 2024 et 2025 : communiqué annuel 2025"
+  },
+  "complements": {
+    "cours": 67.84,
+    "per_a_terme": 10.0,
+    "roe": 0.110,
+    "rendement_dividende": 0.034,
+    "objectif_moyen_analystes": 95.03,
+    "nombre_analystes": 16,
+    "dette_nette_sur_ebitda_publiee_30_06_2026": 1.6,
+    "bnpa_courant_2025": 6.70,
+    "croissance_organique_s1_2026": 0.007
+  },
+  "sources": [
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2026/02/FCECO081080_20260226.pdf",
+    "https://www.saint-gobain.com/sites/saint-gobain.com/files/media/document/CP_S1_2026_VF_t.pdf",
+    "https://www.saint-gobain.com/sites/saint-gobain.com/files/media/document/CP_S1_2025_VF_t.pdf",
+    "https://bnains.org/archives/communiques/Saint_Gobain/20250227_Communique_resultats_annuels_2024_Saint_Gobain.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2023/02/FCECO070208_20230223.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2022/02/FCECO062352_20220224.pdf",
+    "Stocklake, fiche SGO.PA du 28/10/2026"
+  ]
+}
