@@ -1,0 +1,56 @@
+{
+  "nom": "Accor",
+  "ticker": "AC",
+  "place": "Euronext Paris",
+  "date": "2026-10-29",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": false,
+    "chiffre_affaires": {"2021": 2204, "2022": 4224, "2023": 5056, "2024": 5606, "2025": 5639},
+    "cash_flow_libre": {"2021": -246, "2022": 373, "2023": 596, "2024": 614, "2025": 632},
+    "chiffre_affaires_12m": 5654,
+    "resultat_net_12m": 330,
+    "resultat_operationnel_12m": 702,
+    "ebitda_12m": 1212,
+    "dette_nette": 3523,
+    "capitaux_propres": 4034,
+    "taux_impot": 0.289,
+    "per": 40.3,
+    "taux_distribution": 0.84
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026 (1er semestre 2025 tel que publié en comparatif dans les comptes du 1er semestre 2026)",
+    "chiffre_affaires_12m": "5639 − 2745 + 2760",
+    "resultat_net_12m": "résultat net part du Groupe : 449 − 233 + 114",
+    "resultat_operationnel_12m": "résultat opérationnel : 807 − 399 + 294",
+    "ebitda_12m": "EBE courant, l'EBITDA publié par le groupe : 1201 − 552 + 563",
+    "dette_nette": "dette financière nette publiée au 30/06/2026",
+    "capitaux_propres": "capitaux propres part du Groupe publiés au 30/06/2026 (4 477 avec les intérêts minoritaires)",
+    "taux_impot": "taux non publié ; impôts / résultat avant impôts sur 12 mois : (152 − 69 + 66) / (651 − 328 + 193) = 149 / 516",
+    "per": "PER sur 12 mois (Stocklake) au cours de 45,99 €",
+    "taux_distribution": "dividende 2025 de 1,35 € / résultat net dilué part du Groupe par action 2025 de 1,61 € (communiqué annuel 2025)",
+    "chiffre_affaires": "2021 et 2022 : communiqué annuel 2022 ; 2023 : communiqué annuel 2023 ; 2024 et 2025 : communiqué annuel 2025",
+    "cash_flow_libre": "Free Cash-Flow récurrent publié. 2021 et 2022 : communiqué annuel 2022 ; 2023 : communiqué annuel 2023 ; 2024 et 2025 : communiqué annuel 2025"
+  },
+  "complements": {
+    "cours": 45.99,
+    "per_a_terme": 17.4,
+    "roe": 0.080,
+    "rendement_dividende": 0.030,
+    "objectif_moyen_analystes": 55.48,
+    "nombre_analystes": 17,
+    "bnpa_ajuste_2025": 1.84,
+    "free_cash_flow_recurrent_s1_2026": 194,
+    "elements_non_courants_s1_2026": -113,
+    "objectif_ebe_courant_2026": "1260 à 1285"
+  },
+  "sources": [
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2026/02/FCECO080989_20260219.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2026/07/FCECO082818_20260730.pdf",
+    "https://group.accor.com/files/plaquette-semestrielle-30-juin-2026-fr.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2024/02/FCECO073840_20240222.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2023/02/FCECO070193_20230223.pdf",
+    "Stocklake, fiche AC.PA du 29/10/2026"
+  ]
+}
