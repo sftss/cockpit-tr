@@ -1,0 +1,63 @@
+{
+  "nom": "Constellation Energy",
+  "ticker": "CEG",
+  "place": "Nasdaq",
+  "date": "2026-10-30",
+  "devise": "USD",
+  "unite": "millions de dollars, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": false,
+    "chiffre_affaires": {"2021": 19649, "2022": 24440, "2023": 24918, "2024": 23568, "2025": 25533},
+    "cash_flow_libre": {"2021": -2667, "2022": -4042, "2023": -7723, "2024": -5029, "2025": 1288},
+    "chiffre_affaires_12m": 31270,
+    "resultat_net_12m": 3465,
+    "resultat_operationnel_12m": 4596,
+    "ebitda_12m": 5965,
+    "dette_nette": 24003,
+    "capitaux_propres": 32322,
+    "taux_impot": 0.307,
+    "per": 25.2,
+    "taux_distribution": 0.21
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026 (Calpine consolidé depuis janvier 2026)",
+    "chiffre_affaires_12m": "25533 − 12889 + 18626",
+    "resultat_net_12m": "résultat net attribuable aux actionnaires : 2319 − 957 + 2103",
+    "resultat_operationnel_12m": "résultat opérationnel publié : 3086 − 1402 + 2912",
+    "ebitda_12m": "non publié : résultat opérationnel + dotations aux amortissements du compte de résultat, soit (3086 + 985) − (1402 + 502) + (2912 + 886) ; l'amortissement du combustible nucléaire, compté dans le tableau de flux, n'est pas réintégré",
+    "cash_flow_libre": "flux de trésorerie d'exploitation − investissements, lignes publiées : 2021 : −1338 − 1329 ; 2022 : −2353 − 1689 ; 2023 : −5301 − 2422 ; 2024 : −2464 − 2565 ; 2025 : 4237 − 2949. Jusqu'en 2024, les encaissements du prix différé des créances cédées (« collection of DPP » : 3902, 4964, 7340, 10217) sont classés en investissement et ne sont pas réintégrés ici",
+    "cash_flow_libre_avec_dpp": "2021 : 1235 ; 2022 : 922 ; 2023 : −383 ; 2024 : 5188 ; 2025 : 1288",
+    "dette_nette": "bilan au 30/06/2026 : emprunts à court terme 5226 + dette à long terme à moins d'un an 363 + dette à long terme 19111 − trésorerie 697",
+    "capitaux_propres": "total des capitaux propres au 30/06/2026, dont 345 de participations ne donnant pas le contrôle",
+    "taux_impot": "impôts du 1er semestre 2026 / résultat avant impôts : 928 / 3025 (2025 : 1187 / 3511, soit 33,8 %)",
+    "per": "PER sur 12 mois (Stocklake, 25,22) au cours de 264,58 $",
+    "taux_distribution": "dividendes versés en 2025 / résultat net attribuable 2025 : 486 / 2319",
+    "resultat_par_action_12m": "résultat dilué par action : 7,40 − 3,05 + 5,88",
+    "dette_nette_fin_2025": "1650 + 92 + 7250 − 3641",
+    "ebitda_2025": "3086 + 985"
+  },
+  "complements": {
+    "cours": 264.58,
+    "capitalisation": 93742.6,
+    "per_a_terme": 19.8,
+    "roe": 0.151,
+    "cours_sur_actif_net": 2.94,
+    "rendement_dividende": 0.0066,
+    "objectif_moyen_analystes": 338.9,
+    "nombre_analystes": 23,
+    "resultat_par_action_12m": 10.23,
+    "dette_totale_30_06_2026": 24700,
+    "tresorerie_30_06_2026": 697,
+    "dette_nette_fin_2025": 5351,
+    "ebitda_2025": 4071,
+    "rachats_d_actions_1er_semestre_2026": 1971,
+    "acquisition_calpine_tresorerie_nette": 2537
+  },
+  "sources": [
+    "https://www.sec.gov/Archives/edgar/data/0001868275/000186827526000097/ceg-20260806991.htm",
+    "https://www.sec.gov/Archives/edgar/data/1868275/000186827526000029/ceg-20260224991.htm",
+    "https://www.sec.gov/Archives/edgar/data/1868275/000186827524000010/ceg-20240227991.htm",
+    "https://www.constellationenergy.com/content/dam/constellationenergy/earnings-releases/0.%20Q4%2722%20-%20Press%20Release%20and%20Earnings%20Release%20Attachments%20-%202.15.23.pdf",
+    "Stocklake, fiche CEG du 30/10/2026"
+  ]
+}
