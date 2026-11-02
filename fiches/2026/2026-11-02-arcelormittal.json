@@ -1,0 +1,61 @@
+{
+  "nom": "ArcelorMittal",
+  "ticker": "MT",
+  "place": "Euronext Amsterdam",
+  "date": "2026-11-02",
+  "devise": "USD",
+  "unite": "millions de dollars, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 76571, "2022": 79844, "2023": 68275, "2024": 62441, "2025": 61352},
+    "cash_flow_libre": {"2021": 6637, "2022": 6404, "2023": 2870, "2024": 260, "2025": 350},
+    "chiffre_affaires_12m": 62846,
+    "resultat_net_12m": 1812,
+    "resultat_operationnel_12m": 2679,
+    "ebitda_12m": 6844,
+    "dette_nette": 9500,
+    "capitaux_propres": 56823,
+    "taux_impot": 0.197,
+    "per": 25.2,
+    "taux_distribution": 0.134
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026 ; les résultats du 3e trimestre 2026 sont attendus le 5 novembre 2026",
+    "chiffre_affaires_12m": "61352 − 30724 + 32218",
+    "resultat_net_12m": "résultat net attribuable aux actionnaires : 3152 − 2598 + 1258",
+    "resultat_operationnel_12m": "résultat opérationnel publié : 3628 − 2757 + 1808",
+    "ebitda_12m": "EBITDA publié : 6541 − 3440 + 3743",
+    "cash_flow_libre": "définition de l'entreprise : flux d'exploitation − investissements − dividendes versés aux minoritaires ; 2021 : 9905 − 3008 − 260 ; 2022 : 10203 − 3468 − 331 ; 2023 : 7645 − 4613 − 162 ; 2024 : 4852 − 4405 − 187 ; 2025 : 4808 − 4337 − 121",
+    "dette_nette": "dette nette publiée au 30/06/2026 (dette brute 14421 − trésorerie)",
+    "capitaux_propres": "total des capitaux propres au 30/06/2026 : 54820 attribuables + 2003 de participations ne donnant pas le contrôle",
+    "taux_impot": "impôts du 1er semestre 2026 / résultat avant impôts : 311 / 1579 (2025 : 359 / 3602, soit 10,0 %)",
+    "per": "PER sur 12 mois (Stocklake, 25,24) au cours de 59,81 $ de l'action cotée à New York",
+    "taux_distribution": "dividendes versés aux actionnaires en 2025 / résultat net attribuable 2025 : 421 / 3152",
+    "dette_nette_sur_ebitda_fin_2025": "7931 / 6541"
+  },
+  "complements": {
+    "cours": 59.81,
+    "capitalisation": 44973.2,
+    "per_a_terme": 8.4,
+    "roe": 0.033,
+    "rendement_dividende": 0.010,
+    "dividende_par_action_2026": 0.60,
+    "objectif_moyen_analystes": 77.8,
+    "nombre_analystes": 7,
+    "dette_nette_fin_2025": 7931,
+    "dette_nette_sur_ebitda_fin_2025": 1.21,
+    "dette_brute_30_06_2026": 14421,
+    "cash_flow_libre_1er_semestre_2026": -1493,
+    "investissements_prevus_2026": "4500 à 5000"
+  },
+  "sources": [
+    "https://mfn.se/all/a/arcelormittal/arcelormittal-s-a-arcelormittal-reports-second-quarter-2026-results-920cf2ce",
+    "https://www.ariva.de/aktien/arcelormittal-sa-aktie/news/arcelormittal-s-a-arcelormittal-reports-second-quarter-12085561",
+    "https://www.stocktitan.net/news/MT/arcelor-mittal-reports-fourth-quarter-2025-and-full-year-2025-82krl17mo74q.html",
+    "https://www.sec.gov/Archives/edgar/data/1243429/000199937125010355/ex99-1.htm",
+    "https://d5bp8bijhhba2.cloudfront.net/pdf/b2bf8b45daaaa1359f6f466dd14122d9ba79bc2e107deb9b72d09957372e44d7.pdf",
+    "https://live.euronext.com/sites/default/files/company_press_releases/attachments/2023/02/09/cpr01_hugin_4Q22%20Earnings%20release%20FINAL.pdf",
+    "https://business.mammothtimes.com/mammothtimes/article/gnwcq-2025-12-12-arcelormittal-announces-its-financial-calendar-for-2026",
+    "Stocklake, fiche MT (New York) du 02/11/2026"
+  ]
+}
