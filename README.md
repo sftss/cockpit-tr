@@ -45,10 +45,6 @@ l'export CSV officiel.
 | | La clé d'API (gestionnaire d'identifiants de Windows) |
 | | Les identifiants et les clés d'API |
 
-Deux garde-fous : le `.gitignore` écarte les fichiers de données, et un test
-(`tests/test_repo_hygiene.py`) échoue si git suit un CSV, un classeur, une base
-ou un fichier de secrets.
-
 ## Installation (Windows)
 
 Deux outils sont nécessaires : [uv](https://docs.astral.sh/uv/) (il installe
@@ -336,12 +332,6 @@ Tout est recalculé à partir des transactions importées
 
 Un type de transaction inconnu est conservé et signalé à l'import, mais ignoré
 dans les calculs : l'outil ne devine pas.
-
-## Développement
-
-Les règles du projet, pour une personne comme pour un agent de code, sont dans
-[`CLAUDE.md`](CLAUDE.md) : ce qui ne se discute pas, la façon de travailler et
-les vérifications à passer avant une demande de fusion.
 
 ```powershell
 uv run pytest                 # tests (données inventées)
