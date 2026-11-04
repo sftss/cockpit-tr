@@ -1,0 +1,60 @@
+{
+  "nom": "STMicroelectronics",
+  "ticker": "STMPA",
+  "place": "Euronext Paris",
+  "date": "2026-11-04",
+  "devise": "USD",
+  "unite": "millions de dollars, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 12761, "2022": 16128, "2023": 17286, "2024": 13269, "2025": 11800},
+    "cash_flow_libre": {"2021": 1120, "2022": 1591, "2023": 1774, "2024": 288, "2025": 265},
+    "chiffre_affaires_12m": 13669,
+    "resultat_net_12m": 520,
+    "resultat_operationnel_12m": 750,
+    "ebitda_12m": 2680,
+    "dette_nette": -2106,
+    "capitaux_propres": 17877,
+    "taux_impot": 0.159,
+    "per": 82.3,
+    "taux_distribution": 2.0
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − neuf premiers mois 2025 + neuf premiers mois 2026 (résultats du 3e trimestre 2026 publiés le 29 octobre 2026)",
+    "chiffre_affaires_12m": "11800 − 8470 + 10339",
+    "resultat_net_12m": "résultat net attribuable aux actionnaires de la société mère : 166 − 196 + 550",
+    "resultat_operationnel_12m": "résultat opérationnel publié, après dépréciations et charges de restructuration : 175 − 50 + 625",
+    "ebitda_12m": "résultat opérationnel 12 mois (750) + amortissements des quatre derniers trimestres publiés : 480 (T4 2025) + 454 (T1 2026) + 492 (T2 2026) + 504 (T3 2026)",
+    "cash_flow_libre": "définition de l'entreprise : flux d'exploitation − investissements nets − achats nets d'actifs incorporels et financiers − acquisitions ; montants annuels publiés (2022 tel que repris dans le communiqué annuel 2023)",
+    "dette_nette": "position financière nette publiée au 26/09/2026 : +2106 (trésorerie nette), dette financière totale 3206",
+    "capitaux_propres": "capitaux propres attribuables aux actionnaires de la société mère au 26/09/2026",
+    "taux_impot": "impôts des neuf premiers mois 2026 / résultat avant impôts : 106 / 666 (douze mois : 276 / 813, soit 33,9 %)",
+    "per": "PER sur 12 mois (Stocklake, 82,27) au cours de 46,80 $ de l'action cotée à New York ; Stocklake ne couvre pas la cotation de Paris",
+    "taux_distribution": "dividende 2025 de 0,36 $ par action / résultat dilué par action 2025 de 0,18 $",
+    "cash_flow_libre_9_mois_2026": "somme des trimestres publiés : −723 (T1, dont 895 pour l'acquisition MEMS de NXP) + 75 (T2) + 351 (T3) ; investissements nets : 362 + 409 + 643 = 1414"
+  },
+  "complements": {
+    "cours": 46.80,
+    "capitalisation": 43396,
+    "per_a_terme": 18.0,
+    "roe": 0.030,
+    "cours_sur_actif_net": 2.43,
+    "rendement_dividende": 0.008,
+    "objectif_moyen_analystes": 70.46,
+    "nombre_analystes": 12,
+    "cash_flow_libre_9_mois_2026": -297,
+    "acquisition_mems_nxp_t1_2026": 895,
+    "position_financiere_nette_fin_2025": 2789,
+    "charges_de_restructuration_9_mois_2026": 184,
+    "chiffre_affaires_prevu_t4_2026": 4150
+  },
+  "sources": [
+    "https://www.generation-nt.com/communiques-presse/stmicroelectronics-reports-q3-2026-financial-results-2083619",
+    "https://www.generation-nt.com/communiques-presse/stmicroelectronics-reports-q2-2026-financial-results-2079020",
+    "https://www.streetinsider.com/SEC+Filings/Form+6-K+STMicroelectronics+N.V.+For%3A+Jan+29/25913950.html",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2024/01/FCMKW110319_20240125.pdf",
+    "https://www.globenewswire.com/news-release/2022/01/27/2373956/0/en/STMicroelectronics-Reports-Q4-and-FY-2021-Financial-Results.html",
+    "https://www.nasdaq.com/press-release/all-resolutions-approved-2025-stmicroelectronics-annual-general-meeting-shareholders",
+    "Stocklake, fiche STM (New York) du 04/11/2026"
+  ]
+}
