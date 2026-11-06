@@ -1,0 +1,70 @@
+{
+  "nom": "L'Oréal",
+  "ticker": "OR",
+  "place": "Euronext Paris",
+  "date": "2026-11-06",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {
+      "2021": 32287.6,
+      "2022": 38260.6,
+      "2023": 41182.5,
+      "2024": 43486.8,
+      "2025": 44052.0
+    },
+    "cash_flow_libre": {
+      "2021": 5653.2,
+      "2022": 4935.1,
+      "2023": 6116.0,
+      "2024": 6644.3,
+      "2025": 7161.6
+    },
+    "chiffre_affaires_12m": 45354.8,
+    "resultat_net_12m": 6306.3,
+    "resultat_operationnel_12m": 8677.8,
+    "ebitda_12m": 10637.7,
+    "dette_nette": 12663.8,
+    "capitaux_propres": 33899.1,
+    "taux_impot": 0.278,
+    "per": 39.6,
+    "taux_distribution": 0.629
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires_12m": "44052,0 − 22473,3 + 23776,1",
+    "resultat_net_12m": "résultat net part du groupe publié : 6127,2 − 3368,0 + 3547,1",
+    "resultat_operationnel_12m": "résultat opérationnel publié, autres produits et charges compris : 8386,5 − 4471,2 + 4762,5 ; pour le 1er semestre 2026, la présentation donne le résultat d'exploitation (5063,0) et les autres produits et charges (−300,5), d'où 4762,5",
+    "ebitda_12m": "le groupe ne publie pas l'EBITDA dans ses comptes : résultat opérationnel + dotations aux amortissements et provisions du tableau de flux, soit (8386,5 + 1817,4) − (4471,2 + 859,1) + (4762,5 + 1001,6) ; la ligne mêle amortissements et provisions",
+    "dette_nette": "dette nette au 30/06/2026, dette de location comprise (2375,4), lue sur le graphique de la présentation semestrielle (10288,4 hors dette de location) ; les libellés du graphique ne sont pas lisibles dans le texte extrait, la lecture est confirmée par les deux ratios publiés : 37,4 % des capitaux propres part du groupe (30,4 % hors location) et 1,2 fois l'EBE sur 12 mois",
+    "capitaux_propres": "bilan semestriel non lu : capitalisation 242978,3 / cours sur actif net 7,1677 (Stocklake) ; capitaux propres part du groupe publiés au 31/12/2025 : 34953,2",
+    "taux_impot": "taux effectif de l'exercice 2025 calculé sur les lignes publiées : impôts 2363,1 / résultat avant impôt 8502,2 ; hors éléments non récurrents, taux publié de 24,3 %",
+    "per": "PER sur 12 mois (Stocklake, 39,62) au cours de 455,60 €",
+    "taux_distribution": "dividende 2025 de 7,20 € par action / BNPA dilué publié 2025 de 11,44 € ; rapporté au BNPA dilué hors éléments non récurrents (12,71 €), 56,6 %",
+    "chiffre_affaires": "2021 : communiqué annuel 2021 ; 2022 et 2023 : communiqué annuel 2023 ; 2024 et 2025 : communiqué annuel 2025",
+    "cash_flow_libre": "cash-flow opérationnel du groupe (marge brute d'autofinancement + variation du besoin en fonds de roulement − investissements). 2023 (6116) et 2025 (7161,6) publiés ; 2024 (6644,3) publié dans le rapport semestriel 2025 ; 2021 : « net cash flow » publié de 5653, soit 6640,4 + 88,0 − 1075,2 ; 2022 non publié en un chiffre : 7289,6 − 1011,3 − 1343,2 d'après le tableau de flux du communiqué 2023",
+    "dette_nette_fin_2025": "dette de location comprise, présentation semestrielle 2026 et bilan du communiqué annuel 2025 : 8069,7 + 2048,9 + 1362,9 + 434,5 − 9865,0",
+    "capitalisation": "Stocklake, au cours de 455,60 €"
+  },
+  "complements": {
+    "cours": 455.6,
+    "per_a_terme": 29.9,
+    "roe": 0.194,
+    "rendement_dividende": 0.016,
+    "objectif_moyen_analystes": 434.46,
+    "nombre_analystes": 24,
+    "capitalisation": 242978.3,
+    "dette_nette_fin_2025": 2051.0,
+    "dette_nette_sur_ebitda_fin_2025": 0.2
+  },
+  "sources": [
+    "https://www.loreal-finance.com/system/files/2026-02/CPFY25FRV.12.02%2017.00.pdf",
+    "https://www.loreal-finance.com/system/files/2026-07/C.B.%20Presentation%20_%201H26_FR.pdf",
+    "https://www.loreal-finance.com/system/files/2025-08/LOREAL_RFS_2025_VF.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2024/02/FCMKW132823_20240208.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2022/02/FCMKW113846_20220209.pdf",
+    "https://www.loreal-finance.com/fr/communique-de-presse/loreal-finalise-lacquisition-de-kering-beaute-dans-le-cadre-de-son-alliance",
+    "Stocklake, fiche OR.PA du 06/11/2026"
+  ]
+}
