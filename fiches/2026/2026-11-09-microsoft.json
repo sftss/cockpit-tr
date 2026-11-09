@@ -1,0 +1,62 @@
+{
+  "nom": "Microsoft",
+  "ticker": "MSFT",
+  "place": "Nasdaq",
+  "date": "2026-11-09",
+  "devise": "USD",
+  "unite": "millions de dollars, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": false,
+    "chiffre_affaires": {"2022": 198270, "2023": 211915, "2024": 245122, "2025": 281724, "2026": 331839},
+    "cash_flow_libre": {"2022": 65149, "2023": 59475, "2024": 74071, "2025": 71611, "2026": 66987},
+    "chiffre_affaires_12m": 346445,
+    "resultat_net_12m": 142631,
+    "resultat_operationnel_12m": 163191,
+    "ebitda_12m": 205322,
+    "dette_nette": -29028,
+    "capitaux_propres": 470509,
+    "taux_impot": 0.197,
+    "per": 27.7,
+    "taux_distribution": 0.190
+  },
+  "calculs": {
+    "exercices": "exercices décalés : l'exercice 2026 est clos le 30/06/2026, l'exercice 2022 le 30/06/2022",
+    "douze_mois": "exercice 2026 − 1er trimestre 2026 + 1er trimestre 2027 (trimestres clos les 30/09/2025 et 30/09/2026)",
+    "chiffre_affaires_12m": "331839 − 77673 + 92279",
+    "resultat_net_12m": "133749 − 27747 + 36629 ; inclut l'effet des participations dans OpenAI (+4963 sur l'exercice 2026, −3086 au 1er trimestre 2026, +207 au 1er trimestre 2027) et un gain de 3,2 Md$ sur la participation dans Anthropic au 4e trimestre 2026",
+    "resultat_operationnel_12m": "155237 − 37961 + 45915",
+    "ebitda_12m": "non publié : résultat opérationnel + ligne « amortissements et autres » du tableau de flux, soit (155237 + 38534) − (37961 + 8147) + (45915 + 11744) ; la ligne mêle amortissements et autres éléments",
+    "cash_flow_libre": "flux d'exploitation − investissements corporels publiés : 2022 89035 − 23886 ; 2023 87582 − 28107 ; 2024 118548 − 44477 ; 2025 136162 − 64551 ; 2026 182935 − 115948",
+    "dette_nette": "bilan au 30/09/2026 : part à court terme de la dette à long terme 4391 + dette à long terme 31090 − trésorerie 20281 − placements à court terme 44228 ; les dettes locatives (21719 au passif non courant) ne sont pas comptées",
+    "capitaux_propres": "capitaux propres publiés au 30/09/2026",
+    "taux_impot": "impôts sur 12 mois / résultat avant impôts sur 12 mois : (32185 − 6554 + 9324) / (165934 − 34301 + 45953) = 34955 / 177586",
+    "per": "PER sur 12 mois (Stocklake, 27,69) au cours de 537,91 $ ; avec le résultat dilué par action publié sur 12 mois (17,95 − 3,72 + 4,92 = 21,15 $), 25,4",
+    "taux_distribution": "dividendes versés sur 12 mois / résultat net sur 12 mois : (26445 − 6169 + 6757) / 142631"
+  },
+  "complements": {
+    "cours": 537.91,
+    "capitalisation": 3940413,
+    "per_a_terme": 21.9,
+    "roe": 0.342,
+    "cours_sur_actif_net": 8.38,
+    "rendement_dividende": 0.0074,
+    "dividende_annuel_par_action": 3.92,
+    "objectif_moyen_analystes": 636.12,
+    "nombre_analystes": 54,
+    "resultat_par_action_12m": 21.15,
+    "dette_totale_30_09_2026": 35481,
+    "investissements_corporels_1er_trimestre_2027": 39367,
+    "investissements_corporels_1er_trimestre_2026": 19394,
+    "cash_flow_libre_1er_trimestre_2027": 18633,
+    "cash_flow_libre_1er_trimestre_2026": 25663,
+    "rachats_d_actions_1er_trimestre_2027": 4379,
+    "date_prochains_resultats": "2027-01-27"
+  },
+  "sources": [
+    "https://www.sec.gov/Archives/edgar/data/0000789019/000119312526436122/msft-ex99_1.htm",
+    "https://www.sec.gov/Archives/edgar/data/0000789019/000119312526323632/msft-ex99_1.htm",
+    "https://www.sec.gov/Archives/edgar/data/789019/000095017024087835/msft-ex99_1.htm",
+    "https://www.sec.gov/Archives/edgar/data/789019/000119312522202034/d372382dex991.htm",
+    "Stocklake, fiche MSFT du 09/11/2026"
+  ]
+}
