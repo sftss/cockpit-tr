@@ -1,0 +1,59 @@
+{
+  "nom": "Kering",
+  "ticker": "KER",
+  "place": "Euronext Paris",
+  "date": "2026-11-10",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 17645.0, "2025": 14675.0},
+    "cash_flow_libre": {"2021": 3948.0, "2022": 3208.0, "2025": 4428.0},
+    "chiffre_affaires_12m": 14456.0,
+    "resultat_net_12m": -322.0,
+    "resultat_operationnel_12m": 791.0,
+    "ebitda_12m": 3655.0,
+    "dette_nette": 3324.0,
+    "capitaux_propres": 15362.0,
+    "taux_impot": 0.325,
+    "per": 48.4,
+    "taux_distribution": 5.08
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026, activités poursuivies (Kering Beauté, cédée à L'Oréal le 31/03/2026, est sortie du périmètre ; 2025 et le 1er semestre 2025 sont retraités par le groupe)",
+    "chiffre_affaires_12m": "14675 − 7439 + 7220",
+    "resultat_net_12m": "résultat net des activités poursuivies, part du groupe : (−29) − 429 + 136 ; avec les activités cédées (part du groupe, 72 − 474 + 189), −213",
+    "resultat_operationnel_12m": "résultat opérationnel, éléments non récurrents compris : 1047 − 954 + 698 ; le 1047 de 2025 vient de l'annexe du communiqué annuel, lue par extrait et non mot à mot",
+    "ebitda_12m": "EBITDA récurrent publié : 3675 − 1955 + 1935",
+    "dette_nette": "définition du groupe (emprunts moins trésorerie, hors dettes de location) appliquée au bilan du 30/06/2026 : 9964 + 1840 − 8480 ; le communiqué publie « 3,3 milliards d'euros »",
+    "capitaux_propres": "capitaux propres totaux publiés au 30/06/2026 (part du groupe : 14482)",
+    "taux_impot": "taux effectif sur le résultat récurrent publié pour le 1er semestre 2026 ; taux apparent du semestre : 204 / 418, soit 48,8 %",
+    "per": "PER sur 12 mois (Stocklake, 48,40) au cours de 189,08 € ; le résultat net publié sur 12 mois est négatif, ce qui donne aussi 0 point",
+    "taux_distribution": "dividende ordinaire 2025 de 3,00 € par action / BNPA dilué 2025 de 0,59 € (annexe du communiqué annuel, lue par extrait) ; hors dividende exceptionnel de 1,00 € ; rapporté au résultat net récurrent par action (4,34 €), 69,1 %",
+    "chiffre_affaires": "2021 : communiqué annuel 2022 (périmètre de l'époque, Kering Beauté comprise) ; 2025 : communiqué annuel 2025, activités poursuivies",
+    "cash_flow_libre": "définition du groupe : flux de trésorerie opérationnels − acquisitions + cessions d'immobilisations corporelles et incorporelles. 2021 : 4876 − 934 + 6 et 2022 : 4278 − 1071 + 1, tableau de flux du communiqué annuel 2022 (le communiqué publie « plus de 3,2 milliards » pour 2022) ; 2025 : 3100 − 830 + 2158, tableau de flux du communiqué annuel 2025 lu par extrait (le communiqué publie « 4,4 milliards », dont des cessions immobilières à Paris, New York et Tokyo ; 2,3 milliards hors immobilier). 2023 et 2024 non relevés",
+    "capitalisation": "Stocklake, au cours de 189,08 €"
+  },
+  "complements": {
+    "cours": 189.08,
+    "per_a_terme": 21.1,
+    "roe": -0.016,
+    "rendement_dividende": 0.0159,
+    "objectif_moyen_analystes": 240.42,
+    "nombre_analystes": 26,
+    "capitalisation": 23190.9,
+    "dette_nette_fin_2025": 8039.0,
+    "cash_flow_libre_2025_hors_immobilier": 2300.0,
+    "cash_flow_libre_s1_2026": 2600.0,
+    "cash_flow_libre_s1_2026_hors_elements_exceptionnels": 1800.0,
+    "resultat_net_recurrent_12m": 483.0
+  },
+  "sources": [
+    "https://mfn.se/all/a/kering/kering-2025-results-sequential-improvement-unlocking-the-next-phase-of-sustainable-and-profitable-growth-df4cbf96",
+    "https://www.nasdaq.com/press-release/kering-2025-results-sequential-improvement-unlocking-next-phase-sustainable",
+    "https://www.finanznachrichten.de/nachrichten-2026-07/69146533-kering-2026-first-half-results-back-to-growth-performance-improvement-strategy-execution-on-track-399.htm",
+    "https://mfn.se/all/a/kering/kering-2026-first-half-results-back-to-growth-performance-improvement-and-strategy-execution-on-track-be4c7c4c",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2023/02/FCMKW112751_20230215.pdf",
+    "Stocklake, fiche KER.PA du 10/11/2026"
+  ]
+}
