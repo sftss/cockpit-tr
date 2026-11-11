@@ -1,0 +1,63 @@
+{
+  "nom": "Bloom Energy",
+  "ticker": "BE",
+  "place": "NYSE",
+  "date": "2026-11-11",
+  "devise": "USD",
+  "unite": "millions de dollars, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 972.2, "2022": 1199.1, "2023": 1333.5, "2024": 1473.9, "2025": 2024.0},
+    "cash_flow_libre": {"2021": -110.5, "2022": -308.5, "2023": -456.3, "2024": 33.1, "2025": 57.2},
+    "chiffre_affaires_12m": 3829.9,
+    "resultat_net_12m": 518.3,
+    "resultat_operationnel_12m": 567.4,
+    "ebitda_12m": 621.4,
+    "dette_nette": 174.7,
+    "capitaux_propres": 1963.1,
+    "taux_impot": 0.005,
+    "per": 112.4,
+    "taux_distribution": 0
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − neuf premiers mois 2025 + neuf premiers mois 2026 ; les communiqués ne publient que des trimestres, les neuf mois sont la somme des trois premiers trimestres",
+    "chiffre_affaires_12m": "2023.994 − (326.021 + 401.242 + 519.048) + (751.054 + 1065.365 + 1235.837)",
+    "resultat_net_12m": "résultat net attribuable aux actionnaires : −88.434 − (−23.814 − 42.619 − 23.093) + (70.653 + 196.290 + 250.271)",
+    "resultat_operationnel_12m": "résultat opérationnel publié : 72.802 − (−19.070 − 3.503 + 7.846) + (72.190 + 182.237 + 225.449)",
+    "ebitda_12m": "non publié en normes comptables : résultat opérationnel 567.4 + dotations aux amortissements (50.566 − (11.986 + 12.596 + 12.800) + (13.279 + 13.746 + 13.805)) = 567.4 + 54.0 ; l'EBITDA ajusté publié par le groupe, qui réintègre notamment les rémunérations en actions, n'est pas utilisé",
+    "cash_flow_libre": "flux de trésorerie d'exploitation − achats d'immobilisations corporelles : 2021 : −60.681 − 49.810 ; 2022 : −191.723 − 116.823 ; 2023 : −372.531 − 83.739 ; 2024 : 91.998 − 58.852 ; 2025 : 113.949 − 56.759. Les chiffres 2022 et 2023 n'ont été lus que par extrait des communiqués, pas dans le tableau lui-même ; 2021 vient du communiqué annuel 2021, provisoire et non audité",
+    "dette_nette": "bilan au 30/09/2026 : dette avec recours à long terme 2473.499 + dette sans recours à court terme 2.950 + obligations de financement 42.783 + 142.212 − trésorerie 2486.702 ; trésorerie soumise à restrictions (21.4) non déduite",
+    "capitaux_propres": "total des capitaux propres au 30/09/2026, dont 30.2 de participations ne donnant pas le contrôle",
+    "taux_impot": "impôts des neuf premiers mois 2026 / résultat avant impôts : (0.445 + 1.470 + 0.817) / (74.136 + 200.326 + 249.793), soit 0,5 %",
+    "per": "PER sur 12 mois (Stocklake, 112,38) au cours de 185,42 $",
+    "taux_distribution": "pas de dividende aux actionnaires (rendement nul, Stocklake)",
+    "resultat_par_action_12m": "résultat dilué par action : 0,00 (4e trimestre 2025) + 0,23 + 0,62 + 0,78",
+    "dette_nette_sans_obligations_de_financement": "2473.499 + 2.950 − 2486.702 = −10.3, soit une trésorerie nette"
+  },
+  "complements": {
+    "cours": 185.42,
+    "capitalisation": 54798.5,
+    "per_a_terme": 34.8,
+    "roe": 0.396,
+    "cours_sur_actif_net": 28.4,
+    "rendement_dividende": 0,
+    "objectif_moyen_analystes": 283.85,
+    "nombre_analystes": 26,
+    "resultat_par_action_12m": 1.63,
+    "dette_brute_30_09_2026": 2661.4,
+    "tresorerie_30_09_2026": 2486.7,
+    "capitaux_propres_fin_2025": 793.0,
+    "ebitda_ajuste_12m_publie": 842.0,
+    "objectif_chiffre_affaires_2026": "4 400 à 4 600"
+  },
+  "sources": [
+    "https://www.sec.gov/Archives/edgar/data/0001664703/000162828026066890/ex991_q326financialresults.htm",
+    "https://www.sec.gov/Archives/edgar/data/0001664703/000162828026050150/ex991_q226financialresults.htm",
+    "https://www.sec.gov/Archives/edgar/data/0001664703/000162828026027913/ex991_q126financialresults.htm",
+    "https://s29.q4cdn.com/452919417/files/doc_financials/2025/q4/Q4-2025-Financial-Results.pdf",
+    "https://www.sec.gov/Archives/edgar/data/1664703/000162828025008626/ex991_q42024financialresul.htm",
+    "https://www.sec.gov/Archives/edgar/data/1664703/000162828024005031/ex991_q42023financialresul.htm",
+    "https://www.sec.gov/Archives/edgar/data/1664703/000166470322000015/ex991be4q2021financialre.htm",
+    "Stocklake, fiche BE du 11/11/2026"
+  ]
+}
