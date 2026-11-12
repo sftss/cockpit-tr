@@ -1,0 +1,62 @@
+{
+  "nom": "Meta Platforms",
+  "ticker": "META",
+  "place": "Nasdaq",
+  "date": "2026-11-12",
+  "devise": "USD",
+  "unite": "millions de dollars, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": false,
+    "chiffre_affaires": {"2021": 117929, "2022": 116609, "2023": 134902, "2024": 164501, "2025": 200966},
+    "cash_flow_libre": {"2021": 38316, "2022": 18194, "2023": 43010, "2024": 52103, "2025": 43585},
+    "chiffre_affaires_12m": 241605,
+    "resultat_net_12m": 75249,
+    "resultat_operationnel_12m": 79380,
+    "ebitda_12m": 104300,
+    "dette_nette": -1527,
+    "capitaux_propres": 272386,
+    "taux_impot": 0.019,
+    "per": 21.5,
+    "taux_distribution": 0.088
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − neuf premiers mois 2025 + neuf premiers mois 2026 (période close le 30/09/2026)",
+    "chiffre_affaires_12m": "200966 − 141073 + 181712",
+    "resultat_net_12m": "résultat net publié : 60458 − 37690 + 52481. Il comprend une charge juridique de 9890 au 3e trimestre 2026 et, en 2025, une charge d'impôt liée à une provision sur impôts différés au 3e trimestre 2025",
+    "resultat_operationnel_12m": "résultat opérationnel publié : 83276 − 58531 + 54635, charge juridique de 9890 comprise",
+    "ebitda_12m": "le groupe ne publie pas l'EBITDA : résultat opérationnel 79380 + dotations aux amortissements du tableau de flux (18616 − 13205 + 19509 = 24920). Les amortissements des neuf mois n'ont été lus que dans un résumé de la page, pas dans le tableau lui-même",
+    "cash_flow_libre": "définition du groupe : flux de trésorerie d'exploitation − achats d'immobilisations corporelles − remboursements de dettes de location-financement. 2021 : 57683 − 18690 − 677 ; 2022 : 50475 − 31431 − 850 ; 2023 : 71113 − 27045 − 1058 ; 2024 : 91328 − 37256 − 1969 ; 2025 : 115800 − 69691 − 2524. Pour 2021 et 2022, les achats sont pris bruts (sans les cessions de 123 et 245), comme dans les communiqués suivants ; le groupe publiait alors 38439 et 18439",
+    "dette_nette": "bilan au 30/09/2026 : dette à long terme 80922 − trésorerie 11222 − titres négociables 71227, soit une trésorerie nette ; dettes de location simple (2522 + 28651) et de location-financement non comptées",
+    "capitaux_propres": "total des capitaux propres au bilan du 30/09/2026",
+    "taux_impot": "impôts des neuf premiers mois 2026 / résultat avant impôts : 1028 / 53509, soit 1,9 % ; le taux du 3e trimestre seul est de 24 % (17 % hors charge juridique) et le groupe attend 15 à 17 % au 4e trimestre",
+    "per": "PER sur 12 mois (Stocklake, 21,45) au cours de 628,77 $",
+    "taux_distribution": "dividendes versés en 2025 / résultat net 2025 : 5324 / 60458",
+    "resultat_par_action_12m": "résultat dilué par action : 23,49 − 14,62 + 20,44",
+    "dette_nette_avec_locations_simples": "80922 + 2522 + 28651 − 11222 − 71227 = 29646",
+    "dette_totale_sur_capitalisation": "80922 / 1607660"
+  },
+  "complements": {
+    "cours": 628.77,
+    "capitalisation": 1607660,
+    "per_a_terme": 17.7,
+    "roe": 0.323,
+    "cours_sur_actif_net": 5.9,
+    "rendement_dividende": 0.0033,
+    "dividende_annuel_par_action": 2.10,
+    "objectif_moyen_analystes": 850.10,
+    "nombre_analystes": 57,
+    "resultat_par_action_12m": 29.31,
+    "dette_long_terme_30_09_2026": 80922,
+    "tresorerie_et_titres_30_09_2026": 82449,
+    "charge_juridique_3e_trimestre_2026": 9890,
+    "cash_flow_libre_9_mois_2026": 11049,
+    "investissements_2026_prevus": "135 000 à 145 000, remboursements de location-financement compris"
+  },
+  "sources": [
+    "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-Third-Quarter-2026-Results/default.aspx",
+    "https://s21.q4cdn.com/399680738/files/doc_news/Meta-Reports-Fourth-Quarter-and-Full-Year-2025-Results-2026.pdf",
+    "https://capedge.com/filing/1326801/0001326801-25-000014/META-8K/file/2",
+    "https://www.sec.gov/Archives/edgar/data/1326801/000132680123000008/meta-12312022xexhibit991.htm",
+    "Stocklake, fiche META du 12/11/2026"
+  ]
+}
