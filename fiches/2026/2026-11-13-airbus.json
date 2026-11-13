@@ -1,0 +1,61 @@
+{
+  "nom": "Airbus",
+  "ticker": "AIR",
+  "place": "Euronext Paris",
+  "date": "2026-11-13",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 52149.0, "2025": 73420.0},
+    "cash_flow_libre": {"2021": 3511.0, "2022": 4324.0, "2023": 3885.0, "2024": 4461.0, "2025": 4753.0},
+    "chiffre_affaires_12m": 76629.0,
+    "resultat_net_12m": 6167.0,
+    "resultat_operationnel_12m": 7267.0,
+    "ebitda_12m": 9215.0,
+    "dette_nette": -7042.0,
+    "capitaux_propres": 26742.0,
+    "taux_impot": 0.219,
+    "per": 26.7,
+    "taux_distribution": 0.484
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − neuf mois 2025 + neuf mois 2026",
+    "chiffre_affaires_12m": "73420 − 47436 + 50645",
+    "resultat_net_12m": "résultat net part du groupe : 5221 − 2641 + 3587",
+    "resultat_operationnel_12m": "EBIT publié (non ajusté) : 6082 − 3365 + 4550 ; EBIT ajusté sur 12 mois : 7128 − 4146 + 4495 = 7477",
+    "ebitda_12m": "dernier exercice, faute de dotations aux amortissements publiées pour neuf mois : EBIT publié 2025 (6082) + dotations aux amortissements 2025 (3133, tableau de flux, Stocklake) ; sans effet sur les points, le groupe étant en trésorerie nette",
+    "dette_nette": "trésorerie nette publiée au 30/09/2026 : 7042 (12171 au 31/12/2025), comptée en négatif",
+    "capitaux_propres": "non publiés dans le communiqué des neuf mois : capitalisation 164 338,6 / cours sur actif net 6,1454 (Stocklake) ; capitaux propres au 31/12/2025 : 26104 (Stocklake)",
+    "taux_impot": "taux effectif de l'exercice 2025 : impôt 1390 / résultat avant impôt 6350 (Stocklake) ; pas de taux publié pour neuf mois",
+    "per": "PER sur 12 mois (Stocklake, 26,70) au cours de 208,25 € ; contrôle : 208,25 / BNPA sur 12 mois (6,61 − 3,34 + 4,54 = 7,81 €) = 26,7",
+    "taux_distribution": "dividende 2025 de 3,20 € par action / BNPA publié 2025 de 6,61 €",
+    "chiffre_affaires": "2021 : communiqué annuel 2021 ; 2025 : communiqué annuel 2025",
+    "cash_flow_libre": "ligne « Free Cash Flow (FCF) » des communiqués annuels : 2021 (communiqué 2021), 2022 (communiqué 2022), 2023 (communiqué 2023), 2024 et 2025 (communiqué 2025). La définition a changé au 01/01/2024 (opérations de fusion-acquisition exclues du cash-flow libre avant financement clients). Cash-flow libre avant financement clients : 3515 en 2021 (alors « avant fusions-acquisitions et financement clients »), 4574 en 2025"
+  },
+  "complements": {
+    "cours": 208.25,
+    "per_a_terme": 24.0,
+    "roe": 0.235,
+    "rendement_dividende": 0.0152,
+    "objectif_moyen_analystes": 231.54,
+    "nombre_analystes": 24,
+    "capitalisation": 164338.6,
+    "tresorerie_nette_fin_2025": 12171.0,
+    "ebit_ajuste_12m": 7477.0,
+    "cash_flow_libre_9m_2026": -1108.0,
+    "cash_flow_libre_avant_financement_clients_9m_2026": -1268.0,
+    "chiffre_affaires_defense_2025": 14244.0,
+    "chiffre_affaires_defense_9m_2026": 9310.0,
+    "dette_brute_fin_2025": 11023.0
+  },
+  "sources": [
+    "https://www.bnains.org/archives/communiques/EADS/20260219_Communique_resultats_annuels_2025_Airbus_EN.pdf",
+    "https://mediaassets.airbus.com/pm_38_942_942888-eyfb5ynik9.pdf?fileName=airbus-nine-month-9m-2026-press-release.pdf",
+    "https://www.airbus.com/en/newsroom/press-releases/2026-07-airbus-reports-half-year-h1-2026-results",
+    "https://www.lobbyregister.bundestag.de/media/0b/4b/256976/EN-Press-Release-Airbus-FY2023-Results-1.pdf",
+    "https://www.airbus.com/en/newsroom/press-releases/2023-02-airbus-reports-full-year-fy-2022-results",
+    "https://www.airbus.com/en/newsroom/press-releases/2022-02-airbus-reports-strong-full-year-fy-2021-results",
+    "Stocklake, fiche AIR.PA du 13/11/2026"
+  ]
+}
