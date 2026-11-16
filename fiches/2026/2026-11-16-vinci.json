@@ -1,0 +1,58 @@
+{
+  "nom": "Vinci",
+  "ticker": "DG",
+  "place": "Euronext Paris",
+  "date": "2026-11-16",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 49396.0, "2025": 74599.0},
+    "cash_flow_libre": {"2021": 5282.0, "2022": 5433.0, "2023": 6628.0, "2024": 6808.0, "2025": 7010.0},
+    "chiffre_affaires_12m": 75344.0,
+    "resultat_net_12m": 5085.0,
+    "resultat_operationnel_12m": 9575.0,
+    "ebitda_12m": 13783.0,
+    "dette_nette": 22450.0,
+    "capitaux_propres": 34244.0,
+    "taux_impot": 0.397,
+    "per": 12.8,
+    "taux_distribution": 0.578
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires_12m": "chiffre d'affaires hors travaux des filiales concessionnaires : 74599 − 34852 + 35597",
+    "resultat_net_12m": "résultat net part du groupe : 4903 − 1896 + 2078",
+    "resultat_operationnel_12m": "résultat opérationnel publié : 9364 − 4026 + 4237 ; résultat opérationnel sur activité (ROPA) sur 12 mois : 9558 − 4140 + 4363 = 9781",
+    "ebitda_12m": "Ebitda publié (capacité d'autofinancement avant coût de financement et impôts) : 13507 − 6129 + 6405",
+    "dette_nette": "endettement financier net publié au 30/06/2026 (19075 au 31/12/2025, 23336 au 30/06/2025)",
+    "capitaux_propres": "capitaux propres totaux publiés au 30/06/2026, intérêts minoritaires compris ; part du groupe : 30590",
+    "taux_impot": "taux effectif publié pour le 1er semestre 2026, contribution exceptionnelle sur les bénéfices comprise ; retraité de cette contribution : 30,1 %",
+    "per": "PER sur 12 mois (Stocklake, 12,82) au cours de 115,50 € ; contrôle : 115,50 / BNPA dilué sur 12 mois (8,65 − 3,34 + 3,70 = 9,01 €) = 12,8",
+    "taux_distribution": "dividende 2025 de 5,00 € par action / BNPA dilué publié 2025 de 8,65 € ; le communiqué annonce 58 %",
+    "chiffre_affaires": "chiffre d'affaires hors travaux des filiales concessionnaires : 2021 (communiqué annuel 2021), 2025 (communiqué annuel 2025). Chiffre d'affaires total : 49982 en 2021, 75372 en 2025",
+    "cash_flow_libre": "ligne « cash-flow libre » des communiqués annuels : 2021 (communiqué 2021), 2022 et 2023 (communiqué 2023), 2024 et 2025 (communiqué 2025). Cash-flow libre 2025 hors contribution exceptionnelle : 7435"
+  },
+  "complements": {
+    "cours": 115.5,
+    "per_a_terme": 11.7,
+    "roe": 0.163,
+    "rendement_dividende": 0.0437,
+    "objectif_moyen_analystes": 140.35,
+    "nombre_analystes": 20,
+    "capitalisation": 63536.3,
+    "dette_nette_fin_2025": 19075.0,
+    "ropa_12m": 9781.0,
+    "cash_flow_libre_s1_2026": 264.0,
+    "contribution_exceptionnelle_s1_2026": 323.0,
+    "carnet_de_commandes_30_06_2026": 76800.0,
+    "dette_financiere_brute_long_terme_30_06_2026": 34000.0
+  },
+  "sources": [
+    "https://www.vinci.com/sites/default/files/medias/communiques/file/2026-02/communique-de-presse-vinci-full-year-2025.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/8888/01/FCMKW135819_20260803.pdf",
+    "https://www.globenewswire.com/news-release/2024/02/07/2825446/0/en/VINCI-2023-Annual-Results.html",
+    "https://www.globenewswire.com/news-release/2022/02/04/2379018/0/en/2021-annual-results.html",
+    "Stocklake, fiche DG.PA du 16/11/2026"
+  ]
+}
