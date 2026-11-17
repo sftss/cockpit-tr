@@ -1,0 +1,71 @@
+{
+  "nom": "Hermès",
+  "ticker": "RMS",
+  "place": "Euronext Paris",
+  "date": "2026-11-17",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {
+      "2021": 8982,
+      "2022": 11602,
+      "2023": 13427,
+      "2024": 15170,
+      "2025": 16002
+    },
+    "cash_flow_libre": {
+      "2021": 2661,
+      "2022": 3405,
+      "2023": 3192,
+      "2024": 3767,
+      "2025": 3880
+    },
+    "chiffre_affaires_12m": 16131,
+    "resultat_net_12m": 4516,
+    "resultat_operationnel_12m": 6593,
+    "ebitda_12m": 7577,
+    "dette_nette": -12310,
+    "capitaux_propres": 19023,
+    "taux_impot": 0.334,
+    "per": 31.4,
+    "taux_distribution": 0.418
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires_12m": "16002 − 8034 + 8163 (égal au chiffre d'affaires sur 12 mois de Stocklake, 16131)",
+    "resultat_net_12m": "résultat net part du groupe publié : 4524 − 2246 + 2238",
+    "resultat_operationnel_12m": "résultat opérationnel publié, égal au résultat opérationnel courant (aucun élément non courant) : 6569 − 3327 + 3351",
+    "ebitda_12m": "le groupe ne publie pas l'EBITDA : résultat opérationnel + dotations aux amortissements des immobilisations et droits d'utilisation et dépréciations du tableau de flux, soit (6569 + 926) − (3327 + 463) + (3351 + 521). 926 est confirmé par Stocklake ; 463 et 521 sont lus dans la partie des communiqués semestriels qui n'a pas pu être relue mot à mot. Sans effet sur la note : le groupe a une trésorerie nette",
+    "dette_nette": "trésorerie nette publiée au 30/06/2026 (12310), hors dettes locatives, comptée en négatif. Avec les dettes locatives de fin 2025 (1987 + 325), la trésorerie nette resterait d'environ 10000. Trésorerie nette retraitée publiée : 12926",
+    "capitaux_propres": "capitaux propres part du groupe publiés au 30/06/2026",
+    "taux_impot": "impôt sur 12 mois / résultat avant impôt sur 12 mois : (2263 − 1230 + 1217) / (6775 − 3475 + 3441). Il comprend la contribution exceptionnelle française sur les grandes entreprises",
+    "per": "PER sur 12 mois (Stocklake, 31,38) au cours de 1349,50 €",
+    "taux_distribution": "dividende 2025 de 18,00 € par action / résultat dilué par action 2025 de 43,07 €",
+    "chiffre_affaires": "2021 : communiqué annuel 2022 ; 2022 et 2023 : communiqué annuel 2023 ; 2024 et 2025 : communiqué annuel 2025",
+    "cash_flow_libre": "cash-flow disponible ajusté publié (flux liés à l'activité − investissements opérationnels − remboursement des dettes locatives). 2021 : communiqué annuel 2022 ; 2022 et 2023 : communiqué annuel 2023 ; 2024 et 2025 : communiqué annuel 2025",
+    "capitalisation": "Stocklake, au cours de 1349,50 €"
+  },
+  "complements": {
+    "cours": 1349.5,
+    "capitalisation": 141161.7,
+    "per_a_terme": 28.1,
+    "roe": 0.255,
+    "cours_sur_actif_net": 7.43,
+    "rendement_dividende": 0.013,
+    "objectif_moyen_analystes": 1555.43,
+    "nombre_analystes": 24,
+    "plus_haut_52_semaines": 2300,
+    "plus_bas_52_semaines": 1228,
+    "cash_flow_libre_s1_2026": 2182,
+    "cash_flow_libre_s1_2025": 1847
+  },
+  "sources": [
+    "https://mfn.se/all/a/hermes/hermes-international-2025-full-year-results-a01f2a5e",
+    "https://mfn.se/all/a/hermes/hermes-international-2026-half-year-results-be9f20c4",
+    "https://mfn.se/all/a/hermes/hermes-international-2025-half-year-results-b0918fd8",
+    "https://www.nasdaq.com/press-release/hermes-international:-2023-full-year-results-2024-02-09",
+    "https://ca.finance.yahoo.com/news/herm-international-2022-full-results-070000758.html",
+    "Stocklake, fiche RMS.PA du 17/11/2026"
+  ]
+}
