@@ -1,0 +1,54 @@
+{
+  "nom": "Carrefour",
+  "ticker": "CA",
+  "place": "Euronext Paris",
+  "date": "2026-11-18",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 70462, "2025": 82102},
+    "cash_flow_libre": {"2021": 1227, "2022": 1262, "2023": 1622, "2024": 1457, "2025": 1305},
+    "chiffre_affaires_12m": 80118,
+    "resultat_net_12m": 750,
+    "resultat_operationnel_12m": 2159,
+    "ebitda_12m": 4377,
+    "dette_nette": 5849,
+    "capitaux_propres": 11811,
+    "taux_impot": 0.285,
+    "per": 13.2,
+    "taux_distribution": 2.15
+  },
+  "calculs": {
+    "chiffre_affaires": "chiffre d'affaires hors taxes publié : 2021 retraité IFRS 5 de Taïwan (70 462, publié dans le communiqué annuel 2022 ; 72 958 avant retraitement), 2025 hors Italie cédée (82 102). L'Italie reste dans 2021 et pas dans 2025 : la croissance est sous-estimée",
+    "cash_flow_libre": "cash-flow libre net publié (après coût de l'endettement, paiements locatifs et charges exceptionnelles) : 1227, 1262, 1622, 1457, 1305 ; 2025 inclut l'Italie (−260), 1565 hors Italie",
+    "douze_mois": "exercice 2025 − Roumanie 2025 (cédée, non retraitée dans l'exercice 2025) − 1er semestre 2025 retraité IFRS 5 (sans Italie ni Roumanie) + 1er semestre 2026",
+    "chiffre_affaires_12m": "82102 − 2770 − 38648 + 39434",
+    "resultat_net_12m": "résultat net part du Groupe publié, toutes activités : 319 − (−401) + 30",
+    "resultat_operationnel_12m": "résultat opérationnel courant : 2158 − 29 − 727 + 757",
+    "ebitda_12m": "4506 − 173 − 1821 + 1865",
+    "dette_nette": "dette financière nette publiée au 30/06/2026, hors dettes locatives (4 971 au bilan) ; point haut saisonnier, 3 965 au 31/12/2025",
+    "capitaux_propres": "capitaux propres totaux au 30/06/2026 (dont part du Groupe 11 066)",
+    "taux_impot": "taux d'impôt normatif publié pour le 1er semestre 2026",
+    "per": "capitalisation 9 934 (Stocklake, cours de 14,045 €) / résultat net part du Groupe sur 12 mois 750 ; le PER de Stocklake (6,53) est incohérent avec les résultats publiés et n'a pas été utilisé",
+    "taux_distribution": "dividende ordinaire 2025 de 0,97 € par action, soit 685 / résultat net part du Groupe 2025 de 319 ; rapporté au résultat net ajusté part du Groupe (1 090), 63 %"
+  },
+  "complements": {
+    "cours": 14.045,
+    "per_a_terme": 7.8,
+    "roe": 0.084,
+    "rendement_dividende": 0.068,
+    "objectif_moyen_analystes": 15.44,
+    "nombre_analystes": 15,
+    "dette_nette_sur_ebitda_fin_2025": 0.88,
+    "dettes_locatives_30_06_2026": 4971
+  },
+  "sources": [
+    "https://www.carrefour.com/sites/default/files/2026-07/Press%20release%20Carrefour%20Q2%20&%20H1%202026_0.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2026/02/FCECO080961_20260217.pdf",
+    "https://www.carrefour.com/sites/default/files/2025-07/Communique%CC%81%20Carrefour%20T2%2BS1%202025_FR.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2024/02/FCECO073819_20240220.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2023/02/FCECO070092_20230214.pdf",
+    "Stocklake, fiche CA.PA du 18/11/2026"
+  ]
+}
