@@ -1,0 +1,55 @@
+{
+  "nom": "Air Liquide",
+  "ticker": "AI",
+  "place": "Euronext Paris",
+  "date": "2026-11-19",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 23334.8, "2025": 26940.2},
+    "cash_flow_libre": {"2021": 2654.2, "2022": 2537.0, "2023": 2869.6, "2024": 2797.1, "2025": 2675.0},
+    "chiffre_affaires_12m": 27045.9,
+    "resultat_net_12m": 3539.4,
+    "resultat_operationnel_12m": 5359.2,
+    "ebitda_12m": 7961.0,
+    "dette_nette": 13921.0,
+    "capitaux_propres": 27262.4,
+    "taux_impot": 0.264,
+    "per": 33.9,
+    "taux_distribution": 0.607
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires_12m": "26940.2 − 13722.2 + 13827.9",
+    "resultat_net_12m": "résultat net part du Groupe : 3517.9 − 1801.1 + 1822.6",
+    "resultat_operationnel_12m": "résultat opérationnel (après autres produits et charges non courants) : 5278.7 − 2689.9 + 2770.4",
+    "ebitda_12m": "le groupe ne publie pas l'EBITDA : résultat opérationnel + dotations aux amortissements, soit (5278.7 + 2563.5) − (2689.9 + 1286.8) + (2770.4 + 1325.1)",
+    "cash_flow_libre": "le groupe ne publie pas de cash-flow libre : flux net de trésorerie généré par les activités opérationnelles − acquisitions d'immobilisations corporelles et incorporelles, soit 2021 : 5571 − 2916.8 ; 2022 : 5810 − 3273.0 ; 2023 : 6263.0 − 3393.4 ; 2024 : 6322.2 − 3525.1 ; 2025 : 6518.4 − 3843.4. Les acquisitions de sociétés (DIG Airgas en 2026) n'en sont pas déduites",
+    "dette_nette": "dette nette publiée au 30/06/2026, après l'acquisition de DIG Airgas et le versement du dividende de mai",
+    "capitaux_propres": "total des capitaux propres au bilan du 30/06/2026 (part du Groupe 26517.0 + intérêts minoritaires)",
+    "taux_impot": "taux effectif d'impôt du 1er semestre 2026 (674.7 / 2560.6) ; 25,4 % hors élément fiscal exceptionnel selon le groupe",
+    "per": "PER sur 12 mois (Stocklake, 33,94) au cours de 189,74 €",
+    "taux_distribution": "dividende 2025 de 3,70 € par action / bénéfice net par action 2025 de 6,10 € (le groupe publie 63 % du résultat net)"
+  },
+  "complements": {
+    "cours": 189.74,
+    "per_a_terme": 26.4,
+    "roe": 0.140,
+    "rendement_dividende": 0.0176,
+    "objectif_moyen_analystes": 202.73,
+    "nombre_analystes": 20,
+    "capitalisation": 121086.1,
+    "dette_nette_fin_2025": 8416,
+    "dette_nette_sur_ebitda_fin_2025": 1.07,
+    "marge_operationnelle_1er_semestre_2026": 0.209
+  },
+  "sources": [
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2026/02/FCECO080999_20260220.pdf",
+    "https://www.airliquide.com/sites/airliquide.com/files/2026-07/resultats-s1-2026-avec-une-acceleration-au-2eme-trimestre-air-liquide-conjugue-dynamique-de_6a683c081a988.pdf",
+    "https://airliquide.com/sites/airliquide.com/files/2025-02/2024-fort-dune-progression-record-de-sa-marge-et-dun-reservoir-de-croissance-porte-par-des-succes_67b81b65be8f9.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/BWR/2023/02/FCBWR147772_20230216.pdf",
+    "https://bourse.fortuneo.fr/actualites/air-liquide-plus-forte-baisse-du-cac-40-apres-les-semestriels-2362071",
+    "Stocklake, fiche AI.PA du 19/11/2026"
+  ]
+}
