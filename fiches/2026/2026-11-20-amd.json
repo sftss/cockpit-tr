@@ -1,0 +1,60 @@
+{
+  "nom": "AMD",
+  "ticker": "AMD",
+  "place": "Nasdaq",
+  "date": "2026-11-20",
+  "devise": "USD",
+  "unite": "millions de dollars, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2021": 16434, "2022": 23601, "2023": 22680, "2024": 25785, "2025": 34639},
+    "cash_flow_libre": {"2021": 3220, "2022": 3115, "2023": 1121, "2024": 2405, "2025": 5519},
+    "chiffre_affaires_12m": 45436,
+    "resultat_net_12m": 7619,
+    "resultat_operationnel_12m": 8050,
+    "ebitda_12m": 11096,
+    "dette_nette": -8697,
+    "capitaux_propres": 68389,
+    "taux_impot": 0.048,
+    "per": 113.2,
+    "taux_distribution": 0
+  },
+  "calculs": {
+    "exercices": "exercices clos fin décembre (27/12/2025 pour 2025, 25/12/2021 pour 2021)",
+    "douze_mois": "exercice 2025 − neuf premiers mois 2025 + neuf premiers mois 2026 (clos le 26/09/2026)",
+    "chiffre_affaires_12m": "34639 − 24369 + 35166",
+    "resultat_net_12m": "4335 − 2824 + 6108 ; comprend les activités abandonnées (ZT Systems), une reprise de provision fiscale de 853 en 2025, et au 3e trimestre 2026 une charge de réévaluation de bons de souscription (1097) et un produit d'impôt (555)",
+    "resultat_operationnel_12m": "3694 − 1942 + 6298",
+    "ebitda_12m": "résultat opérationnel + amortissements + amortissement des incorporels d'acquisition (tableau de flux) : (3694 + 750 + 2254) − (1942 + 556 + 1697) + (6298 + 666 + 1629) ; EBITDA ajusté publié sur 12 mois : 8521 − 5470 + 10223 = 13274",
+    "cash_flow_libre": "cash-flow libre publié (flux d'exploitation − achats d'immobilisations) ; à partir de 2025, sur les seules activités poursuivies (6493 − 974)",
+    "dette_nette": "bilan au 26/09/2026 : dette à long terme 7079 (aucune part à moins d'un an) − trésorerie 7404 − placements à court terme 8372 ; dettes locatives (1837) non comptées",
+    "capitaux_propres": "capitaux propres publiés au 26/09/2026",
+    "taux_impot": "impôts sur 12 mois / résultat avant impôts sur 12 mois : (−103 + 558 − 65) / (4140 − 2066 + 6023) = 390 / 8097 ; l'exercice 2025 et les neuf mois 2026 affichent chacun un produit d'impôt net",
+    "per": "PER sur 12 mois (Stocklake, 113,24) au cours de 489,19 $ ; avec le résultat dilué par action publié sur 12 mois, 2,65 − 1,73 + 3,69 = 4,61 $, le PER serait de 106,1",
+    "taux_distribution": "AMD ne verse pas de dividende (aucun dividende dans les communiqués lus, rendement nul chez Stocklake)"
+  },
+  "complements": {
+    "cours": 489.19,
+    "capitalisation": 809641.6,
+    "per_a_terme": 27.7,
+    "roe": 0.120,
+    "cours_sur_actif_net": 11.7,
+    "rendement_dividende": 0,
+    "objectif_moyen_analystes": 657.74,
+    "nombre_analystes": 49,
+    "resultat_par_action_12m": 4.61,
+    "dette_totale_26_09_2026": 7079,
+    "chiffre_affaires_3e_trimestre_2026": 13377,
+    "chiffre_affaires_centres_de_donnees_3e_trimestre_2026": 8546,
+    "prevision_chiffre_affaires_4e_trimestre_2026": 17000,
+    "cash_flow_libre_3e_trimestre_2026": 554,
+    "stocks_26_09_2026": 11463
+  },
+  "sources": [
+    "https://www.sec.gov/Archives/edgar/data/0000002488/000000248826000188/q32026991.htm",
+    "https://ir.amd.com/news-events/press-releases/detail/1276/amd-reports-fourth-quarter-and-full-year-2025-financial",
+    "https://www.sec.gov/Archives/edgar/data/0000002488/000000248824000009/q42023991final.htm",
+    "https://www.sec.gov/Archives/edgar/data/2488/000000248822000014/q421991amd.htm",
+    "Stocklake, fiche AMD du 20/11/2026"
+  ]
+}
