@@ -1,0 +1,59 @@
+{
+  "nom": "Gaztransport & Technigaz",
+  "ticker": "GTT",
+  "place": "Euronext Paris",
+  "date": "2026-11-23",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": false,
+    "chiffre_affaires": {"2021": 314.7, "2022": 307.3, "2023": 427.7, "2024": 641.4, "2025": 803.0},
+    "cash_flow_libre": {"2021": 196.5, "2022": 118.9, "2023": 173.0, "2024": 299.8, "2025": 382.9},
+    "chiffre_affaires_12m": 801.6,
+    "resultat_net_12m": 444.0,
+    "resultat_operationnel_12m": 512.4,
+    "ebitda_12m": 540.9,
+    "dette_nette": -294.7,
+    "capitaux_propres": 615.3,
+    "taux_impot": 0.135,
+    "per": 15.3,
+    "taux_distribution": 0.80
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires_12m": "803.0 − 388.7 + 387.3",
+    "resultat_net_12m": "413.6 − 180.0 + 210.4 ; le 1er semestre 2025 portait 48.2 de charges non courantes, le 1er semestre 2026 aucune",
+    "resultat_operationnel_12m": "résultat opérationnel courant (EBIT publié) : 521.3 − 257.1 + 248.2 ; résultat opérationnel courant et non courant : 472.6 − 208.9 + 248.2 = 511.9",
+    "ebitda_12m": "541.8 − 264.5 + 263.6",
+    "cash_flow_libre": "non publié par le groupe : flux net de trésorerie généré par l'activité − acquisition d'immobilisations (tableau de flux), hors prises de contrôle et subventions d'investissement. 2021 : 212.5 − 16.0 ; 2022 : 139.4 − 20.5 ; 2023 : 216.2 − 43.1 ; 2024 : 361.5 − 61.7 ; 2025 : 423.2 − 40.3. Le rachat de Danelec en 2025 (194.1) n'y est pas compté",
+    "chiffre_affaires": "2021 et 2022 : communiqué 2022 (314 735 et 307 294 k€) ; 2023 : communiqué 2023 (427 704 k€) ; 2024 et 2025 : communiqué 2025",
+    "dette_nette": "trésorerie nette publiée au 30/06/2026 : trésorerie 384.7 − dette 90 ; avec tous les passifs financiers du bilan (104.7, dont dettes locatives), la trésorerie nette serait de 280.0",
+    "capitaux_propres": "capitaux propres d'ensemble au 30/06/2026 (part du groupe : 613.8)",
+    "taux_impot": "impôts sur 12 mois / résultat avant impôt sur 12 mois : (66.9 − 35.4 + 37.7) / (480.4 − 215.3 + 248.2) = 69.2 / 513.3",
+    "per": "PER sur 12 mois (Stocklake, 15,27) au cours de 182,00 €",
+    "taux_distribution": "taux publié pour le dividende 2025 : 80 % du résultat net consolidé (8,94 € par action pour un résultat de base de 11,16 €)"
+  },
+  "complements": {
+    "cours": 182.00,
+    "capitalisation": 6744.8,
+    "per_a_terme": 14.8,
+    "roe": 0.796,
+    "cours_sur_actif_net": 11.0,
+    "rendement_dividende": 0.047,
+    "objectif_moyen_analystes": 233.83,
+    "nombre_analystes": 12,
+    "dividende_2025_par_action": 8.94,
+    "acompte_dividende_2026_par_action": 4.30,
+    "carnet_de_commandes_30_06_2026": 1853,
+    "objectif_chiffre_affaires_2026": "740 à 780",
+    "objectif_ebitda_2026": "490 à 530"
+  },
+  "sources": [
+    "https://www.gtt.fr/sites/default/files/GTT%20-%20R%C3%A9sultats%20du%20premier%20semestre%202026%20-%20Communiqu%C3%A9%20de%20Presse.pdf",
+    "https://www.gtt.fr/sites/default/files/GTT%20-%20Rapport%20Financier%20Semestriel%202026.pdf",
+    "https://www.gtt.fr/sites/default/files/GTT%20-%20R%C3%A9sultats%20annuels%202025%20-%20Communiqu%C3%A9%20de%20Presse.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2024/02/FCMKW135780_20240226.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2023/02/FCMKW133149_20230216.pdf",
+    "Stocklake, fiche GTT.PA du 23/11/2026"
+  ]
+}
