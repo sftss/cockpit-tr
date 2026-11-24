@@ -1,0 +1,55 @@
+{
+  "nom": "Euronext",
+  "ticker": "ENX",
+  "place": "Euronext Paris",
+  "date": "2026-11-24",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": false,
+    "chiffre_affaires": {"2021": 1298.7, "2022": 1418.8, "2023": 1474.7, "2024": 1626.9, "2025": 1818.8},
+    "cash_flow_libre": {"2021": 476.0, "2022": 516.9, "2023": 723.1, "2024": 621.3, "2025": 682.2},
+    "chiffre_affaires_12m": 2074.0,
+    "resultat_net_12m": 750.7,
+    "resultat_operationnel_12m": 1098.2,
+    "ebitda_12m": 1310.1,
+    "dette_nette": 1491.6,
+    "capitaux_propres": 5049.8,
+    "taux_impot": 0.2645,
+    "per": 22.5,
+    "taux_distribution": 0.50
+  },
+  "calculs": {
+    "douze_mois": "somme des quatre derniers trimestres publiés : 4e trimestre 2025 + 1er, 2e et 3e trimestres 2026 (le groupe publie des comptes trimestriels, sans cumul semestriel ni neuf mois dans ses communiqués)",
+    "chiffre_affaires_12m": "456.4 + 526.7 + 543.5 + 547.4 (revenus et produits publiés)",
+    "resultat_net_12m": "144.7 + 192.3 + 218.8 + 194.9 (résultat net publié, part du groupe)",
+    "resultat_operationnel_12m": "206.6 + 288.8 + 301.2 + 301.6 (résultat opérationnel publié)",
+    "ebitda_12m": "260.8 + 339.0 + 354.5 + 355.8 (EBITDA publié)",
+    "dette_nette": "emprunts non courants 2 920,1 + emprunts courants 22,0 − trésorerie 1 450,5, bilan au 30/09/2026 ; hors dettes locatives. Le groupe publie un ratio dette nette / EBITDA de 1,1 fois à cette date, sans montant",
+    "capitaux_propres": "capitaux propres totaux au 30/09/2026, intérêts minoritaires compris (part du groupe : 4 847,5)",
+    "taux_impot": "impôt publié 56.8 + 74.6 + 84.7 + 77.5 = 293.6, sur résultat avant impôt 213.3 + 282.4 + 320.8 + 293.5 = 1 110.0",
+    "cash_flow_libre": "flux de trésorerie opérationnels − achats d'immobilisations corporelles et incorporelles, tableaux de flux publiés : 2021 543.6 − 33.4 − 34.2 ; 2022 616.5 − 31.9 − 67.7 ; 2023 826.1 − 27.7 − 75.3 ; 2024 708.6 − 18.0 − 69.3 ; 2025 812.1 − 24.7 − 105.2. Les flux opérationnels incluent les variations de besoin en fonds de roulement des chambres de compensation",
+    "per": "PER sur 12 mois (Stocklake) au cours de 164,80 €",
+    "taux_distribution": "dividende proposé de 321,5 M€, 50 % du résultat net publié 2025"
+  },
+  "complements": {
+    "cours": 164.80,
+    "per_a_terme": 17.7,
+    "roe": 0.172,
+    "rendement_dividende": 0.019,
+    "objectif_moyen_analystes": 180.29,
+    "nombre_analystes": 17,
+    "capitalisation": 16437.2,
+    "dette_nette_sur_ebitda_publiee": 1.1,
+    "rachat_actions_annonce": 350.0
+  },
+  "sources": [
+    "https://www.euronext.com/en/investor-relations/financial-information/news/euronext-publishes-q3-2026-results-and-announces",
+    "https://www.euronext.com/en/investor-relations/financial-information/news/euronext-publishes-q2-2026-results",
+    "https://www.globenewswire.com/news-release/2026/05/19/3297785/0/en/Euronext-publishes-Q1-2026-results.html",
+    "https://www.vfb.be/Media/Default/pdf/q4-2025-results-press-release.pdf",
+    "https://www.euronext.com/en/about/media/euronext-press-releases/euronext-publishes-q4-and-full-year-2023-results",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/MKW/2022/02/FCMKW114133_20220210.pdf",
+    "Stocklake, fiche ENX.PA du 24/11/2026"
+  ]
+}
