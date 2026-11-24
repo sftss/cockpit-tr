@@ -1,3 +1,4 @@
+⚠️ Projet à but personnel
 # Cockpit TR
 
 Tableau de bord personnel et **local** pour suivre un portefeuille Trade Republic
