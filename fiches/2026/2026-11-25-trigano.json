@@ -1,0 +1,57 @@
+{
+  "nom": "Trigano",
+  "ticker": "TRI",
+  "place": "Euronext Paris",
+  "date": "2026-11-25",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": true,
+    "chiffre_affaires": {"2022": 3177.2, "2023": 3480.2, "2024": 3926.3, "2025": 3660.2, "2026": 3800.0},
+    "cash_flow_libre": {"2022": 106.6, "2023": 144.5, "2024": -7.5, "2025": 520.7, "2026": 314.6},
+    "chiffre_affaires_12m": 3800.0,
+    "resultat_net_12m": 285.6,
+    "resultat_operationnel_12m": 362.1,
+    "ebitda_12m": 437.4,
+    "dette_nette": -520.0,
+    "capitaux_propres": 2232.9,
+    "taux_impot": 0.254,
+    "per": 9.6,
+    "taux_distribution": 0.302
+  },
+  "calculs": {
+    "douze_mois": "exercice clos le 31/08/2026 (2025/26), publié le 24/11/2026, chiffres en cours d'audit : c'est le dernier exercice, aucune période intermédiaire plus récente",
+    "exercices": "l'exercice va du 1er septembre au 31 août ; « 2026 » désigne l'exercice 2025/26, « 2022 » l'exercice 2021/22",
+    "chiffre_affaires": "2022 : communiqués annuels 2022 et 2023 ; 2023 et 2024 : communiqué annuel 2024 ; 2025 et 2026 : communiqué annuel 2026",
+    "cash_flow_libre": "non publié par le groupe : flux de trésorerie liés aux activités opérationnelles − acquisitions d'immobilisations incorporelles et corporelles (tableaux de flux). 2022 : 171.5 − 3.7 − 61.2 (chiffres retraités du communiqué 2023 ; le communiqué 2022 donnait 217.0 de flux opérationnels et 74.5 d'immobilisations corporelles, IFRS 16 compris) ; 2023 : 201.7 − 3.6 − 53.6 ; 2024 : 53.3 − 2.7 − 58.1 ; 2025 : 563.9 − 2.1 − 41.1 ; 2026 : 369.4 − 2.8 − 52.0. Acquisitions de filiales et remboursements de dettes de location non déduits",
+    "resultat_net_12m": "résultat net part du groupe 2025/26 (résultat net d'ensemble : 285.7)",
+    "resultat_operationnel_12m": "résultat opérationnel 2025/26 (résultat opérationnel courant : 364.2)",
+    "ebitda_12m": "non publié : résultat opérationnel courant 364.2 + amortissements et dépréciations 73.2 (compte de résultat)",
+    "dette_nette": "trésorerie nette publiée au 31/08/2026, hors dettes de location : 520.0 ; avec les dettes de location (53.6 + 15.7), le tableau de synthèse publie 450.7",
+    "capitaux_propres": "capitaux propres de l'ensemble consolidé au 31/08/2026 (part du groupe : 2232.4)",
+    "taux_impot": "non publié : charge d'impôt / résultat avant impôt = 96.3 / (362.1 + 17.1) = 96.3 / 379.2",
+    "per": "PER sur 12 mois (Stocklake, 9,59) au cours de 127,20 € ; sur le résultat par action 2025/26 publié (14,90 €), il serait de 8,5",
+    "taux_distribution": "dividende 2025/26 de 4,50 € par action (déjà versé en acomptes) / résultat par action de 14,90 €"
+  },
+  "complements": {
+    "cours": 127.2,
+    "capitalisation": 2418.3,
+    "per_a_terme": 7.7,
+    "roe": 0.123,
+    "cours_sur_actif_net": 1.13,
+    "rendement_dividende": 0.035,
+    "objectif_moyen_analystes": 178.0,
+    "nombre_analystes": 8,
+    "resultat_operationnel_courant": 364.2,
+    "marge_operationnelle_courante": 0.096,
+    "rachats_actions_2026": 60.5,
+    "dettes_financieres_hors_location": 65.4
+  },
+  "sources": [
+    "https://www.webdisclosure.fr/press-release/trigano-epa-tri-resultats-annuels-202526-CaY9PX5uwtM",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2024/11/FCECO076707_20241125.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2023/11/FCECO073114_20231128.pdf",
+    "https://echanges.dila.gouv.fr/OPENDATA/AMF/ECO/2022/11/FCECO069338_20221129.pdf",
+    "Stocklake, fiche TRI.PA du 25/11/2026"
+  ]
+}
