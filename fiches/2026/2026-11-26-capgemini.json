@@ -1,0 +1,58 @@
+{
+  "nom": "Capgemini",
+  "ticker": "CAP",
+  "place": "Euronext Paris",
+  "date": "2026-11-26",
+  "devise": "EUR",
+  "unite": "millions d'euros, sauf PER et taux",
+  "chiffres": {
+    "produits_physiques": false,
+    "chiffre_affaires": {"2021": 18160.0, "2022": 21995.0, "2023": 22522.0, "2024": 22096.0, "2025": 22465.0},
+    "cash_flow_libre": {"2021": 1873.0, "2022": 1852.0, "2023": 1963.0, "2024": 1961.0, "2025": 1949.0},
+    "chiffre_affaires_12m": 23440.0,
+    "resultat_net_12m": 1375.0,
+    "resultat_operationnel_12m": 2101.0,
+    "ebitda_12m": 3065.0,
+    "dette_nette": 6454.0,
+    "capitaux_propres": 11267.6,
+    "taux_impot": 0.291,
+    "per": 15.3,
+    "taux_distribution": 0.359
+  },
+  "calculs": {
+    "douze_mois": "exercice 2025 − 1er semestre 2025 + 1er semestre 2026",
+    "chiffre_affaires_12m": "22465 − 11107 + 12082",
+    "resultat_net_12m": "résultat net part du groupe : 1601 − 724 + 498",
+    "resultat_operationnel_12m": "résultat d'exploitation (après autres produits et charges opérationnels) : 2199 − 976 + 878 ; avec la marge opérationnelle, il serait de 2983 − 1377 + 1506 = 3112",
+    "ebitda_12m": "non publié par le groupe, ni au semestre : EBITDA de l'exercice 2025 (Stocklake), faute de comptes intermédiaires exploitables",
+    "cash_flow_libre": "free cash flow organique publié (flux de l'activité − investissements nets − intérêts financiers nets − remboursement des dettes de loyers) ; 2021 et 2022 : communiqué annuel 2022 ; 2023 : communiqué annuel 2023 (2022 repris à l'identique) ; 2024 et 2025 : communiqué annuel 2025",
+    "dette_nette": "endettement net publié au 30/06/2026 (5306 au 31/12/2025, 2799 au 30/06/2025)",
+    "capitaux_propres": "non publiés dans les communiqués : capitalisation 19612.6 / cours sur actif net 1.7406 (Stocklake)",
+    "taux_impot": "non publié sur 12 mois : impôt (534 − 260 + 305 = 579) / résultat avant impôt (2169 − 992 + 813 = 1990) ; taux publiés : 24,6 % en 2025, 37,5 % au 1er semestre 2026",
+    "per": "PER sur 12 mois (Stocklake, 15,28) au cours de 120,10 €",
+    "taux_distribution": "dividende 2025 de 3,40 € par action / résultat de base par action 2025 de 9,46 € ; le communiqué annonce « environ 35 % »"
+  },
+  "complements": {
+    "cours": 120.1,
+    "capitalisation": 19612.6,
+    "per_a_terme": 8.6,
+    "roe": 0.122,
+    "cours_sur_actif_net": 1.74,
+    "rendement_dividende": 0.028,
+    "objectif_moyen_analystes": 150.91,
+    "nombre_analystes": 17,
+    "marge_operationnelle_s1_2026": 0.125,
+    "resultat_normalise_par_action_2025": 12.95,
+    "free_cash_flow_organique_s1_2026": 37.0,
+    "dette_financiere_brute_30_06_2026": 9052.0
+  },
+  "sources": [
+    "https://www.capgemini.com/fr-fr/actualites/communiques-de-presse/resultats-de-lannee-2025/",
+    "https://www.capgemini.com/wp-content/uploads/2026/07/Capgemini_-_2026-07-30_-_2026_Half-year_Results.pdf",
+    "https://www.capgemini.com/fr-fr/actualites/communiques-de-presse/capgemini-releve-ses-perspectives-pour-2026/",
+    "https://www.capgemini.com/fr-fr/actualites/communiques-de-presse/capgemini-resultats-du-1er-semestre-2025/",
+    "https://www.globenewswire.com/news-release/2024/02/14/2828770/0/en/capgemini-delivers-another-record-performance-in-2023.html",
+    "https://www.nasdaq.com/press-release/capgemini-delivers-another-record-performance-in-2022-2023-02-21",
+    "Stocklake, fiche CAP.PA du 26/11/2026"
+  ]
+}
